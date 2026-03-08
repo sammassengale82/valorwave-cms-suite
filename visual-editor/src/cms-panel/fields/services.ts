@@ -26,35 +26,17 @@ export default function ServicesFields({ node }) {
 
   return (
     <div className="cms-section">
-      <h4>Services Section</h4>
+      <h4>Services</h4>
 
-      <FieldEditor
-        label="Heading"
-        value={node.props?.heading}
-        onChange={(v) => update("heading", v)}
-      />
+      <FieldEditor label="Heading" value={node.props?.heading} onChange={(v) => update("heading", v)} />
 
       {node.children.map((card, i) => (
         <div key={card.id} className="cms-subsection">
           <h5>Service Card {i + 1}</h5>
 
-          <FieldEditor
-            label="Image URL"
-            value={card.props?.image}
-            onChange={(v) => updateCard(i, "image", v)}
-          />
-
-          <FieldEditor
-            label="Title"
-            value={card.props?.title}
-            onChange={(v) => updateCard(i, "title", v)}
-          />
-
-          <FieldEditor
-            label="Text"
-            value={card.props?.text}
-            onChange={(v) => updateCard(i, "text", v)}
-          />
+          <FieldEditor label="Image" value={card.props?.image} onChange={(v) => updateCard(i, "image", v)} />
+          <FieldEditor label="Title" value={card.props?.title} onChange={(v) => updateCard(i, "title", v)} />
+          <FieldEditor label="Text" value={card.props?.text} onChange={(v) => updateCard(i, "text", v)} />
         </div>
       ))}
     </div>
