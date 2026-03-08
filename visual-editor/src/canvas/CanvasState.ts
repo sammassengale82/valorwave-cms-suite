@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import type { VisualTree, VisualNode } from "./VisualTree";
+import type { VisualTree } from "./VisualTree";
 
 interface CanvasState {
   tree: VisualTree;
@@ -9,29 +9,90 @@ interface CanvasState {
   draggingId: string | null;
   resizingId: string | null;
 
-  setTree: (tree: VisualTree) => void;
+  history: VisualTree[];
+  historyIndex: number;
+
+  setTree: (tree: VisualTree, pushHistory?: boolean) => void;
   select: (id: string | null) => void;
   hover: (id: string | null) => void;
   startDrag: (id: string) => void;
   endDrag: () => void;
   startResize: (id: string) => void;
   endResize: () => void;
+
+  undo: () => void;
+  redo: () => void;
+}
+
+function cloneTree(tree: VisualTree): VisualTree {
+  return JSON.parse(JSON.stringify(tree));
 }
 
 export const useCanvasState = create<CanvasState>()(
-  immer((set) => ({
+  immer((set, get) => ({
     tree: { root: [] },
     selectedId: null,
     hoveredId: null,
     draggingId: null,
     resizingId: null,
 
-    setTree: (tree) => set((s) => { s.tree = tree }),
-    select: (id) => set((s) => { s.selectedId = id }),
-    hover: (id) => set((s) => { s.hoveredId = id }),
-    startDrag: (id) => set((s) => { s.draggingId = id }),
-    endDrag: () => set((s) => { s.draggingId = null }),
-    startResize: (id) => set((s) => { s.resizingId = id }),
-    endResize: () => set((s) => { s.resizingId = null })
+    history: [],
+    historyIndex: -1,
+
+    setTree: (tree, pushHistory = true) =>
+      set((state) => {
+        state.tree = tree;
+
+        if (pushHistory) {
+          const snapshot = cloneTree(tree);
+          state.history = state.history.slice(0, state.historyIndex + 1);
+          state.history.push(snapshot);
+          state.historyIndex = state.history.length - 1;
+        }
+      }),
+
+    select: (id) =>
+      set((state) => {
+        state.selectedId = id;
+      }),
+
+    hover: (id) =>
+      set((state) => {
+        state.hoveredId = id;
+      }),
+
+    startDrag: (id) =>
+      set((state) => {
+        state.draggingId = id;
+      }),
+
+    endDrag: () =>
+      set((state) => {
+        state.draggingId = null;
+      }),
+
+    startResize: (id) =>
+      set((state) => {
+        state.resizingId = id;
+      }),
+
+    endResize: () =>
+      set((state) => {
+        state.resizingId = null;
+      }),
+
+    undo: () =>
+      set((state) => {
+        if (state.historyIndex <= 0) return;
+        state.historyIndex -= 1;
+        state.tree = cloneTree(state.history[state.historyIndex]);
+      }),
+
+    redo: () =>
+      set((state) => {
+        if (state.historyIndex >= state.history.length - 1) return;
+        state.historyIndex += 1;
+        state.tree = cloneTree(state.history[state.historyIndex]);
+      })
   }))
 );
