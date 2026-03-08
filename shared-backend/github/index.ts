@@ -7,10 +7,6 @@ export class GitHubSync {
     this.config = config;
   }
 
-  // -----------------------------
-  // INTERNAL HELPERS
-  // -----------------------------
-
   private api(path: string, init?: RequestInit) {
     return fetch(`https://api.github.com${path}`, {
       ...init,
@@ -32,7 +28,7 @@ export class GitHubSync {
     if (!res.ok) throw new Error(`GitHub GET failed: ${res.status}`);
 
     const json = await res.json();
-    return atob(json.content);
+    return Buffer.from(json.content, "base64").toString("utf8");
   }
 
   private async putFile(path: string, content: string, message: string) {
@@ -49,7 +45,7 @@ export class GitHubSync {
 
     const body = {
       message,
-      content: btoa(content),
+      content: Buffer.from(content, "utf8").toString("base64"),
       branch: this.config.branch,
       ...(sha ? { sha } : {})
     };
@@ -67,10 +63,6 @@ export class GitHubSync {
       throw new Error(`GitHub PUT failed: ${text}`);
     }
   }
-
-  // -----------------------------
-  // PUBLIC API
-  // -----------------------------
 
   async pullAll(): Promise<{
     draft: CMSData;
@@ -124,7 +116,7 @@ export class GitHubSync {
     const base = this.config.dataDirInRepo;
     const path = `${base}/images/uploads/${filename}`;
 
-    const content = btoa(String.fromCharCode(...bytes));
+    const content = Buffer.from(bytes).toString("base64");
 
     const existing = await this.api(
       `/repos/${this.config.owner}/${this.config.repo}/contents/${path}?ref=${this.config.branch}`
