@@ -1,6 +1,7 @@
 import React from "react";
-import { useCanvasState } from "../canvas/CanvasState";
 import type { VisualNode } from "../canvas/VisualTree";
+import { useCanvasState } from "../canvas/CanvasState";
+import { useEditorState } from "../state/EditorState";
 
 interface Props {
   node: VisualNode;
@@ -9,36 +10,26 @@ interface Props {
 export function BlockWrapper({ node }: Props) {
   const select = useCanvasState((s) => s.select);
   const selectedId = useCanvasState((s) => s.selectedId);
-  const hoveredId = useCanvasState((s) => s.hoveredId);
+  const device = useEditorState((s) => s.device);
 
   const isSelected = selectedId === node.id;
-  const isHovered = hoveredId === node.id;
+  const styles = node.styles?.[device] || {};
 
-  const style = {
-    ...(node.styles?.desktop || {}),
-    border: isSelected
-      ? "2px solid #1d4ed8"
-      : isHovered
-      ? "1px dashed #6b7280"
-      : "1px solid transparent",
-    padding: "8px",
-    marginBottom: "8px",
-    borderRadius: "6px",
-    background: "#0f0f14"
-  };
+  function handleClick(e: React.MouseEvent) {
+    e.stopPropagation();
+    select(node.id);
+  }
 
   return (
     <div
-      className="block-wrapper"
-      style={style}
-      onClick={(e) => {
-        e.stopPropagation();
-        select(node.id);
-      }}
-      onMouseEnter={() => useCanvasState.getState().hover(node.id)}
-      onMouseLeave={() => useCanvasState.getState().hover(null)}
+      className={`block-wrapper ${isSelected ? "is-selected" : ""}`}
+      onClick={handleClick}
+      style={styles}
     >
-      {node.props?.text || node.props?.title || node.component}
+      {/* Actual block content is rendered by the section/block renderer */}
+      <div className="block-wrapper-inner">
+        <div className="block-label">{node.component}</div>
+      </div>
     </div>
   );
 }
