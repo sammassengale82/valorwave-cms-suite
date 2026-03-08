@@ -8,6 +8,9 @@ import DeviceSwitcher from "../devices/DeviceSwitcher";
 import SectionLibrary from "../section-library/SectionLibrary";
 import BlockLibrary from "../block-library/BlockLibrary";
 
+import ThemeProvider from "../theme/ThemeProvider";
+import ThemeEditor from "../theme/ThemeEditor";
+
 import { getDraft, saveDraft } from "../api/api";
 import { deserializeFromCMS } from "../serialization/deserializeFromCMS";
 import { serializeToCMS } from "../serialization/serializeToCMS";
@@ -17,6 +20,7 @@ import { useCanvasState } from "../canvas/CanvasState";
 export default function App() {
   const setTree = useCanvasState((s) => s.setTree);
 
+  // Load draft.json → VisualTree + Theme
   useEffect(() => {
     (async () => {
       const cms = await getDraft();
@@ -33,21 +37,24 @@ export default function App() {
   }
 
   return (
-    <div className="editor-root">
-      <div className="editor-body">
-        <SectionLibrary />
-        <BlockLibrary />
-        <Sidebar />
-        <Canvas />
-        <Inspector />
+    <ThemeProvider>
+      <div className="editor-root">
+        <div className="editor-body">
+          <SectionLibrary />
+          <BlockLibrary />
+          <Sidebar />
+          <Canvas />
+          <Inspector />
+        </div>
+
+        <ThemeEditor />
+        <CMSPanel />
+        <DeviceSwitcher />
+
+        <button className="save-button" onClick={handleSave}>
+          Save Draft
+        </button>
       </div>
-
-      <CMSPanel />
-      <DeviceSwitcher />
-
-      <button className="save-button" onClick={handleSave}>
-        Save Draft
-      </button>
-    </div>
+    </ThemeProvider>
   );
 }
