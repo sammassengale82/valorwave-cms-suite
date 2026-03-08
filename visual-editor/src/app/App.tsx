@@ -10,17 +10,19 @@ import BlockLibrary from "../block-library/BlockLibrary";
 
 import ThemeProvider from "../theme/ThemeProvider";
 import ThemeEditor from "../theme/ThemeEditor";
+import PreviewMode from "../preview/PreviewMode";
 
 import { getDraft, saveDraft } from "../api/api";
 import { deserializeFromCMS } from "../serialization/deserializeFromCMS";
 import { serializeToCMS } from "../serialization/serializeToCMS";
 
 import { useCanvasState } from "../canvas/CanvasState";
+import { useEditorState } from "../state/EditorState";
 
 export default function App() {
   const setTree = useCanvasState((s) => s.setTree);
+  const enterPreview = useEditorState((s) => s.enterPreview);
 
-  // Load draft.json → VisualTree + Theme
   useEffect(() => {
     (async () => {
       const cms = await getDraft();
@@ -38,6 +40,8 @@ export default function App() {
 
   return (
     <ThemeProvider>
+      <PreviewMode />
+
       <div className="editor-root">
         <div className="editor-body">
           <SectionLibrary />
@@ -51,9 +55,15 @@ export default function App() {
         <CMSPanel />
         <DeviceSwitcher />
 
-        <button className="save-button" onClick={handleSave}>
-          Save Draft
-        </button>
+        <div className="editor-actions">
+          <button className="preview-button" onClick={enterPreview}>
+            Preview
+          </button>
+
+          <button className="save-button" onClick={handleSave}>
+            Save Draft
+          </button>
+        </div>
       </div>
     </ThemeProvider>
   );
