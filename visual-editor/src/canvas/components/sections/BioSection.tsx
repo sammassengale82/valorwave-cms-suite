@@ -1,14 +1,5 @@
 import React from "react";
 
-interface Props {
-  heading?: string;
-  image?: string;
-  name?: string;
-  text1?: string;
-  text2?: string;
-  text3?: string;
-}
-
 export default function BioSection({
   heading,
   image,
@@ -16,7 +7,7 @@ export default function BioSection({
   text1,
   text2,
   text3
-}: Props) {
+}) {
   return (
     <section className="bio-section">
       {heading && <h2>{heading}</h2>}
@@ -24,15 +15,9 @@ export default function BioSection({
         {image && <img src={image} alt={name} className="bio-image" />}
         <div className="bio-text">
           {name && <h3>{name}</h3>}
-          {text1 && (
-            <p dangerouslySetInnerHTML={{ __html: text1 }} />
-          )}
-          {text2 && (
-            <p dangerouslySetInnerHTML={{ __html: text2 }} />
-          )}
-          {text3 && (
-            <p dangerouslySetInnerHTML={{ __html: text3 }} />
-          )}
+          {text1 && <p dangerouslySetInnerHTML={{ __html: text1 }} />}
+          {text2 && <p dangerouslySetInnerHTML={{ __html: text2 }} />}
+          {text3 && <p dangerouslySetInnerHTML={{ __html: text3 }} />}
         </div>
       </div>
     </section>
