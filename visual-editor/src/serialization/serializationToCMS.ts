@@ -27,17 +27,22 @@ function applyServices(node: VisualNode, cms: CMSData) {
   mapCard(3, "service-card-4");
 }
 
+// Extend similarly for bio, FAQ, testimonials, etc.
+
 export function serializeToCMS(tree: VisualTree, base: CMSData): CMSData {
   const cms: CMSData = { ...base };
 
   for (const node of tree.root) {
-    if (node.component === "HeroSection") {
-      applyHero(node, cms);
+    switch (node.component) {
+      case "HeroSection":
+        applyHero(node, cms);
+        break;
+      case "ServicesSection":
+        applyServices(node, cms);
+        break;
+      default:
+        break;
     }
-    if (node.component === "ServicesSection") {
-      applyServices(node, cms);
-    }
-    // extend for all other sections
   }
 
   return cms;
