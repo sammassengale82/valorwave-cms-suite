@@ -1,13 +1,27 @@
 import React from "react";
-import FieldEditor from "./FieldEditor";
+import { useCanvasState } from "../canvas/CanvasState";
+import { serializeToCMS } from "../serialization/serializeToCMS";
+import { getDraft, saveDraft } from "../api/api";
+import SectionFields from "./SectionFields";
 
 export default function CMSPanel() {
+  const tree = useCanvasState((s) => s.tree);
+
+  async function handleSave() {
+    const cms = await getDraft();
+    const updated = serializeToCMS(tree, cms);
+    await saveDraft(updated);
+  }
+
   return (
     <div className="cms-panel-root">
-      <h3>CMS Fields</h3>
-      <FieldEditor field="hero-h1" label="Hero Heading" />
-      <FieldEditor field="hero-tagline" label="Hero Tagline" />
-      {/* ... */}
+      <h3>CMS Content</h3>
+
+      <SectionFields />
+
+      <button className="cms-save-btn" onClick={handleSave}>
+        Save CMS Content
+      </button>
     </div>
   );
 }
