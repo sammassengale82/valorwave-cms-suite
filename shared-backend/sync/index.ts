@@ -1,6 +1,12 @@
 import type { CMSData, VersionInfo } from "../types";
 import { CMSStorage } from "../storage";
 import { GitHubSync } from "../github";
+import crypto from "crypto";
+
+function hashPayload(draft: CMSData, publish: CMSData): string {
+  const json = JSON.stringify({ draft, publish });
+  return crypto.createHash("sha256").update(json).digest("hex");
+}
 
 export class CMSSync {
   private storage: CMSStorage;
@@ -12,21 +18,26 @@ export class CMSSync {
   }
 
   async pull(): Promise<void> {
+    const localVersion = this.storage.getVersion();
     const remote = await this.github.pullAll();
-    this.storage.setDraft(remote.draft);
-    this.storage.setPublish(remote.publish);
-    this.storage.setVersion(remote.version);
+
+    // simple rule: if remote version is newer, accept it
+    if (remote.version.version > localVersion.version) {
+      this.storage.setDraft(remote.draft);
+      this.storage.setPublish(remote.publish);
+      this.storage.setVersion(remote.version);
+    }
   }
 
   async push(): Promise<void> {
     const draft = this.storage.getDraft();
     const publish = this.storage.getPublish();
-    const version = this.storage.getVersion();
+    const current = this.storage.getVersion();
 
     const nextVersion: VersionInfo = {
-      version: version.version + 1,
+      version: current.version + 1,
       timestamp: Date.now(),
-      hash: "" // TODO: compute hash of draft/publish
+      hash: hashPayload(draft, publish)
     };
 
     await this.github.pushAll({
