@@ -1,20 +1,6 @@
 import React from "react";
 
-interface CardNode {
-  id: string;
-  props?: {
-    image?: string;
-    title?: string;
-    text?: string;
-  };
-}
-
-interface Props {
-  heading?: string;
-  childrenNodes?: CardNode[];
-}
-
-export default function ServicesSection({ heading, childrenNodes = [] }: Props) {
+export default function ServicesSection({ heading, childrenNodes = [] }) {
   return (
     <section className="services-section">
       {heading && <h2>{heading}</h2>}
@@ -26,9 +12,7 @@ export default function ServicesSection({ heading, childrenNodes = [] }: Props) 
             )}
             {card.props?.title && <h3>{card.props.title}</h3>}
             {card.props?.text && (
-              <p
-                dangerouslySetInnerHTML={{ __html: card.props.text }}
-              />
+              <p dangerouslySetInnerHTML={{ __html: card.props.text }} />
             )}
           </div>
         ))}
