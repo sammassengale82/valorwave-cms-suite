@@ -12,7 +12,7 @@ import ThemeProvider from "../theme/ThemeProvider";
 import ThemeEditor from "../theme/ThemeEditor";
 import PreviewMode from "../preview/PreviewMode";
 
-import { getDraft, saveDraft } from "../api/api";
+import { getDraft, saveDraft, syncGitHub } from "../api/api";
 import { deserializeFromCMS } from "../serialization/deserializeFromCMS";
 import { serializeToCMS } from "../serialization/serializeToCMS";
 
@@ -38,6 +38,10 @@ export default function App() {
     await saveDraft(updated);
   }
 
+  async function handleSync() {
+    await syncGitHub();
+  }
+
   return (
     <ThemeProvider>
       <PreviewMode />
@@ -58,6 +62,10 @@ export default function App() {
         <div className="editor-actions">
           <button className="preview-button" onClick={enterPreview}>
             Preview
+          </button>
+
+          <button className="sync-button" onClick={handleSync}>
+            Sync GitHub
           </button>
 
           <button className="save-button" onClick={handleSave}>
