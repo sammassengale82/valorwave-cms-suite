@@ -19,35 +19,13 @@ export default function HeroFields({ node }) {
     <div className="cms-section">
       <h4>Hero Section</h4>
 
-      <FieldEditor
-        label="Heading"
-        value={node.props?.heading}
-        onChange={(v) => update("heading", v)}
-      />
-
-      <FieldEditor
-        label="Tagline"
-        value={node.props?.tagline}
-        onChange={(v) => update("tagline", v)}
-      />
-
-      <FieldEditor
-        label="Subline"
-        value={node.props?.subline}
-        onChange={(v) => update("subline", v)}
-      />
-
-      <FieldEditor
-        label="CTA Label"
-        value={node.props?.ctaLabel}
-        onChange={(v) => update("ctaLabel", v)}
-      />
-
-      <FieldEditor
-        label="CTA Link"
-        value={node.props?.ctaHref}
-        onChange={(v) => update("ctaHref", v)}
-      />
+      <FieldEditor label="Heading" value={node.props?.heading} onChange={(v) => update("heading", v)} />
+      <FieldEditor label="Logo" value={node.props?.logo} onChange={(v) => update("logo", v)} />
+      <FieldEditor label="Kicker" value={node.props?.kicker} onChange={(v) => update("kicker", v)} />
+      <FieldEditor label="Tagline" value={node.props?.tagline} onChange={(v) => update("tagline", v)} />
+      <FieldEditor label="Subline" value={node.props?.subline} onChange={(v) => update("subline", v)} />
+      <FieldEditor label="CTA Label" value={node.props?.ctaLabel} onChange={(v) => update("ctaLabel", v)} />
+      <FieldEditor label="CTA Link" value={node.props?.ctaHref} onChange={(v) => update("ctaHref", v)} />
     </div>
   );
 }
