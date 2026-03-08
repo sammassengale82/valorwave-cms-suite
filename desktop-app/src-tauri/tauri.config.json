@@ -1,0 +1,21 @@
+{
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "devPath": "../src",
+    "distDir": "../dist"
+  },
+  "package": {
+    "productName": "ValorWave CMS",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "windows": [
+      {
+        "title": "ValorWave CMS",
+        "width": 1400,
+        "height": 900
+      }
+    ]
+  }
+}
