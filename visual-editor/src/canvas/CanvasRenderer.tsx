@@ -11,6 +11,9 @@ interface Props {
 
 export default function CanvasRenderer({ nodes }: Props) {
   const device = useEditorState((s) => s.device);
+  const preview = useEditorState((s) => s.preview);
+
+  if (preview) return null;
 
   const deviceStyles = {
     desktop: { transform: "scale(1)", maxWidth: "1200px", margin: "0 auto" },
@@ -29,7 +32,6 @@ export default function CanvasRenderer({ nodes }: Props) {
               <BlockWrapper node={node} />
             )}
 
-            {/* Insert wave divider between sections */}
             {node.type === "section" &&
               i < nodes.length - 1 &&
               nodes[i + 1].type === "section" && <WaveDivider />}
