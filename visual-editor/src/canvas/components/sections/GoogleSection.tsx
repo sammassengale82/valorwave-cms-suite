@@ -1,10 +1,6 @@
 import React from "react";
 
-interface Props {
-  analytics?: string;
-}
-
-export default function GoogleSection({ analytics }: Props) {
+export default function GoogleSection({ analytics }) {
   return (
     <section className="google-section">
       <h2>Google Integrations</h2>
