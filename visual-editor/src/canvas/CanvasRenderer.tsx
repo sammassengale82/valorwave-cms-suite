@@ -11,28 +11,10 @@ interface Props {
 export default function CanvasRenderer({ nodes }: Props) {
   const device = useEditorState((s) => s.device);
 
-  const deviceStyles: Record<string, React.CSSProperties> = {
-    desktop: {
-      transform: "scale(1)",
-      transformOrigin: "top center",
-      width: "100%",
-      maxWidth: "1200px",
-      margin: "0 auto"
-    },
-    tablet: {
-      transform: "scale(0.85)",
-      transformOrigin: "top center",
-      width: "100%",
-      maxWidth: "900px",
-      margin: "0 auto"
-    },
-    mobile: {
-      transform: "scale(0.7)",
-      transformOrigin: "top center",
-      width: "100%",
-      maxWidth: "480px",
-      margin: "0 auto"
-    }
+  const deviceStyles = {
+    desktop: { transform: "scale(1)", maxWidth: "1200px", margin: "0 auto" },
+    tablet: { transform: "scale(0.85)", maxWidth: "900px", margin: "0 auto" },
+    mobile: { transform: "scale(0.7)", maxWidth: "480px", margin: "0 auto" }
   };
 
   return (
