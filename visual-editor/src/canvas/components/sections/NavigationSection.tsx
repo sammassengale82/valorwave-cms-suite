@@ -1,15 +1,5 @@
 import React from "react";
 
-interface Props {
-  services?: string;
-  availability?: string;
-  heroDiscount?: string;
-  requestQuote?: string;
-  requestQuoteHref?: string;
-  clientPortal?: string;
-  clientPortalHref?: string;
-}
-
 export default function NavigationSection({
   services,
   availability,
@@ -18,7 +8,7 @@ export default function NavigationSection({
   requestQuoteHref,
   clientPortal,
   clientPortalHref
-}: Props) {
+}) {
   return (
     <nav className="nav-section">
       <ul>
