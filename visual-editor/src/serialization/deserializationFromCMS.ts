@@ -14,7 +14,7 @@ function buildHero(cms: CMSData): VisualNode {
       ctaHref: cms["hero-cta__href"] ?? ""
     },
     styles: {
-      padding: "80px 40px"
+      desktop: { padding: "80px 40px" }
     },
     children: []
   };
@@ -30,7 +30,9 @@ function buildServices(cms: CMSData): VisualNode {
       title: cms[`${prefix}-title`] ?? "",
       text: cms[`${prefix}-text`] ?? ""
     },
-    styles: {}
+    styles: {
+      desktop: {}
+    }
   });
 
   return {
@@ -41,7 +43,7 @@ function buildServices(cms: CMSData): VisualNode {
       heading: cms["services-heading"] ?? ""
     },
     styles: {
-      padding: "60px 40px"
+      desktop: { padding: "60px 40px" }
     },
     children: [
       makeCard("service-card-1", "service-card-1"),
@@ -57,7 +59,7 @@ export function deserializeFromCMS(cms: CMSData): VisualTree {
 
   root.push(buildHero(cms));
   root.push(buildServices(cms));
-  // extend with bio, FAQ, testimonials, etc.
+  // Extend with other sections as needed
 
   return { root };
 }
