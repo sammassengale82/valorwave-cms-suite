@@ -22,6 +22,7 @@ interface CanvasState {
 
   undo: () => void;
   redo: () => void;
+  resetHistory: () => void;
 }
 
 function cloneTree(tree: VisualTree): VisualTree {
@@ -48,6 +49,13 @@ export const useCanvasState = create<CanvasState>()(
           state.history = state.history.slice(0, state.historyIndex + 1);
           state.history.push(snapshot);
           state.historyIndex = state.history.length - 1;
+
+          // simple history cap
+          const MAX_HISTORY = 100;
+          if (state.history.length > MAX_HISTORY) {
+            state.history.shift();
+            state.historyIndex = state.history.length - 1;
+          }
         }
       }),
 
@@ -93,6 +101,12 @@ export const useCanvasState = create<CanvasState>()(
         if (state.historyIndex >= state.history.length - 1) return;
         state.historyIndex += 1;
         state.tree = cloneTree(state.history[state.historyIndex]);
+      }),
+
+    resetHistory: () =>
+      set((state) => {
+        state.history = [];
+        state.historyIndex = -1;
       })
   }))
 );
