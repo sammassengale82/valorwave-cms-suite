@@ -38,6 +38,12 @@ interface CanvasState {
   removeSection: (id: string) => void;
   duplicateSection: (id: string) => void;
   moveSection: (id: string, newIndex: number) => void;
+
+  // Block Library
+  addBlock: (parentId: string, type: string) => void;
+  removeBlock: (parentId: string, blockId: string) => void;
+  duplicateBlock: (parentId: string, blockId: string) => void;
+  moveBlock: (parentId: string, blockId: string, newIndex: number) => void;
 }
 
 function cloneTree(tree: VisualTree): VisualTree {
@@ -71,7 +77,6 @@ export const useCanvasState = create<CanvasState>()(
           state.history.push(snapshot);
           state.historyIndex = state.history.length - 1;
 
-          // History cap
           const MAX = 200;
           if (state.history.length > MAX) {
             state.history.shift();
@@ -177,6 +182,11 @@ export const useCanvasState = create<CanvasState>()(
         const [node] = arr.splice(oldIndex, 1);
         const safeIndex = Math.max(0, Math.min(newIndex, arr.length));
         arr.splice(safeIndex, 0, node);
-      })
-  }))
-);
+      }),
+
+    // -----------------------------
+    // BLOCK LIBRARY ACTIONS
+    // -----------------------------
+    addBlock: (parentId, type) =>
+      set((state) => {
+        const parent = state.tree.root.find((n) => n.id
