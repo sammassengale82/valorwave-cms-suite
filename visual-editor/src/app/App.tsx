@@ -6,6 +6,7 @@ import Inspector from "../inspector/Inspector";
 import CMSPanel from "../cms-panel/CMSPanel";
 import DeviceSwitcher from "../devices/DeviceSwitcher";
 import SectionLibrary from "../section-library/SectionLibrary";
+import BlockLibrary from "../block-library/BlockLibrary";
 
 import { getDraft, saveDraft } from "../api/api";
 import { deserializeFromCMS } from "../serialization/deserializeFromCMS";
@@ -16,9 +17,6 @@ import { useCanvasState } from "../canvas/CanvasState";
 export default function App() {
   const setTree = useCanvasState((s) => s.setTree);
 
-  // -----------------------------
-  // INITIAL LOAD
-  // -----------------------------
   useEffect(() => {
     (async () => {
       const cms = await getDraft();
@@ -27,9 +25,6 @@ export default function App() {
     })();
   }, [setTree]);
 
-  // -----------------------------
-  // SAVE HANDLER
-  // -----------------------------
   async function handleSave() {
     const state = useCanvasState.getState();
     const cms = await getDraft();
@@ -41,6 +36,7 @@ export default function App() {
     <div className="editor-root">
       <div className="editor-body">
         <SectionLibrary />
+        <BlockLibrary />
         <Sidebar />
         <Canvas />
         <Inspector />
