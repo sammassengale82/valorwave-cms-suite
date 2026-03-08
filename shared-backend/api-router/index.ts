@@ -11,71 +11,71 @@ export class CMSApiRouter {
     this.sync = sync;
   }
 
-  // GET /draft.json
   getDraft(): CMSData {
     return this.storage.getDraft();
   }
 
-  // PUT /draft.json
-  setDraft(data: CMSData): void {
+  setDraft(data: CMSData): { saved: boolean } {
     this.storage.setDraft(data);
+    return { saved: true };
   }
 
-  // GET /publish.json
   getPublish(): CMSData {
     return this.storage.getPublish();
   }
 
-  // PUT /publish.json
-  setPublish(data: CMSData): void {
+  setPublish(data: CMSData): { saved: boolean } {
     this.storage.setPublish(data);
+    return { saved: true };
   }
 
-  // POST /publish
-  publish(): void {
+  publish(): { published: boolean } {
     const draft = this.storage.getDraft();
     this.storage.setPublish(draft);
+    return { published: true };
   }
 
-  // GET /site-theme.txt
   getSiteTheme(): string {
     return this.storage.getSiteTheme();
   }
 
-  // PUT /site-theme.txt
-  setSiteTheme(theme: string): void {
+  setSiteTheme(theme: string): { saved: boolean } {
     this.storage.setSiteTheme(theme);
+    return { saved: true };
   }
 
-  // GET /cms-theme.txt
   getCmsTheme(): string {
     return this.storage.getCmsTheme();
   }
 
-  // PUT /cms-theme.txt
-  setCmsTheme(theme: string): void {
+  setCmsTheme(theme: string): { saved: boolean } {
     this.storage.setCmsTheme(theme);
+    return { saved: true };
   }
 
-  // GET /preview.json
   getPreview(): { theme: string; data: CMSData } {
     const draft = this.storage.getDraft();
     const theme = this.storage.getSiteTheme();
     return { theme, data: draft };
   }
 
-  // POST /reset-cms
-  reset(): void {
+  reset(): { reset: boolean } {
     this.storage.reset();
+    return { reset: true };
   }
 
-  // POST /sync/pull
-  async syncPull(): Promise<void> {
+  async syncPull(): Promise<{ pulled: boolean }> {
     await this.sync.pull();
+    return { pulled: true };
   }
 
-  // POST /sync/push
-  async syncPush(): Promise<void> {
+  async syncPush(): Promise<{ pushed: boolean }> {
     await this.sync.push();
+    return { pushed: true };
+  }
+
+  async uploadImage(filename: string, bytes: Uint8Array): Promise<{ url: string }> {
+    const url = await this.storage.saveImage(filename, bytes);
+    return { url };
   }
 }
