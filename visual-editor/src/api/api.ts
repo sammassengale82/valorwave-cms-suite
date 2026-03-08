@@ -1,6 +1,7 @@
 import { MobileBridge } from "../../../mobile/MobileBridge";
 
-const isMobile = typeof navigator !== "undefined" && navigator.product === "ReactNative";
+const isMobile =
+  typeof navigator !== "undefined" && navigator.product === "ReactNative";
 
 export async function getDraft() {
   if (isMobile) return MobileBridge.getDraft();
@@ -12,6 +13,7 @@ export async function saveDraft(json: any) {
 
   return fetch("/api/save-draft", {
     method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(json)
   });
 }
@@ -26,11 +28,12 @@ export async function savePublish(json: any) {
 
   return fetch("/api/save-publish", {
     method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(json)
   });
 }
 
 export async function syncGitHub() {
   if (isMobile) return MobileBridge.sync();
-  return fetch("/api/sync-github");
+  return fetch("/api/sync-github", { method: "POST" });
 }
