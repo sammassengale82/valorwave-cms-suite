@@ -3,6 +3,7 @@ import type { VisualNode } from "./VisualTree";
 import { SectionBlock } from "../components/SectionBlock";
 import { BlockWrapper } from "../components/BlockWrapper";
 import { useEditorState } from "../state/EditorState";
+import WaveDivider from "../theme/wave-divider";
 
 interface Props {
   nodes: VisualNode[];
@@ -20,13 +21,20 @@ export default function CanvasRenderer({ nodes }: Props) {
   return (
     <div className="canvas-device-wrapper">
       <div className="canvas-device-frame" style={deviceStyles[device]}>
-        {nodes.map((node) =>
-          node.type === "section" ? (
-            <SectionBlock key={node.id} node={node} />
-          ) : (
-            <BlockWrapper key={node.id} node={node} />
-          )
-        )}
+        {nodes.map((node, i) => (
+          <React.Fragment key={node.id}>
+            {node.type === "section" ? (
+              <SectionBlock node={node} />
+            ) : (
+              <BlockWrapper node={node} />
+            )}
+
+            {/* Insert wave divider between sections */}
+            {node.type === "section" &&
+              i < nodes.length - 1 &&
+              nodes[i + 1].type === "section" && <WaveDivider />}
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );
