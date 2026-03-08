@@ -1,12 +1,6 @@
 import React from "react";
 
-interface Props {
-  logo?: string;
-  brandText?: string;
-  socialLinks?: string;
-}
-
-export default function HeaderSection({ logo, brandText, socialLinks }: Props) {
+export default function HeaderSection({ logo, brandText, socialLinks }) {
   return (
     <header className="header-section">
       <div className="header-left">
