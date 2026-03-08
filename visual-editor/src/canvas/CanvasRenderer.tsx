@@ -1,13 +1,17 @@
 import React from "react";
-import SectionBlock from "../components/SectionBlock";
+import type { VisualNode } from "./VisualTree";
+import { BlockWrapper } from "../components/BlockWrapper";
+import { SectionBlock } from "../components/SectionBlock";
 
-export default function CanvasRenderer({ data }: { data: any }) {
+export default function CanvasRenderer({ nodes }: { nodes: VisualNode[] }) {
   return (
-    <div className="canvas-renderer">
-      {/* Later: map sections dynamically */}
-      <SectionBlock id="hero" data={data} />
-      <SectionBlock id="services" data={data} />
-      {/* ... */}
-    </div>
+    <>
+      {nodes.map((node) => {
+        if (node.type === "section") {
+          return <SectionBlock key={node.id} node={node} />;
+        }
+        return <BlockWrapper key={node.id} node={node} />;
+      })}
+    </>
   );
 }
