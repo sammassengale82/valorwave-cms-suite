@@ -1,14 +1,5 @@
 import React from "react";
 
-interface Props {
-  metaTitle?: string;
-  metaDescription?: string;
-  metaKeywords?: string;
-  ogTitle?: string;
-  ogDescription?: string;
-  ogImage?: string;
-}
-
 export default function SEOSection({
   metaTitle,
   metaDescription,
@@ -16,7 +7,7 @@ export default function SEOSection({
   ogTitle,
   ogDescription,
   ogImage
-}: Props) {
+}) {
   return (
     <section className="seo-section">
       <h2>SEO Preview</h2>
