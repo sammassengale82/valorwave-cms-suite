@@ -14,36 +14,36 @@ interface CanvasState {
   history: VisualTree[];
   historyIndex: number;
 
-  // Core
   setTree: (tree: VisualTree, pushHistory?: boolean) => void;
 
-  // Selection
   select: (id: string | null) => void;
   hover: (id: string | null) => void;
 
-  // Dragging
   startDrag: (id: string) => void;
   endDrag: () => void;
 
-  // Resizing
   startResize: (id: string) => void;
   endResize: () => void;
 
-  // Undo / Redo
   undo: () => void;
   redo: () => void;
   resetHistory: () => void;
 
-  // Section Library
   removeSection: (id: string) => void;
   duplicateSection: (id: string) => void;
   moveSection: (id: string, newIndex: number) => void;
 
-  // Block Library
   addBlock: (parentId: string, type: string) => void;
   removeBlock: (parentId: string, blockId: string) => void;
   duplicateBlock: (parentId: string, blockId: string) => void;
   moveBlock: (parentId: string, blockId: string, newIndex: number) => void;
+
+  updateStyle: (
+    id: string,
+    device: "desktop" | "tablet" | "mobile",
+    prop: string,
+    value: string
+  ) => void;
 }
 
 function cloneTree(tree: VisualTree): VisualTree {
@@ -63,9 +63,6 @@ export const useCanvasState = create<CanvasState>()(
     history: [],
     historyIndex: -1,
 
-    // -----------------------------
-    // CORE TREE UPDATE
-    // -----------------------------
     setTree: (tree, pushHistory = true) =>
       set((state) => {
         state.tree = tree;
@@ -85,9 +82,6 @@ export const useCanvasState = create<CanvasState>()(
         }
       }),
 
-    // -----------------------------
-    // SELECTION
-    // -----------------------------
     select: (id) =>
       set((state) => {
         state.selectedId = id;
@@ -98,9 +92,6 @@ export const useCanvasState = create<CanvasState>()(
         state.hoveredId = id;
       }),
 
-    // -----------------------------
-    // DRAGGING
-    // -----------------------------
     startDrag: (id) =>
       set((state) => {
         state.draggingId = id;
@@ -111,9 +102,6 @@ export const useCanvasState = create<CanvasState>()(
         state.draggingId = null;
       }),
 
-    // -----------------------------
-    // RESIZING
-    // -----------------------------
     startResize: (id) =>
       set((state) => {
         state.resizingId = id;
@@ -124,9 +112,6 @@ export const useCanvasState = create<CanvasState>()(
         state.resizingId = null;
       }),
 
-    // -----------------------------
-    // UNDO / REDO
-    // -----------------------------
     undo: () =>
       set((state) => {
         if (state.historyIndex <= 0) return;
@@ -147,9 +132,6 @@ export const useCanvasState = create<CanvasState>()(
         state.historyIndex = -1;
       }),
 
-    // -----------------------------
-    // SECTION LIBRARY ACTIONS
-    // -----------------------------
     removeSection: (id) =>
       set((state) => {
         state.tree.root = state.tree.root.filter((n) => n.id !== id);
@@ -184,9 +166,79 @@ export const useCanvasState = create<CanvasState>()(
         arr.splice(safeIndex, 0, node);
       }),
 
-    // -----------------------------
-    // BLOCK LIBRARY ACTIONS
-    // -----------------------------
     addBlock: (parentId, type) =>
       set((state) => {
-        const parent = state.tree.root.find((n) => n.id
+        const parent = state.tree.root.find((n) => n.id === parentId);
+        if (!parent) return;
+
+        const presetsModule = require("../block-library/block-presets");
+        const BlockPresets = presetsModule.BlockPresets;
+
+        const preset = BlockPresets[type];
+        if (!preset) return;
+
+        const clone: VisualNode = JSON.parse(JSON.stringify(preset));
+        clone.id = crypto.randomUUID();
+
+        parent.children = parent.children || [];
+        parent.children.push(clone);
+      }),
+
+    removeBlock: (parentId, blockId) =>
+      set((state) => {
+        const parent = state.tree.root.find((n) => n.id === parentId);
+        if (!parent || !parent.children) return;
+
+        parent.children = parent.children.filter((c) => c.id !== blockId);
+      }),
+
+    duplicateBlock: (parentId, blockId) =>
+      set((state) => {
+        const parent = state.tree.root.find((n) => n.id === parentId);
+        if (!parent || !parent.children) return;
+
+        const original = parent.children.find((c) => c.id === blockId);
+        if (!original) return;
+
+        const clone: VisualNode = JSON.parse(JSON.stringify(original));
+        clone.id = crypto.randomUUID();
+
+        parent.children.push(clone);
+      }),
+
+    moveBlock: (parentId, blockId, newIndex) =>
+      set((state) => {
+        const parent = state.tree.root.find((n) => n.id === parentId);
+        if (!parent || !parent.children) return;
+
+        const arr = parent.children;
+        const oldIndex = arr.findIndex((c) => c.id === blockId);
+        if (oldIndex === -1) return;
+
+        const [node] = arr.splice(oldIndex, 1);
+        const safeIndex = Math.max(0, Math.min(newIndex, arr.length));
+        arr.splice(safeIndex, 0, node);
+      }),
+
+    updateStyle: (id, device, prop, value) =>
+      set((state) => {
+        function findNode(nodes: VisualNode[]): VisualNode | null {
+          for (const n of nodes) {
+            if (n.id === id) return n;
+            if (n.children) {
+              const child = findNode(n.children);
+              if (child) return child;
+            }
+          }
+          return null;
+        }
+
+        const node = findNode(state.tree.root);
+        if (!node) return;
+
+        node.styles = node.styles || {};
+        node.styles[device] = node.styles[device] || {};
+        node.styles[device][prop] = value;
+      })
+  }))
+);
