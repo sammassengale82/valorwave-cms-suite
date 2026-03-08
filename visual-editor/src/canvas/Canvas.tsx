@@ -1,13 +1,13 @@
 import React from "react";
-import { useEditorState } from "../state/EditorState";
+import { useCanvasState } from "./CanvasState";
 import CanvasRenderer from "./CanvasRenderer";
 
 export default function Canvas() {
-  const draft = useEditorState((s) => s.draft);
+  const tree = useCanvasState((s) => s.tree);
 
   return (
     <div className="canvas-root">
-      <CanvasRenderer data={draft} />
+      <CanvasRenderer nodes={tree.root} />
     </div>
   );
 }
