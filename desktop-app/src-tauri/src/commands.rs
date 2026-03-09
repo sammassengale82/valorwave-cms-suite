@@ -1,92 +1,82 @@
-use warp::Filter;
-use serde_json::json;
-use std::sync::Arc;
+use serde::Serialize;
+use std::fs;
+use std::path::PathBuf;
+use tauri::api::file;
 
-use shared_backend::{
-    config::{createGitHubConfig, createStorageConfig},
-    storage::CMSStorage,
-    sync::CMSSync,
-    github::GitHubSync,
-    api_router::CMSApiRouter
-};
+#[derive(Serialize)]
+pub struct FileEntry {
+    pub filename: String,
+    pub size: u64,
+}
 
-pub async fn start_api_server() {
-    let root = std::env::current_dir().unwrap();
-    let root_str = root.to_string_lossy().to_string();
+fn uploads_dir() -> PathBuf {
+    tauri::api::path::app_data_dir(&tauri::Config::default())
+        .unwrap()
+        .join("data/images/uploads")
+}
 
-    let storage_config = createStorageConfig(&root_str);
-    let github_config = createGitHubConfig(&std::env::vars().collect());
+#[tauri::command]
+pub fn list_files() -> Result<Vec<FileEntry>, String> {
+    let dir = uploads_dir();
 
-    let storage = Arc::new(CMSStorage::new(storage_config));
-    let github = Arc::new(GitHubSync::new(github_config));
-    let sync = Arc::new(CMSSync::new(storage.clone(), github.clone()));
-    let api = Arc::new(CMSApiRouter::new(storage.clone(), sync.clone()));
+    if !dir.exists() {
+        fs::create_dir_all(&dir).map_err(|e| e.to_string())?;
+    }
 
-    // GET /draft.json
-    let get_draft = warp::path!("draft.json")
-        .and(warp::get())
-        .map(move || warp::reply::json(&api.getDraft()));
+    let mut entries = vec![];
 
-    // PUT /draft.json
-    let api_clone = api.clone();
-    let put_draft = warp::path!("draft.json")
-        .and(warp::put())
-        .and(warp::body::json())
-        .map(move |body| {
-            api_clone.setDraft(body);
-            warp::reply::json(&json!({ "saved": true }))
-        });
+    for entry in fs::read_dir(&dir).map_err(|e| e.to_string())? {
+        let entry = entry.map_err(|e| e.to_string())?;
+        let metadata = entry.metadata().map_err(|e| e.to_string())?;
 
-    // GET /publish.json
-    let get_publish = warp::path!("publish.json")
-        .and(warp::get())
-        .map(move || warp::reply::json(&api.getPublish()));
+        if metadata.is_file() {
+            entries.push(FileEntry {
+                filename: entry
+                    .file_name()
+                    .into_string()
+                    .unwrap_or("unknown".into()),
+                size: metadata.len(),
+            });
+        }
+    }
 
-    // POST /publish
-    let api_clone = api.clone();
-    let publish = warp::path!("publish")
-        .and(warp::post())
-        .map(move || {
-            api_clone.publish();
-            warp::reply::json(&json!({ "published": true }))
-        });
+    Ok(entries)
+}
 
-    // GET /preview.json
-    let get_preview = warp::path!("preview.json")
-        .and(warp::get())
-        .map(move || warp::reply::json(&api.getPreview()));
+#[tauri::command]
+pub fn upload_file(filename: String, bytes: Vec<u8>) -> Result<(), String> {
+    let dir = uploads_dir();
 
-    // POST /sync/pull
-    let api_clone = api.clone();
-    let sync_pull = warp::path!("sync" / "pull")
-        .and(warp::post())
-        .and_then(move || {
-            let api = api_clone.clone();
-            async move {
-                api.syncPull().await.unwrap();
-                Ok::<_, warp::Rejection>(warp::reply::json(&json!({ "pulled": true })))
-            }
-        });
+    if !dir.exists() {
+        fs::create_dir_all(&dir).map_err(|e| e.to_string())?;
+    }
 
-    // POST /sync/push
-    let api_clone = api.clone();
-    let sync_push = warp::path!("sync" / "push")
-        .and(warp::post())
-        .and_then(move || {
-            let api = api_clone.clone();
-            async move {
-                api.syncPush().await.unwrap();
-                Ok::<_, warp::Rejection>(warp::reply::json(&json!({ "pushed": true })))
-            }
-        });
+    let path = dir.join(filename);
+    fs::write(path, bytes).map_err(|e| e.to_string())?;
 
-    let routes = get_draft
-        .or(put_draft)
-        .or(get_publish)
-        .or(publish)
-        .or(get_preview)
-        .or(sync_pull)
-        .or(sync_push);
+    Ok(())
+}
 
-    warp::serve(routes).run(([127, 0, 0, 1], 1818)).await;
+#[tauri::command]
+pub fn delete_file(filename: String) -> Result<(), String> {
+    let path = uploads_dir().join(filename);
+
+    if path.exists() {
+        fs::remove_file(path).map_err(|e| e.to_string())?;
+    }
+
+    Ok(())
+}
+
+#[tauri::command]
+pub fn rename_file(old_name: String, new_name: String) -> Result<(), String> {
+    let dir = uploads_dir();
+    let old_path = dir.join(old_name);
+    let new_path = dir.join(new_name);
+
+    if old_path.exists() {
+        fs::rename(old_path, new_path).map_err(|e| e.to_string())?;
+    }
+
+    Ok(())
 }
