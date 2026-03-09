@@ -11,7 +11,24 @@ export interface VisualNode {
     mobile?: Record<string, string>;
   };
 
+  animations?: {
+    desktop?: AnimationConfig[];
+    tablet?: AnimationConfig[];
+    mobile?: AnimationConfig[];
+  };
+
   children?: VisualNode[];
+}
+
+export interface AnimationConfig {
+  type: string;        // fade-in, slide-up, parallax, etc.
+  duration: number;    // ms
+  delay: number;       // ms
+  easing: string;      // ease, ease-out, cubic-bezier(...)
+  trigger: string;     // on-load, on-visible, on-scroll
+  speed?: number;      // for parallax
+  threshold?: number;  // for scroll triggers
+  loop?: boolean;      // for looping animations
 }
 
 export interface VisualTree {
