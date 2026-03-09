@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useCanvasState } from "./CanvasState";
 
 export default function BlockWrapper({ node, children }: any) {
@@ -19,27 +19,28 @@ export default function BlockWrapper({ node, children }: any) {
     const mod = isMac ? e.metaKey : e.ctrlKey;
 
     if (e.shiftKey) {
-      // Add to selection
       selectMultiple([...selectedIds, node.id]);
       return;
     }
 
     if (mod) {
-      // Toggle selection
       toggleSelect(node.id);
       return;
     }
 
-    // Normal click → single select
     selectOne(node.id);
   }
 
+  const isAbsolute = node.styles?.desktop?.position === "absolute";
+
   return (
     <div
-      className={`block-wrapper ${isSelected ? "selected" : ""}`}
+      className={`block-wrapper ${isSelected ? "selected" : ""} ${
+        isAbsolute ? "absolute" : ""
+      }`}
       onClick={handleClick}
+      style={isAbsolute ? node.styles?.desktop : {}}
     >
-      {/* Selection outline */}
       {isSelected && <div className="selection-outline" />}
 
       <div className="block-actions">
