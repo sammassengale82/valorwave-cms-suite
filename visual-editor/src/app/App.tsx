@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import CanvasRenderer from "../canvas/CanvasRenderer";
 import SectionLibrary from "../section-library/SectionLibrary";
@@ -10,6 +10,8 @@ import PreviewMode from "../preview/PreviewMode";
 import ThemeProvider from "../theme/ThemeProvider";
 import ThemeEditor from "../theme/ThemeEditor";
 
+import AssetManager from "../asset-manager/AssetManager";
+
 import { getDraft, saveDraft, syncGitHub } from "../api/api";
 import { deserializeFromCMS } from "../serialization/deserializeFromCMS";
 import { serializeToCMS } from "../serialization/serializeToCMS";
@@ -20,6 +22,8 @@ import { useEditorState } from "../state/EditorState";
 export default function App() {
   const setTree = useCanvasState((s) => s.setTree);
   const enterPreview = useEditorState((s) => s.enterPreview);
+
+  const [assetManagerOpen, setAssetManagerOpen] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -44,6 +48,11 @@ export default function App() {
     <ThemeProvider>
       <PreviewMode />
 
+      <AssetManager
+        isOpen={assetManagerOpen}
+        onClose={() => setAssetManagerOpen(false)}
+      />
+
       <div className="editor-root">
         <div className="editor-body">
           <SectionLibrary />
@@ -59,6 +68,13 @@ export default function App() {
         <div className="editor-actions">
           <button className="preview-button" onClick={enterPreview}>
             Preview
+          </button>
+
+          <button
+            className="assets-button"
+            onClick={() => setAssetManagerOpen(true)}
+          >
+            Assets
           </button>
 
           <button className="sync-button" onClick={handleSync}>
