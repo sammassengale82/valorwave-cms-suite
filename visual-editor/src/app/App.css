@@ -1,0 +1,21 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.app-main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.preview-container {
+  flex: 1;
+  overflow: auto;
+}
+
+.inspector-panel {
+  width: 320px;
+  border-left: 1px solid #d0d4d9;
+}
