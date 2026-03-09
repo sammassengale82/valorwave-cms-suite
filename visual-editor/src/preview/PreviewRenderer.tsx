@@ -1,26 +1,69 @@
-import React from "react";
-import type { VisualNode } from "../canvas/VisualTree";
-import { SectionComponents } from "../components/sections";
-import WaveDivider from "../theme/wave-divider";
+import React, { useEffect, useRef } from "react";
+import { useEditorState } from "../state/EditorState";
+import { AnimationEngine } from "../animations/AnimationEngine";
+import "../animations/animation-styles.css";
 
-interface Props {
-  nodes: VisualNode[];
-}
+export default function PreviewRenderer({ html }: { html: string }) {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const previewActive = useEditorState((s) => s.previewActive);
 
-export default function PreviewRenderer({ nodes }: Props) {
+  useEffect(() => {
+    if (!previewActive) return;
+
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+
+    const doc = iframe.contentDocument;
+    if (!doc) return;
+
+    // Inject HTML into iframe
+    doc.open();
+    doc.write(`
+      <html>
+        <head>
+          <style>
+            body {
+              margin: 0;
+              padding: 0;
+              overflow-x: hidden;
+              font-family: system-ui, sans-serif;
+            }
+          </style>
+        </head>
+        <body>${html}</body>
+      </html>
+    `);
+    doc.close();
+
+    // Wait for DOM to be ready
+    const runEngine = () => {
+      try {
+        // Inject animation CSS
+        const style = doc.createElement("style");
+        style.textContent = require("../animations/animation-styles.css").default;
+        doc.head.appendChild(style);
+
+        // Run animation engine inside iframe
+        AnimationEngine.init();
+      } catch (err) {
+        console.error("Preview animation engine error:", err);
+      }
+    };
+
+    // Delay ensures DOM is fully parsed
+    setTimeout(runEngine, 50);
+  }, [previewActive, html]);
+
   return (
-    <div className="preview-site">
-      {nodes.map((node, i) => {
-        const Component = SectionComponents[node.component];
-
-        return (
-          <React.Fragment key={node.id}>
-            <Component {...node.props} childrenNodes={node.children} />
-
-            {i < nodes.length - 1 && <WaveDivider />}
-          </React.Fragment>
-        );
-      })}
-    </div>
+    <iframe
+      ref={iframeRef}
+      className="preview-iframe"
+      style={{
+        width: "100%",
+        height: "100%",
+        border: "none",
+        background: "white",
+      }}
+    />
   );
 }
