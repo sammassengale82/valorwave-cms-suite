@@ -155,7 +155,7 @@ export class GitHubSync {
     }
 
     // ------------------------------------------------------------
-    // 3. Sync templates (folder-per-template)
+    // 3. Sync templates
     // ------------------------------------------------------------
     const templatesDir = path.join(localRoot, "data/templates");
 
@@ -185,11 +185,44 @@ export class GitHubSync {
     // Delete removed template folders
     for (const folder of repoTemplateFolders) {
       if (!localTemplateFolders.includes(folder)) {
-        // Delete template.json
         await this.deleteFile(`data/templates/${folder}/template.json`);
-
-        // Delete preview.jpg if exists
         await this.deleteFile(`data/templates/${folder}/preview.jpg`);
+      }
+    }
+
+    // ------------------------------------------------------------
+    // 4. NEW — Sync variants
+    // ------------------------------------------------------------
+    const variantsDir = path.join(localRoot, "data/variants");
+
+    if (!fs.existsSync(variantsDir)) {
+      fs.mkdirSync(variantsDir, { recursive: true });
+    }
+
+    const localVariantFolders = fs
+      .readdirSync(variantsDir)
+      .filter((f) => fs.statSync(path.join(variantsDir, f)).isDirectory());
+
+    const repoVariantFolders = await this.listRepoFiles("data/variants");
+
+    // Upload or update variant folders
+    for (const folder of localVariantFolders) {
+      const folderPath = path.join(variantsDir, folder);
+
+      const files = fs.readdirSync(folderPath);
+
+      for (const file of files) {
+        const localPath = path.join(folderPath, file);
+        const repoPath = `data/variants/${folder}/${file}`;
+        await this.writeFile(repoPath, localPath);
+      }
+    }
+
+    // Delete removed variant folders
+    for (const folder of repoVariantFolders) {
+      if (!localVariantFolders.includes(folder)) {
+        await this.deleteFile(`data/variants/${folder}/variant.json`);
+        await this.deleteFile(`data/variants/${folder}/preview.jpg`);
       }
     }
   }
