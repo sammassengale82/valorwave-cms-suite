@@ -5,9 +5,10 @@ import { useEditorState } from "../state/EditorState";
 
 interface Props {
   node: VisualNode;
+  animAttrs?: Record<string, string>;
 }
 
-export function BlockWrapper({ node }: Props) {
+export function BlockWrapper({ node, animAttrs = {} }: Props) {
   const select = useCanvasState((s) => s.select);
   const selectedId = useCanvasState((s) => s.selectedId);
   const device = useEditorState((s) => s.device);
@@ -25,6 +26,7 @@ export function BlockWrapper({ node }: Props) {
       className={`block-wrapper ${isSelected ? "is-selected" : ""}`}
       onClick={handleClick}
       style={styles}
+      {...animAttrs}
     >
       <div className="block-wrapper-inner">
         <div className="block-label">{node.component}</div>
