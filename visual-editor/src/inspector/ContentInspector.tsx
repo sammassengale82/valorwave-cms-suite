@@ -1,131 +1,86 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useCanvasState } from "../canvas/CanvasState";
-import { listVariants, loadVariant, saveVariant } from "../api/variants";
 
-export default function ContentInspector({ selected }: any) {
+export default function ContentInspector() {
+  const tree = useCanvasState((s) => s.tree);
+  const selectedIds = useCanvasState((s) => s.selectedIds);
   const updateContent = useCanvasState((s) => s.updateContent);
-  const applyVariantToNode = useCanvasState((s) => s.applyVariant);
 
-  const [variants, setVariants] = useState([]);
-  const [showVariantSave, setShowVariantSave] = useState(false);
-  const [variantName, setVariantName] = useState("");
-  const [variantCategory, setVariantCategory] = useState("Default");
-
-  const component = selected?.type;
-
-  useEffect(() => {
-    if (component) load();
-  }, [component]);
-
-  async function load() {
-    const list = await listVariants(component);
-    setVariants(list);
+  if (selectedIds.length === 0) {
+    return <div className="inspector-empty">No block selected</div>;
   }
 
-  async function handleApplyVariant(id: string) {
-    const variant = await loadVariant(id);
-    if (!variant) return;
-
-    applyVariantToNode(selected.id, variant);
-  }
-
-  async function handleSaveVariant() {
-    if (!variantName.trim()) {
-      alert("Enter a variant name");
-      return;
+  // ------------------------------------------------------------
+  // COLLECT SELECTED NODES
+  // ------------------------------------------------------------
+  function findNodeById(nodes: any[], id: string): any | null {
+    for (const n of nodes) {
+      if (n.id === id) return n;
+      const child = findNodeById(n.children || [], id);
+      if (child) return child;
     }
-
-    await saveVariant(
-      variantName,
-      variantCategory,
-      component,
-      selected.styles || {},
-      selected.content || {}
-    );
-
-    setShowVariantSave(false);
-    setVariantName("");
-    setVariantCategory("Default");
-    await load();
+    return null;
   }
 
-  if (!selected) return null;
+  const selectedNodes = selectedIds
+    .map((id) => findNodeById(tree, id))
+    .filter(Boolean);
+
+  // ------------------------------------------------------------
+  // DETERMINE SHARED CONTENT FIELDS
+  // ------------------------------------------------------------
+  const allFields = selectedNodes.map((n: any) => Object.keys(n.content || {}));
+  const sharedFields = allFields.reduce((acc, fields) =>
+    acc.filter((f) => fields.includes(f))
+  );
+
+  if (sharedFields.length === 0) {
+    return (
+      <div className="inspector-empty">
+        No shared content fields across selected blocks
+      </div>
+    );
+  }
+
+  // ------------------------------------------------------------
+  // HELPER: GET MIXED OR UNIFIED VALUE
+  // ------------------------------------------------------------
+  function getMixedValue(field: string) {
+    const values = selectedNodes.map((n: any) => n.content?.[field]);
+    const unique = Array.from(new Set(values));
+
+    if (unique.length === 1) return unique[0];
+    return "__MIXED__";
+  }
+
+  // ------------------------------------------------------------
+  // APPLY CONTENT TO ALL SELECTED
+  // ------------------------------------------------------------
+  function applyToAll(field: string, value: any) {
+    selectedIds.forEach((id) => updateContent(id, field, value));
+  }
 
   return (
-    <div className="inspector-section">
-      <h3>Content</h3>
+    <div className="content-inspector">
+      <h3>Content ({selectedIds.length} selected)</h3>
 
-      {/* Existing content fields */}
-      {Object.entries(selected.content || {}).map(([key, value]: any) => (
-        <div key={key} className="inspector-field">
-          <label>{key}</label>
-          <input
-            value={value}
-            onChange={(e) => updateContent(selected.id, key, e.target.value)}
-          />
-        </div>
-      ))}
+      {sharedFields.map((field) => {
+        const value = getMixedValue(field);
+        const isMixed = value === "__MIXED__";
 
-      {/* VARIANT PANEL */}
-      <div className="variant-panel">
-        <h4>Variants</h4>
+        return (
+          <div key={field} className="content-row">
+            <label>{field}</label>
 
-        <button onClick={() => setShowVariantSave(true)}>
-          Save as Variant
-        </button>
-
-        <div className="variant-grid">
-          {variants.map((v: any) => (
-            <div key={v.id} className="variant-item">
-              <div className="variant-preview">
-                {v.previewImage ? (
-                  <img
-                    src={`/data/variants/${v.id}/${v.previewImage}`}
-                    alt={v.name}
-                  />
-                ) : (
-                  <div className="variant-placeholder">No Preview</div>
-                )}
-              </div>
-
-              <div className="variant-info">
-                <span>{v.name}</span>
-                <span className="variant-category">{v.category}</span>
-              </div>
-
-              <button onClick={() => handleApplyVariant(v.id)}>
-                Apply
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* SAVE VARIANT MODAL */}
-      {showVariantSave && (
-        <div className="variant-modal-overlay">
-          <div className="variant-modal">
-            <h3>Save Variant</h3>
-
-            <label>Name</label>
             <input
-              value={variantName}
-              onChange={(e) => setVariantName(e.target.value)}
+              type="text"
+              placeholder={isMixed ? "— mixed —" : ""}
+              value={isMixed ? "" : value || ""}
+              onChange={(e) => applyToAll(field, e.target.value)}
             />
-
-            <label>Category</label>
-            <input
-              value={variantCategory}
-              onChange={(e) => setVariantCategory(e.target.value)}
-            />
-
-            <div className="variant-modal-actions">
-              <button onClick={handleSaveVariant}>Save</button>
-              <button onClick={() => setShowVariantSave(false)}>Cancel</button>
-            </div>
           </div>
-        </div>
-      )}
+        );
+      })}
     </div>
   );
 }
