@@ -10,9 +10,6 @@ export default function StyleInspector() {
     return <div className="inspector-empty">No block selected</div>;
   }
 
-  // ------------------------------------------------------------
-  // COLLECT SELECTED NODES
-  // ------------------------------------------------------------
   function findNodeById(nodes: any[], id: string): any | null {
     for (const n of nodes) {
       if (n.id === id) return n;
@@ -26,44 +23,31 @@ export default function StyleInspector() {
     .map((id) => findNodeById(tree, id))
     .filter(Boolean);
 
-  // ------------------------------------------------------------
-  // HELPER: GET MIXED OR UNIFIED VALUE
-  // ------------------------------------------------------------
   function getMixedValue(device: string, prop: string) {
     const values = selectedNodes.map((n: any) => n.styles?.[device]?.[prop]);
     const unique = Array.from(new Set(values));
-
     if (unique.length === 1) return unique[0];
     return "__MIXED__";
   }
 
-  // ------------------------------------------------------------
-  // HELPER: APPLY STYLE TO ALL SELECTED NODES
-  // ------------------------------------------------------------
   function applyToAll(device: string, prop: string, value: any) {
     selectedIds.forEach((id) => updateStyle(id, device, prop, value));
   }
 
-  // Example style fields
   const devices = ["desktop", "tablet", "mobile"];
   const styleProps = ["color", "fontSize", "padding", "margin"];
 
   return (
     <div className="style-inspector">
-      <h3>Styles ({selectedIds.length} selected)</h3>
-
       {devices.map((device) => (
         <div key={device} className="style-device-group">
           <h4>{device.toUpperCase()}</h4>
-
           {styleProps.map((prop) => {
             const value = getMixedValue(device, prop);
             const isMixed = value === "__MIXED__";
-
             return (
               <div key={prop} className="style-row">
                 <label>{prop}</label>
-
                 <input
                   type="text"
                   placeholder={isMixed ? "— mixed —" : ""}
