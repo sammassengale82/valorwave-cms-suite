@@ -13,7 +13,13 @@ export const CMS = {
       });
       return JSON.parse(result.data);
     } catch {
-      return { sections: [], assets: { assets: [] }, uploads: {}, templateIndex: [] };
+      return {
+        sections: [],
+        assets: { assets: [] },
+        uploads: {},
+        templateIndex: [],
+        variantIndex: []
+      };
     }
   },
 
@@ -26,9 +32,8 @@ export const CMS = {
   },
 
   // ------------------------------------------------------------
-  // NEW: TEMPLATE FOLDER OPERATIONS
+  // TEMPLATE FOLDER OPERATIONS
   // ------------------------------------------------------------
-
   async listTemplateFolders(): Promise<string[]> {
     try {
       const dir = await Filesystem.readdir({
@@ -58,8 +63,41 @@ export const CMS = {
         directory: Directory.Data,
         recursive: true,
       });
+    } catch {}
+  },
+
+  // ------------------------------------------------------------
+  // NEW: VARIANT FOLDER OPERATIONS
+  // ------------------------------------------------------------
+  async listVariantFolders(): Promise<string[]> {
+    try {
+      const dir = await Filesystem.readdir({
+        path: "data/variants",
+        directory: Directory.Data,
+      });
+
+      return dir.files.map((f) => f.name);
     } catch {
-      // ignore
+      return [];
     }
+  },
+
+  async writeVariantFile(path: string, base64: string): Promise<void> {
+    await Filesystem.writeFile({
+      path,
+      data: base64,
+      directory: Directory.Data,
+      recursive: true,
+    });
+  },
+
+  async deleteVariantFolder(id: string): Promise<void> {
+    try {
+      await Filesystem.rmdir({
+        path: `data/variants/${id}`,
+        directory: Directory.Data,
+        recursive: true,
+      });
+    } catch {}
   },
 };
