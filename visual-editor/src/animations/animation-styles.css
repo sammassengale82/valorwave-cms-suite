@@ -1,0 +1,180 @@
+/* ------------------------------------------------------------
+   Animation CSS Library
+   Pure CSS animations triggered by data-attributes
+   Works with AnimationEngine.ts
+------------------------------------------------------------ */
+
+/* Base state for all animations */
+[data-anim] {
+  opacity: 0;
+  transform: translateZ(0);
+  transition:
+    opacity var(--anim-duration) var(--anim-easing) var(--anim-delay),
+    transform var(--anim-duration) var(--anim-easing) var(--anim-delay),
+    filter var(--anim-duration) var(--anim-easing) var(--anim-delay);
+}
+
+/* Active state */
+.anim-active {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* ------------------------------------------------------------
+   FADE ANIMATIONS
+------------------------------------------------------------ */
+
+[data-anim="fade-in"] {
+  opacity: 0;
+}
+
+[data-anim="fade-in"].anim-active {
+  opacity: 1;
+}
+
+[data-anim="fade-up"] {
+  transform: translateY(20px);
+}
+
+[data-anim="fade-up"].anim-active {
+  transform: translateY(0);
+}
+
+[data-anim="fade-down"] {
+  transform: translateY(-20px);
+}
+
+[data-anim="fade-down"].anim-active {
+  transform: translateY(0);
+}
+
+[data-anim="fade-left"] {
+  transform: translateX(20px);
+}
+
+[data-anim="fade-left"].anim-active {
+  transform: translateX(0);
+}
+
+[data-anim="fade-right"] {
+  transform: translateX(-20px);
+}
+
+[data-anim="fade-right"].anim-active {
+  transform: translateX(0);
+}
+
+/* ------------------------------------------------------------
+   SLIDE ANIMATIONS
+------------------------------------------------------------ */
+
+[data-anim="slide-up"] {
+  transform: translateY(40px);
+}
+
+[data-anim="slide-up"].anim-active {
+  transform: translateY(0);
+}
+
+[data-anim="slide-down"] {
+  transform: translateY(-40px);
+}
+
+[data-anim="slide-down"].anim-active {
+  transform: translateY(0);
+}
+
+/* ------------------------------------------------------------
+   ZOOM ANIMATIONS
+------------------------------------------------------------ */
+
+[data-anim="zoom-in"] {
+  transform: scale(0.85);
+}
+
+[data-anim="zoom-in"].anim-active {
+  transform: scale(1);
+}
+
+[data-anim="zoom-out"] {
+  transform: scale(1.15);
+}
+
+[data-anim="zoom-out"].anim-active {
+  transform: scale(1);
+}
+
+/* ------------------------------------------------------------
+   ROTATE / FLIP
+------------------------------------------------------------ */
+
+[data-anim="rotate-in"] {
+  transform: rotate(-10deg);
+}
+
+[data-anim="rotate-in"].anim-active {
+  transform: rotate(0deg);
+}
+
+[data-anim="flip"] {
+  transform: rotateY(90deg);
+}
+
+[data-anim="flip"].anim-active {
+  transform: rotateY(0deg);
+}
+
+/* ------------------------------------------------------------
+   BLUR / SKEW
+------------------------------------------------------------ */
+
+[data-anim="blur-in"] {
+  filter: blur(8px);
+}
+
+[data-anim="blur-in"].anim-active {
+  filter: blur(0);
+}
+
+[data-anim="skew-in"] {
+  transform: skewY(6deg);
+}
+
+[data-anim="skew-in"].anim-active {
+  transform: skewY(0deg);
+}
+
+/* ------------------------------------------------------------
+   PARALLAX / SCROLL-SPEED / SCROLL-PROGRESS
+   (Transform is applied dynamically by AnimationEngine)
+------------------------------------------------------------ */
+
+[data-anim="parallax"],
+[data-anim="scroll-speed"],
+[data-anim="scroll-progress"] {
+  will-change: transform;
+}
+
+/* ------------------------------------------------------------
+   HOVER ANIMATIONS
+------------------------------------------------------------ */
+
+[data-anim="hover"] {
+  transition:
+    opacity var(--anim-duration) var(--anim-easing),
+    transform var(--anim-duration) var(--anim-easing);
+}
+
+[data-anim="hover"].anim-active {
+  transform: scale(1.05);
+}
+
+/* ------------------------------------------------------------
+   LOOP SUPPORT
+   (Looping is handled by AnimationEngine; CSS just resets)
+------------------------------------------------------------ */
+
+[data-anim-loop="true"] {
+  animation-iteration-count: infinite;
+}
