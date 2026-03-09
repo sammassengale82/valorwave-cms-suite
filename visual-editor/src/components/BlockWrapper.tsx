@@ -26,7 +26,6 @@ export function BlockWrapper({ node }: Props) {
       onClick={handleClick}
       style={styles}
     >
-      {/* Actual block content is rendered by the section/block renderer */}
       <div className="block-wrapper-inner">
         <div className="block-label">{node.component}</div>
       </div>
