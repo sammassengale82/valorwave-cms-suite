@@ -5,12 +5,11 @@ import { useEditorState } from "../../state/EditorState";
 export default function LayoutPanel({ node }) {
   const updateStyle = useCanvasState((s) => s.updateStyle);
   const device = useEditorState((s) => s.device);
+  const styles = node.styles?.[device] || {};
 
   function set(prop, value) {
     updateStyle(node.id, device, prop, value);
   }
-
-  const styles = node.styles?.[device] || {};
 
   return (
     <div className="panel layout-panel">
