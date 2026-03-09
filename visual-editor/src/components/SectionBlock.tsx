@@ -26,7 +26,6 @@ export function SectionBlock({ node }: Props) {
       onClick={handleClick}
       style={styles}
     >
-      {/* Rendered content is handled by your section renderer / component map */}
       <div className="section-block-inner">
         <div className="section-label">{node.component}</div>
       </div>
