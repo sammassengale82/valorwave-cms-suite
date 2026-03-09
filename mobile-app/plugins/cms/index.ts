@@ -3,7 +3,7 @@ import { Filesystem, Directory } from "@capacitor/filesystem";
 
 export const CMS = {
   // ------------------------------------------------------------
-  // Existing CMS functions (draft, publish, sync)
+  // Existing CMS functions
   // ------------------------------------------------------------
   async readDraft() {
     try {
@@ -13,7 +13,7 @@ export const CMS = {
       });
       return JSON.parse(result.data);
     } catch {
-      return { sections: [], assets: { assets: [] }, uploads: {} };
+      return { sections: [], assets: { assets: [] }, uploads: {}, templateIndex: [] };
     }
   },
 
@@ -25,95 +25,41 @@ export const CMS = {
     });
   },
 
-  async readPublish() {
-    try {
-      const result = await Filesystem.readFile({
-        path: "data/cms/publish.json",
-        directory: Directory.Data,
-      });
-      return JSON.parse(result.data);
-    } catch {
-      return { sections: [], assets: { assets: [] }, uploads: {} };
-    }
-  },
-
-  async writePublish(data: any) {
-    await Filesystem.writeFile({
-      path: "data/cms/publish.json",
-      data: JSON.stringify(data, null, 2),
-      directory: Directory.Data,
-    });
-  },
-
   // ------------------------------------------------------------
-  // NEW: Asset File Operations
+  // NEW: TEMPLATE FOLDER OPERATIONS
   // ------------------------------------------------------------
 
-  async listFiles(): Promise<{ filename: string; size: number }[]> {
+  async listTemplateFolders(): Promise<string[]> {
     try {
       const dir = await Filesystem.readdir({
-        path: "data/images/uploads",
+        path: "data/templates",
         directory: Directory.Data,
       });
 
-      const entries: { filename: string; size: number }[] = [];
-
-      for (const file of dir.files) {
-        const stat = await Filesystem.stat({
-          path: `data/images/uploads/${file.name}`,
-          directory: Directory.Data,
-        });
-
-        entries.push({
-          filename: file.name,
-          size: stat.size ?? 0,
-        });
-      }
-
-      return entries;
+      return dir.files.map((f) => f.name);
     } catch {
       return [];
     }
   },
 
-  async uploadFile(filename: string, base64: string): Promise<void> {
+  async writeTemplateFile(path: string, base64: string): Promise<void> {
     await Filesystem.writeFile({
-      path: `data/images/uploads/${filename}`,
+      path,
       data: base64,
       directory: Directory.Data,
+      recursive: true,
     });
   },
 
-  async deleteFile(filename: string): Promise<void> {
+  async deleteTemplateFolder(id: string): Promise<void> {
     try {
-      await Filesystem.deleteFile({
-        path: `data/images/uploads/${filename}`,
+      await Filesystem.rmdir({
+        path: `data/templates/${id}`,
         directory: Directory.Data,
+        recursive: true,
       });
     } catch {
-      // ignore if file doesn't exist
-    }
-  },
-
-  async renameFile(oldName: string, newName: string): Promise<void> {
-    try {
-      const file = await Filesystem.readFile({
-        path: `data/images/uploads/${oldName}`,
-        directory: Directory.Data,
-      });
-
-      await Filesystem.writeFile({
-        path: `data/images/uploads/${newName}`,
-        data: file.data,
-        directory: Directory.Data,
-      });
-
-      await Filesystem.deleteFile({
-        path: `data/images/uploads/${oldName}`,
-        directory: Directory.Data,
-      });
-    } catch {
-      // ignore if missing
+      // ignore
     }
   },
 };
