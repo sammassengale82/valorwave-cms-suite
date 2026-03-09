@@ -13,12 +13,14 @@ export default function ResponsiveTabs() {
       >
         Desktop
       </button>
+
       <button
         className={device === "tablet" ? "active" : ""}
         onClick={() => setDevice("tablet")}
       >
         Tablet
       </button>
+
       <button
         className={device === "mobile" ? "active" : ""}
         onClick={() => setDevice("mobile")}
