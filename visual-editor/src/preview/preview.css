@@ -1,0 +1,52 @@
+.preview-toolbar {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: #f0f2f5;
+  border-bottom: 1px solid #d0d4d9;
+}
+
+.preview-toolbar button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #c8ccd2;
+  background: white;
+  cursor: pointer;
+}
+
+.preview-toolbar button.active {
+  background: #1565c0;
+  color: white;
+  border-color: #1565c0;
+}
+
+.preview-container {
+  width: 100%;
+  height: 100%;
+  background: #e5e7eb;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.preview-container.desktop iframe {
+  width: 1200px;
+  height: 800px;
+}
+
+.preview-container.tablet iframe {
+  width: 800px;
+  height: 1100px;
+}
+
+.preview-container.mobile iframe {
+  width: 390px;
+  height: 844px;
+}
+
+.preview-frame {
+  border: 1px solid #c8ccd2;
+  border-radius: 8px;
+  background: white;
+}
