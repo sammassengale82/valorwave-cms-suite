@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import type { VisualTree, VisualNode } from "./VisualTree";
+import type { VisualTree, VisualNode, AnimationConfig } from "./VisualTree";
 
 interface CanvasState {
   tree: VisualTree;
@@ -44,10 +44,29 @@ interface CanvasState {
     prop: string,
     value: string
   ) => void;
+
+  updateAnimations: (
+    id: string,
+    device: "desktop" | "tablet" | "mobile",
+    index: number | "add" | "remove",
+    field?: keyof AnimationConfig,
+    value?: any
+  ) => void;
 }
 
 function cloneTree(tree: VisualTree): VisualTree {
   return JSON.parse(JSON.stringify(tree));
+}
+
+function findNode(nodes: VisualNode[], id: string): VisualNode | null {
+  for (const n of nodes) {
+    if (n.id === id) return n;
+    if (n.children) {
+      const child = findNode(n.children, id);
+      if (child) return child;
+    }
+  }
+  return null;
 }
 
 export const useCanvasState = create<CanvasState>()(
@@ -222,23 +241,54 @@ export const useCanvasState = create<CanvasState>()(
 
     updateStyle: (id, device, prop, value) =>
       set((state) => {
-        function findNode(nodes: VisualNode[]): VisualNode | null {
-          for (const n of nodes) {
-            if (n.id === id) return n;
-            if (n.children) {
-              const child = findNode(n.children);
-              if (child) return child;
-            }
-          }
-          return null;
-        }
-
-        const node = findNode(state.tree.root);
+        const node = findNode(state.tree.root, id);
         if (!node) return;
 
         node.styles = node.styles || {};
         node.styles[device] = node.styles[device] || {};
-        node.styles[device][prop] = value;
+        node.styles[device]![prop] = value;
+      }),
+
+    // ------------------------------------------------------------
+    // NEW: updateAnimations()
+    // ------------------------------------------------------------
+    updateAnimations: (id, device, index, field, value) =>
+      set((state) => {
+        const node = findNode(state.tree.root, id);
+        if (!node) return;
+
+        node.animations = node.animations || {};
+        node.animations[device] = node.animations[device] || [];
+
+        const list = node.animations[device]!;
+
+        // Add new animation
+        if (index === "add") {
+          list.push({
+            type: "fade-in",
+            duration: 600,
+            delay: 0,
+            easing: "ease-out",
+            trigger: "on-visible",
+            speed: 1,
+            threshold: 0,
+            loop: false
+          });
+          return;
+        }
+
+        // Remove animation
+        if (index === "remove" && typeof field === "number") {
+          list.splice(field, 1);
+          return;
+        }
+
+        // Update animation field
+        if (typeof index === "number" && field) {
+          const anim = list[index];
+          if (!anim) return;
+          (anim as any)[field] = value;
+        }
       })
   }))
 );
