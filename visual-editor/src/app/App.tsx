@@ -1,16 +1,14 @@
 import React, { useEffect } from "react";
 
-import Sidebar from "../components/Sidebar";
-import Canvas from "../canvas/Canvas";
+import CanvasRenderer from "../canvas/CanvasRenderer";
+import SectionLibrary from "../section-library/SectionLibrary";
+import BlockLibrary from "../block-library/BlockLibrary";
 import Inspector from "../inspector/Inspector";
 import CMSPanel from "../cms-panel/CMSPanel";
 import DeviceSwitcher from "../devices/DeviceSwitcher";
-import SectionLibrary from "../section-library/SectionLibrary";
-import BlockLibrary from "../block-library/BlockLibrary";
-
+import PreviewMode from "../preview/PreviewMode";
 import ThemeProvider from "../theme/ThemeProvider";
 import ThemeEditor from "../theme/ThemeEditor";
-import PreviewMode from "../preview/PreviewMode";
 
 import { getDraft, saveDraft, syncGitHub } from "../api/api";
 import { deserializeFromCMS } from "../serialization/deserializeFromCMS";
@@ -50,8 +48,7 @@ export default function App() {
         <div className="editor-body">
           <SectionLibrary />
           <BlockLibrary />
-          <Sidebar />
-          <Canvas />
+          <CanvasRenderer />
           <Inspector />
         </div>
 
