@@ -1,135 +1,82 @@
-import React, { useEffect, useState } from "react";
-import { useCanvasState } from "../../canvas/CanvasState";
-import { listVariants, loadVariant, saveVariant } from "../../api/variants";
+import React from "react";
+import { useCanvasState } from "../canvas/CanvasState";
 
-export default function StyleInspector({ selected, device }: any) {
+export default function StyleInspector() {
+  const tree = useCanvasState((s) => s.tree);
+  const selectedIds = useCanvasState((s) => s.selectedIds);
   const updateStyle = useCanvasState((s) => s.updateStyle);
-  const applyVariantToNode = useCanvasState((s) => s.applyVariant);
 
-  const [variants, setVariants] = useState([]);
-  const [showVariantSave, setShowVariantSave] = useState(false);
-  const [variantName, setVariantName] = useState("");
-  const [variantCategory, setVariantCategory] = useState("Default");
-
-  const component = selected?.type;
-
-  useEffect(() => {
-    if (component) load();
-  }, [component]);
-
-  async function load() {
-    const list = await listVariants(component);
-    setVariants(list);
+  if (selectedIds.length === 0) {
+    return <div className="inspector-empty">No block selected</div>;
   }
 
-  async function handleApplyVariant(id: string) {
-    const variant = await loadVariant(id);
-    if (!variant) return;
-
-    applyVariantToNode(selected.id, variant);
-  }
-
-  async function handleSaveVariant() {
-    if (!variantName.trim()) {
-      alert("Enter a variant name");
-      return;
+  // ------------------------------------------------------------
+  // COLLECT SELECTED NODES
+  // ------------------------------------------------------------
+  function findNodeById(nodes: any[], id: string): any | null {
+    for (const n of nodes) {
+      if (n.id === id) return n;
+      const child = findNodeById(n.children || [], id);
+      if (child) return child;
     }
-
-    await saveVariant(
-      variantName,
-      variantCategory,
-      component,
-      selected.styles || {},
-      selected.content || {}
-    );
-
-    setShowVariantSave(false);
-    setVariantName("");
-    setVariantCategory("Default");
-    await load();
+    return null;
   }
 
-  if (!selected) return null;
+  const selectedNodes = selectedIds
+    .map((id) => findNodeById(tree, id))
+    .filter(Boolean);
 
-  const styles = selected.styles?.[device] || {};
+  // ------------------------------------------------------------
+  // HELPER: GET MIXED OR UNIFIED VALUE
+  // ------------------------------------------------------------
+  function getMixedValue(device: string, prop: string) {
+    const values = selectedNodes.map((n: any) => n.styles?.[device]?.[prop]);
+    const unique = Array.from(new Set(values));
+
+    if (unique.length === 1) return unique[0];
+    return "__MIXED__";
+  }
+
+  // ------------------------------------------------------------
+  // HELPER: APPLY STYLE TO ALL SELECTED NODES
+  // ------------------------------------------------------------
+  function applyToAll(device: string, prop: string, value: any) {
+    selectedIds.forEach((id) => updateStyle(id, device, prop, value));
+  }
+
+  // Example style fields
+  const devices = ["desktop", "tablet", "mobile"];
+  const styleProps = ["color", "fontSize", "padding", "margin"];
 
   return (
-    <div className="inspector-section">
-      <h3>Styles ({device})</h3>
+    <div className="style-inspector">
+      <h3>Styles ({selectedIds.length} selected)</h3>
 
-      {/* Existing style fields */}
-      {Object.entries(styles).map(([prop, value]: any) => (
-        <div key={prop} className="inspector-field">
-          <label>{prop}</label>
-          <input
-            value={value}
-            onChange={(e) =>
-              updateStyle(selected.id, device, prop, e.target.value)
-            }
-          />
+      {devices.map((device) => (
+        <div key={device} className="style-device-group">
+          <h4>{device.toUpperCase()}</h4>
+
+          {styleProps.map((prop) => {
+            const value = getMixedValue(device, prop);
+            const isMixed = value === "__MIXED__";
+
+            return (
+              <div key={prop} className="style-row">
+                <label>{prop}</label>
+
+                <input
+                  type="text"
+                  placeholder={isMixed ? "— mixed —" : ""}
+                  value={isMixed ? "" : value || ""}
+                  onChange={(e) =>
+                    applyToAll(device, prop, e.target.value)
+                  }
+                />
+              </div>
+            );
+          })}
         </div>
       ))}
-
-      {/* VARIANT PANEL */}
-      <div className="variant-panel">
-        <h4>Variants</h4>
-
-        <button onClick={() => setShowVariantSave(true)}>
-          Save as Variant
-        </button>
-
-        <div className="variant-grid">
-          {variants.map((v: any) => (
-            <div key={v.id} className="variant-item">
-              <div className="variant-preview">
-                {v.previewImage ? (
-                  <img
-                    src={`/data/variants/${v.id}/${v.previewImage}`}
-                    alt={v.name}
-                  />
-                ) : (
-                  <div className="variant-placeholder">No Preview</div>
-                )}
-              </div>
-
-              <div className="variant-info">
-                <span>{v.name}</span>
-                <span className="variant-category">{v.category}</span>
-              </div>
-
-              <button onClick={() => handleApplyVariant(v.id)}>
-                Apply
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* SAVE VARIANT MODAL */}
-      {showVariantSave && (
-        <div className="variant-modal-overlay">
-          <div className="variant-modal">
-            <h3>Save Variant</h3>
-
-            <label>Name</label>
-            <input
-              value={variantName}
-              onChange={(e) => setVariantName(e.target.value)}
-            />
-
-            <label>Category</label>
-            <input
-              value={variantCategory}
-              onChange={(e) => setVariantCategory(e.target.value)}
-            />
-
-            <div className="variant-modal-actions">
-              <button onClick={handleSaveVariant}>Save</button>
-              <button onClick={() => setShowVariantSave(false)}>Cancel</button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
