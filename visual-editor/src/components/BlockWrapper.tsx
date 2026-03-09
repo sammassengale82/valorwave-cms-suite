@@ -1,81 +1,53 @@
-import React, { useState } from "react";
+import React from "react";
 import { useCanvasState } from "./CanvasState";
-import { saveVariant } from "../api/variants";
 
 export default function BlockWrapper({ node, children }: any) {
+  const selectedIds = useCanvasState((s) => s.selectedIds);
+  const selectOne = useCanvasState((s) => s.selectOne);
+  const toggleSelect = useCanvasState((s) => s.toggleSelect);
+  const selectMultiple = useCanvasState((s) => s.selectMultiple);
+
   const removeBlock = useCanvasState((s) => s.removeBlock);
   const duplicateBlock = useCanvasState((s) => s.duplicateBlock);
 
-  const [variantModalOpen, setVariantModalOpen] = useState(false);
-  const [variantName, setVariantName] = useState("");
-  const [variantCategory, setVariantCategory] = useState("Default");
+  const isSelected = selectedIds.includes(node.id);
 
-  async function handleSaveVariant() {
-    if (!variantName.trim()) {
-      alert("Please enter a variant name");
+  function handleClick(e: React.MouseEvent) {
+    e.stopPropagation();
+
+    const isMac = navigator.platform.toUpperCase().includes("MAC");
+    const mod = isMac ? e.metaKey : e.ctrlKey;
+
+    if (e.shiftKey) {
+      // Add to selection
+      selectMultiple([...selectedIds, node.id]);
       return;
     }
 
-    await saveVariant(
-      variantName,
-      variantCategory,
-      node.type,          // component type (button, card, etc.)
-      node.styles || {},  // style overrides
-      node.content || {}  // content overrides
-    );
+    if (mod) {
+      // Toggle selection
+      toggleSelect(node.id);
+      return;
+    }
 
-    setVariantModalOpen(false);
-    setVariantName("");
-    setVariantCategory("Default");
-
-    alert("Variant saved");
+    // Normal click → single select
+    selectOne(node.id);
   }
 
   return (
-    <div className="block-wrapper">
+    <div
+      className={`block-wrapper ${isSelected ? "selected" : ""}`}
+      onClick={handleClick}
+    >
+      {/* Selection outline */}
+      {isSelected && <div className="selection-outline" />}
+
       <div className="block-actions">
         <button onClick={() => duplicateBlock(node.id)}>Duplicate</button>
         <button onClick={() => removeBlock(node.id)}>Delete</button>
-
-        {/* NEW: Save as Variant */}
-        <button onClick={() => setVariantModalOpen(true)}>
-          Save as Variant
-        </button>
       </div>
 
       {children}
-
-      {/* Variant Save Modal */}
-      {variantModalOpen && (
-        <div className="variant-modal-overlay">
-          <div className="variant-modal">
-            <h3>Save Block as Variant</h3>
-
-            <label>Name</label>
-            <input
-              type="text"
-              value={variantName}
-              onChange={(e) => setVariantName(e.target.value)}
-              placeholder="Primary Button"
-            />
-
-            <label>Category</label>
-            <input
-              type="text"
-              value={variantCategory}
-              onChange={(e) => setVariantCategory(e.target.value)}
-              placeholder="Primary, Outline, Hero..."
-            />
-
-            <div className="variant-modal-actions">
-              <button onClick={handleSaveVariant}>Save</button>
-              <button onClick={() => setVariantModalOpen(false)}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
