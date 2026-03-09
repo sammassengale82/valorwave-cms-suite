@@ -1,5 +1,6 @@
 import React from "react";
 import { useCanvasState } from "../../canvas/CanvasState";
+import { findNodeById } from "../../canvas/VisualTree";
 import ResponsiveTabs from "./ResponsiveTabs";
 import LayoutPanel from "./LayoutPanel";
 import TypographyPanel from "./TypographyPanel";
@@ -12,18 +13,26 @@ export default function StyleInspector() {
   const tree = useCanvasState((s) => s.tree);
 
   if (!selectedId) {
-    return <div className="style-inspector-empty">Select a component</div>;
+    return (
+      <div className="style-inspector-empty">
+        <p>Select a section or block to edit styles</p>
+      </div>
+    );
   }
 
-  const node = tree.root.find((n) => n.id === selectedId) ||
-    tree.root.flatMap((n) => n.children || []).find((c) => c.id === selectedId);
-
+  const node = findNodeById(tree, selectedId);
   if (!node) {
-    return <div className="style-inspector-empty">Select a component</div>;
+    return (
+      <div className="style-inspector-empty">
+        <p>Node not found</p>
+      </div>
+    );
   }
 
   return (
     <div className="style-inspector">
+      <h3 className="inspector-title">Styles</h3>
+
       <ResponsiveTabs />
 
       <LayoutPanel node={node} />
