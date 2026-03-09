@@ -16,6 +16,10 @@ export default function SectionWrapper({ node, children }: any) {
     <div
       className={`section-wrapper ${isSelected ? "selected" : ""}`}
       onClick={handleClick}
+      style={{
+        position: "relative",
+        padding: "20px",
+      }}
     >
       {isSelected && <div className="selection-outline" />}
       {children}
