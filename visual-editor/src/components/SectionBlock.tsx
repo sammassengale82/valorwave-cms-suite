@@ -5,9 +5,10 @@ import { useEditorState } from "../state/EditorState";
 
 interface Props {
   node: VisualNode;
+  animAttrs?: Record<string, string>;
 }
 
-export function SectionBlock({ node }: Props) {
+export function SectionBlock({ node, animAttrs = {} }: Props) {
   const select = useCanvasState((s) => s.select);
   const selectedId = useCanvasState((s) => s.selectedId);
   const device = useEditorState((s) => s.device);
@@ -25,6 +26,7 @@ export function SectionBlock({ node }: Props) {
       className={`section-block ${isSelected ? "is-selected" : ""}`}
       onClick={handleClick}
       style={styles}
+      {...animAttrs}
     >
       <div className="section-block-inner">
         <div className="section-label">{node.component}</div>
