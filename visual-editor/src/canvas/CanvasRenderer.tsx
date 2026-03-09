@@ -1,43 +1,29 @@
 import React from "react";
-import type { VisualNode } from "./VisualTree";
+import { useCanvasState } from "./CanvasState";
+import { useEditorState } from "../state/EditorState";
 import { SectionBlock } from "../components/SectionBlock";
 import { BlockWrapper } from "../components/BlockWrapper";
-import { useEditorState } from "../state/EditorState";
-import WaveDivider from "../theme/wave-divider";
+import type { VisualNode } from "./VisualTree";
 
-interface Props {
-  nodes: VisualNode[];
+function renderNode(node: VisualNode) {
+  if (node.type === "section") {
+    return <SectionBlock key={node.id} node={node} />;
+  }
+
+  if (node.type === "block") {
+    return <BlockWrapper key={node.id} node={node} />;
+  }
+
+  return null;
 }
 
-export default function CanvasRenderer({ nodes }: Props) {
+export default function CanvasRenderer() {
+  const tree = useCanvasState((s) => s.tree);
   const device = useEditorState((s) => s.device);
-  const preview = useEditorState((s) => s.preview);
-
-  if (preview) return null;
-
-  const deviceStyles = {
-    desktop: { transform: "scale(1)", maxWidth: "1200px", margin: "0 auto" },
-    tablet: { transform: "scale(0.85)", maxWidth: "900px", margin: "0 auto" },
-    mobile: { transform: "scale(0.7)", maxWidth: "480px", margin: "0 auto" }
-  };
 
   return (
-    <div className="canvas-device-wrapper">
-      <div className="canvas-device-frame" style={deviceStyles[device]}>
-        {nodes.map((node, i) => (
-          <React.Fragment key={node.id}>
-            {node.type === "section" ? (
-              <SectionBlock node={node} />
-            ) : (
-              <BlockWrapper node={node} />
-            )}
-
-            {node.type === "section" &&
-              i < nodes.length - 1 &&
-              nodes[i + 1].type === "section" && <WaveDivider />}
-          </React.Fragment>
-        ))}
-      </div>
+    <div className={`canvas-renderer device-${device}`}>
+      {tree.root.map((node) => renderNode(node))}
     </div>
   );
 }
