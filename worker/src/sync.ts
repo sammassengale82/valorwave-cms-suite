@@ -96,40 +96,6 @@ export class GitHubSync {
   }
 
   // ------------------------------------------------------------
-  // MAIN SYNC FUNCTION
-  // ------------------------------------------------------------
-  async syncAll(localRoot: string) {
-    // 1. Sync assets.json
-    const assetsJson = path.join(localRoot, "data/assets.json");
-    if (fs.existsSync(assetsJson)) {
-      await this.writeFile("data/assets.json", assetsJson);
-    }
-
-    // 2. Sync uploaded images
-    const uploadsDir = path.join(localRoot, "data/images/uploads");
-
-    if (!fs.existsSync(uploadsDir)) {
-      fs.mkdirSync(uploadsDir, { recursive: true });
-    }
-
-    const localFiles = fs.readdirSync(uploadsDir);
-    const repoFiles = await this.listRepoFiles("data/images/uploads");
-
-    // Upload new or changed files
-    for (const file of localFiles) {
-      const localPath = path.join(uploadsDir, file);
-      await this.writeFile(`data/images/uploads/${file}`, localPath);
-    }
-
-    // Delete removed files
-    for (const file of repoFiles) {
-      if (!localFiles.includes(file)) {
-        await this.deleteFile(`data/images/uploads/${file}`);
-      }
-    }
-  }
-
-  // ------------------------------------------------------------
   // List files in repo directory
   // ------------------------------------------------------------
   async listRepoFiles(dir: string): Promise<string[]> {
@@ -149,5 +115,82 @@ export class GitHubSync {
     }
 
     return [];
+  }
+
+  // ------------------------------------------------------------
+  // MAIN SYNC FUNCTION
+  // ------------------------------------------------------------
+  async syncAll(localRoot: string) {
+    // ------------------------------------------------------------
+    // 1. Sync assets.json
+    // ------------------------------------------------------------
+    const assetsJson = path.join(localRoot, "data/assets.json");
+    if (fs.existsSync(assetsJson)) {
+      await this.writeFile("data/assets.json", assetsJson);
+    }
+
+    // ------------------------------------------------------------
+    // 2. Sync uploaded images
+    // ------------------------------------------------------------
+    const uploadsDir = path.join(localRoot, "data/images/uploads");
+
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true });
+    }
+
+    const localUploads = fs.readdirSync(uploadsDir);
+    const repoUploads = await this.listRepoFiles("data/images/uploads");
+
+    // Upload new or changed files
+    for (const file of localUploads) {
+      const localPath = path.join(uploadsDir, file);
+      await this.writeFile(`data/images/uploads/${file}`, localPath);
+    }
+
+    // Delete removed files
+    for (const file of repoUploads) {
+      if (!localUploads.includes(file)) {
+        await this.deleteFile(`data/images/uploads/${file}`);
+      }
+    }
+
+    // ------------------------------------------------------------
+    // 3. Sync templates (folder-per-template)
+    // ------------------------------------------------------------
+    const templatesDir = path.join(localRoot, "data/templates");
+
+    if (!fs.existsSync(templatesDir)) {
+      fs.mkdirSync(templatesDir, { recursive: true });
+    }
+
+    const localTemplateFolders = fs
+      .readdirSync(templatesDir)
+      .filter((f) => fs.statSync(path.join(templatesDir, f)).isDirectory());
+
+    const repoTemplateFolders = await this.listRepoFiles("data/templates");
+
+    // Upload or update template folders
+    for (const folder of localTemplateFolders) {
+      const folderPath = path.join(templatesDir, folder);
+
+      const files = fs.readdirSync(folderPath);
+
+      for (const file of files) {
+        const localPath = path.join(folderPath, file);
+        const repoPath = `data/templates/${folder}/${file}`;
+        await this.writeFile(repoPath, localPath);
+      }
+    }
+
+    // Delete removed template folders
+    for (const folder of repoTemplateFolders) {
+      if (!localTemplateFolders.includes(folder)) {
+        // Delete template.json
+        await this.deleteFile(`data/templates/${folder}/template.json`);
+
+        // Delete preview.jpg if exists
+        await this.deleteFile(`data/templates/${folder}/preview.jpg`);
+      }
+    }
   }
 }
