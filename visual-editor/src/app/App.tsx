@@ -11,6 +11,7 @@ import ThemeProvider from "../theme/ThemeProvider";
 import ThemeEditor from "../theme/ThemeEditor";
 
 import AssetManager from "../asset-manager/AssetManager";
+import TemplateLibrary from "../template-library/TemplateLibrary";
 
 import { getDraft, saveDraft, syncGitHub } from "../api/api";
 import { deserializeFromCMS } from "../serialization/deserializeFromCMS";
@@ -24,6 +25,7 @@ export default function App() {
   const enterPreview = useEditorState((s) => s.enterPreview);
 
   const [assetManagerOpen, setAssetManagerOpen] = useState(false);
+  const [templateLibraryOpen, setTemplateLibraryOpen] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -53,6 +55,11 @@ export default function App() {
         onClose={() => setAssetManagerOpen(false)}
       />
 
+      <TemplateLibrary
+        isOpen={templateLibraryOpen}
+        onClose={() => setTemplateLibraryOpen(false)}
+      />
+
       <div className="editor-root">
         <div className="editor-body">
           <SectionLibrary />
@@ -68,6 +75,13 @@ export default function App() {
         <div className="editor-actions">
           <button className="preview-button" onClick={enterPreview}>
             Preview
+          </button>
+
+          <button
+            className="templates-button"
+            onClick={() => setTemplateLibraryOpen(true)}
+          >
+            Templates
           </button>
 
           <button
