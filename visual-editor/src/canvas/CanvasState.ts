@@ -58,6 +58,18 @@ function compressTree(tree: any[]): any[] {
 }
 
 // ------------------------------------------------------------
+// Helper: Find node by ID
+// ------------------------------------------------------------
+function findNode(nodes: any[], id: string): any | null {
+  for (const n of nodes) {
+    if (n.id === id) return n;
+    const child = findNode(n.children || [], id);
+    if (child) return child;
+  }
+  return null;
+}
+
+// ------------------------------------------------------------
 // Canvas State
 // ------------------------------------------------------------
 export const useCanvasState = create((set, get) => ({
@@ -241,6 +253,112 @@ export const useCanvasState = create((set, get) => ({
     }),
 
   // ------------------------------------------------------------
+  // GROUP OPERATIONS (NEW)
+  // ------------------------------------------------------------
+  deleteSelected: () =>
+    set((state: any) => {
+      get().pushHistory("Delete Multiple Blocks");
+
+      const ids = new Set(state.selectedIds);
+
+      const remove = (nodes: any[]): any[] =>
+        nodes
+          .filter((n) => !ids.has(n.id))
+          .map((n) => ({ ...n, children: remove(n.children || []) }));
+
+      return {
+        tree: remove(state.tree),
+        selectedIds: [],
+      };
+    }),
+
+  duplicateSelected: () =>
+    set((state: any) => {
+      get().pushHistory("Duplicate Multiple Blocks");
+
+      const ids = new Set(state.selectedIds);
+
+      const duplicate = (nodes: any[]): any[] => {
+        const result: any[] = [];
+
+        for (const n of nodes) {
+          result.push({
+            ...n,
+            children: duplicate(n.children || []),
+          });
+
+          if (ids.has(n.id)) {
+            const clone = cloneNodeWithNewIds(n);
+            result.push(clone);
+          }
+        }
+
+        return result;
+      };
+
+      return {
+        tree: duplicate(state.tree),
+      };
+    }),
+
+  moveSelected: (direction: "up" | "down") =>
+    set((state: any) => {
+      get().pushHistory("Move Multiple Blocks");
+
+      const ids = new Set(state.selectedIds);
+
+      const move = (nodes: any[]): any[] => {
+        const newNodes = [...nodes];
+
+        for (let i = 0; i < newNodes.length; i++) {
+          if (ids.has(newNodes[i].id)) {
+            const targetIndex = direction === "up" ? i - 1 : i + 1;
+
+            if (targetIndex >= 0 && targetIndex < newNodes.length) {
+              const temp = newNodes[targetIndex];
+              newNodes[targetIndex] = newNodes[i];
+              newNodes[i] = temp;
+            }
+          }
+        }
+
+        return newNodes.map((n) => ({
+          ...n,
+          children: move(n.children || []),
+        }));
+      };
+
+      return {
+        tree: move(state.tree),
+      };
+    }),
+
+  applyVariantToSelected: (variant: any) =>
+    set((state: any) => {
+      get().pushHistory("Apply Variant to Multiple");
+
+      const ids = new Set(state.selectedIds);
+
+      const apply = (nodes: any[]): any[] =>
+        nodes.map((n) => {
+          if (ids.has(n.id)) {
+            const mergedStyles = deepMerge(n.styles || {}, variant.styles || {});
+            const mergedContent = deepMerge(n.content || {}, variant.content || {});
+
+            return {
+              ...n,
+              styles: mergedStyles,
+              content: mergedContent,
+            };
+          }
+
+          return { ...n, children: apply(n.children || []) };
+        });
+
+      return { tree: apply(state.tree) };
+    }),
+
+  // ------------------------------------------------------------
   // STYLE + CONTENT UPDATES
   // ------------------------------------------------------------
   updateStyle: (id: string, device: string, prop: string, value: any) =>
@@ -293,7 +411,7 @@ export const useCanvasState = create((set, get) => ({
     }),
 
   // ------------------------------------------------------------
-  // APPLY VARIANT
+  // APPLY VARIANT (single)
   // ------------------------------------------------------------
   applyVariant: (nodeId: string, variant: any) =>
     set((state: any) => {
