@@ -1,0 +1,102 @@
+/* ------------------------------------------------------------
+   CANVAS CONTAINER
+------------------------------------------------------------ */
+.canvas-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* scrollable canvas */
+  background: #f8f9fb;
+  user-select: none;
+}
+
+/* ------------------------------------------------------------
+   CANVAS CONTENT (supports zoom + pan)
+------------------------------------------------------------ */
+.canvas-content {
+  position: relative;
+  transform-origin: top left;
+  width: 100%;
+  height: 100%;
+}
+
+/* ------------------------------------------------------------
+   SELECTION MARQUEE
+------------------------------------------------------------ */
+.selection-marquee {
+  position: fixed;
+  background: rgba(0, 120, 255, 0.15);
+  border: 1px solid rgba(0, 120, 255, 0.5);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ------------------------------------------------------------
+   BLOCK SELECTION OUTLINE
+------------------------------------------------------------ */
+.block-wrapper.selected {
+  position: relative;
+}
+
+.selection-outline {
+  position: absolute;
+  inset: 0;
+  border: 2px solid #0078ff;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ------------------------------------------------------------
+   BLOCK WRAPPER
+------------------------------------------------------------ */
+.block-wrapper {
+  position: relative;
+  padding: 4px;
+}
+
+.block-wrapper.absolute {
+  position: absolute;
+}
+
+/* ------------------------------------------------------------
+   SECTION WRAPPER
+------------------------------------------------------------ */
+.section-wrapper {
+  position: relative;
+  padding: 8px;
+}
+
+.section-wrapper.selected {
+  outline: 2px solid #0078ff;
+}
+
+/* ------------------------------------------------------------
+   ZOOM UI
+------------------------------------------------------------ */
+.canvas-zoom {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: white;
+  border-radius: 6px;
+  padding: 6px 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  font-size: 14px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.canvas-zoom button {
+  background: #e6e9ef;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.canvas-zoom button:hover {
+  background: #d5d8df;
+}
