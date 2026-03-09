@@ -44,6 +44,20 @@ function deepMerge(target: any, source: any) {
 }
 
 // ------------------------------------------------------------
+// Helper: Compress snapshot (remove empty objects, trim nulls)
+// ------------------------------------------------------------
+function compressTree(tree: any[]): any[] {
+  return JSON.parse(
+    JSON.stringify(tree, (key, value) => {
+      if (value === null) return undefined;
+      if (typeof value === "object" && value && Object.keys(value).length === 0)
+        return undefined;
+      return value;
+    })
+  );
+}
+
+// ------------------------------------------------------------
 // Canvas State
 // ------------------------------------------------------------
 export const useCanvasState = create((set, get) => ({
@@ -54,23 +68,45 @@ export const useCanvasState = create((set, get) => ({
   // ------------------------------------------------------------
   history: [] as HistoryEntry[],
   historyIndex: -1,
+  lastPushTime: 0,
+  debounceDelay: 250, // ms
+  maxHistory: 200,
 
   pushHistory: (label: string) => {
     const state = get();
+    const now = Date.now();
+
+    // Debounce: prevent flooding history during rapid typing
+    if (now - state.lastPushTime < state.debounceDelay) return;
+
+    const compressed = compressTree(state.tree);
+
+    // No-op detection: if identical to last snapshot, skip
+    const last = state.history[state.historyIndex];
+    if (last && JSON.stringify(last.tree) === JSON.stringify(compressed)) {
+      return;
+    }
 
     const snapshot: HistoryEntry = {
       id: nanoid(),
-      timestamp: Date.now(),
+      timestamp: now,
       label,
-      tree: JSON.parse(JSON.stringify(state.tree)), // deep clone
+      tree: compressed,
     };
 
-    const newHistory = state.history.slice(0, state.historyIndex + 1);
+    // Trim future history if user jumped back
+    let newHistory = state.history.slice(0, state.historyIndex + 1);
     newHistory.push(snapshot);
+
+    // Enforce max history length
+    if (newHistory.length > state.maxHistory) {
+      newHistory = newHistory.slice(newHistory.length - state.maxHistory);
+    }
 
     set({
       history: newHistory,
       historyIndex: newHistory.length - 1,
+      lastPushTime: now,
     });
   },
 
