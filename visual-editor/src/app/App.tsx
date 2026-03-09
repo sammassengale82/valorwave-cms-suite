@@ -17,14 +17,14 @@ export default function App() {
       const isMac = navigator.platform.toUpperCase().includes("MAC");
       const mod = isMac ? e.metaKey : e.ctrlKey;
 
-      // Undo: Cmd+Z / Ctrl+Z
+      // Undo
       if (mod && e.key === "z" && !e.shiftKey) {
         e.preventDefault();
         undo();
         return;
       }
 
-      // Redo: Cmd+Shift+Z / Ctrl+Shift+Z
+      // Redo
       if (mod && e.key === "z" && e.shiftKey) {
         e.preventDefault();
         redo();
@@ -38,6 +38,7 @@ export default function App() {
 
   return (
     <div className="app-container">
+
       {/* Top Bar */}
       <div className="top-bar">
         <button onClick={() => undo()}>Undo</button>
@@ -47,14 +48,19 @@ export default function App() {
 
       {/* Main Editor */}
       <div className="editor-container">
-        {/* Your existing editor UI */}
+        {/* Your existing editor UI goes here */}
       </div>
 
       {/* History Panel */}
-      <HistoryPanel isOpen={historyOpen} onClose={() => setHistoryOpen(false)} />
+      <HistoryPanel
+        isOpen={historyOpen}
+        onClose={() => setHistoryOpen(false)}
+      />
 
-      {/* Timeline Scrubber */}
-      <HistoryScrubber />
+      {/* Timeline Scrubber (always visible) */}
+      <div className="history-scrubber-container">
+        <HistoryScrubber />
+      </div>
     </div>
   );
 }
