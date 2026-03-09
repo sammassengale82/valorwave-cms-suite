@@ -1,136 +1,130 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCanvasState } from "../canvas/CanvasState";
-import { useEditorState } from "../state/EditorState";
-import AssetPicker from "../asset-manager/AssetPicker";
+import { listVariants, loadVariant, saveVariant } from "../api/variants";
 
-interface Props {
-  node: any;
-}
-
-export default function ContentInspector({ node }: Props) {
-  const updateStyle = useCanvasState((s) => s.updateStyle);
-  const device = useEditorState((s) => s.device);
-
+export default function ContentInspector({ selected }: any) {
   const updateContent = useCanvasState((s) => s.updateContent);
-  const [pickerOpen, setPickerOpen] = useState(false);
+  const applyVariantToNode = useCanvasState((s) => s.applyVariant);
 
-  const content = node.content || {};
+  const [variants, setVariants] = useState([]);
+  const [showVariantSave, setShowVariantSave] = useState(false);
+  const [variantName, setVariantName] = useState("");
+  const [variantCategory, setVariantCategory] = useState("Default");
 
-  function setContent(field: string, value: any) {
-    updateContent(node.id, field, value);
+  const component = selected?.type;
+
+  useEffect(() => {
+    if (component) load();
+  }, [component]);
+
+  async function load() {
+    const list = await listVariants(component);
+    setVariants(list);
   }
 
-  const isImageBlock =
-    node.component === "image" ||
-    node.component === "hero-image" ||
-    node.component === "gallery-image" ||
-    node.component === "card-image";
+  async function handleApplyVariant(id: string) {
+    const variant = await loadVariant(id);
+    if (!variant) return;
+
+    applyVariantToNode(selected.id, variant);
+  }
+
+  async function handleSaveVariant() {
+    if (!variantName.trim()) {
+      alert("Enter a variant name");
+      return;
+    }
+
+    await saveVariant(
+      variantName,
+      variantCategory,
+      component,
+      selected.styles || {},
+      selected.content || {}
+    );
+
+    setShowVariantSave(false);
+    setVariantName("");
+    setVariantCategory("Default");
+    await load();
+  }
+
+  if (!selected) return null;
 
   return (
-    <div className="panel content-panel">
-      <h4>Content</h4>
+    <div className="inspector-section">
+      <h3>Content</h3>
 
-      {/* TEXT BLOCKS */}
-      {node.component === "text" && (
-        <>
-          <label>Text</label>
-          <textarea
-            value={content.text || ""}
-            onChange={(e) => setContent("text", e.target.value)}
-          />
-        </>
-      )}
-
-      {/* HEADING BLOCK */}
-      {node.component === "heading" && (
-        <>
-          <label>Heading</label>
+      {/* Existing content fields */}
+      {Object.entries(selected.content || {}).map(([key, value]: any) => (
+        <div key={key} className="inspector-field">
+          <label>{key}</label>
           <input
-            type="text"
-            value={content.text || ""}
-            onChange={(e) => setContent("text", e.target.value)}
+            value={value}
+            onChange={(e) => updateContent(selected.id, key, e.target.value)}
           />
-        </>
-      )}
+        </div>
+      ))}
 
-      {/* BUTTON BLOCK */}
-      {node.component === "button" && (
-        <>
-          <label>Label</label>
-          <input
-            type="text"
-            value={content.label || ""}
-            onChange={(e) => setContent("label", e.target.value)}
-          />
+      {/* VARIANT PANEL */}
+      <div className="variant-panel">
+        <h4>Variants</h4>
 
-          <label>Link</label>
-          <input
-            type="text"
-            value={content.href || ""}
-            onChange={(e) => setContent("href", e.target.value)}
-          />
-        </>
-      )}
+        <button onClick={() => setShowVariantSave(true)}>
+          Save as Variant
+        </button>
 
-      {/* IMAGE BLOCKS */}
-      {isImageBlock && (
-        <>
-          <label>Image</label>
+        <div className="variant-grid">
+          {variants.map((v: any) => (
+            <div key={v.id} className="variant-item">
+              <div className="variant-preview">
+                {v.previewImage ? (
+                  <img
+                    src={`/data/variants/${v.id}/${v.previewImage}`}
+                    alt={v.name}
+                  />
+                ) : (
+                  <div className="variant-placeholder">No Preview</div>
+                )}
+              </div>
 
-          <div className="image-row">
+              <div className="variant-info">
+                <span>{v.name}</span>
+                <span className="variant-category">{v.category}</span>
+              </div>
+
+              <button onClick={() => handleApplyVariant(v.id)}>
+                Apply
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* SAVE VARIANT MODAL */}
+      {showVariantSave && (
+        <div className="variant-modal-overlay">
+          <div className="variant-modal">
+            <h3>Save Variant</h3>
+
+            <label>Name</label>
             <input
-              type="text"
-              value={content.src || ""}
-              placeholder="Image URL"
-              onChange={(e) => setContent("src", e.target.value)}
+              value={variantName}
+              onChange={(e) => setVariantName(e.target.value)}
             />
 
-            <button
-              className="choose-image-btn"
-              onClick={() => setPickerOpen(true)}
-            >
-              Choose Image
-            </button>
-          </div>
+            <label>Category</label>
+            <input
+              value={variantCategory}
+              onChange={(e) => setVariantCategory(e.target.value)}
+            />
 
-          {content.src && (
-            <div className="image-preview">
-              <img src={content.src} alt="Preview" />
+            <div className="variant-modal-actions">
+              <button onClick={handleSaveVariant}>Save</button>
+              <button onClick={() => setShowVariantSave(false)}>Cancel</button>
             </div>
-          )}
-
-          <AssetPicker
-            isOpen={pickerOpen}
-            onClose={() => setPickerOpen(false)}
-            onSelect={(asset) => {
-              setContent("src", asset.url);
-            }}
-          />
-        </>
-      )}
-
-      {/* VIDEO BLOCK */}
-      {node.component === "video" && (
-        <>
-          <label>Video URL</label>
-          <input
-            type="text"
-            value={content.src || ""}
-            onChange={(e) => setContent("src", e.target.value)}
-          />
-        </>
-      )}
-
-      {/* ICON BLOCK */}
-      {node.component === "icon" && (
-        <>
-          <label>Icon Name</label>
-          <input
-            type="text"
-            value={content.name || ""}
-            onChange={(e) => setContent("name", e.target.value)}
-          />
-        </>
+          </div>
+        </div>
       )}
     </div>
   );
