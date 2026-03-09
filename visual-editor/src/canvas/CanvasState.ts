@@ -44,7 +44,7 @@ function deepMerge(target: any, source: any) {
 }
 
 // ------------------------------------------------------------
-// Helper: Compress snapshot (remove empty objects, trim nulls)
+// Helper: Compress snapshot
 // ------------------------------------------------------------
 function compressTree(tree: any[]): any[] {
   return JSON.parse(
@@ -64,24 +64,52 @@ export const useCanvasState = create((set, get) => ({
   tree: [],
 
   // ------------------------------------------------------------
+  // MULTI‑SELECT STATE
+  // ------------------------------------------------------------
+  selectedIds: [] as string[],
+
+  selectOne: (id: string) =>
+    set({
+      selectedIds: [id],
+    }),
+
+  toggleSelect: (id: string) =>
+    set((state: any) => {
+      const exists = state.selectedIds.includes(id);
+      return {
+        selectedIds: exists
+          ? state.selectedIds.filter((x: string) => x !== id)
+          : [...state.selectedIds, id],
+      };
+    }),
+
+  clearSelection: () =>
+    set({
+      selectedIds: [],
+    }),
+
+  selectMultiple: (ids: string[]) =>
+    set({
+      selectedIds: [...ids],
+    }),
+
+  // ------------------------------------------------------------
   // HISTORY ENGINE
   // ------------------------------------------------------------
   history: [] as HistoryEntry[],
   historyIndex: -1,
   lastPushTime: 0,
-  debounceDelay: 250, // ms
+  debounceDelay: 250,
   maxHistory: 200,
 
   pushHistory: (label: string) => {
     const state = get();
     const now = Date.now();
 
-    // Debounce: prevent flooding history during rapid typing
     if (now - state.lastPushTime < state.debounceDelay) return;
 
     const compressed = compressTree(state.tree);
 
-    // No-op detection: if identical to last snapshot, skip
     const last = state.history[state.historyIndex];
     if (last && JSON.stringify(last.tree) === JSON.stringify(compressed)) {
       return;
@@ -94,11 +122,9 @@ export const useCanvasState = create((set, get) => ({
       tree: compressed,
     };
 
-    // Trim future history if user jumped back
     let newHistory = state.history.slice(0, state.historyIndex + 1);
     newHistory.push(snapshot);
 
-    // Enforce max history length
     if (newHistory.length > state.maxHistory) {
       newHistory = newHistory.slice(newHistory.length - state.maxHistory);
     }
@@ -137,7 +163,7 @@ export const useCanvasState = create((set, get) => ({
   },
 
   // ------------------------------------------------------------
-  // SET TREE (manual)
+  // SET TREE
   // ------------------------------------------------------------
   setTree: (tree: any[], pushHistory = true) => {
     if (pushHistory) {
