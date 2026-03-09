@@ -1,0 +1,109 @@
+.theme-dark-operator {
+  --vw-bg: #05070b;
+  --vw-bg-elevated: #0b1018;
+  --vw-bg-subtle: #111827;
+  --vw-text: #e5e7eb;
+  --vw-accent: #f4c542;
+  --vw-accent-soft: rgba(244,197,66,0.16);
+  --vw-border-subtle: rgba(148,163,184,0.35);
+  --vw-danger: #f97373;
+  --vw-blue: #3b82f6;
+  --vw-red: #ef4444;
+
+  background: radial-gradient(circle at top, #111827 0, #020617 55%);
+  color: var(--vw-text);
+}
+
+.theme-dark-operator .app-container {
+  background: transparent;
+  color: var(--vw-text);
+}
+
+.theme-dark-operator .top-bar {
+  background: linear-gradient(to right, #020617, #0b1120);
+  border-bottom: 1px solid var(--vw-border-subtle);
+  padding: 8px 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.theme-dark-operator .top-bar button {
+  background: #020617;
+  color: var(--vw-text);
+  border-radius: 999px;
+  border: 1px solid var(--vw-border-subtle);
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.theme-dark-operator .top-bar button:hover {
+  border-color: var(--vw-accent);
+}
+
+.theme-dark-operator .canvas-container {
+  background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
+}
+
+.theme-dark-operator .canvas-content {
+  filter: drop-shadow(0 18px 40px rgba(0,0,0,0.75));
+}
+
+.theme-dark-operator .block-wrapper {
+  background: #020617;
+  border-radius: 10px;
+  border: 1px solid rgba(15,23,42,0.9);
+  box-shadow: 0 0 0 1px rgba(15,23,42,0.9);
+}
+
+.theme-dark-operator .section-wrapper {
+  background: linear-gradient(
+    135deg,
+    rgba(15,23,42,0.95),
+    rgba(15,23,42,0.85)
+  );
+  border-radius: 16px;
+  border: 1px solid rgba(30,64,175,0.5);
+}
+
+.theme-dark-operator .selection-outline {
+  border-color: var(--vw-accent);
+  box-shadow: 0 0 0 1px rgba(244,197,66,0.4);
+}
+
+.theme-dark-operator .block-actions button {
+  background: rgba(15,23,42,0.9);
+  border: 1px solid var(--vw-border-subtle);
+  color: var(--vw-text);
+}
+
+.theme-dark-operator .block-actions button:hover {
+  border-color: var(--vw-accent);
+}
+
+.theme-dark-operator .inspector-panel {
+  background: #020617;
+  border-left: 1px solid var(--vw-border-subtle);
+}
+
+.theme-dark-operator .inspector-tab-group {
+  background: #020617;
+  box-shadow: 0 0 0 1px rgba(15,23,42,0.9);
+}
+
+.theme-dark-operator .canvas-zoom {
+  background: #020617;
+  color: var(--vw-text);
+  border: 1px solid var(--vw-border-subtle);
+}
+
+.theme-dark-operator .canvas-zoom button {
+  background: #020617;
+  border: 1px solid var(--vw-border-subtle);
+  color: var(--vw-text);
+}
+
+.theme-dark-operator .canvas-zoom button:hover {
+  border-color: var(--vw-accent);
+}
