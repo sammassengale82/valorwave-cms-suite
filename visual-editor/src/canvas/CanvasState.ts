@@ -1,5 +1,6 @@
 import create from "zustand";
 import { nanoid } from "nanoid";
+import type { HistoryEntry } from "../types/HistoryTypes";
 
 // ------------------------------------------------------------
 // Helper: Deep clone with new IDs
@@ -48,19 +49,83 @@ function deepMerge(target: any, source: any) {
 export const useCanvasState = create((set, get) => ({
   tree: [],
 
-  setTree: (tree: any[], pushHistory = true) =>
-    set({ tree }),
+  // ------------------------------------------------------------
+  // HISTORY ENGINE
+  // ------------------------------------------------------------
+  history: [] as HistoryEntry[],
+  historyIndex: -1,
+
+  pushHistory: (label: string) => {
+    const state = get();
+
+    const snapshot: HistoryEntry = {
+      id: nanoid(),
+      timestamp: Date.now(),
+      label,
+      tree: JSON.parse(JSON.stringify(state.tree)), // deep clone
+    };
+
+    const newHistory = state.history.slice(0, state.historyIndex + 1);
+    newHistory.push(snapshot);
+
+    set({
+      history: newHistory,
+      historyIndex: newHistory.length - 1,
+    });
+  },
+
+  undo: () => {
+    const state = get();
+    if (state.historyIndex <= 0) return;
+
+    const newIndex = state.historyIndex - 1;
+    const entry = state.history[newIndex];
+
+    set({
+      tree: JSON.parse(JSON.stringify(entry.tree)),
+      historyIndex: newIndex,
+    });
+  },
+
+  redo: () => {
+    const state = get();
+    if (state.historyIndex >= state.history.length - 1) return;
+
+    const newIndex = state.historyIndex + 1;
+    const entry = state.history[newIndex];
+
+    set({
+      tree: JSON.parse(JSON.stringify(entry.tree)),
+      historyIndex: newIndex,
+    });
+  },
+
+  // ------------------------------------------------------------
+  // SET TREE (manual)
+  // ------------------------------------------------------------
+  setTree: (tree: any[], pushHistory = true) => {
+    if (pushHistory) {
+      get().pushHistory("Set Tree");
+    }
+    set({ tree });
+  },
 
   // ------------------------------------------------------------
   // SECTION OPERATIONS
   // ------------------------------------------------------------
   removeSection: (id: string) =>
-    set((state: any) => ({
-      tree: state.tree.filter((n: any) => n.id !== id),
-    })),
+    set((state: any) => {
+      get().pushHistory("Remove Section");
+
+      return {
+        tree: state.tree.filter((n: any) => n.id !== id),
+      };
+    }),
 
   duplicateSection: (id: string) =>
     set((state: any) => {
+      get().pushHistory("Duplicate Section");
+
       const index = state.tree.findIndex((n: any) => n.id === id);
       if (index === -1) return {};
 
@@ -78,6 +143,8 @@ export const useCanvasState = create((set, get) => ({
   // ------------------------------------------------------------
   removeBlock: (id: string) =>
     set((state: any) => {
+      get().pushHistory("Remove Block");
+
       const remove = (nodes: any[]): any[] =>
         nodes
           .filter((n) => n.id !== id)
@@ -88,6 +155,8 @@ export const useCanvasState = create((set, get) => ({
 
   duplicateBlock: (id: string) =>
     set((state: any) => {
+      get().pushHistory("Duplicate Block");
+
       const duplicate = (nodes: any[]): any[] => {
         const result: any[] = [];
 
@@ -114,6 +183,8 @@ export const useCanvasState = create((set, get) => ({
   // ------------------------------------------------------------
   updateStyle: (id: string, device: string, prop: string, value: any) =>
     set((state: any) => {
+      get().pushHistory("Update Style");
+
       const update = (nodes: any[]): any[] =>
         nodes.map((n) => {
           if (n.id === id) {
@@ -131,6 +202,8 @@ export const useCanvasState = create((set, get) => ({
 
   updateContent: (id: string, field: string, value: any) =>
     set((state: any) => {
+      get().pushHistory("Update Content");
+
       const update = (nodes: any[]): any[] =>
         nodes.map((n) => {
           if (n.id === id) {
@@ -150,16 +223,20 @@ export const useCanvasState = create((set, get) => ({
   // ------------------------------------------------------------
   insertTemplate: (templateNode: any) =>
     set((state: any) => {
+      get().pushHistory("Insert Template");
+
       const cloned = cloneNodeWithNewIds(templateNode);
       const newTree = [...state.tree, cloned];
       return { tree: newTree };
     }),
 
   // ------------------------------------------------------------
-  // NEW: APPLY VARIANT
+  // APPLY VARIANT
   // ------------------------------------------------------------
   applyVariant: (nodeId: string, variant: any) =>
     set((state: any) => {
+      get().pushHistory("Apply Variant");
+
       const apply = (nodes: any[]): any[] =>
         nodes.map((n) => {
           if (n.id === nodeId) {
