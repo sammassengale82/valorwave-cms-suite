@@ -19,9 +19,12 @@ const categories = [
 
 export default function TemplatePicker() {
   const addSection = useCanvasState((s: any) => s.addSection);
-  const replaceTargetId = useCanvasState((s: any) => s.replaceTargetId);
   const replaceSection = useCanvasState((s: any) => s.replaceSection);
-  const clearReplaceTarget = useCanvasState((s: any) => s.clearReplaceTarget);
+  const replaceBlock = useCanvasState((s: any) => s.replaceBlock);
+  const sectionReplaceTargetId = useCanvasState((s: any) => s.sectionReplaceTargetId);
+  const blockReplaceTargetId = useCanvasState((s: any) => s.blockReplaceTargetId);
+  const clearSectionReplaceTarget = useCanvasState((s: any) => s.clearSectionReplaceTarget);
+  const clearBlockReplaceTarget = useCanvasState((s: any) => s.clearBlockReplaceTarget);
 
   const [category, setCategory] = useState("All");
   const [search, setSearch] = useState("");
@@ -34,9 +37,15 @@ export default function TemplatePicker() {
   function handleSelect(t: TemplateEntry) {
     const node = buildNode(t);
 
-    if (replaceTargetId) {
-      replaceSection(replaceTargetId, node);
-      clearReplaceTarget();
+    if (sectionReplaceTargetId) {
+      replaceSection(sectionReplaceTargetId, node);
+      clearSectionReplaceTarget();
+      return;
+    }
+
+    if (blockReplaceTargetId) {
+      replaceBlock(blockReplaceTargetId, node);
+      clearBlockReplaceTarget();
       return;
     }
 
