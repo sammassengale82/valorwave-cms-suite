@@ -12,6 +12,9 @@ import testimonials from "./testimonials/template.json";
 import testimonialForm from "./testimonial-form/template.json";
 import footer from "./footer/template.json";
 
+import seo from "./seo/template.json";
+import google from "./google/template.json";
+
 export const templates = [
   { id: hero.id, name: hero.name, preview: "/templates/hero/preview.png", data: hero },
   { id: header.id, name: header.name, preview: "/templates/header/preview.png", data: header },
@@ -25,5 +28,9 @@ export const templates = [
   { id: calendar.id, name: calendar.name, preview: "/templates/calendar/preview.png", data: calendar },
   { id: testimonials.id, name: testimonials.name, preview: "/templates/testimonials/preview.png", data: testimonials },
   { id: testimonialForm.id, name: testimonialForm.name, preview: "/templates/testimonial-form/preview.png", data: testimonialForm },
-  { id: footer.id, name: footer.name, preview: "/templates/footer/preview.png", data: footer }
+  { id: footer.id, name: footer.name, preview: "/templates/footer/preview.png", data: footer },
+
+  // Non-visual templates (still selectable)
+  { id: seo.id, name: seo.name, preview: "/templates/seo/preview.png", data: seo },
+  { id: google.id, name: google.name, preview: "/templates/google/preview.png", data: google }
 ];
