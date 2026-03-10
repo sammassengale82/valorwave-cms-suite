@@ -1,6 +1,10 @@
 import React from "react";
 
-export default function TemplateCard({ template, onSelect, onDragStart }: any) {
+export default function TemplateCard({
+  template,
+  onSelect,
+  onDragStart
+}: any) {
   return (
     <div
       className="template-card"
