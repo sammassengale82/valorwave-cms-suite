@@ -1,9 +1,10 @@
 import { useState } from "react";
+import type { TemplateEntry } from "../../../templates";
 
 export function useTemplateDrag() {
-  const [dragging, setDragging] = useState(null);
+  const [dragging, setDragging] = useState<TemplateEntry | null>(null);
 
-  function startDrag(template) {
+  function startDrag(template: TemplateEntry) {
     setDragging(template);
   }
 
