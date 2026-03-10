@@ -1,10 +1,15 @@
 {
   "id": "brand-meaning",
   "name": "Brand Meaning",
+  "version": 1,
   "tree": [
     {
       "id": "brand-meaning-section",
       "type": "section",
+      "templateId": "brand-meaning",
+      "templateName": "Brand Meaning",
+      "templateCategory": "Brand Meaning",
+      "templateVersion": 1,
       "styles": {
         "desktop": {
           "padding": "56px 40px",
