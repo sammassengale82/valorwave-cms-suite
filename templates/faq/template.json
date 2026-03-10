@@ -1,0 +1,68 @@
+{
+  "id": "faq",
+  "name": "FAQ",
+  "tree": [
+    {
+      "id": "faq-section",
+      "type": "section",
+      "styles": {
+        "desktop": {
+          "padding": "56px 40px",
+          "background": "#f5f7fa",
+          "color": "#0a1a2f"
+        }
+      },
+      "children": [
+        {
+          "id": "faq-heading",
+          "type": "text",
+          "content": { "text": "FAQ" },
+          "styles": {
+            "desktop": {
+              "fontSize": "28px",
+              "fontWeight": "700",
+              "textAlign": "center",
+              "marginBottom": "24px"
+            }
+          }
+        },
+        {
+          "id": "faq-list",
+          "type": "container",
+          "styles": {
+            "desktop": {
+              "maxWidth": "760px",
+              "margin": "0 auto",
+              "display": "flex",
+              "flexDirection": "column",
+              "gap": "16px"
+            }
+          },
+          "children": [
+            {
+              "id": "faq-1",
+              "type": "text",
+              "content": {
+                "text": "<strong>How far in advance should we book?</strong><br>For peak wedding season, we recommend reaching out as early as possible to secure your date."
+              }
+            },
+            {
+              "id": "faq-2",
+              "type": "text",
+              "content": {
+                "text": "<strong>Do you travel outside Chattanooga?</strong><br>Yes—Southeast Tennessee and Northwest Georgia are our core service areas, and extended travel is available upon request."
+              }
+            },
+            {
+              "id": "faq-3",
+              "type": "text",
+              "content": {
+                "text": "<strong>Can you keep music clean/family-friendly?</strong><br>Absolutely. We can customize playlists to match your values and your guest list."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
