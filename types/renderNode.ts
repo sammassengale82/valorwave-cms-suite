@@ -10,18 +10,15 @@ export type NodeType =
   | "textarea"
   | "meta";
 
-export type Breakpoint = "desktop"; // extend later if needed
+export type Breakpoint = "desktop";
 
 export type StyleMap = Partial<Record<string, string | number>>;
 
 export interface NodeStyles {
   desktop?: StyleMap;
-  // tablet?: StyleMap;
-  // mobile?: StyleMap;
 }
 
 export interface NodeContent {
-  // generic content bag; each component will pick what it needs
   text?: string;
   html?: string;
   src?: string;
@@ -43,10 +40,21 @@ export interface RenderTreeNode {
   children?: RenderTreeNode[];
 }
 
+export type DropPosition = "before" | "inside" | "after";
+
+export interface DropTarget {
+  nodeId: string;
+  position: DropPosition;
+}
+
 export interface RenderNodeProps {
   node: RenderTreeNode;
   selectedId?: string | null;
   hoveredId?: string | null;
+  dropTarget?: DropTarget | null;
   onSelect?: (id: string) => void;
   onHover?: (id: string | null) => void;
+  onDropZoneEnter?: (nodeId: string, position: DropPosition) => void;
+  onDropZoneLeave?: () => void;
+  onDrop?: (nodeId: string, position: DropPosition, data: any) => void;
 }
