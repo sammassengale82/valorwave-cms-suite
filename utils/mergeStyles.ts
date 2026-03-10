@@ -1,4 +1,5 @@
 import { NodeStyles, StyleMap } from "../types/renderNode";
+import React from "react";
 
 export function getComputedStyles(
   styles?: NodeStyles,
