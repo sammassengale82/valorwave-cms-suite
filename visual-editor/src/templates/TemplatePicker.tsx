@@ -1,19 +1,49 @@
 import React, { useState } from "react";
-import { templates } from "../../../templates";
+import { templates, TemplateEntry } from "../../../templates";
 import TemplateCard from "./TemplateCard";
 import { useCanvasState } from "../canvas/CanvasState";
+import { useTemplateDrag } from "./useTemplateDrag";
 import "./templates.css";
 
-const categories = ["All", "Hero", "Header", "Services", "About", "Testimonials", "Forms", "Footer", "Utility", "Meta"];
+const categories = [
+  "All",
+  "Hero",
+  "Header",
+  "Services",
+  "About",
+  "Testimonials",
+  "Forms",
+  "Footer",
+  "Utility",
+  "Meta"
+];
 
 export default function TemplatePicker() {
-  const addSection = useCanvasState((s) => s.addSection);
+  const addSection = useCanvasState((s: any) => s.addSection);
+  const replaceTargetId = useCanvasState((s: any) => s.replaceTargetId);
+  const replaceSection = useCanvasState((s: any) => s.replaceSection);
+  const clearReplaceTarget = useCanvasState((s: any) => s.clearReplaceTarget);
+
   const [category, setCategory] = useState("All");
   const [search, setSearch] = useState("");
 
-  function handleSelect(t: any) {
+  const { dragging, startDrag, endDrag } = useTemplateDrag();
+
+  function insertTemplate(t: TemplateEntry) {
     const root = t.data.tree[0];
-    addSection(JSON.parse(JSON.stringify(root)));
+    return JSON.parse(JSON.stringify(root));
+  }
+
+  function handleSelect(t: TemplateEntry) {
+    const node = insertTemplate(t);
+
+    if (replaceTargetId) {
+      replaceSection(replaceTargetId, node);
+      clearReplaceTarget();
+      return;
+    }
+
+    addSection(node);
   }
 
   const filtered = templates.filter((t) => {
@@ -47,7 +77,12 @@ export default function TemplatePicker() {
 
       <div className="template-picker">
         {filtered.map((t) => (
-          <TemplateCard key={t.id} template={t} onSelect={handleSelect} />
+          <TemplateCard
+            key={t.id}
+            template={t}
+            onSelect={handleSelect}
+            onDragStart={startDrag}
+          />
         ))}
       </div>
     </div>
