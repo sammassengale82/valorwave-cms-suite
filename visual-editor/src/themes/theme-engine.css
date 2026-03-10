@@ -1,0 +1,45 @@
+.theme-switcher {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--vw-surface);
+  border-bottom: 1px solid var(--vw-border);
+}
+
+.theme-switcher button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--vw-border);
+  background: var(--vw-bg);
+  color: var(--vw-text);
+  cursor: pointer;
+}
+
+.theme-switcher button.active {
+  background: var(--vw-accent);
+  color: #000;
+  border-color: var(--vw-accent);
+}
+
+.theme-patriotic,
+.theme-dark-operator,
+.theme-multicam {
+  background: var(--vw-bg);
+  color: var(--vw-text);
+}
+
+.theme-patriotic .wave-top,
+.theme-dark-operator .wave-top,
+.theme-multicam .wave-top {
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 80px;
+}
+
+.theme-patriotic .wave-bottom,
+.theme-dark-operator .wave-bottom,
+.theme-multicam .wave-bottom {
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 80px;
+}
