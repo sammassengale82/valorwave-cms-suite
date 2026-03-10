@@ -1,0 +1,68 @@
+{
+  "id": "brand-meaning",
+  "name": "Brand Meaning",
+  "tree": [
+    {
+      "id": "brand-meaning-section",
+      "type": "section",
+      "styles": {
+        "desktop": {
+          "padding": "56px 40px",
+          "background": "#ffffff",
+          "color": "#0a1a2f"
+        }
+      },
+      "children": [
+        {
+          "id": "brand-meaning-heading",
+          "type": "text",
+          "content": { "text": "The Meaning Behind Valor Wave Entertainment" },
+          "styles": {
+            "desktop": {
+              "fontSize": "28px",
+              "fontWeight": "700",
+              "textAlign": "center",
+              "marginBottom": "20px"
+            }
+          }
+        },
+        {
+          "id": "brand-meaning-body",
+          "type": "container",
+          "styles": {
+            "desktop": {
+              "maxWidth": "760px",
+              "margin": "0 auto",
+              "display": "flex",
+              "flexDirection": "column",
+              "gap": "12px"
+            }
+          },
+          "children": [
+            {
+              "id": "brand-meaning-1",
+              "type": "text",
+              "content": {
+                "text": "<strong>Valor Wave Entertainment</strong> represents the powerful blend of <strong>honor, service, and celebration</strong>. <em>Valor</em> reflects courage, sacrifice, and respect for those who serve — our military, veterans, first responders, healthcare workers, educators, and everyday heroes in our communities."
+              }
+            },
+            {
+              "id": "brand-meaning-2",
+              "type": "text",
+              "content": {
+                "text": "The word <em>Wave</em> symbolizes movement, energy, and the moments that bring people together. Just like a wave, music carries emotion, creates connection, and leaves a lasting impact long after the event ends."
+              }
+            },
+            {
+              "id": "brand-meaning-3",
+              "type": "text",
+              "content": {
+                "text": "Together, <strong>Valor Wave Entertainment</strong> stands for honoring what matters most while creating unforgettable, joy-filled experiences — all delivered with professionalism, integrity, and faith-based values."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
