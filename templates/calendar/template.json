@@ -1,10 +1,15 @@
 {
   "id": "calendar",
   "name": "Availability Calendar",
+  "version": 1,
   "tree": [
     {
       "id": "calendar-section",
       "type": "section",
+      "templateId": "calendar",
+      "templateName": "Availability Calendar",
+      "templateCategory": "Calendar",
+      "templateVersion": 1,
       "styles": {
         "desktop": {
           "padding": "56px 40px",
