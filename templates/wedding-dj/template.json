@@ -1,0 +1,114 @@
+{
+  "id": "wedding-dj",
+  "name": "Wedding DJ Explainer",
+  "tree": [
+    {
+      "id": "wedding-dj-section",
+      "type": "section",
+      "styles": {
+        "desktop": {
+          "padding": "64px 40px",
+          "background": "#ffffff",
+          "color": "#0a1a2f"
+        }
+      },
+      "children": [
+        {
+          "id": "wedding-dj-heading",
+          "type": "text",
+          "content": { "text": "Wedding DJ Chattanooga" },
+          "styles": {
+            "desktop": {
+              "fontSize": "30px",
+              "fontWeight": "700",
+              "marginBottom": "16px",
+              "textAlign": "center"
+            }
+          }
+        },
+        {
+          "id": "wedding-dj-intro",
+          "type": "text",
+          "content": {
+            "text": "Looking for a <strong>wedding DJ in Chattanooga</strong> who brings modern energy with faith-based values? Valor Wave Entertainment provides DJ + MC services, sound, and lighting for weddings and events across <strong>Southeast Tennessee</strong> and <strong>Northwest Georgia</strong>. We focus on clear communication, clean music options, and a smooth, stress-free experience from ceremony to last dance."
+          },
+          "styles": {
+            "desktop": {
+              "maxWidth": "760px",
+              "margin": "0 auto 32px",
+              "textAlign": "center",
+              "lineHeight": "1.7"
+            }
+          }
+        },
+        {
+          "id": "wedding-dj-grid",
+          "type": "container",
+          "styles": {
+            "desktop": {
+              "display": "grid",
+              "gridTemplateColumns": "repeat(3, minmax(0,1fr))",
+              "gap": "20px"
+            }
+          },
+          "children": [
+            {
+              "id": "wedding-dj-card-1",
+              "type": "card",
+              "children": [
+                {
+                  "id": "wedding-dj-card-1-title",
+                  "type": "text",
+                  "content": { "text": "What you get" }
+                },
+                {
+                  "id": "wedding-dj-card-1-text",
+                  "type": "text",
+                  "content": {
+                    "text": "Professional planning, timeline support, reliable equipment, and a confident MC—so your day stays on track."
+                  }
+                }
+              ]
+            },
+            {
+              "id": "wedding-dj-card-2",
+              "type": "card",
+              "children": [
+                {
+                  "id": "wedding-dj-card-2-title",
+                  "type": "text",
+                  "content": { "text": "Where we serve" }
+                },
+                {
+                  "id": "wedding-dj-card-2-text",
+                  "type": "text",
+                  "content": {
+                    "text": "Chattanooga, Cleveland, Hixson, and nearby communities—plus Northwest GA including Ringgold, Fort Oglethorpe, and Dalton."
+                  }
+                }
+              ]
+            },
+            {
+              "id": "wedding-dj-card-3",
+              "type": "card",
+              "children": [
+                {
+                  "id": "wedding-dj-card-3-title",
+                  "type": "text",
+                  "content": { "text": "Faith-based option" }
+                },
+                {
+                  "id": "wedding-dj-card-3-text",
+                  "type": "text",
+                  "content": {
+                    "text": "We can tailor music to your preferences and venue guidelines while keeping the atmosphere fun and welcoming."
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
