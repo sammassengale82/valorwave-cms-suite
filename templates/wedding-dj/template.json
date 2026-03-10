@@ -1,10 +1,15 @@
 {
   "id": "wedding-dj",
   "name": "Wedding DJ Explainer",
+  "version": 1,
   "tree": [
     {
       "id": "wedding-dj-section",
       "type": "section",
+      "templateId": "wedding-dj",
+      "templateName": "Wedding DJ Explainer",
+      "templateCategory": "Wedding DJ",
+      "templateVersion": 1,
       "styles": {
         "desktop": {
           "padding": "64px 40px",
