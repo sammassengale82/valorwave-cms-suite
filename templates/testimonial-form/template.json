@@ -1,10 +1,15 @@
 {
   "id": "testimonial-form",
   "name": "Testimonial Form",
+  "version": 1,
   "tree": [
     {
       "id": "testimonial-form-section",
       "type": "section",
+      "templateId": "testimonial-form",
+      "templateName": "Testimonial Form",
+      "templateCategory": "Forms",
+      "templateVersion": 1,
       "styles": {
         "desktop": {
           "padding": "56px 40px",
