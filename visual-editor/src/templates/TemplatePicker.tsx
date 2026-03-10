@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { templates, TemplateEntry } from "../../../templates";
 import TemplateCard from "./TemplateCard";
 import { useCanvasState } from "../canvas/CanvasState";
-import { useTemplateDrag } from "./useTemplateDrag";
 import "./templates.css";
 
 const categories = [
@@ -27,15 +26,13 @@ export default function TemplatePicker() {
   const [category, setCategory] = useState("All");
   const [search, setSearch] = useState("");
 
-  const { dragging, startDrag, endDrag } = useTemplateDrag();
-
-  function insertTemplate(t: TemplateEntry) {
+  function buildNode(t: TemplateEntry) {
     const root = t.data.tree[0];
     return JSON.parse(JSON.stringify(root));
   }
 
   function handleSelect(t: TemplateEntry) {
-    const node = insertTemplate(t);
+    const node = buildNode(t);
 
     if (replaceTargetId) {
       replaceSection(replaceTargetId, node);
@@ -44,6 +41,12 @@ export default function TemplatePicker() {
     }
 
     addSection(node);
+  }
+
+  function handleDragStart(e: React.DragEvent, t: TemplateEntry) {
+    const node = buildNode(t);
+    e.dataTransfer.setData("application/x-template-node", JSON.stringify(node));
+    e.dataTransfer.effectAllowed = "copyMove";
   }
 
   const filtered = templates.filter((t) => {
@@ -81,7 +84,7 @@ export default function TemplatePicker() {
             key={t.id}
             template={t}
             onSelect={handleSelect}
-            onDragStart={startDrag}
+            onDragStart={handleDragStart}
           />
         ))}
       </div>
