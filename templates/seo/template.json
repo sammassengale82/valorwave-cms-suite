@@ -1,0 +1,18 @@
+{
+  "id": "seo",
+  "name": "SEO Settings",
+  "tree": [
+    {
+      "id": "seo-root",
+      "type": "meta",
+      "content": {
+        "meta_title": "Wedding DJ in Chattanooga • Faith-Based Events",
+        "meta_description": "Veteran-owned, faith-based professional DJ services serving Chattanooga and surrounding areas. Honoring every moment and all heroes.",
+        "meta_keywords": "",
+        "og_title": "Wedding DJ in Chattanooga • Faith-Based Events",
+        "og_description": "Veteran-owned, faith-based professional DJ services serving Chattanooga and surrounding areas.",
+        "og_image": "/og-image.jpg"
+      }
+    }
+  ]
+}
