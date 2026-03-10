@@ -21,17 +21,32 @@ export default function TemplatePicker() {
   const addSection = useCanvasState((s: any) => s.addSection);
   const replaceSection = useCanvasState((s: any) => s.replaceSection);
   const replaceBlock = useCanvasState((s: any) => s.replaceBlock);
-  const sectionReplaceTargetId = useCanvasState((s: any) => s.sectionReplaceTargetId);
-  const blockReplaceTargetId = useCanvasState((s: any) => s.blockReplaceTargetId);
-  const clearSectionReplaceTarget = useCanvasState((s: any) => s.clearSectionReplaceTarget);
-  const clearBlockReplaceTarget = useCanvasState((s: any) => s.clearBlockReplaceTarget);
+  const sectionReplaceTargetId = useCanvasState(
+    (s: any) => s.sectionReplaceTargetId
+  );
+  const blockReplaceTargetId = useCanvasState(
+    (s: any) => s.blockReplaceTargetId
+  );
+  const clearSectionReplaceTarget = useCanvasState(
+    (s: any) => s.clearSectionReplaceTarget
+  );
+  const clearBlockReplaceTarget = useCanvasState(
+    (s: any) => s.clearBlockReplaceTarget
+  );
 
   const [category, setCategory] = useState("All");
   const [search, setSearch] = useState("");
 
   function buildNode(t: TemplateEntry) {
     const root = t.data.tree[0];
-    return JSON.parse(JSON.stringify(root));
+    const node = {
+      ...root,
+      templateId: t.id,
+      templateName: t.name,
+      templateCategory: t.category,
+      templateVersion: t.version
+    };
+    return JSON.parse(JSON.stringify(node));
   }
 
   function handleSelect(t: TemplateEntry) {
