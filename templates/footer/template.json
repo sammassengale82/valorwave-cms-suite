@@ -1,0 +1,57 @@
+{
+  "id": "footer",
+  "name": "Footer",
+  "tree": [
+    {
+      "id": "footer-section",
+      "type": "section",
+      "styles": {
+        "desktop": {
+          "padding": "32px 24px",
+          "background": "#0a1a2f",
+          "color": "#ffffff",
+          "textAlign": "center"
+        }
+      },
+      "children": [
+        {
+          "id": "footer-logo",
+          "type": "image",
+          "content": { "src": "/logo.png", "alt": "Valor Wave Entertainment" },
+          "styles": {
+            "desktop": {
+              "height": "48px",
+              "marginBottom": "12px"
+            }
+          }
+        },
+        {
+          "id": "footer-line-1",
+          "type": "text",
+          "content": { "text": "© 2026 Valor Wave Entertainment" }
+        },
+        {
+          "id": "footer-line-2",
+          "type": "text",
+          "content": {
+            "text": "Faith-Based Wedding & Event DJ | Southeast TN & Northwest GA"
+          }
+        },
+        {
+          "id": "footer-line-3",
+          "type": "text",
+          "content": {
+            "text": "Phone: (423) 680-2700 • Email: <a href=\"mailto:valorwaveentertainment@gmail.com\">valorwaveentertainment@gmail.com</a>"
+          }
+        },
+        {
+          "id": "footer-line-4",
+          "type": "text",
+          "content": {
+            "text": "Address: 5424 School Dr, Hixson, TN 37343"
+          }
+        }
+      ]
+    }
+  ]
+}
