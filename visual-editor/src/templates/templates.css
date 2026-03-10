@@ -37,3 +37,51 @@
   color: white;
   border-color: #0d47a1;
 }
+
+.template-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.template-card {
+  background: #ffffff;
+  border: 1px solid #d0d4d9;
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: 0.15s ease;
+  position: relative;
+}
+
+.template-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.template-preview {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  background: #f0f2f5;
+}
+
+.template-name {
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.update-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #ffb300;
+  color: #0a1a2f;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
