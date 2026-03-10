@@ -1,0 +1,47 @@
+{
+  "id": "service-area",
+  "name": "Service Area",
+  "tree": [
+    {
+      "id": "service-area-section",
+      "type": "section",
+      "styles": {
+        "desktop": {
+          "padding": "56px 40px",
+          "background": "#ffffff",
+          "color": "#0a1a2f"
+        }
+      },
+      "children": [
+        {
+          "id": "service-area-heading",
+          "type": "text",
+          "content": { "text": "Serving Your Area" },
+          "styles": {
+            "desktop": {
+              "fontSize": "28px",
+              "fontWeight": "700",
+              "marginBottom": "16px",
+              "textAlign": "center"
+            }
+          }
+        },
+        {
+          "id": "service-area-text",
+          "type": "text",
+          "content": {
+            "text": "Valor Wave Entertainment proudly serves weddings and events throughout <strong>Southeast Tennessee</strong>, including Chattanooga and Cleveland, as well as <strong>Northwest Georgia</strong> communities such as Dalton, Ringgold, and Fort Oglethorpe. Travel outside these areas may be available upon request."
+          },
+          "styles": {
+            "desktop": {
+              "maxWidth": "720px",
+              "margin": "0 auto",
+              "textAlign": "center",
+              "lineHeight": "1.7"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
