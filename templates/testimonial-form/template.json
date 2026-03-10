@@ -1,0 +1,98 @@
+{
+  "id": "testimonial-form",
+  "name": "Testimonial Form",
+  "tree": [
+    {
+      "id": "testimonial-form-section",
+      "type": "section",
+      "styles": {
+        "desktop": {
+          "padding": "56px 40px",
+          "background": "#ffffff",
+          "color": "#0a1a2f"
+        }
+      },
+      "children": [
+        {
+          "id": "testimonial-form-heading",
+          "type": "text",
+          "content": { "text": "Submit a Testimonial" },
+          "styles": {
+            "desktop": {
+              "fontSize": "26px",
+              "fontWeight": "700",
+              "textAlign": "center",
+              "marginBottom": "20px"
+            }
+          }
+        },
+        {
+          "id": "testimonial-form-body",
+          "type": "container",
+          "styles": {
+            "desktop": {
+              "maxWidth": "640px",
+              "margin": "0 auto",
+              "display": "flex",
+              "flexDirection": "column",
+              "gap": "12px"
+            }
+          },
+          "children": [
+            {
+              "id": "testimonial-form-name",
+              "type": "input",
+              "content": { "label": "Name", "value": "" }
+            },
+            {
+              "id": "testimonial-form-email",
+              "type": "input",
+              "content": { "label": "Email", "value": "" }
+            },
+            {
+              "id": "testimonial-form-event-type",
+              "type": "input",
+              "content": { "label": "Event Type", "value": "" }
+            },
+            {
+              "id": "testimonial-form-date",
+              "type": "input",
+              "content": { "label": "Event Date", "value": "" }
+            },
+            {
+              "id": "testimonial-form-message",
+              "type": "textarea",
+              "content": { "label": "Testimonial", "value": "" }
+            },
+            {
+              "id": "testimonial-form-permission",
+              "type": "text",
+              "content": {
+                "text": "<input type=\"checkbox\" name=\"permission\" value=\"Yes\" required> I give Valor Wave Entertainment permission to use my testimonial on the website."
+              }
+            },
+            {
+              "id": "testimonial-form-submit",
+              "type": "button",
+              "content": { "text": "Send Testimonial", "href": "#" }
+            },
+            {
+              "id": "testimonial-form-footer",
+              "type": "text",
+              "content": {
+                "text": "Thank you—your feedback helps future couples and clients book with confidence."
+              },
+              "styles": {
+                "desktop": {
+                  "fontSize": "14px",
+                  "opacity": "0.8",
+                  "textAlign": "center"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
