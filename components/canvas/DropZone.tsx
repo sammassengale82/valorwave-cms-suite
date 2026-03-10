@@ -1,4 +1,3 @@
-// components/canvas/DropZone.tsx
 import React from "react";
 
 export const DropZone = ({
@@ -25,8 +24,17 @@ export const DropZone = ({
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
-    const data = JSON.parse(e.dataTransfer.getData("application/json"));
-    onDrop(data);
+    const raw = e.dataTransfer.getData("application/json");
+    if (!raw) {
+      onLeave();
+      return;
+    }
+    try {
+      const data = JSON.parse(raw);
+      onDrop(data);
+    } catch {
+      // ignore parse errors
+    }
     onLeave();
   };
 
