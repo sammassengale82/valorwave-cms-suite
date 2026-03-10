@@ -1,44 +1,31 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useCanvasState } from "./CanvasState";
-import WysiwygWrapper from "../wysiwyg/WysiwygWrapper";
+import { useDragBlock } from "../dragdrop/useDragBlock";
 
 export default function BlockWrapper({ node, children }: any) {
   const selectedIds = useCanvasState((s) => s.selectedIds);
   const selectOne = useCanvasState((s) => s.selectOne);
-  const toggleSelect = useCanvasState((s) => s.toggleSelect);
-  const selectMultiple = useCanvasState((s) => s.selectMultiple);
 
   const isSelected = selectedIds.includes(node.id);
+  const { onMouseDown } = useDragBlock(node);
 
   function handleClick(e: React.MouseEvent) {
     e.stopPropagation();
-
-    const isMac = navigator.platform.toUpperCase().includes("MAC");
-    const mod = isMac ? e.metaKey : e.ctrlKey;
-
-    if (e.shiftKey) {
-      selectMultiple([...selectedIds, node.id]);
-      return;
-    }
-
-    if (mod) {
-      toggleSelect(node.id);
-      return;
-    }
-
     selectOne(node.id);
   }
 
+  const isAbsolute = node.styles?.desktop?.position === "absolute";
+
   return (
     <div
-      className={`block-wrapper ${isSelected ? "selected" : ""}`}
+      className={`block-wrapper ${isSelected ? "selected" : ""} ${
+        isAbsolute ? "absolute" : ""
+      }`}
       onClick={handleClick}
+      onMouseDown={isAbsolute ? onMouseDown : undefined}
+      style={isAbsolute ? node.styles?.desktop : {}}
     >
-      {isSelected ? (
-        <WysiwygWrapper node={node}>{children}</WysiwygWrapper>
-      ) : (
-        children
-      )}
+      {children}
     </div>
   );
 }
