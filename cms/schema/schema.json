@@ -1,0 +1,13 @@
+{
+  "collections": [
+    {
+      "id": "pages",
+      "name": "Pages",
+      "fields": [
+        { "id": "title", "type": "text", "label": "Title" },
+        { "id": "slug", "type": "slug", "label": "Slug" },
+        { "id": "content", "type": "richtext", "label": "Content" }
+      ]
+    }
+  ]
+}
