@@ -1,0 +1,98 @@
+{
+  "id": "hero",
+  "name": "Hero",
+  "tree": [
+    {
+      "id": "hero-section",
+      "type": "section",
+      "styles": {
+        "desktop": {
+          "padding": "80px 40px",
+          "textAlign": "center",
+          "background": "linear-gradient(135deg,#0a1a2f,#1565c0)",
+          "color": "#ffffff"
+        }
+      },
+      "children": [
+        {
+          "id": "hero-logo",
+          "type": "image",
+          "content": { "src": "/logo.png", "alt": "Valor Wave Entertainment" },
+          "styles": {
+            "desktop": {
+              "height": "72px",
+              "marginBottom": "16px"
+            }
+          }
+        },
+        {
+          "id": "hero-kicker",
+          "type": "text",
+          "content": { "text": "Faith-Based DJ Services" },
+          "styles": {
+            "desktop": {
+              "fontSize": "16px",
+              "letterSpacing": "0.12em",
+              "textTransform": "uppercase",
+              "opacity": "0.9",
+              "marginBottom": "8px"
+            }
+          }
+        },
+        {
+          "id": "hero-headline",
+          "type": "text",
+          "content": { "text": "Wedding DJ in Chattanooga • Faith-Based Events" },
+          "styles": {
+            "desktop": {
+              "fontSize": "44px",
+              "fontWeight": "700",
+              "marginBottom": "12px"
+            }
+          }
+        },
+        {
+          "id": "hero-tagline",
+          "type": "text",
+          "content": { "text": "Honoring Every Moment • Honoring All Heroes" },
+          "styles": {
+            "desktop": {
+              "fontSize": "20px",
+              "marginBottom": "8px"
+            }
+          }
+        },
+        {
+          "id": "hero-subline",
+          "type": "text",
+          "content": { "text": "Veteran-owned • Faith-based • Professional DJ services" },
+          "styles": {
+            "desktop": {
+              "fontSize": "16px",
+              "opacity": "0.9",
+              "marginBottom": "24px"
+            }
+          }
+        },
+        {
+          "id": "hero-cta",
+          "type": "button",
+          "content": {
+            "text": "Request a Quote",
+            "href": "https://portal.valorwaveentertainment.com/request_information.asp?djidnumber=28542"
+          },
+          "styles": {
+            "desktop": {
+              "display": "inline-block",
+              "padding": "12px 28px",
+              "borderRadius": "999px",
+              "background": "#ffb300",
+              "color": "#0a1a2f",
+              "fontWeight": "600"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
