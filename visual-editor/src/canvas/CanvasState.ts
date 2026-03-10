@@ -385,7 +385,6 @@ export const useCanvasState = create((set, get) => ({
       return { tree: apply(state.tree) };
     }),
 
-  // drag/insert helpers
   addSection: (node: any) =>
     set((state: any) => {
       get().pushHistory("Add Section");
@@ -402,17 +401,48 @@ export const useCanvasState = create((set, get) => ({
       return { tree: newTree };
     }),
 
-  // replace mode
-  replaceTargetId: null as string | null,
+  insertBlockAt: (parentId: string, index: number, node: any) =>
+    set((state: any) => {
+      get().pushHistory("Insert Block");
 
-  setReplaceTarget: (id: string) =>
-    set({
-      replaceTargetId: id
+      const cloned = cloneNodeWithNewIds(node);
+
+      const insert = (nodes: any[]): any[] =>
+        nodes.map((n) => {
+          if (n.id === parentId) {
+            const children = [...(n.children || [])];
+            children.splice(index, 0, cloned);
+            return { ...n, children };
+          }
+          return { ...n, children: insert(n.children || []) };
+        });
+
+      return { tree: insert(state.tree) };
     }),
 
-  clearReplaceTarget: () =>
+  sectionReplaceTargetId: null as string | null,
+  blockReplaceTargetId: null as string | null,
+
+  setSectionReplaceTarget: (id: string) =>
     set({
-      replaceTargetId: null
+      sectionReplaceTargetId: id,
+      blockReplaceTargetId: null
+    }),
+
+  clearSectionReplaceTarget: () =>
+    set({
+      sectionReplaceTargetId: null
+    }),
+
+  setBlockReplaceTarget: (id: string) =>
+    set({
+      blockReplaceTargetId: id,
+      sectionReplaceTargetId: null
+    }),
+
+  clearBlockReplaceTarget: () =>
+    set({
+      blockReplaceTargetId: null
     }),
 
   replaceSection: (id: string, node: any) =>
@@ -425,5 +455,22 @@ export const useCanvasState = create((set, get) => ({
       );
 
       return { tree: newTree };
+    }),
+
+  replaceBlock: (id: string, node: any) =>
+    set((state: any) => {
+      get().pushHistory("Replace Block");
+
+      const cloned = cloneNodeWithNewIds(node);
+
+      const replace = (nodes: any[]): any[] =>
+        nodes.map((n) => {
+          if (n.id === id) {
+            return cloned;
+          }
+          return { ...n, children: replace(n.children || []) };
+        });
+
+      return { tree: replace(state.tree) };
     })
 }));
