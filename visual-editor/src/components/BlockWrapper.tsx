@@ -1,14 +1,12 @@
 import React, { useRef } from "react";
 import { useCanvasState } from "./CanvasState";
+import WysiwygWrapper from "../wysiwyg/WysiwygWrapper";
 
 export default function BlockWrapper({ node, children }: any) {
   const selectedIds = useCanvasState((s) => s.selectedIds);
   const selectOne = useCanvasState((s) => s.selectOne);
   const toggleSelect = useCanvasState((s) => s.toggleSelect);
   const selectMultiple = useCanvasState((s) => s.selectMultiple);
-
-  const removeBlock = useCanvasState((s) => s.removeBlock);
-  const duplicateBlock = useCanvasState((s) => s.duplicateBlock);
 
   const isSelected = selectedIds.includes(node.id);
 
@@ -31,24 +29,16 @@ export default function BlockWrapper({ node, children }: any) {
     selectOne(node.id);
   }
 
-  const isAbsolute = node.styles?.desktop?.position === "absolute";
-
   return (
     <div
-      className={`block-wrapper ${isSelected ? "selected" : ""} ${
-        isAbsolute ? "absolute" : ""
-      }`}
+      className={`block-wrapper ${isSelected ? "selected" : ""}`}
       onClick={handleClick}
-      style={isAbsolute ? node.styles?.desktop : {}}
     >
-      {isSelected && <div className="selection-outline" />}
-
-      <div className="block-actions">
-        <button onClick={() => duplicateBlock(node.id)}>Duplicate</button>
-        <button onClick={() => removeBlock(node.id)}>Delete</button>
-      </div>
-
-      {children}
+      {isSelected ? (
+        <WysiwygWrapper node={node}>{children}</WysiwygWrapper>
+      ) : (
+        children
+      )}
     </div>
   );
 }
