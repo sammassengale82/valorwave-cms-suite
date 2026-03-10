@@ -1,10 +1,15 @@
 {
   "id": "hero",
   "name": "Hero",
+  "version": 1,
   "tree": [
     {
       "id": "hero-section",
       "type": "section",
+      "templateId": "hero",
+      "templateName": "Hero",
+      "templateCategory": "Hero",
+      "templateVersion": 1,
       "styles": {
         "desktop": {
           "padding": "80px 40px",
