@@ -13,7 +13,12 @@ export default function TemplateCard({
       onClick={() => onSelect(template)}
     >
       <img src={template.preview} className="template-preview" />
-      <div className="template-name">{template.name}</div>
+      <div className="template-name">
+        {template.name}
+        <span style={{ fontSize: 11, opacity: 0.7, marginLeft: 4 }}>
+          v{template.version || 1}
+        </span>
+      </div>
     </div>
   );
 }
