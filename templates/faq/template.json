@@ -1,10 +1,15 @@
 {
   "id": "faq",
   "name": "FAQ",
+  "version": 1,
   "tree": [
     {
       "id": "faq-section",
       "type": "section",
+      "templateId": "faq",
+      "templateName": "FAQ",
+      "templateCategory": "FAQ",
+      "templateVersion": 1,
       "styles": {
         "desktop": {
           "padding": "56px 40px",
