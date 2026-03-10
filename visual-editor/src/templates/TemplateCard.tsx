@@ -1,8 +1,13 @@
 import React from "react";
 
-export default function TemplateCard({ template, onSelect }: any) {
+export default function TemplateCard({ template, onSelect, onDragStart }: any) {
   return (
-    <div className="template-card" onClick={() => onSelect(template)}>
+    <div
+      className="template-card"
+      draggable
+      onDragStart={() => onDragStart(template)}
+      onClick={() => onSelect(template)}
+    >
       <img src={template.preview} className="template-preview" />
       <div className="template-name">{template.name}</div>
     </div>
