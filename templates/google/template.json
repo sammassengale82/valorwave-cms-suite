@@ -1,0 +1,15 @@
+{
+  "id": "google",
+  "name": "Google Integrations",
+  "tree": [
+    {
+      "id": "google-root",
+      "type": "meta",
+      "content": {
+        "google_analytics_id": "G-PPBLPGS51B",
+        "google_tag_manager_id": "",
+        "google_site_verification": ""
+      }
+    }
+  ]
+}
