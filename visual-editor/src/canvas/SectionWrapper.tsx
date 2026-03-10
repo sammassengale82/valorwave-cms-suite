@@ -4,7 +4,9 @@ import { useCanvasState } from "./CanvasState";
 export default function SectionWrapper({ node, children }: any) {
   const selectedIds = useCanvasState((s: any) => s.selectedIds);
   const selectOne = useCanvasState((s: any) => s.selectOne);
-  const setReplaceTarget = useCanvasState((s: any) => s.setReplaceTarget);
+  const setSectionReplaceTarget = useCanvasState(
+    (s: any) => s.setSectionReplaceTarget
+  );
 
   const isSelected = selectedIds.includes(node.id);
 
@@ -15,7 +17,7 @@ export default function SectionWrapper({ node, children }: any) {
 
   function handleReplaceClick(e: React.MouseEvent) {
     e.stopPropagation();
-    setReplaceTarget(node.id);
+    setSectionReplaceTarget(node.id);
   }
 
   return (
@@ -32,18 +34,6 @@ export default function SectionWrapper({ node, children }: any) {
           <div className="selection-outline" />
           <button
             className="replace-btn"
-            style={{
-              position: "absolute",
-              top: 8,
-              right: 8,
-              zIndex: 2,
-              fontSize: 11,
-              padding: "4px 8px",
-              borderRadius: 999,
-              border: "1px solid #1565c0",
-              background: "#ffffff",
-              cursor: "pointer"
-            }}
             onClick={handleReplaceClick}
           >
             Replace Section
