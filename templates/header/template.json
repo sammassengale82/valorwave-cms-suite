@@ -1,10 +1,15 @@
 {
   "id": "header",
   "name": "Header",
+  "version": 1,
   "tree": [
     {
       "id": "header-bar",
       "type": "section",
+      "templateId": "header",
+      "templateName": "Header",
+      "templateCategory": "Header",
+      "templateVersion": 1,
       "styles": {
         "desktop": {
           "padding": "12px 32px",
@@ -30,7 +35,10 @@
             {
               "id": "header-logo",
               "type": "image",
-              "content": { "src": "/images/mini-logo.png", "alt": "Valor Wave Entertainment" },
+              "content": {
+                "src": "/images/mini-logo.png",
+                "alt": "Valor Wave Entertainment"
+              },
               "styles": {
                 "desktop": {
                   "height": "40px"
