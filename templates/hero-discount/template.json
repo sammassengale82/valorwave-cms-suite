@@ -1,10 +1,15 @@
 {
   "id": "hero-discount",
   "name": "Hero Discount",
+  "version": 1,
   "tree": [
     {
       "id": "hero-discount-section",
       "type": "section",
+      "templateId": "hero-discount",
+      "templateName": "Hero Discount",
+      "templateCategory": "Hero Discount",
+      "templateVersion": 1,
       "styles": {
         "desktop": {
           "padding": "56px 40px",
