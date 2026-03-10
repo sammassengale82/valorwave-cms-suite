@@ -1,14 +1,19 @@
+// SectionNode.tsx (DROP-ZONE VERSION)
 import React from "react";
 import { RenderNodeProps } from "../../types/renderNode";
 import { getComputedStyles } from "../../utils/mergeStyles";
 import { RenderNode } from "../canvas/RenderNode";
+import { DropZone } from "../canvas/DropZone";
 
 export const SectionNode: React.FC<RenderNodeProps> = ({
   node,
   selectedId,
   hoveredId,
   onSelect,
-  onHover
+  onHover,
+  onDropZoneEnter,
+  onDropZoneLeave,
+  onDrop
 }) => {
   const isSelected = node.id === selectedId;
   const isHovered = node.id === hoveredId;
@@ -20,19 +25,9 @@ export const SectionNode: React.FC<RenderNodeProps> = ({
     outlineOffset: "-1px"
   };
 
-  const handleClick: React.MouseEventHandler = (e) => {
+  const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     onSelect?.(node.id);
-  };
-
-  const handleMouseEnter: React.MouseEventHandler = (e) => {
-    e.stopPropagation();
-    onHover?.(node.id);
-  };
-
-  const handleMouseLeave: React.MouseEventHandler = (e) => {
-    e.stopPropagation();
-    onHover?.(null);
   };
 
   return (
@@ -40,9 +35,18 @@ export const SectionNode: React.FC<RenderNodeProps> = ({
       data-node-id={node.id}
       style={style}
       onClick={handleClick}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={() => onHover?.(node.id)}
+      onMouseLeave={() => onHover?.(null)}
     >
+      {/* BEFORE */}
+      <DropZone
+        onEnter={() => onDropZoneEnter?.(node.id, "before")}
+        onLeave={() => onDropZoneLeave?.()}
+        onDrop={(data) => onDrop?.(node.id, "before", data)}
+        isActive={hoveredId === node.id && selectedId === "drop-before"}
+      />
+
+      {/* INSIDE */}
       {node.children?.map((child) => (
         <RenderNode
           key={child.id}
@@ -51,8 +55,26 @@ export const SectionNode: React.FC<RenderNodeProps> = ({
           hoveredId={hoveredId}
           onSelect={onSelect}
           onHover={onHover}
+          onDropZoneEnter={onDropZoneEnter}
+          onDropZoneLeave={onDropZoneLeave}
+          onDrop={onDrop}
         />
       ))}
+
+      <DropZone
+        onEnter={() => onDropZoneEnter?.(node.id, "inside")}
+        onLeave={() => onDropZoneLeave?.()}
+        onDrop={(data) => onDrop?.(node.id, "inside", data)}
+        isActive={hoveredId === node.id && selectedId === "drop-inside"}
+      />
+
+      {/* AFTER */}
+      <DropZone
+        onEnter={() => onDropZoneEnter?.(node.id, "after")}
+        onLeave={() => onDropZoneLeave?.()}
+        onDrop={(data) => onDrop?.(node.id, "after", data)}
+        isActive={hoveredId === node.id && selectedId === "drop-after"}
+      />
     </section>
   );
 };
