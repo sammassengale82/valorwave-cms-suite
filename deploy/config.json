@@ -1,0 +1,10 @@
+{
+  "repoOwner": "sammassengale82",
+  "repoName": "valorwave-cms-suite",
+  "branchDraft": "draft",
+  "branchPublish": "main",
+  "commitAuthor": {
+    "name": "Valor Wave Deploy Bot",
+    "email": "bot@valorwave.com"
+  }
+}
