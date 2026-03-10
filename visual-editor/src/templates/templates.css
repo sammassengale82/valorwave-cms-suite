@@ -106,3 +106,15 @@
   border-color: #1565c0;
   background: rgba(21, 101, 192, 0.06);
 }
+.update-btn {
+  position: absolute;
+  top: 8px;
+  right: 90px;
+  z-index: 2;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid #ffb300;
+  background: #fff8e1;
+  cursor: pointer;
+}
