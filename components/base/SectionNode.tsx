@@ -1,6 +1,7 @@
-// SectionNode.tsx (DROP-ZONE VERSION)
 import React from "react";
-import { RenderNodeProps } from "../../types/renderNode";
+import {
+  RenderNodeProps
+} from "../../types/renderNode";
 import { getComputedStyles } from "../../utils/mergeStyles";
 import { RenderNode } from "../canvas/RenderNode";
 import { DropZone } from "../canvas/DropZone";
@@ -9,6 +10,7 @@ export const SectionNode: React.FC<RenderNodeProps> = ({
   node,
   selectedId,
   hoveredId,
+  dropTarget,
   onSelect,
   onHover,
   onDropZoneEnter,
@@ -30,6 +32,13 @@ export const SectionNode: React.FC<RenderNodeProps> = ({
     onSelect?.(node.id);
   };
 
+  const isBeforeActive =
+    dropTarget?.nodeId === node.id && dropTarget.position === "before";
+  const isInsideActive =
+    dropTarget?.nodeId === node.id && dropTarget.position === "inside";
+  const isAfterActive =
+    dropTarget?.nodeId === node.id && dropTarget.position === "after";
+
   return (
     <section
       data-node-id={node.id}
@@ -38,21 +47,20 @@ export const SectionNode: React.FC<RenderNodeProps> = ({
       onMouseEnter={() => onHover?.(node.id)}
       onMouseLeave={() => onHover?.(null)}
     >
-      {/* BEFORE */}
       <DropZone
         onEnter={() => onDropZoneEnter?.(node.id, "before")}
         onLeave={() => onDropZoneLeave?.()}
         onDrop={(data) => onDrop?.(node.id, "before", data)}
-        isActive={hoveredId === node.id && selectedId === "drop-before"}
+        isActive={!!isBeforeActive}
       />
 
-      {/* INSIDE */}
       {node.children?.map((child) => (
         <RenderNode
           key={child.id}
           node={child}
           selectedId={selectedId}
           hoveredId={hoveredId}
+          dropTarget={dropTarget}
           onSelect={onSelect}
           onHover={onHover}
           onDropZoneEnter={onDropZoneEnter}
@@ -65,15 +73,14 @@ export const SectionNode: React.FC<RenderNodeProps> = ({
         onEnter={() => onDropZoneEnter?.(node.id, "inside")}
         onLeave={() => onDropZoneLeave?.()}
         onDrop={(data) => onDrop?.(node.id, "inside", data)}
-        isActive={hoveredId === node.id && selectedId === "drop-inside"}
+        isActive={!!isInsideActive}
       />
 
-      {/* AFTER */}
       <DropZone
         onEnter={() => onDropZoneEnter?.(node.id, "after")}
         onLeave={() => onDropZoneLeave?.()}
         onDrop={(data) => onDrop?.(node.id, "after", data)}
-        isActive={hoveredId === node.id && selectedId === "drop-after"}
+        isActive={!!isAfterActive}
       />
     </section>
   );
