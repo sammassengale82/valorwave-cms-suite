@@ -1,0 +1,47 @@
+{
+  "patriotic": {
+    "name": "Patriotic",
+    "variables": {
+      "--vw-bg": "#ffffff",
+      "--vw-text": "#0a1a2f",
+      "--vw-accent": "#1565c0",
+      "--vw-accent-alt": "#c62828",
+      "--vw-surface": "#ffffff",
+      "--vw-border": "rgba(0,0,0,0.12)"
+    },
+    "waves": {
+      "top": "/waves/wave-blue.svg",
+      "bottom": "/waves/wave-red.svg"
+    }
+  },
+  "dark-operator": {
+    "name": "Dark Operator",
+    "variables": {
+      "--vw-bg": "#05070b",
+      "--vw-text": "#e5e7eb",
+      "--vw-accent": "#f4c542",
+      "--vw-accent-alt": "#3b82f6",
+      "--vw-surface": "#0b1018",
+      "--vw-border": "rgba(148,163,184,0.35)"
+    },
+    "waves": {
+      "top": "/waves/wave-operator-top.svg",
+      "bottom": "/waves/wave-operator-bottom.svg"
+    }
+  },
+  "multicam": {
+    "name": "Multicam",
+    "variables": {
+      "--vw-bg": "#2e2e2e",
+      "--vw-text": "#f5f5f5",
+      "--vw-accent": "#8f8f8f",
+      "--vw-accent-alt": "#c0c0c0",
+      "--vw-surface": "#3a3a3a",
+      "--vw-border": "rgba(255,255,255,0.15)"
+    },
+    "waves": {
+      "top": "/waves/wave-multicam-top.svg",
+      "bottom": "/waves/wave-multicam-bottom.svg"
+    }
+  }
+}
