@@ -1,0 +1,93 @@
+{
+  "id": "testimonials",
+  "name": "Testimonials",
+  "tree": [
+    {
+      "id": "testimonials-section",
+      "type": "section",
+      "styles": {
+        "desktop": {
+          "padding": "64px 40px",
+          "background": "#f5f7fa",
+          "color": "#0a1a2f"
+        }
+      },
+      "children": [
+        {
+          "id": "testimonial-heading",
+          "type": "text",
+          "content": { "text": "What Our Clients Say" },
+          "styles": {
+            "desktop": {
+              "fontSize": "28px",
+              "fontWeight": "700",
+              "textAlign": "center",
+              "marginBottom": "24px"
+            }
+          }
+        },
+        {
+          "id": "testimonial-grid",
+          "type": "container",
+          "styles": {
+            "desktop": {
+              "display": "grid",
+              "gridTemplateColumns": "repeat(3, minmax(0,1fr))",
+              "gap": "20px"
+            }
+          },
+          "children": [
+            {
+              "id": "testimonial-1",
+              "type": "card",
+              "children": [
+                {
+                  "id": "testimonial-1-text",
+                  "type": "text",
+                  "content": { "text": "\"Valor Wave Entertainment made our wedding absolutely perfect. Professional, faith-centered, and fun!\"" }
+                },
+                {
+                  "id": "testimonial-1-author",
+                  "type": "text",
+                  "content": { "text": "- Sarah M." }
+                }
+              ]
+            },
+            {
+              "id": "testimonial-2",
+              "type": "card",
+              "children": [
+                {
+                  "id": "testimonial-2-text",
+                  "type": "text",
+                  "content": { "text": "\"Sam was incredible. From ceremony to reception, everything was smooth and stress-free.\"" }
+                },
+                {
+                  "id": "testimonial-2-author",
+                  "type": "text",
+                  "content": { "text": "- James & Emily" }
+                }
+              ]
+            },
+            {
+              "id": "testimonial-3",
+              "type": "card",
+              "children": [
+                {
+                  "id": "testimonial-3-text",
+                  "type": "text",
+                  "content": { "text": "\"Highly recommend for church and community events. Clean music and great energy.\"" }
+                },
+                {
+                  "id": "testimonial-3-author",
+                  "type": "text",
+                  "content": { "text": "- Pastor David R." }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
