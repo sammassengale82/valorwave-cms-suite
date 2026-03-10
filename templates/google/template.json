@@ -1,15 +1,42 @@
 {
   "id": "google",
-  "name": "Google Integrations",
+  "name": "Google Integration",
+  "version": 1,
   "tree": [
     {
-      "id": "google-root",
-      "type": "meta",
-      "content": {
-        "google_analytics_id": "G-PPBLPGS51B",
-        "google_tag_manager_id": "",
-        "google_site_verification": ""
-      }
+      "id": "google-section",
+      "type": "section",
+      "templateId": "google",
+      "templateName": "Google Integration",
+      "templateCategory": "Meta",
+      "templateVersion": 1,
+      "styles": {},
+      "children": [
+        {
+          "id": "google-analytics-id",
+          "type": "input",
+          "content": {
+            "label": "Google Analytics Measurement ID (G‑XXXXXXX)",
+            "value": ""
+          }
+        },
+        {
+          "id": "google-tag-manager-id",
+          "type": "input",
+          "content": {
+            "label": "Google Tag Manager Container ID (GTM-XXXXXX)",
+            "value": ""
+          }
+        },
+        {
+          "id": "google-site-verification",
+          "type": "input",
+          "content": {
+            "label": "Google Site Verification Code",
+            "value": ""
+          }
+        }
+      ]
     }
   ]
 }
