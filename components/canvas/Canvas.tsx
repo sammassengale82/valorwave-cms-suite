@@ -1,35 +1,24 @@
 import React from "react";
 import { RenderTreeNode } from "../../types/renderNode";
 import { RenderNode } from "./RenderNode";
+import { useCanvasState } from "../../hooks/useCanvasState";
 
 export interface CanvasProps {
-  tree: RenderTreeNode[];
-  selectedId?: string | null;
-  hoveredId?: string | null;
-  onSelectNode?: (id: string) => void;
-  onHoverNode?: (id: string | null) => void;
+  initialTree: RenderTreeNode[];
 }
 
-/**
- * If you already have a CanvasState store, you can:
- * - lift selectedId / hoveredId from that store
- * - pass them into this component
- * - wire onSelectNode / onHoverNode back into your store
- */
-export const Canvas: React.FC<CanvasProps> = ({
-  tree,
-  selectedId,
-  hoveredId,
-  onSelectNode,
-  onHoverNode
-}) => {
-  const handleSelect = (id: string) => {
-    onSelectNode?.(id);
-  };
-
-  const handleHover = (id: string | null) => {
-    onHoverNode?.(id);
-  };
+export const Canvas: React.FC<CanvasProps> = ({ initialTree }) => {
+  const {
+    tree,
+    selectedId,
+    hoveredId,
+    dropTarget,
+    setSelectedId,
+    setHoveredId,
+    setDropTarget,
+    clearDropTarget,
+    insertAt
+  } = useCanvasState(initialTree);
 
   return (
     <div
@@ -54,10 +43,16 @@ export const Canvas: React.FC<CanvasProps> = ({
           <RenderNode
             key={node.id}
             node={node}
-            selectedId={selectedId ?? null}
-            hoveredId={hoveredId ?? null}
-            onSelect={handleSelect}
-            onHover={handleHover}
+            selectedId={selectedId}
+            hoveredId={hoveredId}
+            dropTarget={dropTarget}
+            onSelect={setSelectedId}
+            onHover={setHoveredId}
+            onDropZoneEnter={setDropTarget}
+            onDropZoneLeave={clearDropTarget}
+            onDrop={(nodeId, position, data) => {
+              insertAt(nodeId, position, data as RenderTreeNode);
+            }}
           />
         ))}
       </div>
