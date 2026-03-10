@@ -1,0 +1,22 @@
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path from "path";
+
+export default defineConfig({
+  plugins: [react()],
+  root: "visual-editor", // or wherever your index.html lives
+  build: {
+    outDir: "../dist",
+    emptyOutDir: true
+  },
+  resolve: {
+    alias: {
+      "@components": path.resolve(__dirname, "components"),
+      "@stores": path.resolve(__dirname, "stores"),
+      "@hooks": path.resolve(__dirname, "hooks"),
+      "@types": path.resolve(__dirname, "types"),
+      "@utils": path.resolve(__dirname, "utils"),
+      "@templates": path.resolve(__dirname, "templates")
+    }
+  }
+});
