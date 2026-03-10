@@ -1,5 +1,7 @@
 import React from "react";
 import { useCanvasState } from "./CanvasState";
+import { templates } from "../../../templates";
+import { hasTemplateUpdateForNode } from "../templates/useTemplateVersioning";
 
 export default function SectionWrapper({ node, children }: any) {
   const selectedIds = useCanvasState((s: any) => s.selectedIds);
@@ -7,8 +9,17 @@ export default function SectionWrapper({ node, children }: any) {
   const setSectionReplaceTarget = useCanvasState(
     (s: any) => s.setSectionReplaceTarget
   );
+  const updateSectionToLatest = useCanvasState(
+    (s: any) => s.updateSectionToLatest
+  );
 
   const isSelected = selectedIds.includes(node.id);
+
+  const template = node.templateId
+    ? templates.find((t) => t.id === node.templateId)
+    : undefined;
+
+  const hasUpdate = hasTemplateUpdateForNode(node, template);
 
   function handleClick(e: React.MouseEvent) {
     e.stopPropagation();
@@ -18,6 +29,11 @@ export default function SectionWrapper({ node, children }: any) {
   function handleReplaceClick(e: React.MouseEvent) {
     e.stopPropagation();
     setSectionReplaceTarget(node.id);
+  }
+
+  function handleUpdateClick(e: React.MouseEvent) {
+    e.stopPropagation();
+    updateSectionToLatest(node.id);
   }
 
   return (
@@ -38,6 +54,14 @@ export default function SectionWrapper({ node, children }: any) {
           >
             Replace Section
           </button>
+          {hasUpdate && (
+            <button
+              className="update-btn"
+              onClick={handleUpdateClick}
+            >
+              Update Template
+            </button>
+          )}
         </>
       )}
       {children}
