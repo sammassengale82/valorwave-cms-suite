@@ -1,0 +1,137 @@
+{
+  "id": "services",
+  "name": "Services",
+  "tree": [
+    {
+      "id": "services-section",
+      "type": "section",
+      "styles": {
+        "desktop": {
+          "padding": "64px 40px",
+          "background": "#f5f7fa",
+          "color": "#0a1a2f"
+        }
+      },
+      "children": [
+        {
+          "id": "services-heading",
+          "type": "text",
+          "content": { "text": "Services" },
+          "styles": {
+            "desktop": {
+              "fontSize": "32px",
+              "fontWeight": "700",
+              "textAlign": "center",
+              "marginBottom": "32px"
+            }
+          }
+        },
+        {
+          "id": "services-grid",
+          "type": "container",
+          "styles": {
+            "desktop": {
+              "display": "grid",
+              "gridTemplateColumns": "repeat(4, minmax(0,1fr))",
+              "gap": "20px"
+            }
+          },
+          "children": [
+            {
+              "id": "service-card-1",
+              "type": "card",
+              "children": [
+                {
+                  "id": "service-card-1-image",
+                  "type": "image",
+                  "content": { "src": "/images/service-wedding.jpg", "alt": "Wedding DJ Services" }
+                },
+                {
+                  "id": "service-card-1-title",
+                  "type": "text",
+                  "content": { "text": "Wedding DJ Services" }
+                },
+                {
+                  "id": "service-card-1-text",
+                  "type": "text",
+                  "content": {
+                    "text": "Professional, faith-respectful wedding DJ services with clean music, structured timelines, and stress-free coordination."
+                  }
+                }
+              ]
+            },
+            {
+              "id": "service-card-2",
+              "type": "card",
+              "children": [
+                {
+                  "id": "service-card-2-image",
+                  "type": "image",
+                  "content": { "src": "/images/service-dj-mc.jpg", "alt": "DJ & MC Services" }
+                },
+                {
+                  "id": "service-card-2-title",
+                  "type": "text",
+                  "content": { "text": "DJ & MC Services" }
+                },
+                {
+                  "id": "service-card-2-text",
+                  "type": "text",
+                  "content": {
+                    "text": "Confident MC presence, clear communication, and modern music tailored to your values and your guests."
+                  }
+                }
+              ]
+            },
+            {
+              "id": "service-card-3",
+              "type": "card",
+              "children": [
+                {
+                  "id": "service-card-3-image",
+                  "type": "image",
+                  "content": { "src": "/images/service-sound-lighting.jpg", "alt": "Sound & Lighting" }
+                },
+                {
+                  "id": "service-card-3-title",
+                  "type": "text",
+                  "content": { "text": "Sound & Lighting" }
+                },
+                {
+                  "id": "service-card-3-text",
+                  "type": "text",
+                  "content": {
+                    "text": "High-quality audio and tasteful lighting designed to enhance your event without overwhelming it."
+                  }
+                }
+              ]
+            },
+            {
+              "id": "service-card-4",
+              "type": "card",
+              "children": [
+                {
+                  "id": "service-card-4-image",
+                  "type": "image",
+                  "content": { "src": "/images/service-corporate.jpg", "alt": "Corporate & Community Events" }
+                },
+                {
+                  "id": "service-card-4-title",
+                  "type": "text",
+                  "content": { "text": "Corporate & Community Events" }
+                },
+                {
+                  "id": "service-card-4-text",
+                  "type": "text",
+                  "content": {
+                    "text": "Reliable, positive entertainment for corporate gatherings, churches, and community celebrations."
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
