@@ -1,0 +1,33 @@
+.component-inspector,
+.layout-inspector,
+.responsive-inspector {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.component-row,
+.layout-row,
+.responsive-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.component-row label,
+.layout-row label,
+.responsive-row label {
+  flex: 0 0 100px;
+  font-size: 12px;
+  color: rgba(0,0,0,0.6);
+}
+
+.component-row input,
+.layout-row input,
+.responsive-row input {
+  flex: 1;
+  padding: 4px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.15);
+  font-size: 12px;
+}
