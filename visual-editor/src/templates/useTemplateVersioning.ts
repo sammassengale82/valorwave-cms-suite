@@ -1,14 +1,19 @@
 import type { TemplateEntry } from "../../../templates";
 
-export function getTemplateVersion(template: TemplateEntry): number {
-  return (template.data as any).version || 1;
+export function getTemplateVersionFromTemplate(t: TemplateEntry): number {
+  return t.version || (t.data as any).version || 1;
 }
 
-export function hasTemplateUpdate(
-  template: TemplateEntry,
-  instanceVersion: number | undefined | null
+export function getInstanceTemplateVersion(node: any): number {
+  return node.templateVersion || node.version || 1;
+}
+
+export function hasTemplateUpdateForNode(
+  node: any,
+  template: TemplateEntry | undefined
 ): boolean {
-  const tplVersion = getTemplateVersion(template);
-  if (!instanceVersion) return false;
+  if (!template) return false;
+  const tplVersion = getTemplateVersionFromTemplate(template);
+  const instanceVersion = getInstanceTemplateVersion(node);
   return tplVersion > instanceVersion;
 }
