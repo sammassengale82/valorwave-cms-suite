@@ -9,7 +9,7 @@ export default function TemplateCard({
     <div
       className="template-card"
       draggable
-      onDragStart={() => onDragStart(template)}
+      onDragStart={(e) => onDragStart(e, template)}
       onClick={() => onSelect(template)}
     >
       <img src={template.preview} className="template-preview" />
