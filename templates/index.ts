@@ -1,4 +1,28 @@
-export const templates = [
+import hero from "./hero/template.json";
+import header from "./header/template.json";
+import services from "./services/template.json";
+import serviceArea from "./service-area/template.json";
+import bio from "./bio/template.json";
+import weddingDj from "./wedding-dj/template.json";
+import faq from "./faq/template.json";
+import brandMeaning from "./brand-meaning/template.json";
+import heroDiscount from "./hero-discount/template.json";
+import calendar from "./calendar/template.json";
+import testimonials from "./testimonials/template.json";
+import testimonialForm from "./testimonial-form/template.json";
+import footer from "./footer/template.json";
+import seo from "./seo/template.json";
+import google from "./google/template.json";
+
+export type TemplateEntry = {
+  id: string;
+  name: string;
+  category: string;
+  preview: string;
+  data: any;
+};
+
+export const templates: TemplateEntry[] = [
   { id: hero.id, name: hero.name, category: "Hero", preview: "/templates/hero/preview.png", data: hero },
   { id: header.id, name: header.name, category: "Header", preview: "/templates/header/preview.png", data: header },
   { id: services.id, name: services.name, category: "Services", preview: "/templates/services/preview.png", data: services },
