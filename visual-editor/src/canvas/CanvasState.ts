@@ -1,13 +1,21 @@
 import create from "zustand";
 import { nanoid } from "nanoid";
 import type { HistoryEntry } from "../types/HistoryTypes";
+import { templates } from "../../../templates";
 
+// ------------------------------------------------------------
+// Helper: Deep clone with new IDs + template metadata
+// ------------------------------------------------------------
 function cloneNodeWithNewIds(node: any): any {
   const newId = nanoid();
 
   const cloned = {
     ...node,
     id: newId,
+    templateId: node.templateId,
+    templateName: node.templateName,
+    templateCategory: node.templateCategory,
+    templateVersion: node.templateVersion || node.version || 1,
     children: node.children
       ? node.children.map((child: any) => cloneNodeWithNewIds(child))
       : []
@@ -16,6 +24,9 @@ function cloneNodeWithNewIds(node: any): any {
   return cloned;
 }
 
+// ------------------------------------------------------------
+// Helper: Deep merge for styles + content
+// ------------------------------------------------------------
 function deepMerge(target: any, source: any) {
   const output = { ...target };
 
@@ -37,6 +48,9 @@ function deepMerge(target: any, source: any) {
   return output;
 }
 
+// ------------------------------------------------------------
+// Helper: Compress snapshot
+// ------------------------------------------------------------
 function compressTree(tree: any[]): any[] {
   return JSON.parse(
     JSON.stringify(tree, (key, value) => {
@@ -48,9 +62,15 @@ function compressTree(tree: any[]): any[] {
   );
 }
 
+// ------------------------------------------------------------
+// Canvas State
+// ------------------------------------------------------------
 export const useCanvasState = create((set, get) => ({
   tree: [],
 
+  // ------------------------------------------------------------
+  // MULTI‑SELECT STATE
+  // ------------------------------------------------------------
   selectedIds: [] as string[],
 
   selectOne: (id: string) =>
@@ -78,6 +98,9 @@ export const useCanvasState = create((set, get) => ({
       selectedIds: [...ids]
     }),
 
+  // ------------------------------------------------------------
+  // HISTORY ENGINE
+  // ------------------------------------------------------------
   history: [] as HistoryEntry[],
   historyIndex: -1,
   lastPushTime: 0,
@@ -144,6 +167,9 @@ export const useCanvasState = create((set, get) => ({
     });
   },
 
+  // ------------------------------------------------------------
+  // SET TREE
+  // ------------------------------------------------------------
   setTree: (tree: any[], pushHistory = true) => {
     if (pushHistory) {
       get().pushHistory("Set Tree");
@@ -151,6 +177,9 @@ export const useCanvasState = create((set, get) => ({
     set({ tree });
   },
 
+  // ------------------------------------------------------------
+  // SECTION OPERATIONS
+  // ------------------------------------------------------------
   removeSection: (id: string) =>
     set((state: any) => {
       get().pushHistory("Remove Section");
@@ -176,6 +205,9 @@ export const useCanvasState = create((set, get) => ({
       return { tree: newTree };
     }),
 
+  // ------------------------------------------------------------
+  // BLOCK OPERATIONS
+  // ------------------------------------------------------------
   removeBlock: (id: string) =>
     set((state: any) => {
       get().pushHistory("Remove Block");
@@ -213,6 +245,9 @@ export const useCanvasState = create((set, get) => ({
       return { tree: duplicate(state.tree) };
     }),
 
+  // ------------------------------------------------------------
+  // GROUP OPERATIONS
+  // ------------------------------------------------------------
   deleteSelected: () =>
     set((state: any) => {
       get().pushHistory("Delete Multiple Blocks");
@@ -316,6 +351,9 @@ export const useCanvasState = create((set, get) => ({
       return { tree: apply(state.tree) };
     }),
 
+  // ------------------------------------------------------------
+  // STYLE + CONTENT UPDATES
+  // ------------------------------------------------------------
   updateStyle: (id: string, device: string, prop: string, value: any) =>
     set((state: any) => {
       get().pushHistory("Update Style");
@@ -353,6 +391,9 @@ export const useCanvasState = create((set, get) => ({
       return { tree: update(state.tree) };
     }),
 
+  // ------------------------------------------------------------
+  // TEMPLATE INSERTION
+  // ------------------------------------------------------------
   insertTemplate: (templateNode: any) =>
     set((state: any) => {
       get().pushHistory("Insert Template");
@@ -362,6 +403,9 @@ export const useCanvasState = create((set, get) => ({
       return { tree: newTree };
     }),
 
+  // ------------------------------------------------------------
+  // APPLY VARIANT (single)
+  // ------------------------------------------------------------
   applyVariant: (nodeId: string, variant: any) =>
     set((state: any) => {
       get().pushHistory("Apply Variant");
@@ -385,6 +429,9 @@ export const useCanvasState = create((set, get) => ({
       return { tree: apply(state.tree) };
     }),
 
+  // ------------------------------------------------------------
+  // DRAG / INSERT HELPERS
+  // ------------------------------------------------------------
   addSection: (node: any) =>
     set((state: any) => {
       get().pushHistory("Add Section");
@@ -420,6 +467,9 @@ export const useCanvasState = create((set, get) => ({
       return { tree: insert(state.tree) };
     }),
 
+  // ------------------------------------------------------------
+  // REPLACE MODE
+  // ------------------------------------------------------------
   sectionReplaceTargetId: null as string | null,
   blockReplaceTargetId: null as string | null,
 
@@ -472,5 +522,36 @@ export const useCanvasState = create((set, get) => ({
         });
 
       return { tree: replace(state.tree) };
+    }),
+
+  // ------------------------------------------------------------
+  // UPDATE SECTION TO LATEST TEMPLATE
+  // ------------------------------------------------------------
+  updateSectionToLatest: (id: string) =>
+    set((state: any) => {
+      get().pushHistory("Update Template");
+
+      const update = (nodes: any[]): any[] =>
+        nodes.map((n) => {
+          if (n.id === id && n.templateId) {
+            const tpl = templates.find((t) => t.id === n.templateId);
+            if (!tpl) return n;
+
+            const root = tpl.data.tree[0];
+            const cloned = cloneNodeWithNewIds({
+              ...root,
+              templateId: tpl.id,
+              templateName: tpl.name,
+              templateCategory: tpl.category,
+              templateVersion: tpl.version
+            });
+
+            return cloned;
+          }
+
+          return { ...n, children: update(n.children || []) };
+        });
+
+      return { tree: update(state.tree) };
     })
 }));
