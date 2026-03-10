@@ -2,9 +2,6 @@ import create from "zustand";
 import { nanoid } from "nanoid";
 import type { HistoryEntry } from "../types/HistoryTypes";
 
-// ------------------------------------------------------------
-// Helper: Deep clone with new IDs
-// ------------------------------------------------------------
 function cloneNodeWithNewIds(node: any): any {
   const newId = nanoid();
 
@@ -13,15 +10,12 @@ function cloneNodeWithNewIds(node: any): any {
     id: newId,
     children: node.children
       ? node.children.map((child: any) => cloneNodeWithNewIds(child))
-      : [],
+      : []
   };
 
   return cloned;
 }
 
-// ------------------------------------------------------------
-// Helper: Deep merge for styles + content
-// ------------------------------------------------------------
 function deepMerge(target: any, source: any) {
   const output = { ...target };
 
@@ -43,9 +37,6 @@ function deepMerge(target: any, source: any) {
   return output;
 }
 
-// ------------------------------------------------------------
-// Helper: Compress snapshot
-// ------------------------------------------------------------
 function compressTree(tree: any[]): any[] {
   return JSON.parse(
     JSON.stringify(tree, (key, value) => {
@@ -57,32 +48,14 @@ function compressTree(tree: any[]): any[] {
   );
 }
 
-// ------------------------------------------------------------
-// Helper: Find node by ID
-// ------------------------------------------------------------
-function findNode(nodes: any[], id: string): any | null {
-  for (const n of nodes) {
-    if (n.id === id) return n;
-    const child = findNode(n.children || [], id);
-    if (child) return child;
-  }
-  return null;
-}
-
-// ------------------------------------------------------------
-// Canvas State
-// ------------------------------------------------------------
 export const useCanvasState = create((set, get) => ({
   tree: [],
 
-  // ------------------------------------------------------------
-  // MULTI‑SELECT STATE
-  // ------------------------------------------------------------
   selectedIds: [] as string[],
 
   selectOne: (id: string) =>
     set({
-      selectedIds: [id],
+      selectedIds: [id]
     }),
 
   toggleSelect: (id: string) =>
@@ -91,23 +64,20 @@ export const useCanvasState = create((set, get) => ({
       return {
         selectedIds: exists
           ? state.selectedIds.filter((x: string) => x !== id)
-          : [...state.selectedIds, id],
+          : [...state.selectedIds, id]
       };
     }),
 
   clearSelection: () =>
     set({
-      selectedIds: [],
+      selectedIds: []
     }),
 
   selectMultiple: (ids: string[]) =>
     set({
-      selectedIds: [...ids],
+      selectedIds: [...ids]
     }),
 
-  // ------------------------------------------------------------
-  // HISTORY ENGINE
-  // ------------------------------------------------------------
   history: [] as HistoryEntry[],
   historyIndex: -1,
   lastPushTime: 0,
@@ -131,7 +101,7 @@ export const useCanvasState = create((set, get) => ({
       id: nanoid(),
       timestamp: now,
       label,
-      tree: compressed,
+      tree: compressed
     };
 
     let newHistory = state.history.slice(0, state.historyIndex + 1);
@@ -144,7 +114,7 @@ export const useCanvasState = create((set, get) => ({
     set({
       history: newHistory,
       historyIndex: newHistory.length - 1,
-      lastPushTime: now,
+      lastPushTime: now
     });
   },
 
@@ -157,7 +127,7 @@ export const useCanvasState = create((set, get) => ({
 
     set({
       tree: JSON.parse(JSON.stringify(entry.tree)),
-      historyIndex: newIndex,
+      historyIndex: newIndex
     });
   },
 
@@ -170,13 +140,10 @@ export const useCanvasState = create((set, get) => ({
 
     set({
       tree: JSON.parse(JSON.stringify(entry.tree)),
-      historyIndex: newIndex,
+      historyIndex: newIndex
     });
   },
 
-  // ------------------------------------------------------------
-  // SET TREE
-  // ------------------------------------------------------------
   setTree: (tree: any[], pushHistory = true) => {
     if (pushHistory) {
       get().pushHistory("Set Tree");
@@ -184,15 +151,12 @@ export const useCanvasState = create((set, get) => ({
     set({ tree });
   },
 
-  // ------------------------------------------------------------
-  // SECTION OPERATIONS
-  // ------------------------------------------------------------
   removeSection: (id: string) =>
     set((state: any) => {
       get().pushHistory("Remove Section");
 
       return {
-        tree: state.tree.filter((n: any) => n.id !== id),
+        tree: state.tree.filter((n: any) => n.id !== id)
       };
     }),
 
@@ -212,9 +176,6 @@ export const useCanvasState = create((set, get) => ({
       return { tree: newTree };
     }),
 
-  // ------------------------------------------------------------
-  // BLOCK OPERATIONS
-  // ------------------------------------------------------------
   removeBlock: (id: string) =>
     set((state: any) => {
       get().pushHistory("Remove Block");
@@ -237,7 +198,7 @@ export const useCanvasState = create((set, get) => ({
         for (const n of nodes) {
           result.push({
             ...n,
-            children: duplicate(n.children || []),
+            children: duplicate(n.children || [])
           });
 
           if (n.id === id) {
@@ -252,9 +213,6 @@ export const useCanvasState = create((set, get) => ({
       return { tree: duplicate(state.tree) };
     }),
 
-  // ------------------------------------------------------------
-  // GROUP OPERATIONS (NEW)
-  // ------------------------------------------------------------
   deleteSelected: () =>
     set((state: any) => {
       get().pushHistory("Delete Multiple Blocks");
@@ -268,7 +226,7 @@ export const useCanvasState = create((set, get) => ({
 
       return {
         tree: remove(state.tree),
-        selectedIds: [],
+        selectedIds: []
       };
     }),
 
@@ -284,7 +242,7 @@ export const useCanvasState = create((set, get) => ({
         for (const n of nodes) {
           result.push({
             ...n,
-            children: duplicate(n.children || []),
+            children: duplicate(n.children || [])
           });
 
           if (ids.has(n.id)) {
@@ -297,7 +255,7 @@ export const useCanvasState = create((set, get) => ({
       };
 
       return {
-        tree: duplicate(state.tree),
+        tree: duplicate(state.tree)
       };
     }),
 
@@ -324,12 +282,12 @@ export const useCanvasState = create((set, get) => ({
 
         return newNodes.map((n) => ({
           ...n,
-          children: move(n.children || []),
+          children: move(n.children || [])
         }));
       };
 
       return {
-        tree: move(state.tree),
+        tree: move(state.tree)
       };
     }),
 
@@ -348,7 +306,7 @@ export const useCanvasState = create((set, get) => ({
             return {
               ...n,
               styles: mergedStyles,
-              content: mergedContent,
+              content: mergedContent
             };
           }
 
@@ -358,9 +316,6 @@ export const useCanvasState = create((set, get) => ({
       return { tree: apply(state.tree) };
     }),
 
-  // ------------------------------------------------------------
-  // STYLE + CONTENT UPDATES
-  // ------------------------------------------------------------
   updateStyle: (id: string, device: string, prop: string, value: any) =>
     set((state: any) => {
       get().pushHistory("Update Style");
@@ -389,7 +344,7 @@ export const useCanvasState = create((set, get) => ({
           if (n.id === id) {
             return {
               ...n,
-              content: { ...(n.content || {}), [field]: value },
+              content: { ...(n.content || {}), [field]: value }
             };
           }
           return { ...n, children: update(n.children || []) };
@@ -398,9 +353,6 @@ export const useCanvasState = create((set, get) => ({
       return { tree: update(state.tree) };
     }),
 
-  // ------------------------------------------------------------
-  // TEMPLATE INSERTION
-  // ------------------------------------------------------------
   insertTemplate: (templateNode: any) =>
     set((state: any) => {
       get().pushHistory("Insert Template");
@@ -410,9 +362,6 @@ export const useCanvasState = create((set, get) => ({
       return { tree: newTree };
     }),
 
-  // ------------------------------------------------------------
-  // APPLY VARIANT (single)
-  // ------------------------------------------------------------
   applyVariant: (nodeId: string, variant: any) =>
     set((state: any) => {
       get().pushHistory("Apply Variant");
@@ -426,7 +375,7 @@ export const useCanvasState = create((set, get) => ({
             return {
               ...n,
               styles: mergedStyles,
-              content: mergedContent,
+              content: mergedContent
             };
           }
 
@@ -435,4 +384,46 @@ export const useCanvasState = create((set, get) => ({
 
       return { tree: apply(state.tree) };
     }),
+
+  // drag/insert helpers
+  addSection: (node: any) =>
+    set((state: any) => {
+      get().pushHistory("Add Section");
+      const cloned = cloneNodeWithNewIds(node);
+      return { tree: [...state.tree, cloned] };
+    }),
+
+  insertSectionAt: (index: number, node: any) =>
+    set((state: any) => {
+      get().pushHistory("Insert Section");
+      const cloned = cloneNodeWithNewIds(node);
+      const newTree = [...state.tree];
+      newTree.splice(index, 0, cloned);
+      return { tree: newTree };
+    }),
+
+  // replace mode
+  replaceTargetId: null as string | null,
+
+  setReplaceTarget: (id: string) =>
+    set({
+      replaceTargetId: id
+    }),
+
+  clearReplaceTarget: () =>
+    set({
+      replaceTargetId: null
+    }),
+
+  replaceSection: (id: string, node: any) =>
+    set((state: any) => {
+      get().pushHistory("Replace Section");
+
+      const cloned = cloneNodeWithNewIds(node);
+      const newTree = state.tree.map((s: any) =>
+        s.id === id ? cloned : s
+      );
+
+      return { tree: newTree };
+    })
 }));
