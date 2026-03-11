@@ -1,0 +1,112 @@
+.vw-dashboard-patriotic {
+  min-height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    #0b1b33 0,
+    #0b1b33 40%,
+    #ffffff 100%
+  );
+  color: #0a1a2f;
+  display: flex;
+  flex-direction: column;
+}
+
+.vw-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+  background: linear-gradient(90deg, #0a1a2f, #12325b);
+  color: #ffffff;
+}
+
+.vw-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.vw-flag {
+  font-size: 18px;
+}
+
+.vw-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.vw-nav-item {
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #ffffff;
+  padding: 4px 12px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.vw-nav-item.active {
+  background: #f4c542;
+  color: #0a1a2f;
+}
+
+.vw-wave-top,
+.vw-wave-bottom {
+  height: 80px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.vw-wave-top {
+  background-image: url('/waves/wave-blue.svg');
+}
+
+.vw-wave-bottom {
+  background-image: url('/waves/wave-red.svg');
+}
+
+.vw-main {
+  flex: 1;
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.vw-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.vw-grid.wide {
+  grid-template-columns: 2fr 1fr;
+}
+
+.vw-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 10px 25px rgba(15,23,42,0.18);
+  border: 1px solid rgba(15,23,42,0.08);
+}
+
+.vw-card.primary {
+  grid-column: span 2;
+  background: linear-gradient(135deg, #1565c0, #c62828);
+  color: #ffffff;
+}
+
+.vw-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+}
+
+.vw-list li::before {
+  content: "• ";
+  color: #1565c0;
+}
