@@ -16,9 +16,7 @@ export default function CMSPanel() {
   return (
     <div className="cms-panel-root">
       <h3>CMS Content</h3>
-
       <SectionFields />
-
       <button className="cms-save-btn" onClick={handleSave}>
         Save CMS Content
       </button>
