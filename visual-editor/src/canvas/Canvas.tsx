@@ -54,6 +54,7 @@ export default function Canvas() {
           onDragOver={(e) => e.preventDefault()}
           onDrop={(e) => handleSectionDropAt(e, 0)}
         />
+
         {tree.map((section: any, sectionIndex: number) => (
           <React.Fragment key={section.id}>
             <SectionWrapper node={section}>
