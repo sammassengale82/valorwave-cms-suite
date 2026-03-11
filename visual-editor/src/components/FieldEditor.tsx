@@ -1,19 +1,17 @@
 import React from "react";
+import * as fields from "../cms-panel/fields";
 
-interface Props {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-}
+type Props = {
+  section: any;
+};
 
-export default function FieldEditor({ label, value, onChange }: Props) {
+export default function FieldEditor({ section }: Props) {
+  const config = (fields as any)[section.type];
+  if (!config) return null;
+
   return (
-    <div className="cms-field">
-      <label>{label}</label>
-      <textarea
-        value={value ?? ""}
-        onChange={(e) => onChange(e.target.value)}
-      />
+    <div className="cms-field-editor">
+      {/* render inputs based on config */}
     </div>
   );
 }

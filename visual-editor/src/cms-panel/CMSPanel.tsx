@@ -2,7 +2,7 @@ import React from "react";
 import { useCanvasState } from "../canvas/CanvasState";
 import { serializeToCMS } from "../serialization/serializeToCMS";
 import { getDraft, saveDraft } from "../api/api";
-import SectionFields from "./SectionFields";
+import SectionFields from "../components/SectionFields";
 
 export default function CMSPanel() {
   const tree = useCanvasState((s) => s.tree);
@@ -16,9 +16,7 @@ export default function CMSPanel() {
   return (
     <div className="cms-panel-root">
       <h3>CMS Content</h3>
-
       <SectionFields />
-
       <button className="cms-save-btn" onClick={handleSave}>
         Save CMS Content
       </button>

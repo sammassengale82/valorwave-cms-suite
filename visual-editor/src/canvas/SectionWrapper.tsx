@@ -1,70 +1,23 @@
 import React from "react";
 import { useCanvasState } from "./CanvasState";
-import { templates } from "../../../templates";
-import { hasTemplateUpdateForNode } from "../templates/useTemplateVersioning";
 
-export default function SectionWrapper({ node, children }: any) {
-  const selectedIds = useCanvasState((s: any) => s.selectedIds);
-  const selectOne = useCanvasState((s: any) => s.selectOne);
-  const setSectionReplaceTarget = useCanvasState(
-    (s: any) => s.setSectionReplaceTarget
-  );
-  const updateSectionToLatest = useCanvasState(
-    (s: any) => s.updateSectionToLatest
-  );
+type Node = {
+  id: string;
+  type: string;
+  [key: string]: any;
+};
 
-  const isSelected = selectedIds.includes(node.id);
+type Props = {
+  node: Node;
+  children?: React.ReactNode;
+};
 
-  const template = node.templateId
-    ? templates.find((t) => t.id === node.templateId)
-    : undefined;
-
-  const hasUpdate = hasTemplateUpdateForNode(node, template);
-
-  function handleClick(e: React.MouseEvent) {
-    e.stopPropagation();
-    selectOne(node.id);
-  }
-
-  function handleReplaceClick(e: React.MouseEvent) {
-    e.stopPropagation();
-    setSectionReplaceTarget(node.id);
-  }
-
-  function handleUpdateClick(e: React.MouseEvent) {
-    e.stopPropagation();
-    updateSectionToLatest(node.id);
-  }
+export default function SectionWrapper({ node, children }: Props) {
+  const tree = useCanvasState((s) => s.tree); // keep hook usage if you later add selection, etc.
 
   return (
-    <div
-      className={`section-wrapper ${isSelected ? "selected" : ""}`}
-      onClick={handleClick}
-      style={{
-        position: "relative",
-        padding: "20px"
-      }}
-    >
-      {isSelected && (
-        <>
-          <div className="selection-outline" />
-          <button
-            className="replace-btn"
-            onClick={handleReplaceClick}
-          >
-            Replace Section
-          </button>
-          {hasUpdate && (
-            <button
-              className="update-btn"
-              onClick={handleUpdateClick}
-            >
-              Update Template
-            </button>
-          )}
-        </>
-      )}
+    <section className="canvas-section" data-node-id={node.id} data-node-type={node.type}>
       {children}
-    </div>
+    </section>
   );
 }
