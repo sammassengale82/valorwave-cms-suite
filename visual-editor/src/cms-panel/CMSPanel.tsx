@@ -2,7 +2,7 @@ import React from "react";
 import { useCanvasState } from "../canvas/CanvasState";
 import { serializeToCMS } from "../serialization/serializeToCMS";
 import { getDraft, saveDraft } from "../api/api";
-import SectionFields from "./SectionFields";
+import SectionFields from "../components/SectionFields";
 
 export default function CMSPanel() {
   const tree = useCanvasState((s) => s.tree);
