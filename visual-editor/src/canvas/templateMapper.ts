@@ -37,7 +37,8 @@ export function treeToTemplates(tree: Node[]): Record<string, TemplateFile> {
   const grouped: Record<string, Node[]> = {};
 
   for (const section of sections) {
-    const templateId = section.id.split("-")[0] || section.id;
+    const templateId =
+      section.templateId || section.id.split("-")[0] || section.id;
     if (!grouped[templateId]) grouped[templateId] = [];
     grouped[templateId].push(section);
   }
@@ -69,6 +70,10 @@ function mapTemplateNodeToNode(t: TemplateNode): Node {
       id: t.id,
       type: "Section",
       templateType: "section",
+      templateId: t.templateId,
+      templateName: t.templateName,
+      templateCategory: t.templateCategory,
+      templateVersion: t.templateVersion,
       children: t.children?.map(mapTemplateNodeToNode),
       style,
       layout,
@@ -79,6 +84,10 @@ function mapTemplateNodeToNode(t: TemplateNode): Node {
     id: t.id,
     type: "Block",
     templateType: t.type,
+    templateId: t.templateId,
+    templateName: t.templateName,
+    templateCategory: t.templateCategory,
+    templateVersion: t.templateVersion,
     blockType: mapBlockType(t.type),
     content: mapTemplateContentToNodeContent(t),
     style,
@@ -94,6 +103,10 @@ function mapNodeToTemplateNode(n: Node): TemplateNode {
     return {
       id: n.id,
       type: "section",
+      templateId: n.templateId,
+      templateName: n.templateName,
+      templateCategory: n.templateCategory,
+      templateVersion: n.templateVersion,
       styles: Object.keys(desktop).length ? { desktop } : undefined,
       children: n.children?.map(mapNodeToTemplateNode),
     };
@@ -102,6 +115,10 @@ function mapNodeToTemplateNode(n: Node): TemplateNode {
   return {
     id: n.id,
     type: n.templateType || mapNodeBlockTypeToTemplateType(n.blockType),
+    templateId: n.templateId,
+    templateName: n.templateName,
+    templateCategory: n.templateCategory,
+    templateVersion: n.templateVersion,
     content: mapNodeContentToTemplateContent(n),
     styles: Object.keys(desktop).length ? { desktop } : undefined,
     children: n.children?.map(mapNodeToTemplateNode),
@@ -185,7 +202,8 @@ function mapTemplateContentToNodeContent(t: TemplateNode): any {
 
   if (t.type === "button") {
     return {
-      buttonLabel: t.content.label ?? "",
+      text: t.content.text ?? "",
+      buttonLabel: t.content.text ?? "",
       buttonHref: t.content.href ?? "",
     };
   }
@@ -196,20 +214,20 @@ function mapTemplateContentToNodeContent(t: TemplateNode): any {
 function mapNodeContentToTemplateContent(n: Node): any {
   if (!n.content) return undefined;
 
-  if (n.blockType === "text") {
+  if (n.templateType === "text" || n.blockType === "text") {
     return { text: n.content.text ?? "" };
   }
 
-  if (n.blockType === "image") {
+  if (n.templateType === "image" || n.blockType === "image") {
     return {
       src: n.content.imageUrl ?? "",
       alt: n.content.alt ?? "",
     };
   }
 
-  if (n.blockType === "button") {
+  if (n.templateType === "button" || n.blockType === "button") {
     return {
-      label: n.content.buttonLabel ?? "",
+      text: n.content.buttonLabel ?? n.content.text ?? "",
       href: n.content.buttonHref ?? "",
     };
   }

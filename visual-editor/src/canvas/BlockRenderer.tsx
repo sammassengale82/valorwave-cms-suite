@@ -11,15 +11,23 @@ export default function BlockRenderer({ node }: Props) {
     const style = node.style ?? {};
     const layout = node.layout ?? {};
 
+    const title =
+      node.templateName ||
+      node.templateCategory ||
+      node.templateId ||
+      node.id;
+
     return (
       <section
         className="ve-section"
         style={{ ...style, ...layout }}
       >
         <div className="ve-section-header">
-          <span className="ve-section-id">{node.id}</span>
-          {node.templateType && node.templateType !== "section" && (
-            <span className="ve-section-type">{node.templateType}</span>
+          <span className="ve-section-title">{title}</span>
+          {node.templateCategory && (
+            <span className="ve-section-category">
+              {node.templateCategory}
+            </span>
           )}
         </div>
         {node.children?.map((child) => (
@@ -31,22 +39,13 @@ export default function BlockRenderer({ node }: Props) {
 
   const style = node.style ?? {};
   const layout = node.layout ?? {};
-  const typeLabel = node.templateType || node.blockType || "block";
+  const typeLabel = (node.templateType || node.blockType || "block").toUpperCase();
 
-  // Prefer explicit blockType when we know it, otherwise fall back to templateType
-  if (node.blockType === "hero") {
+  // IMAGE
+  if (node.templateType === "image" || node.blockType === "image") {
     return (
-      <div className="ve-hero" style={{ ...style, ...layout }}>
-        <div className="ve-block-meta">HERO</div>
-        <h1>{node.content?.text ?? "Hero headline"}</h1>
-      </div>
-    );
-  }
-
-  if (node.blockType === "image" || node.templateType === "image") {
-    return (
-      <div className="ve-image" style={{ ...style, ...layout }}>
-        <div className="ve-block-meta">IMAGE</div>
+      <div className="ve-image-block" style={{ ...style, ...layout }}>
+        <div className="ve-block-meta">{typeLabel}</div>
         <img
           src={node.content?.imageUrl ?? ""}
           alt={node.content?.alt ?? ""}
@@ -55,38 +54,26 @@ export default function BlockRenderer({ node }: Props) {
     );
   }
 
-  if (node.blockType === "button" || node.templateType === "button") {
+  // BUTTON
+  if (node.templateType === "button" || node.blockType === "button") {
+    const label =
+      node.content?.buttonLabel ?? node.content?.text ?? "Button";
+    const href = node.content?.buttonHref ?? "#";
+
     return (
-      <div className="ve-button-wrap" style={{ ...style, ...layout }}>
-        <div className="ve-block-meta">BUTTON</div>
-        <a
-          href={node.content?.buttonHref ?? "#"}
-          className="ve-button"
-        >
-          {node.content?.buttonLabel ?? node.content?.text ?? "Button"}
+      <div className="ve-button-block" style={{ ...style, ...layout }}>
+        <div className="ve-block-meta">{typeLabel}</div>
+        <a href={href} className="ve-button">
+          {label}
         </a>
       </div>
     );
   }
 
-  if (node.blockType === "grid" || node.templateType === "grid") {
-    return (
-      <div className="ve-grid" style={{ ...style, ...layout }}>
-        <div className="ve-block-meta">GRID</div>
-        <div className="ve-grid-title">
-          {node.content?.text ?? "Grid"}
-        </div>
-        {node.children?.map((child) => (
-          <BlockRenderer key={child.id} node={child} />
-        ))}
-      </div>
-    );
-  }
-
-  // Default: show type label + text content
+  // TEXT (default)
   return (
     <div className="ve-text-block" style={{ ...style, ...layout }}>
-      <div className="ve-block-meta">{typeLabel.toUpperCase()}</div>
+      <div className="ve-block-meta">{typeLabel}</div>
       <div
         className="ve-text"
         dangerouslySetInnerHTML={{

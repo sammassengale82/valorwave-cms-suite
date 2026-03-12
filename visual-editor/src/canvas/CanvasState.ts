@@ -6,8 +6,15 @@ export type BlockType = "hero" | "text" | "image" | "button" | "grid";
 export type Node = {
   id: string;
   type: "Section" | "Block";
+
+  // from templates
+  templateType?: string; // original node.type ("section","text","image","button", etc.)
+  templateId?: string;
+  templateName?: string;
+  templateCategory?: string;
+  templateVersion?: number;
+
   blockType?: BlockType;
-  templateType?: string; // original template node type (e.g. "text", "image", "faq", "calendar")
   children?: Node[];
 
   content?: {
