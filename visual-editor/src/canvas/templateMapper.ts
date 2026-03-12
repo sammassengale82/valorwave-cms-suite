@@ -1,6 +1,6 @@
 // src/canvas/templateMapper.ts
 import type { TemplateFile, TemplateNode } from "./templateTypes";
-import type { Node } from "./CanvasState";
+import type { Node, BlockType } from "./CanvasState";
 
 const STYLE_KEYS = ["background", "color", "textAlign", "padding", "margin"];
 const LAYOUT_KEYS = [
@@ -68,6 +68,7 @@ function mapTemplateNodeToNode(t: TemplateNode): Node {
     return {
       id: t.id,
       type: "Section",
+      templateType: "section",
       children: t.children?.map(mapTemplateNodeToNode),
       style,
       layout,
@@ -77,6 +78,7 @@ function mapTemplateNodeToNode(t: TemplateNode): Node {
   return {
     id: t.id,
     type: "Block",
+    templateType: t.type,
     blockType: mapBlockType(t.type),
     content: mapTemplateContentToNodeContent(t),
     style,
@@ -92,16 +94,16 @@ function mapNodeToTemplateNode(n: Node): TemplateNode {
     return {
       id: n.id,
       type: "section",
-      styles: { desktop },
+      styles: Object.keys(desktop).length ? { desktop } : undefined,
       children: n.children?.map(mapNodeToTemplateNode),
     };
   }
 
   return {
     id: n.id,
-    type: mapNodeBlockTypeToTemplateType(n.blockType),
+    type: n.templateType || mapNodeBlockTypeToTemplateType(n.blockType),
     content: mapNodeContentToTemplateContent(n),
-    styles: { desktop },
+    styles: Object.keys(desktop).length ? { desktop } : undefined,
     children: n.children?.map(mapNodeToTemplateNode),
   };
 }
@@ -131,29 +133,37 @@ function mergeStyles(
   };
 }
 
-function mapBlockType(type: string | undefined) {
+function mapBlockType(type: string | undefined): BlockType | undefined {
   switch (type) {
     case "hero":
+      return "hero";
     case "text":
-    case "image":
-    case "button":
-    case "grid":
-      return type;
-    default:
       return "text";
+    case "image":
+      return "image";
+    case "button":
+      return "button";
+    case "grid":
+      return "grid";
+    default:
+      return undefined;
   }
 }
 
 function mapNodeBlockTypeToTemplateType(
-  blockType: string | undefined
+  blockType: BlockType | undefined
 ): string {
   switch (blockType) {
     case "hero":
+      return "hero";
     case "text":
+      return "text";
     case "image":
+      return "image";
     case "button":
+      return "button";
     case "grid":
-      return blockType;
+      return "grid";
     default:
       return "text";
   }

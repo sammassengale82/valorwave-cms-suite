@@ -1,7 +1,5 @@
 // src/canvas/CanvasState.ts
 import { create } from "zustand";
-import { loadTemplateFiles } from "./templateLoader";
-import { templatesToTree } from "./templateMapper";
 
 export type BlockType = "hero" | "text" | "image" | "button" | "grid";
 
@@ -9,6 +7,7 @@ export type Node = {
   id: string;
   type: "Section" | "Block";
   blockType?: BlockType;
+  templateType?: string; // original template node type (e.g. "text", "image", "faq", "calendar")
   children?: Node[];
 
   content?: {
@@ -72,11 +71,8 @@ type CanvasState = {
   deleteSelected: () => void;
 };
 
-const initialTemplates = loadTemplateFiles();
-const initialTree = templatesToTree(initialTemplates);
-
 export const useCanvasState = create<CanvasState>((set, get) => ({
-  tree: initialTree,
+  tree: [],
 
   setTree: (tree) => set({ tree }),
 
