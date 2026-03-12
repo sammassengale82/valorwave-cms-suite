@@ -1,6 +1,6 @@
 import React from "react";
 import { useTheme } from "./ThemeManager";
-import themeConfig from "./theme-config.json";
+import themeConfig from "../../theme-config.json";
 
 export default function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import themeConfig from "./theme-config.json";
+import themeConfig from "../../theme-config.json";
 
 type ThemeName = keyof typeof themeConfig;
 

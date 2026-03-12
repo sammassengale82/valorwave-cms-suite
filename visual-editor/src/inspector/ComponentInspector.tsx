@@ -1,55 +1,127 @@
+// src/inspector/ContentInspector.tsx
 import React from "react";
-import { useCanvasState } from "../canvas/CanvasState";
+import { useCanvasState, Node } from "../canvas/CanvasState";
 
-export default function ComponentInspector() {
-  const tree = useCanvasState((s) => s.tree);
+export default function ContentInspector() {
   const selectedIds = useCanvasState((s) => s.selectedIds);
-  const updateContent = useCanvasState((s) => s.updateContent);
+  const tree = useCanvasState((s) => s.tree);
+  const setTree = useCanvasState((s) => s.setTree);
 
-  if (selectedIds.length !== 1) {
+  const nodes = findNodes(tree, selectedIds);
+
+  if (nodes.length === 0) {
+    return <div className="content-inspector empty">No selection</div>;
+  }
+
+  const sharedFields = getSharedContentFields(nodes);
+
+  if (sharedFields.length === 0) {
     return (
-      <div className="inspector-empty">
-        Select a single block to edit component properties.
+      <div className="content-inspector empty">
+        No shared content fields across selected blocks
       </div>
     );
   }
 
-  const id = selectedIds[0];
+  function updateField(field: keyof NonNullable<Node["content"]>, value: string) {
+    const newTree = structuredClone(tree) as Node[];
 
-  function findNode(nodes: any[]): any | null {
-    for (const n of nodes) {
-      if (n.id === id) return n;
-      const child = findNode(n.children || []);
-      if (child) return child;
-    }
-    return null;
+    selectedIds.forEach((id) => {
+      const node = findNode(newTree, id);
+      if (!node) return;
+      if (!node.content) node.content = {};
+      (node.content as any)[field] = value;
+    });
+
+    setTree(newTree);
   }
 
-  const node = findNode(tree);
-  if (!node) return null;
-
-  const props = node.props || {};
-
-  function updateProp(key: string, value: any) {
-    updateContent(id, key, value);
+  function getValue(field: keyof NonNullable<Node["content"]>): string {
+    const values = nodes.map((n) => n.content?.[field]);
+    const unique = [...new Set(values)];
+    if (unique.length === 1) {
+      return (unique[0] as string) ?? "";
+    }
+    return "";
   }
 
   return (
-    <div className="component-inspector">
-      {Object.keys(props).length === 0 && (
-        <div className="inspector-empty">No component props</div>
-      )}
-
-      {Object.entries(props).map(([key, value]) => (
-        <div key={key} className="component-row">
-          <label>{key}</label>
-          <input
-            type="text"
-            value={value}
-            onChange={(e) => updateProp(key, e.target.value)}
+    <div className="content-inspector">
+      {sharedFields.includes("text") && (
+        <div className="inspector-field">
+          <label>Text</label>
+          <textarea
+            value={getValue("text")}
+            onChange={(e) => updateField("text", e.target.value)}
           />
         </div>
-      ))}
+      )}
+
+      {sharedFields.includes("imageUrl") && (
+        <div className="inspector-field">
+          <label>Image URL</label>
+          <input
+            type="text"
+            value={getValue("imageUrl")}
+            onChange={(e) => updateField("imageUrl", e.target.value)}
+          />
+        </div>
+      )}
+
+      {sharedFields.includes("buttonLabel") && (
+        <div className="inspector-field">
+          <label>Button Label</label>
+          <input
+            type="text"
+            value={getValue("buttonLabel")}
+            onChange={(e) => updateField("buttonLabel", e.target.value)}
+          />
+        </div>
+      )}
+
+      {sharedFields.includes("buttonHref") && (
+        <div className="inspector-field">
+          <label>Button Link</label>
+          <input
+            type="text"
+            value={getValue("buttonHref")}
+            onChange={(e) => updateField("buttonHref", e.target.value)}
+          />
+        </div>
+      )}
     </div>
+  );
+}
+
+function findNodes(tree: Node[], ids: string[]): Node[] {
+  const out: Node[] = [];
+  ids.forEach((id) => {
+    const n = findNode(tree, id);
+    if (n) out.push(n);
+  });
+  return out;
+}
+
+function findNode(nodes: Node[], id: string): Node | null {
+  for (const n of nodes) {
+    if (n.id === id) return n;
+    if (n.children) {
+      const found = findNode(n.children, id);
+      if (found) return found;
+    }
+  }
+  return null;
+}
+
+function getSharedContentFields(nodes: Node[]): (keyof NonNullable<Node["content"]>)[] {
+  const allFields: (keyof NonNullable<Node["content"]>)[] = [
+    "text",
+    "imageUrl",
+    "buttonLabel",
+    "buttonHref",
+  ];
+
+  return allFields.filter((field) =>
+    nodes.every((n) => n.content && field in n.content!)
   );
 }

@@ -1,147 +1,79 @@
-import React, { useState, useRef, useEffect } from "react";
+// src/canvas/SelectionMarquee.tsx
+import React, { useState } from "react";
 import { useCanvasState } from "./CanvasState";
 
-export default function SelectionMarquee({ getBlockRects }: any) {
-  const selectOne = useCanvasState((s) => s.selectOne);
-  const selectMultiple = useCanvasState((s) => s.selectMultiple);
-  const toggleSelect = useCanvasState((s) => s.toggleSelect);
-  const selectedIds = useCanvasState((s) => s.selectedIds);
+type Rect = { x: number; y: number; w: number; h: number };
 
-  const [dragging, setDragging] = useState(false);
-  const [start, setStart] = useState({ x: 0, y: 0 });
-  const [rect, setRect] = useState({ x: 0, y: 0, w: 0, h: 0 });
+type SelectionMarqueeProps = {
+  canvasRef: React.RefObject<HTMLElement>;
+};
 
-  const marqueeRef = useRef<HTMLDivElement>(null);
+export default function SelectionMarquee({ canvasRef }: SelectionMarqueeProps) {
+  const [rect, setRect] = useState<Rect | null>(null);
+  const setSelectedIds = useCanvasState((s) => s.setSelectedIds);
 
-  // ------------------------------------------------------------
-  // Begin drag
-  // ------------------------------------------------------------
-  function handleMouseDown(e: React.MouseEvent) {
-    // Only start marquee if clicking empty canvas space
-    if ((e.target as HTMLElement).closest(".block-wrapper")) return;
+  function onMouseDown(e: React.MouseEvent) {
+    if (e.button !== 0) return;
 
-    const x = e.clientX;
-    const y = e.clientY;
+    const startX = e.clientX;
+    const startY = e.clientY;
 
-    setStart({ x, y });
-    setRect({ x, y, w: 0, h: 0 });
-    setDragging(true);
-
-    // If not holding shift or cmd, clear selection
-    const isMac = navigator.platform.toUpperCase().includes("MAC");
-    const mod = isMac ? e.metaKey : e.ctrlKey;
-
-    if (!e.shiftKey && !mod) {
-      selectMultiple([]);
+    function onMove(ev: MouseEvent) {
+      const x = Math.min(startX, ev.clientX);
+      const y = Math.min(startY, ev.clientY);
+      const w = Math.abs(ev.clientX - startX);
+      const h = Math.abs(ev.clientY - startY);
+      setRect({ x, y, w, h });
     }
-  }
 
-  // ------------------------------------------------------------
-  // Dragging
-  // ------------------------------------------------------------
-  function handleMouseMove(e: MouseEvent) {
-    if (!dragging) return;
+    function onUp() {
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseup", onUp);
 
-    const x = Math.min(e.clientX, start.x);
-    const y = Math.min(e.clientY, start.y);
-    const w = Math.abs(e.clientX - start.x);
-    const h = Math.abs(e.clientY - start.y);
-
-    setRect({ x, y, w, h });
-  }
-
-  // ------------------------------------------------------------
-  // End drag → compute selection
-  // ------------------------------------------------------------
-  function handleMouseUp() {
-    if (!dragging) return;
-
-    setDragging(false);
-
-    const marquee = {
-      left: rect.x,
-      right: rect.x + rect.w,
-      top: rect.y,
-      bottom: rect.y + rect.h,
-    };
-
-    const blockRects = getBlockRects(); // Provided by parent canvas
-
-    const isMac = navigator.platform.toUpperCase().includes("MAC");
-    const mod = isMac ? window.event?.metaKey : window.event?.ctrlKey;
-    const shift = window.event?.shiftKey;
-
-    let newSelection = [...selectedIds];
-
-    for (const { id, rect: r } of blockRects) {
-      const intersects =
-        r.left < marquee.right &&
-        r.right > marquee.left &&
-        r.top < marquee.bottom &&
-        r.bottom > marquee.top;
-
-      if (intersects) {
-        if (shift) {
-          // Add to selection
-          if (!newSelection.includes(id)) newSelection.push(id);
-        } else if (mod) {
-          // Toggle selection
-          if (newSelection.includes(id)) {
-            newSelection = newSelection.filter((x) => x !== id);
-          } else {
-            newSelection.push(id);
-          }
-        } else {
-          // Replace selection
-          newSelection.push(id);
-        }
+      if (rect && canvasRef.current) {
+        const ids = computeHits(rect, canvasRef.current);
+        setSelectedIds(ids);
       }
+
+      setRect(null);
     }
 
-    selectMultiple(Array.from(new Set(newSelection)));
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseup", onUp);
   }
 
-  // ------------------------------------------------------------
-  // Global listeners
-  // ------------------------------------------------------------
-  useEffect(() => {
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
+  return (
+    <>
+      <div className="selection-marquee-layer" onMouseDown={onMouseDown} />
+      {rect && (
+        <div
+          className="selection-marquee"
+          style={{
+            left: rect.x,
+            top: rect.y,
+            width: rect.w,
+            height: rect.h,
+          }}
+        />
+      )}
+    </>
+  );
+}
 
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-    };
+function computeHits(rect: Rect, canvas: HTMLElement): string[] {
+  const hits: string[] = [];
+  const blocks = canvas.querySelectorAll("[data-block-id]");
+
+  blocks.forEach((el: any) => {
+    const r = el.getBoundingClientRect();
+    const intersects =
+      r.left < rect.x + rect.w &&
+      r.right > rect.x &&
+      r.top < rect.y + rect.h &&
+      r.bottom > rect.y;
+
+    if (intersects && el.dataset.blockId) hits.push(el.dataset.blockId);
   });
 
-  // ------------------------------------------------------------
-  // Render marquee
-  // ------------------------------------------------------------
-  return dragging ? (
-    <div
-      ref={marqueeRef}
-      className="selection-marquee"
-      style={{
-        position: "fixed",
-        left: rect.x,
-        top: rect.y,
-        width: rect.w,
-        height: rect.h,
-        background: "rgba(0, 120, 255, 0.15)",
-        border: "1px solid rgba(0, 120, 255, 0.5)",
-        pointerEvents: "none",
-        zIndex: 9999,
-      }}
-    />
-  ) : (
-    <div
-      className="selection-marquee-hitbox"
-      onMouseDown={handleMouseDown}
-      style={{
-        position: "absolute",
-        inset: 0,
-        zIndex: 1,
-      }}
-    />
-  );
+  return hits;
 }
