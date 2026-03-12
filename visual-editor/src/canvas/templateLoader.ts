@@ -2,7 +2,7 @@
 import type { TemplateFile } from "./templateTypes";
 
 export function loadTemplateFiles(): Record<string, TemplateFile> {
-  const modules = import.meta.glob("/repo/templates/**/*.json", {
+  const modules = import.meta.glob("/templates/**/*.json", {
     eager: true,
   });
 
