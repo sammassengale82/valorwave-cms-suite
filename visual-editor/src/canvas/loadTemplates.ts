@@ -4,7 +4,7 @@ import { cmsTemplatesToTree } from "./cmsConverters";
 import type { Node } from "./CanvasState";
 
 export function loadTemplatesToTree(): Node[] {
-  const modules = import.meta.glob("/templates/**/*.json", { eager: true });
+  const modules = import.meta.glob("/src/templates/**/*.json", { eager: true });
 
   const templates: CmsTemplate[] = [];
 
