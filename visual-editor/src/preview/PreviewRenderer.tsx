@@ -1,9 +1,11 @@
 import React, { useEffect, useRef } from "react";
+import { createRoot } from "react-dom/client";
 import { useEditorState } from "../state/EditorState";
+import BlockRenderer from "../canvas/BlockRenderer";
 import { AnimationEngine } from "../animations/AnimationEngine";
 import "../animations/animation-styles.css";
 
-export default function PreviewRenderer({ html }: { html: string }) {
+export default function PreviewRenderer({ tree }: { tree: any }) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const previewActive = useEditorState((s) => s.previewActive);
 
@@ -16,11 +18,14 @@ export default function PreviewRenderer({ html }: { html: string }) {
     const doc = iframe.contentDocument;
     if (!doc) return;
 
-    // Inject HTML into iframe
+    //
+    // 1. Write base HTML into iframe
+    //
     doc.open();
     doc.write(`
       <html>
         <head>
+          <link rel="stylesheet" href="/styles/site.css" />
           <style>
             body {
               margin: 0;
@@ -30,29 +35,33 @@ export default function PreviewRenderer({ html }: { html: string }) {
             }
           </style>
         </head>
-        <body>${html}</body>
+        <body>
+          <div id="preview-root"></div>
+        </body>
       </html>
     `);
     doc.close();
 
-    // Wait for DOM to be ready
-    const runEngine = () => {
-      try {
-        // Inject animation CSS
-        const style = doc.createElement("style");
-        style.textContent = require("../animations/animation-styles.css").default;
-        doc.head.appendChild(style);
+    //
+    // 2. Mount React into iframe
+    //
+    const mountPoint = doc.getElementById("preview-root");
+    if (!mountPoint) return;
 
-        // Run animation engine inside iframe
-        AnimationEngine.init();
+    const root = createRoot(mountPoint);
+    root.render(<BlockRenderer node={tree} />);
+
+    //
+    // 3. Initialize animations inside iframe
+    //
+    setTimeout(() => {
+      try {
+        AnimationEngine.init(doc);
       } catch (err) {
         console.error("Preview animation engine error:", err);
       }
-    };
-
-    // Delay ensures DOM is fully parsed
-    setTimeout(runEngine, 50);
-  }, [previewActive, html]);
+    }, 50);
+  }, [previewActive, tree]);
 
   return (
     <iframe
