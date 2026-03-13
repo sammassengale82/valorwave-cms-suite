@@ -1,4 +1,3 @@
-// src/canvas/BlockRenderer.tsx
 import React from "react";
 import type { Node } from "./CanvasState";
 
@@ -8,28 +7,18 @@ type Props = {
 
 export default function BlockRenderer({ node }: Props) {
   if (node.type === "Section") {
-    const style = node.style ?? {};
-    const layout = node.layout ?? {};
+    // HERO: render as real hero header
+    if (node.templateId === "hero" || node.templateName === "Hero") {
+      return renderHeroSection(node);
+    }
 
-    const title =
-      node.templateName ||
-      node.templateCategory ||
-      node.templateId ||
-      node.id;
-
+    // Default section wrapper (matches your <section> layout)
     return (
       <section
-        className="ve-section"
-        style={{ ...style, ...layout }}
+        id={node.templateId}
+        data-theme-scope="all"
+        style={{ ...(node.style ?? {}), ...(node.layout ?? {}) }}
       >
-        <div className="ve-section-header">
-          <span className="ve-section-title">{title}</span>
-          {node.templateCategory && (
-            <span className="ve-section-category">
-              {node.templateCategory}
-            </span>
-          )}
-        </div>
         {node.children?.map((child) => (
           <BlockRenderer key={child.id} node={child} />
         ))}
@@ -37,20 +26,81 @@ export default function BlockRenderer({ node }: Props) {
     );
   }
 
+  // Non-section blocks
+  return renderBlock(node);
+}
+
+function renderHeroSection(node: Node) {
+  const children = node.children ?? [];
+
+  const logo = children.find((c) => c.id === "hero-logo");
+  const kicker = children.find((c) => c.id === "hero-kicker");
+  const headline = children.find((c) => c.id === "hero-headline");
+  const tagline = children.find((c) => c.id === "hero-tagline");
+  const subline = children.find((c) => c.id === "hero-subline");
+  const cta = children.find((c) => c.id === "hero-cta");
+
+  return (
+    <header className="hero" data-theme-scope="all">
+      <div className="hero-inner">
+        {headline && (
+          <h1 className="hero-h1">
+            {headline.content?.text ?? ""}
+          </h1>
+        )}
+
+        {logo && (
+          <img
+            className="hero-logo"
+            src={logo.content?.imageUrl ?? "/logo.png"}
+            alt={logo.content?.alt ?? "Valor Wave Entertainment"}
+          />
+        )}
+
+        {kicker && (
+          <div className="kicker">
+            {kicker.content?.text ?? ""}
+          </div>
+        )}
+
+        {tagline && (
+          <div className="tagline">
+            {tagline.content?.text ?? ""}
+          </div>
+        )}
+
+        {subline && (
+          <div className="subline">
+            {subline.content?.text ?? ""}
+          </div>
+        )}
+
+        {cta && (
+          <a
+            className="btn"
+            href={cta.content?.buttonHref ?? "#"}
+          >
+            {cta.content?.buttonLabel ?? cta.content?.text ?? "Request a Quote"}
+          </a>
+        )}
+      </div>
+    </header>
+  );
+}
+
+function renderBlock(node: Node) {
   const style = node.style ?? {};
   const layout = node.layout ?? {};
-  const typeLabel = (node.templateType || node.blockType || "block").toUpperCase();
+  const id = node.id ?? "";
 
   // IMAGE
   if (node.templateType === "image" || node.blockType === "image") {
     return (
-      <div className="ve-image-block" style={{ ...style, ...layout }}>
-        <div className="ve-block-meta">{typeLabel}</div>
-        <img
-          src={node.content?.imageUrl ?? ""}
-          alt={node.content?.alt ?? ""}
-        />
-      </div>
+      <img
+        src={node.content?.imageUrl ?? ""}
+        alt={node.content?.alt ?? ""}
+        style={{ ...style, ...layout }}
+      />
     );
   }
 
@@ -61,25 +111,55 @@ export default function BlockRenderer({ node }: Props) {
     const href = node.content?.buttonHref ?? "#";
 
     return (
-      <div className="ve-button-block" style={{ ...style, ...layout }}>
-        <div className="ve-block-meta">{typeLabel}</div>
-        <a href={href} className="ve-button">
-          {label}
-        </a>
+      <a
+        href={href}
+        className="btn"
+        style={{ ...style, ...layout }}
+      >
+        {label}
+      </a>
+    );
+  }
+
+  // TEXT → choose correct tag based on id
+  const text = node.content?.text ?? "";
+
+  if (id.endsWith("-heading")) {
+    return (
+      <h2 style={{ ...style, ...layout }}>
+        {text}
+      </h2>
+    );
+  }
+
+  if (id.endsWith("-title")) {
+    return (
+      <h3 style={{ ...style, ...layout }}>
+        {text}
+      </h3>
+    );
+  }
+
+  if (id === "bio-name" || id.endsWith("bio-name")) {
+    return (
+      <div className="bio-name" style={{ ...style, ...layout }}>
+        {text}
       </div>
     );
   }
 
-  // TEXT (default)
+  if (id === "service-area-text" || id.includes("service-area")) {
+    return (
+      <p className="service-area" style={{ ...style, ...layout }}>
+        {text}
+      </p>
+    );
+  }
+
+  // Default paragraph
   return (
-    <div className="ve-text-block" style={{ ...style, ...layout }}>
-      <div className="ve-block-meta">{typeLabel}</div>
-      <div
-        className="ve-text"
-        dangerouslySetInnerHTML={{
-          __html: node.content?.text ?? "",
-        }}
-      />
-    </div>
+    <p style={{ ...style, ...layout }}>
+      {text}
+    </p>
   );
 }
