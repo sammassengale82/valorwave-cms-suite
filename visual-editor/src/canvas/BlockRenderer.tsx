@@ -1,86 +1,81 @@
 import React from "react";
-import type { Node } from "./CanvasState";
+import type { Node } from "../state/CanvasState";
 
-type Props = {
-  node: Node;
-};
+export default function BlockRenderer({ node }: { node: Node }) {
+  if (!node) return null;
 
-export default function BlockRenderer({ node }: Props) {
-  if (node.type === "Section") {
-    // HERO: render as real hero header
-    if (node.templateId === "hero" || node.templateName === "Hero") {
-      return renderHeroSection(node);
+  // SECTION ROUTING
+  if (node.type === "section") {
+    switch (node.templateId) {
+      case "hero":
+        return renderHero(node);
+      case "services":
+        return renderServices(node);
+      case "service-area":
+        return renderServiceArea(node);
+      case "bio":
+        return renderBio(node);
+      case "wedding-dj":
+        return renderWeddingDJ(node);
+      case "faq":
+        return renderFAQ(node);
+      case "brand-meaning":
+        return renderBrandMeaning(node);
+      case "hero-discount":
+        return renderHeroDiscount(node);
+      case "calendar":
+        return renderCalendar(node);
+      case "testimonial-form":
+        return renderTestimonialForm(node);
+      case "testimonials":
+        return renderTestimonials(node);
+      case "footer":
+        return renderFooter(node);
+      default:
+        return renderGenericSection(node);
     }
-
-    // Default section wrapper (matches your <section> layout)
-    return (
-      <section
-        id={node.templateId}
-        data-theme-scope="all"
-        style={{ ...(node.style ?? {}), ...(node.layout ?? {}) }}
-      >
-        {node.children?.map((child) => (
-          <BlockRenderer key={child.id} node={child} />
-        ))}
-      </section>
-    );
   }
 
-  // Non-section blocks
+  // BLOCK ROUTING
   return renderBlock(node);
 }
 
-function renderHeroSection(node: Node) {
-  const children = node.children ?? [];
+//
+// ─────────────────────────────────────────────
+//   SECTION RENDERERS
+// ─────────────────────────────────────────────
+//
 
-  const logo = children.find((c) => c.id === "hero-logo");
-  const kicker = children.find((c) => c.id === "hero-kicker");
-  const headline = children.find((c) => c.id === "hero-headline");
-  const tagline = children.find((c) => c.id === "hero-tagline");
-  const subline = children.find((c) => c.id === "hero-subline");
-  const cta = children.find((c) => c.id === "hero-cta");
+function renderGenericSection(node: Node) {
+  return (
+    <section id={node.templateId} data-theme-scope="all">
+      {node.children?.map((child) => (
+        <BlockRenderer key={child.id} node={child} />
+      ))}
+    </section>
+  );
+}
+
+function renderHero(node: Node) {
+  const c = childMap(node);
 
   return (
     <header className="hero" data-theme-scope="all">
       <div className="hero-inner">
-        {headline && (
-          <h1 className="hero-h1">
-            {headline.content?.text ?? ""}
-          </h1>
-        )}
-
-        {logo && (
+        {c["hero-h1"] && <h1 className="hero-h1">{c["hero-h1"].content?.text}</h1>}
+        {c["hero-logo"] && (
           <img
             className="hero-logo"
-            src={logo.content?.imageUrl ?? "/logo.png"}
-            alt={logo.content?.alt ?? "Valor Wave Entertainment"}
+            src={c["hero-logo"].content?.imageUrl}
+            alt="Valor Wave Entertainment"
           />
         )}
-
-        {kicker && (
-          <div className="kicker">
-            {kicker.content?.text ?? ""}
-          </div>
-        )}
-
-        {tagline && (
-          <div className="tagline">
-            {tagline.content?.text ?? ""}
-          </div>
-        )}
-
-        {subline && (
-          <div className="subline">
-            {subline.content?.text ?? ""}
-          </div>
-        )}
-
-        {cta && (
-          <a
-            className="btn"
-            href={cta.content?.buttonHref ?? "#"}
-          >
-            {cta.content?.buttonLabel ?? cta.content?.text ?? "Request a Quote"}
+        {c["hero-kicker"] && <div className="kicker">{c["hero-kicker"].content?.text}</div>}
+        {c["hero-tagline"] && <div className="tagline">{c["hero-tagline"].content?.text}</div>}
+        {c["hero-subline"] && <div className="subline">{c["hero-subline"].content?.text}</div>}
+        {c["hero-cta"] && (
+          <a className="btn" href={c["hero-cta"].content?.buttonHref}>
+            {c["hero-cta"].content?.buttonLabel}
           </a>
         )}
       </div>
@@ -88,78 +83,193 @@ function renderHeroSection(node: Node) {
   );
 }
 
+function renderServices(node: Node) {
+  return (
+    <section id="services" data-theme-scope="all">
+      {node.children?.map((child) => (
+        <BlockRenderer key={child.id} node={child} />
+      ))}
+    </section>
+  );
+}
+
+function renderServiceArea(node: Node) {
+  return (
+    <section id="service-area" data-theme-scope="all">
+      {node.children?.map((child) => (
+        <BlockRenderer key={child.id} node={child} />
+      ))}
+    </section>
+  );
+}
+
+function renderBio(node: Node) {
+  return (
+    <section id="bio" data-theme-scope="all">
+      <h2>{getChild(node, "bio-heading")}</h2>
+      <div className="bio-wrap">
+        {node.children?.map((child) => (
+          <BlockRenderer key={child.id} node={child} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function renderWeddingDJ(node: Node) {
+  return (
+    <section id="chattanooga-wedding-dj" data-theme-scope="all">
+      {node.children?.map((child) => (
+        <BlockRenderer key={child.id} node={child} />
+      ))}
+    </section>
+  );
+}
+
+function renderFAQ(node: Node) {
+  return (
+    <section id="faq" data-theme-scope="all">
+      <h2>{getChild(node, "faq-heading")}</h2>
+      <div className="bio-wrap">
+        {node.children
+          ?.filter((c) => c.id.startsWith("faq-"))
+          .map((child) => (
+            <BlockRenderer key={child.id} node={child} />
+          ))}
+      </div>
+    </section>
+  );
+}
+
+function renderBrandMeaning(node: Node) {
+  return (
+    <section id="brand-meaning" data-theme-scope="all">
+      <h2>{getChild(node, "brand-meaning-heading")}</h2>
+      <div className="bio-wrap">
+        {node.children?.map((child) => (
+          <BlockRenderer key={child.id} node={child} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function renderHeroDiscount(node: Node) {
+  return (
+    <section id="hero-discount" data-theme-scope="all">
+      <h2>{getChild(node, "hero-discount-heading")}</h2>
+      <div className="bio-wrap">
+        {node.children?.map((child) => (
+          <BlockRenderer key={child.id} node={child} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function renderCalendar(node: Node) {
+  return (
+    <section id="calendar" data-theme-scope="all">
+      {node.children?.map((child) => (
+        <BlockRenderer key={child.id} node={child} />
+      ))}
+    </section>
+  );
+}
+
+function renderTestimonialForm(node: Node) {
+  return (
+    <section id="submit-testimonial" data-theme-scope="all">
+      {node.children?.map((child) => (
+        <BlockRenderer key={child.id} node={child} />
+      ))}
+    </section>
+  );
+}
+
+function renderTestimonials(node: Node) {
+  return (
+    <section id="testimonials" data-theme-scope="all">
+      <h2>{getChild(node, "testimonial-heading")}</h2>
+      <div className="testimonial-scroll">
+        {node.children?.map((child) => (
+          <BlockRenderer key={child.id} node={child} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function renderFooter(node: Node) {
+  return (
+    <footer data-theme-scope="all">
+      {node.children?.map((child) => (
+        <BlockRenderer key={child.id} node={child} />
+      ))}
+    </footer>
+  );
+}
+
+//
+// ─────────────────────────────────────────────
+//   BLOCK RENDERER
+// ─────────────────────────────────────────────
+//
+
 function renderBlock(node: Node) {
-  const style = node.style ?? {};
-  const layout = node.layout ?? {};
-  const id = node.id ?? "";
-
-  // IMAGE
-  if (node.templateType === "image" || node.blockType === "image") {
-    return (
-      <img
-        src={node.content?.imageUrl ?? ""}
-        alt={node.content?.alt ?? ""}
-        style={{ ...style, ...layout }}
-      />
-    );
-  }
-
-  // BUTTON
-  if (node.templateType === "button" || node.blockType === "button") {
-    const label =
-      node.content?.buttonLabel ?? node.content?.text ?? "Button";
-    const href = node.content?.buttonHref ?? "#";
-
-    return (
-      <a
-        href={href}
-        className="btn"
-        style={{ ...style, ...layout }}
-      >
-        {label}
-      </a>
-    );
-  }
-
-  // TEXT → choose correct tag based on id
   const text = node.content?.text ?? "";
 
-  if (id.endsWith("-heading")) {
-    return (
-      <h2 style={{ ...style, ...layout }}>
-        {text}
-      </h2>
-    );
-  }
+  switch (node.type) {
+    case "text":
+      return <p dangerouslySetInnerHTML={{ __html: text }} />;
 
-  if (id.endsWith("-title")) {
-    return (
-      <h3 style={{ ...style, ...layout }}>
-        {text}
-      </h3>
-    );
-  }
+    case "image":
+      return <img src={node.content?.imageUrl} alt={node.content?.alt ?? ""} />;
 
-  if (id === "bio-name" || id.endsWith("bio-name")) {
-    return (
-      <div className="bio-name" style={{ ...style, ...layout }}>
-        {text}
-      </div>
-    );
-  }
+    case "button":
+      return (
+        <a className="btn" href={node.content?.buttonHref}>
+          {node.content?.buttonLabel}
+        </a>
+      );
 
-  if (id === "service-area-text" || id.includes("service-area")) {
-    return (
-      <p className="service-area" style={{ ...style, ...layout }}>
-        {text}
-      </p>
-    );
-  }
+    case "card":
+      return (
+        <div className="card">
+          <div className="card-body">
+            {node.children?.map((child) => (
+              <BlockRenderer key={child.id} node={child} />
+            ))}
+          </div>
+        </div>
+      );
 
-  // Default paragraph
-  return (
-    <p style={{ ...style, ...layout }}>
-      {text}
-    </p>
-  );
+    case "container":
+      return (
+        <div style={node.styles?.desktop ?? {}}>
+          {node.children?.map((child) => (
+            <BlockRenderer key={child.id} node={child} />
+          ))}
+        </div>
+      );
+
+    default:
+      return null;
+  }
+}
+
+//
+// ─────────────────────────────────────────────
+//   HELPERS
+// ─────────────────────────────────────────────
+//
+
+function childMap(node: Node) {
+  const map: Record<string, Node> = {};
+  node.children?.forEach((c) => (map[c.id] = c));
+  return map;
+}
+
+function getChild(node: Node, id: string) {
+  return node.children?.find((c) => c.id === id)?.content?.text ?? "";
 }
