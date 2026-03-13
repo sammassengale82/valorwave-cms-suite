@@ -1,20 +1,19 @@
 import { create } from "zustand";
 
 interface EditorState {
-  device: "desktop" | "tablet" | "mobile";
   preview: boolean;
-
-  setDevice: (d: "desktop" | "tablet" | "mobile") => void;
   enterPreview: () => void;
   exitPreview: () => void;
+
+  selectedNodeId: string | null;
+  selectSingle: (id: string | null) => void;
 }
 
 export const useEditorState = create<EditorState>((set) => ({
-  device: "desktop",
   preview: false,
-
-  setDevice: (d) => set({ device: d }),
-
   enterPreview: () => set({ preview: true }),
-  exitPreview: () => set({ preview: false })
+  exitPreview: () => set({ preview: false }),
+
+  selectedNodeId: null,
+  selectSingle: (id) => set({ selectedNodeId: id }),
 }));

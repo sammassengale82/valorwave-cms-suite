@@ -1,7 +1,13 @@
-import create from "zustand";
+import { create } from "zustand";
 
-export const usePreviewState = create((set) => ({
-  mode: "editor", // editor | preview | desktop | tablet | mobile
+export type PreviewMode = "editor" | "desktop" | "tablet" | "mobile";
 
-  setMode: (mode: string) => set({ mode }),
+interface PreviewState {
+  mode: PreviewMode;
+  setMode: (mode: PreviewMode) => void;
+}
+
+export const usePreviewState = create<PreviewState>((set) => ({
+  mode: "editor",
+  setMode: (mode) => set({ mode }),
 }));

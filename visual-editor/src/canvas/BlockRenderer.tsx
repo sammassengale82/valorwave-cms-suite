@@ -1,43 +1,75 @@
 import React from "react";
-import type { Node } from "../state/CanvasState";
+import type { Node } from "../canvas/CanvasState";
+import { useEditorState } from "../state/EditorState";
 
 export default function BlockRenderer({ node }: { node: Node }) {
+  const selectSingle = useEditorState((s) => s.selectSingle);
+  const selectedIds = useEditorState((s) => s.selectedIds || []);
+  const isSelected = selectedIds.includes(node.id);
+
   if (!node) return null;
 
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    selectSingle(node.id);
+  };
+
+  const highlight: React.CSSProperties = isSelected
+    ? { outline: "2px solid #38bdf8", outlineOffset: "2px" }
+    : {};
+
   // SECTION ROUTING
-  if (node.type === "section") {
-    switch (node.templateId) {
-      case "hero":
-        return renderHero(node);
-      case "services":
-        return renderServices(node);
-      case "service-area":
-        return renderServiceArea(node);
-      case "bio":
-        return renderBio(node);
-      case "wedding-dj":
-        return renderWeddingDJ(node);
-      case "faq":
-        return renderFAQ(node);
-      case "brand-meaning":
-        return renderBrandMeaning(node);
-      case "hero-discount":
-        return renderHeroDiscount(node);
-      case "calendar":
-        return renderCalendar(node);
-      case "testimonial-form":
-        return renderTestimonialForm(node);
-      case "testimonials":
-        return renderTestimonials(node);
-      case "footer":
-        return renderFooter(node);
-      default:
-        return renderGenericSection(node);
-    }
+  if (node.type === "Section") {
+    return (
+      <div data-node-id={node.id} onClick={handleClick} style={highlight}>
+        {renderSection(node)}
+      </div>
+    );
   }
 
   // BLOCK ROUTING
-  return renderBlock(node);
+  return (
+    <div data-node-id={node.id} onClick={handleClick} style={highlight}>
+      {renderBlock(node)}
+    </div>
+  );
+}
+
+//
+// ─────────────────────────────────────────────
+//   SECTION ROUTER
+// ─────────────────────────────────────────────
+//
+
+function renderSection(node: Node) {
+  switch (node.templateId) {
+    case "hero":
+      return renderHero(node);
+    case "services":
+      return renderServices(node);
+    case "service-area":
+      return renderServiceArea(node);
+    case "bio":
+      return renderBio(node);
+    case "wedding-dj":
+      return renderWeddingDJ(node);
+    case "faq":
+      return renderFAQ(node);
+    case "brand-meaning":
+      return renderBrandMeaning(node);
+    case "hero-discount":
+      return renderHeroDiscount(node);
+    case "calendar":
+      return renderCalendar(node);
+    case "testimonial-form":
+      return renderTestimonialForm(node);
+    case "testimonials":
+      return renderTestimonials(node);
+    case "footer":
+      return renderFooter(node);
+    default:
+      return renderGenericSection(node);
+  }
 }
 
 //
@@ -219,7 +251,7 @@ function renderFooter(node: Node) {
 function renderBlock(node: Node) {
   const text = node.content?.text ?? "";
 
-  switch (node.type) {
+  switch (node.templateType || node.type) {
     case "text":
       return <p dangerouslySetInnerHTML={{ __html: text }} />;
 
@@ -233,20 +265,9 @@ function renderBlock(node: Node) {
         </a>
       );
 
-    case "card":
-      return (
-        <div className="card">
-          <div className="card-body">
-            {node.children?.map((child) => (
-              <BlockRenderer key={child.id} node={child} />
-            ))}
-          </div>
-        </div>
-      );
-
     case "container":
       return (
-        <div style={node.styles?.desktop ?? {}}>
+        <div style={node.layout || {}}>
           {node.children?.map((child) => (
             <BlockRenderer key={child.id} node={child} />
           ))}

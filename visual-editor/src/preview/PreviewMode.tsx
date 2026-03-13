@@ -8,7 +8,6 @@ export default function PreviewMode() {
   const exitPreview = useEditorState((s) => s.exitPreview);
   const tree = useCanvasState((s) => s.tree);
 
-  // Escape key exits preview
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
       if (e.key === "Escape") exitPreview();
@@ -26,7 +25,7 @@ export default function PreviewMode() {
       </button>
 
       <div className="preview-content">
-        <PreviewRenderer nodes={tree.root} />
+        <PreviewRenderer tree={tree.root} />
       </div>
     </div>
   );
