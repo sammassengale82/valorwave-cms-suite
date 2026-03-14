@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { ThemeProvider } from "../themes/ThemeManager";
 import ThemeSwitcher from "../themes/ThemeSwitcher";
-import PreviewToolbar from "../editor/PreviewToolbar";
 import PreviewContainer from "../editor/PreviewContainer";
 import Canvas from "../canvas/Canvas";
 import InspectorPanel from "../inspector/InspectorPanel";
