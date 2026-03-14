@@ -19,6 +19,7 @@ export default function PreviewRenderer({ canvasTree }: any) {
     const root = createRoot(mount);
 
     const visualTree = compileToVisualTree(canvasTree);
+    console.log("VISUAL TREE:", JSON.stringify(visualTree, null, 2));
 
     root.render(
       <>
