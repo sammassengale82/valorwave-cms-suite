@@ -1,8 +1,18 @@
 import { toComponentName } from "./toComponentName";
 import { compileProps } from "./compileProps";
 
+const componentNameMap: Record<string, string> = {
+  "wedding-dj": "WeddingDJSection",
+  faq: "FAQSection",
+  seo: "SEOSection"
+};
+
 export function compileNode(node: any): any {
-  const component = toComponentName(node.templateId || "");
+  const templateId = node.templateId || "";
+
+  const component =
+    componentNameMap[templateId] ||
+    toComponentName(templateId);
 
   return {
     id: node.id,
