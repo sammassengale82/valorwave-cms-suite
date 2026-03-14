@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { createRoot } from "react-dom/client";
-import { usePreviewState } from "./PreviewState";
+import { usePreviewState } from "../editor/PreviewState";
 import { useCanvasState } from "../canvas/CanvasState";
 import BlockRenderer from "../canvas/BlockRenderer";
 import { AnimationEngine } from "../animations/AnimationEngine";

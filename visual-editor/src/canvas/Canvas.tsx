@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { useCanvasState, Node } from "./CanvasState";
 import SelectionMarquee from "./SelectionMarquee";
 import BlockWrapper from "./BlockWrapper";
-import BlockRenderer from "./BlockRenderer";
+import BlockRenderer from "../editor/BlockRenderer";
 
 export default function Canvas() {
   const tree = useCanvasState((s) => s.tree);

@@ -1,5 +1,5 @@
 import React from "react";
-import { usePreviewState } from "./PreviewState";
+import { usePreviewState } from "../editor/PreviewState";
 import { useCanvasState } from "../canvas/CanvasState";
 import PreviewRenderer from "./PreviewRenderer";
 
