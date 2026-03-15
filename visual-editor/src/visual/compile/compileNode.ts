@@ -1,22 +1,17 @@
 import { toComponentName } from "./toComponentName";
 import { compileProps } from "./compileProps";
 
-const componentNameMap: Record<string, string> = {
-  "wedding-dj": "WeddingDJSection",
-  faq: "FAQSection",
-  seo: "SEOSection"
-};
-
 export function compileNode(node: any): any {
   const templateId = node.templateId || "";
 
   const component =
-    componentNameMap[templateId] ||
-    toComponentName(templateId);
+    node.type === "section"
+      ? toComponentName(templateId)
+      : null;
 
   return {
     id: node.id,
-    type: node.type === "Section" ? "section" : "block",
+    type: node.type, // "section" | "block"
     component,
     props: compileProps(node),
     styles: node.styles || {},

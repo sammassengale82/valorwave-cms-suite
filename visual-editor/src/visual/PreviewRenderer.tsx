@@ -1,6 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { createRoot } from "react-dom/client";
-import SectionRenderer from "./render/SectionRenderer";
 import { compileToVisualTree } from "./compile/compileToVisualTree";
 
 export default function PreviewRenderer({ canvasTree }: any) {
@@ -12,23 +10,56 @@ export default function PreviewRenderer({ canvasTree }: any) {
 
     const doc = iframe.contentDocument!;
     doc.open();
-    doc.write(`<html><body><div id="root"></div></body></html>`);
+
+    doc.write(`
+  <html>
+    <head>
+      <link rel="stylesheet" href="/src/index.css" />
+    </head>
+    <body style="margin:0; padding:0;">
+      <div id="root"></div>
+
+      <script>
+        console.log("IFRAME HTML LOADED");
+      <\/script>
+
+      <script type="module">
+        console.log("IMPORTING IFRAME MAIN…");
+        import "/src/visual/iframe-main.tsx"
+          .then(() => console.log("IFRAME MAIN IMPORTED"))
+          .catch(err => console.error("IMPORT ERROR", err));
+      <\/script>
+    </body>
+  </html>
+`);
+
     doc.close();
 
-    const mount = doc.getElementById("root")!;
-    const root = createRoot(mount);
-
     const visualTree = compileToVisualTree(canvasTree);
-    console.log("VISUAL TREE:", JSON.stringify(visualTree, null, 2));
 
-    root.render(
-      <>
-        {visualTree.root.map((node: any) => (
-          <SectionRenderer key={node.id} node={node} />
-        ))}
-      </>
-    );
+    const interval = setInterval(() => {
+      const fn = iframe.contentWindow?.renderVisualTree;
+      console.log("CHECKING renderVisualTree:", fn);
+      if (fn) {
+        fn(visualTree);
+        clearInterval(interval);
+      }
+    }, 200);
+
+    return () => clearInterval(interval);
   }, [canvasTree]);
 
-  return <iframe ref={iframeRef} style={{ width: "100%", height: "100%" }} />;
+  return (
+    <iframe
+      ref={iframeRef}
+      src="about:blank"
+      sandbox="allow-scripts allow-same-origin"
+      style={{
+        width: "100%",
+        height: "100%",
+        border: "none",
+        display: "block"
+      }}
+    />
+  );
 }
