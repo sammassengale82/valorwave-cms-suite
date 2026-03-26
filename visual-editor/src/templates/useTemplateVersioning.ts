@@ -1,4 +1,4 @@
-import type { TemplateEntry } from "../../../templates";
+import type { TemplateEntry } from "../../../template";
 
 export function getTemplateVersionFromTemplate(t: TemplateEntry): number {
   return t.version || (t.data as any).version || 1;

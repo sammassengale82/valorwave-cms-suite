@@ -1,6 +1,6 @@
 import React from "react";
 import { useCanvasState } from "../canvas/CanvasState";
-import StyleInspector from "./StyleInspector";
+import StyleInspector from "./style/StyleInspector";
 import ContentInspector from "./ContentInspector";
 import ComponentInspector from "./ComponentInspector";
 import LayoutInspector from "./LayoutInspector";

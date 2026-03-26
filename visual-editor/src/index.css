@@ -1,3 +1,9 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .preview-toolbar {
   display: flex;
   gap: 8px;
@@ -28,11 +34,6 @@
   justify-content: center;
   align-items: flex-start;
   padding: 20px;
-}
-
-.preview-container.desktop iframe {
-  width: 1200px;
-  height: 800px;
 }
 
 .preview-container.tablet iframe {

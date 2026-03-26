@@ -1,38 +1,40 @@
 import { VisualNode } from "../canvas/VisualTree";
 
 export const SectionPresets: Record<string, VisualNode> = {
-  HeroSection: {
+  SEOSection: {
     id: "",
     type: "section",
-    component: "HeroSection",
+    component: "SEOSection",
     props: {
-      heading: "New Hero Heading",
-      tagline: "Your tagline here",
-      subline: "",
-      kicker: "",
-      logo: "",
-      ctaLabel: "Learn More",
-      ctaHref: "#"
+      metaTitle: "",
+      metaDescription: "",
+      metaKeywords: "",
+      ogTitle: "",
+      ogDescription: "",
+      ogImage: "",
+      twitterTitle: "",
+      twitterDescription: "",
+      twitterImage: "",
+      canonical: "",
+      robots: ""
     },
-    children: [],
-    styles: { desktop: { padding: "80px 40px" } }
+    styles: {},
+    animations: {},
+    children: []
   },
 
-  NavigationSection: {
+  GoogleSection: {
     id: "",
     type: "section",
-    component: "NavigationSection",
+    component: "GoogleSection",
     props: {
-      services: "Services",
-      availability: "Availability",
-      heroDiscount: "Hero Discount",
-      requestQuote: "Request Quote",
-      requestQuoteHref: "#",
-      clientPortal: "Client Portal",
-      clientPortalHref: "#"
+      analytics: "",
+      tagManager: "",
+      siteVerification: ""
     },
-    children: [],
-    styles: { desktop: {} }
+    styles: {},
+    animations: {},
+    children: []
   },
 
   HeaderSection: {
@@ -40,12 +42,37 @@ export const SectionPresets: Record<string, VisualNode> = {
     type: "section",
     component: "HeaderSection",
     props: {
-      logo: "",
-      brandText: "Brand Name",
-      socialLinks: ""
+      logoHeader: "",
+      brandText: "",
+      services: "",
+      availability: "",
+      heroDiscount: "",
+      requestQuote: "",
+      requestQuoteHref: "",
+      clientPortal: "",
+      clientPortalHref: ""
     },
-    children: [],
-    styles: { desktop: {} }
+    styles: {},
+    animations: {},
+    children: []
+  },
+
+  HeroSection: {
+    id: "",
+    type: "section",
+    component: "HeroSection",
+    props: {
+      logo: "",
+      kicker: "",
+      heading: "",
+      tagline: "",
+      subline: "",
+      ctaLabel: "",
+      ctaHref: ""
+    },
+    styles: {},
+    animations: {},
+    children: []
   },
 
   ServicesSection: {
@@ -53,25 +80,11 @@ export const SectionPresets: Record<string, VisualNode> = {
     type: "section",
     component: "ServicesSection",
     props: {
-      heading: "Our Services"
+      heading_services: ""
     },
-    children: [
-      {
-        id: "",
-        type: "block",
-        component: "ServiceCard",
-        props: { image: "", title: "Service 1", text: "" },
-        styles: { desktop: {} }
-      },
-      {
-        id: "",
-        type: "block",
-        component: "ServiceCard",
-        props: { image: "", title: "Service 2", text: "" },
-        styles: { desktop: {} }
-      }
-    ],
-    styles: { desktop: {} }
+    styles: {},
+    animations: {},
+    children: []
   },
 
   ServiceAreaSection: {
@@ -79,11 +92,12 @@ export const SectionPresets: Record<string, VisualNode> = {
     type: "section",
     component: "ServiceAreaSection",
     props: {
-      heading: "Service Area",
+      heading: "",
       text: ""
     },
-    children: [],
-    styles: { desktop: {} }
+    styles: {},
+    animations: {},
+    children: []
   },
 
   BioSection: {
@@ -91,15 +105,16 @@ export const SectionPresets: Record<string, VisualNode> = {
     type: "section",
     component: "BioSection",
     props: {
-      heading: "Meet the DJ",
+      heading: "",
       image: "",
       name: "",
       text1: "",
       text2: "",
       text3: ""
     },
-    children: [],
-    styles: { desktop: {} }
+    styles: {},
+    animations: {},
+    children: []
   },
 
   WeddingDJSection: {
@@ -107,8 +122,8 @@ export const SectionPresets: Record<string, VisualNode> = {
     type: "section",
     component: "WeddingDJSection",
     props: {
-      heading: "Wedding DJ",
-      intro: "",
+      heading: "",
+      intro_wdj: "",
       c1title: "",
       c1text: "",
       c2title: "",
@@ -116,8 +131,9 @@ export const SectionPresets: Record<string, VisualNode> = {
       c3title: "",
       c3text: ""
     },
-    children: [],
-    styles: { desktop: {} }
+    styles: {},
+    animations: {},
+    children: []
   },
 
   FAQSection: {
@@ -125,13 +141,14 @@ export const SectionPresets: Record<string, VisualNode> = {
     type: "section",
     component: "FAQSection",
     props: {
-      heading: "FAQ",
+      heading: "",
       faq1: "",
       faq2: "",
       faq3: ""
     },
-    children: [],
-    styles: { desktop: {} }
+    styles: {},
+    animations: {},
+    children: []
   },
 
   BrandMeaningSection: {
@@ -139,13 +156,14 @@ export const SectionPresets: Record<string, VisualNode> = {
     type: "section",
     component: "BrandMeaningSection",
     props: {
-      heading: "Brand Meaning",
+      heading: "",
       p1: "",
       p2: "",
       p3: ""
     },
-    children: [],
-    styles: { desktop: {} }
+    styles: {},
+    animations: {},
+    children: []
   },
 
   HeroDiscountSection: {
@@ -153,13 +171,14 @@ export const SectionPresets: Record<string, VisualNode> = {
     type: "section",
     component: "HeroDiscountSection",
     props: {
-      heading: "Hero Discount",
+      heading: "",
       subheading: "",
-      text1: "",
-      text2: ""
+      text1_hd: "",
+      text2_hd: ""
     },
-    children: [],
-    styles: { desktop: {} }
+    styles: {},
+    animations: {},
+    children: []
   },
 
   CalendarSection: {
@@ -167,14 +186,15 @@ export const SectionPresets: Record<string, VisualNode> = {
     type: "section",
     component: "CalendarSection",
     props: {
-      heading: "Availability Calendar",
+      heading: "",
       intro: "",
       note: "",
-      button: "Open Calendar",
-      buttonHref: "#"
+      button: "",
+      buttonHref: ""
     },
-    children: [],
-    styles: { desktop: {} }
+    styles: {},
+    animations: {},
+    children: []
   },
 
   TestimonialFormSection: {
@@ -182,18 +202,19 @@ export const SectionPresets: Record<string, VisualNode> = {
     type: "section",
     component: "TestimonialFormSection",
     props: {
-      heading: "Submit a Testimonial",
-      name: "",
-      email: "",
-      eventType: "",
-      date: "",
-      message: "",
-      permission: "",
-      submit: "Send",
-      footer: ""
+      heading: "",
+      name_tf: "",
+      email_tf: "",
+      eventType_tf: "",
+      date_tf: "",
+      message_tf: "",
+      permission_tf: "",
+      submit_tf: "",
+      footer_tf: ""
     },
-    children: [],
-    styles: { desktop: {} }
+    styles: {},
+    animations: {},
+    children: []
   },
 
   TestimonialsSection: {
@@ -201,7 +222,7 @@ export const SectionPresets: Record<string, VisualNode> = {
     type: "section",
     component: "TestimonialsSection",
     props: {
-      heading: "Testimonials",
+      heading: "",
       t1text: "",
       t1author: "",
       t2text: "",
@@ -209,8 +230,9 @@ export const SectionPresets: Record<string, VisualNode> = {
       t3text: "",
       t3author: ""
     },
-    children: [],
-    styles: { desktop: {} }
+    styles: {},
+    animations: {},
+    children: []
   },
 
   FooterSection: {
@@ -225,34 +247,8 @@ export const SectionPresets: Record<string, VisualNode> = {
       line4: "",
       socialLinks: ""
     },
-    children: [],
-    styles: { desktop: {} }
-  },
-
-  SEOSection: {
-    id: "",
-    type: "section",
-    component: "SEOSection",
-    props: {
-      metaTitle: "",
-      metaDescription: "",
-      metaKeywords: "",
-      ogTitle: "",
-      ogDescription: "",
-      ogImage: ""
-    },
-    children: [],
-    styles: { desktop: {} }
-  },
-
-  GoogleSection: {
-    id: "",
-    type: "section",
-    component: "GoogleSection",
-    props: {
-      analytics: ""
-    },
-    children: [],
-    styles: { desktop: {} }
+    styles: {},
+    animations: {},
+    children: []
   }
 };

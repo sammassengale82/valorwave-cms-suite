@@ -1,0 +1,249 @@
+{
+  "sections": [
+    {
+      "id": "header",
+      "type": "HeaderSection",
+      "props": {
+        "logo": "images/mini-logo.png",
+        "brandText": "Valor Wave Entertainment",
+        "services": "Services",
+        "availability": "Availability",
+        "heroDiscount": "Hero Discount",
+        "requestQuote": "Request a Quote",
+        "requestQuoteHref": "https://portal.valorwaveentertainment.com/request_information.asp?djidnumber=28542",
+        "clientPortal": "Client Portal",
+        "clientPortalHref": "https://portal.valorwaveentertainment.com/clientlogon.asp?djidnumber=28542",
+        "socialLinks": `
+          <a href="https://www.facebook.com/valorwaveentertainment" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2.4V12h2.4V9.8c0-2.4 1.4-3.7 3.6-3.7 1 0 2 .2 2 .2v2.2h-1.1c-1.1 0-1.4.7-1.4 1.4V12h2.5l-.4 2.9h-2.1v7A10 10 0 0 0 22 12z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/valorwaveentertainment/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z"/></svg>
+          </a>
+          <a href="https://x.com/ValorwaveEnt" target="_blank" rel="noopener" aria-label="X">
+            <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.3 8.3L23 22h-6.7l-5.2-6.7L4.9 22H2l7.8-9L1 2h6.8l4.7 6L18.9 2z"/></svg>
+          </a>
+        `
+      }
+    },
+
+    {
+      "id": "hero",
+      "type": "HeroSection",
+      "props": {
+        "heading": "Wedding DJ in Chattanooga • Faith-Based Events",
+        "logo": "logo.png",
+        "kicker": "Faith-Based DJ Services",
+        "tagline": "Honoring Every Moment • Honoring All Heroes",
+        "subline": "Veteran-owned • Faith-based • Professional DJ services",
+        "ctaLabel": "Request a Quote",
+        "ctaHref": "https://portal.valorwaveentertainment.com/request_information.asp?djidnumber=28542"
+      }
+    },
+
+    {
+      "id": "services",
+      "type": "ServicesSection",
+      "props": {
+        "heading": "Services",
+        "cards": [
+          {
+            "image": "images/service-wedding.jpg",
+            "alt": "Wedding DJ Services",
+            "title": "Wedding DJ Services",
+            "text": "Professional, faith-respectful wedding DJ services with clean music, structured timelines, and stress-free coordination."
+          },
+          {
+            "image": "images/service-dj-mc.jpg",
+            "alt": "DJ and MC Services",
+            "title": "DJ & MC Services",
+            "text": "Confident MC presence, clear communication, and modern music tailored to your values and your guests."
+          },
+          {
+            "image": "images/service-sound-lighting.jpg",
+            "alt": "Sound and Lighting",
+            "title": "Sound & Lighting",
+            "text": "High-quality audio and tasteful lighting designed to enhance your event without overwhelming it."
+          },
+          {
+            "image": "images/service-corporate.jpg",
+            "alt": "Corporate and Community Events",
+            "title": "Corporate & Community Events",
+            "text": "Reliable, positive entertainment for corporate gatherings, churches, and community celebrations."
+          },
+          {
+            "image": "images/karaoke.jpg",
+            "alt": "Karaoke DJ Services",
+            "title": "Karaoke DJ Services",
+            "text": "Turn any event into an unforgettable experience with our high‑quality karaoke setup, clean current music library, and professional hosting."
+          }
+        ]
+      }
+    },
+
+    {
+      "id": "service-area",
+      "type": "ServiceAreaSection",
+      "props": {
+        "heading": "Serving Your Area",
+        "text": "Valor Wave Entertainment proudly serves weddings and events throughout <strong>Southeast Tennessee</strong>, including Chattanooga and Cleveland, as well as <strong>Northwest Georgia</strong> communities such as Dalton, Ringgold, and Fort Oglethorpe. Travel outside these areas may be available upon request."
+      }
+    },
+
+    {
+      "id": "bio",
+      "type": "BioSection",
+      "props": {
+        "heading": "Meet the DJ",
+        "image": "images/dj-portrait-sam.jpg",
+        "name": "Sam Massengale – Founder & DJ",
+        "text1": "Hello! My name is <strong>Sam Massengale</strong>, and I’ve proudly called Chattanooga home my entire life. I served over 12 years in the <strong>United States Army</strong> and hold a <strong>Master’s Degree from Belhaven University</strong>. I am blessed with a wonderful wife and four amazing boys.",
+        "text2": "Alongside my wife, I decided it was time to turn our passion for <strong>music and singing</strong> into something special — and that’s how <strong>Valor Wave Entertainment</strong> was born. With over 12 years of DJ experience across weddings, corporate events, and community celebrations, I bring professionalism, creativity, and heart to every event.",
+        "text3": "Guided by our loving Father and Jesus Christ, our mission is simple: to provide a <strong>worry-free, faith-based, unforgettable experience</strong>. We look forward to honoring every moment — and all heroes — while creating memories that last a lifetime."
+      }
+    },
+
+    {
+      "id": "chattanooga-wedding-dj",
+      "type": "WeddingDJSection",
+      "props": {
+        "heading": "Wedding DJ Chattanooga",
+        "intro": "Looking for a <strong>wedding DJ in Chattanooga</strong> who brings modern energy with faith-based values? Valor Wave Entertainment provides DJ + MC services, sound, and lighting for weddings and events across <strong>Southeast Tennessee</strong> and <strong>Northwest Georgia</strong>. We focus on clear communication, clean music options, and a smooth, stress-free experience from ceremony to last dance.",
+        "cards": [
+          {
+            "title": "What you get",
+            "text": "Professional planning, timeline support, reliable equipment, and a confident MC—so your day stays on track."
+          },
+          {
+            "title": "Where we serve",
+            "text": "Chattanooga, Cleveland, Hixson, and nearby communities—plus Northwest GA including Ringgold, Fort Oglethorpe, and Dalton."
+          },
+          {
+            "title": "Faith-based option",
+            "text": "We can tailor music to your preferences and venue guidelines while keeping the atmosphere fun and welcoming."
+          }
+        ]
+      }
+    },
+
+    {
+      "id": "faq",
+      "type": "FAQSection",
+      "props": {
+        "faq1": "<strong>How far in advance should we book?</strong><br>For peak wedding season, we recommend reaching out as early as possible to secure your date.",
+        "faq2": "<strong>Do you travel outside Chattanooga?</strong><br>Yes—Southeast Tennessee and Northwest Georgia are our core service areas, and extended travel is available upon request.",
+        "faq3": "<strong>Can you keep music clean/family-friendly?</strong><br>Absolutely. We can customize playlists to match your values and your guest list."
+      }
+    },
+
+    {
+      "id": "brand-meaning",
+      "type": "BrandMeaningSection",
+      "props": {
+        "heading": "The Meaning Behind Valor Wave Entertainment",
+        "p1": "<strong>Valor Wave Entertainment</strong> represents the powerful blend of <strong>honor, service, and celebration</strong>. <em>Valor</em> reflects courage, sacrifice, and respect for those who serve — our military, veterans, first responders, healthcare workers, educators, and everyday heroes in our communities.",
+        "p2": "The word <em>Wave</em> symbolizes movement, energy, and the moments that bring people together. Just like a wave, music carries emotion, creates connection, and leaves a lasting impact long after the event ends.",
+        "p3": "Together, <strong>Valor Wave Entertainment</strong> stands for honoring what matters most while creating unforgettable, joy-filled experiences — all delivered with professionalism, integrity, and faith-based values."
+      }
+    },
+
+    {
+      "id": "hero-discount",
+      "type": "HeroDiscountSection",
+      "props": {
+        "heading": "Hero Discount",
+        "subheading": "We Honor All Heroes",
+        "text1": "We proudly offer a <strong>Hero Discount</strong> for <strong>active-duty military, veterans, first responders, healthcare workers, and teachers</strong>. Mention it in your quote request and we’ll apply it to qualifying events.",
+        "text2": "Proof of service may be requested. Discount amount varies by package and date availability."
+      }
+    },
+
+    {
+      "id": "calendar",
+      "type": "CalendarSection",
+      "props": {
+        "heading": "Availability Calendar",
+        "intro": "View our availability and request your date. If you don’t see your date listed, submit a quote request and we’ll confirm promptly.",
+        "note": "Note: For this calendar to display, the Valor Wave Entertainment Google Calendar must be shared publicly (or shared with anyone who has the link).",
+        "button": "Open Calendar",
+        "buttonHref": "https://calendar.app.google/9MS5C8rhqfmR3aqM7"
+      }
+    },
+
+    {
+      "id": "submit-testimonial",
+      "type": "TestimonialFormSection",
+      "props": {
+        "heading": "Submit a Testimonial",
+        "name": true,
+        "email": true,
+        "eventType": true,
+        "date": true,
+        "message": true,
+        "permission": "I give Valor Wave Entertainment permission to use my testimonial on the website.",
+        "submit": "Send Testimonial",
+        "footer": "Thank you—your feedback helps future couples and clients book with confidence."
+      }
+    },
+
+    {
+      "id": "testimonials",
+      "type": "TestimonialsSection",
+      "props": {
+        "heading": "What Our Clients Say",
+        "t1text": "\"Valor Wave Entertainment made our wedding absolutely perfect. Professional, faith-centered, and fun!\"",
+        "t1author": "- Sarah M.",
+        "t2text": "\"Sam was incredible. From ceremony to reception, everything was smooth and stress-free.\"",
+        "t2author": "- James & Emily",
+        "t3text": "\"Highly recommend for church and community events. Clean music and great energy.\"",
+        "t3author": "- Pastor David R."
+      }
+    },
+
+    {
+      "id": "footer",
+      "type": "FooterSection",
+      "props": {
+        "logo": "logo.png",
+        "line1": "© 2026 Valor Wave Entertainment",
+        "line2": "Faith-Based Wedding & Event DJ | Southeast TN & Northwest GA",
+        "line3": "Phone: (423) 680-2700 • Email: <a href=\"mailto:valorwaveentertainment@gmail.com\">valorwaveentertainment@gmail.com</a>",
+        "line4": "Address: 5424 School Dr, Hixson, TN 37343",
+        "socialLinks": `
+          <a href="https://www.facebook.com/valorwaveentertainment" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2.4V12h2.4V9.8c0-2.4 1.4-3.7 3.6-3.7 1 0 2 .2 2 .2v2.2h-1.1c-1.1 0-1.4.7-1.4 1.4V12h2.5l-.4 2.9h-2.1v7A10 10 0 0 0 22 12z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/valorwaveentertainment/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z"/></svg>
+          </a>
+          <a href="https://x.com/ValorwaveEnt" target="_blank" rel="noopener" aria-label="X">
+            <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.3 8.3L23 22h-6.7l-5.2-6.7L4.9 22H2l7.8-9L1 2h6.8l4.7 6L18.9 2z"/></svg>
+          </a>
+        `
+      }
+    },
+
+    {
+      "id": "seo",
+      "type": "SEOSection",
+      "props": {
+        "title": "Faith-Based DJ Services | Valor Wave Entertainment",
+        "description": "Veteran-owned, faith-based wedding and event DJ in Chattanooga serving Southeast Tennessee and Northwest Georgia. Clean music, professional sound, MC services, lighting, and worry-free planning.",
+        "ogImage": "https://valorwaveentertainment.com/og-image.jpg",
+        "url": "https://valorwaveentertainment.com/"
+      }
+    },
+
+    {
+      "id": "google",
+      "type": "GoogleSection",
+      "props": {}
+    },
+
+    {
+      "id": "cms-loader",
+      "type": "CMSLoaderSection",
+      "props": {}
+    }
+  ]
+}

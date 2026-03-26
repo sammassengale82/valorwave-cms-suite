@@ -10,19 +10,47 @@ export default function HeroSection({
   ctaHref
 }) {
   return (
-    <section className="hero-section">
-      {logo && <img src={logo} alt="Logo" className="hero-logo" />}
-      {kicker && <p className="hero-kicker">{kicker}</p>}
-      {heading && <h1 className="hero-heading">{heading}</h1>}
-      {tagline && <p className="hero-tagline">{tagline}</p>}
-      {subline && (
-        <p className="hero-subline" dangerouslySetInnerHTML={{ __html: subline }} />
-      )}
-      {ctaLabel && (
-        <a href={ctaHref} className="hero-cta">
-          {ctaLabel}
-        </a>
-      )}
-    </section>
+    <header className="hero" data-theme-scope="all">
+      <div className="hero-inner">
+        {heading && (
+          <h1 className="hero-h1" data-ve-edit="hero-h1">
+            {heading}
+          </h1>
+        )}
+
+        {logo && (
+          <img
+            className="hero-logo"
+            src={logo}
+            alt="Valor Wave Entertainment Logo"
+            data-ve-edit="hero-logo"
+          />
+        )}
+
+        {kicker && (
+          <div className="kicker" data-ve-edit="hero-kicker">
+            {kicker}
+          </div>
+        )}
+
+        {tagline && (
+          <div className="tagline" data-ve-edit="hero-tagline">
+            {tagline}
+          </div>
+        )}
+
+        {subline && (
+          <div className="subline" data-ve-edit="hero-subline">
+            {subline}
+          </div>
+        )}
+
+        {ctaLabel && (
+          <a className="btn" href={ctaHref} data-ve-edit="hero-cta">
+            {ctaLabel}
+          </a>
+        )}
+      </div>
+    </header>
   );
 }

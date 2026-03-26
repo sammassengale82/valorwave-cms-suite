@@ -1,64 +1,17 @@
 // src/canvas/CanvasState.ts
 import { create } from "zustand";
-
-export type BlockType = "hero" | "text" | "image" | "button" | "grid";
+import { loadTemplate } from "./loadTemplate";
 
 export type Node = {
   id: string;
   type: "Section" | "Block";
-
-  // from templates
-  templateType?: string; // original node.type ("section","text","image","button", etc.)
-  templateId?: string;
-  templateName?: string;
-  templateCategory?: string;
-  templateVersion?: number;
-
-  blockType?: BlockType;
+  props?: Record<string, any>;
   children?: Node[];
-
-  content?: {
-    text?: string;
-    imageUrl?: string;
-    alt?: string;
-    buttonLabel?: string;
-    buttonHref?: string;
-    [key: string]: any;
-  };
-
-  layout?: {
-    display?: string;
-    flexDirection?: string;
-    justifyContent?: string;
-    alignItems?: string;
-    gap?: string;
-    width?: string;
-    height?: string;
-    position?: string;
-    top?: string;
-    left?: string;
-    right?: string;
-    bottom?: string;
-  };
-
-  style?: {
-    background?: string;
-    color?: string;
-    textAlign?: string;
-    padding?: string;
-    margin?: string;
-  };
-
-  responsive?: {
-    tablet?: Partial<Node["style"] & Node["layout"]>;
-    mobile?: Partial<Node["style"] & Node["layout"]>;
-  };
-
-  [key: string]: any;
 };
 
 type CanvasState = {
   tree: Node[];
+  init: () => Promise<void>;
   setTree: (tree: Node[]) => void;
 
   selectedIds: string[];
@@ -80,6 +33,13 @@ type CanvasState = {
 
 export const useCanvasState = create<CanvasState>((set, get) => ({
   tree: [],
+
+  // ⭐ Load template.data.json → set tree
+  init: async () => {
+    const sections = await loadTemplate();
+    console.log("CanvasState.init → loaded sections:", sections);
+    set({ tree: sections });
+  },
 
   setTree: (tree) => set({ tree }),
 

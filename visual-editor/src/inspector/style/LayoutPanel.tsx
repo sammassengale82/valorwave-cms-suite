@@ -26,7 +26,7 @@ export default function LayoutPanel({ node }) {
       <input
         value={styles.height || ""}
         onChange={(e) => set("height", e.target.value)}
-        placeholder="e.g. auto, 300px"
+        placeholder="e.g. auto, 1800px"
       />
 
       <label>Padding</label>

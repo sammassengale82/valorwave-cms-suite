@@ -2,9 +2,9 @@ import React from "react";
 import { useCanvasState } from "../canvas/CanvasState";
 import { findNodeById } from "../canvas/VisualTree";
 
-import ContentInspector from "./ContentInspector";
-import StyleInspector from "./style/StyleInspector";
-import AnimationPanel from "./style/AnimationPanel";
+import ContentInspector from "../inspector/ContentInspector";
+import StyleInspector from "../inspector/style/StyleInspector";
+import AnimationPanel from "../inspector/style/AnimationPanel";
 
 export default function Inspector() {
   const selectedId = useCanvasState((s) => s.selectedId);

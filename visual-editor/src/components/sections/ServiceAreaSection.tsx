@@ -2,10 +2,17 @@ import React from "react";
 
 export default function ServiceAreaSection({ heading, text }) {
   return (
-    <section className="service-area-section">
-      {heading && <h2>{heading}</h2>}
+    <section data-theme-scope="all">
+      {heading && (
+        <h2 data-ve-edit="service-area-heading">{heading}</h2>
+      )}
+
       {text && (
-        <p dangerouslySetInnerHTML={{ __html: text }} />
+        <p
+          className="service-area"
+          data-ve-edit="service-area-text"
+          dangerouslySetInnerHTML={{ __html: text }}
+        />
       )}
     </section>
   );

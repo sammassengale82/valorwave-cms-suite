@@ -2,22 +2,22 @@ import React from "react";
 import { useCanvasState } from "../canvas/CanvasState";
 import { findNodeById } from "../canvas/VisualTree";
 
-import HeroFields from "./fields/hero";
-import NavigationFields from "./fields/navigation";
-import HeaderFields from "./fields/header";
-import ServicesFields from "./fields/services";
-import ServiceAreaFields from "./fields/service-area";
-import BioFields from "./fields/bio";
-import WeddingDJFields from "./fields/wedding-dj";
-import FAQFields from "./fields/faq";
-import BrandMeaningFields from "./fields/brand-meaning";
-import HeroDiscountFields from "./fields/hero-discount";
-import CalendarFields from "./fields/calendar";
-import TestimonialFormFields from "./fields/testimonial-form";
-import TestimonialsFields from "./fields/testimonials";
-import FooterFields from "./fields/footer";
-import SEOFields from "./fields/seo";
-import GoogleFields from "./fields/google";
+import HeroFields from "../cms-panel/fields/hero";
+import NavigationFields from "../cms-panel/fields/navigation";
+import HeaderFields from "../cms-panel/fields/header";
+import ServicesFields from "../cms-panel/fields/services";
+import ServiceAreaFields from "../cms-panel/fields/service-area";
+import BioFields from "../cms-panel/fields/bio";
+import WeddingDJFields from "../cms-panel/fields/wedding-dj";
+import FAQFields from "../cms-panel/fields/faq";
+import BrandMeaningFields from "../cms-panel/fields/brand-meaning";
+import HeroDiscountFields from "../cms-panel/fields/hero-discount";
+import CalendarFields from "../cms-panel/fields/calendar";
+import TestimonialFormFields from "../cms-panel/fields/testimonial-form";
+import TestimonialsFields from "../cms-panel/fields/testimonials";
+import FooterFields from "../cms-panel/fields/footer";
+import SEOFields from "../cms-panel/fields/seo";
+import GoogleFields from "../cms-panel/fields/google";
 
 export default function SectionFields() {
   const selectedId = useCanvasState((s) => s.selectedId);

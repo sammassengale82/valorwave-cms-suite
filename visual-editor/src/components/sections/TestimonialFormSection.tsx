@@ -12,20 +12,113 @@ export default function TestimonialFormSection({
   footer
 }) {
   return (
-    <section className="testimonial-form-section">
-      {heading && <h2>{heading}</h2>}
-      <form className="testimonial-form">
-        {name && <label dangerouslySetInnerHTML={{ __html: name }} />}
-        {email && <label dangerouslySetInnerHTML={{ __html: email }} />}
-        {eventType && <label dangerouslySetInnerHTML={{ __html: eventType }} />}
-        {date && <label dangerouslySetInnerHTML={{ __html: date }} />}
-        {message && <label dangerouslySetInnerHTML={{ __html: message }} />}
-        {permission && (
-          <div dangerouslySetInnerHTML={{ __html: permission }} />
+    <section id="submit-testimonial" data-theme-scope="all">
+      {heading && (
+        <h2 data-ve-edit="testimonial-form-heading">{heading}</h2>
+      )}
+
+      <form
+        action="https://formsubmit.co/valorwaveentertainment@gmail.com"
+        method="POST"
+        className="testimonial-form"
+      >
+        <input
+          type="hidden"
+          name="_subject"
+          value="New Testimonial Submission - Valor Wave Entertainment"
+        />
+        <input type="hidden" name="_template" value="table" />
+        <input
+          type="hidden"
+          name="_next"
+          value="https://valorwaveentertainment.com/testimonial-thank-you.html"
+        />
+
+        {name && (
+          <input
+            type="text"
+            name="client_name"
+            placeholder="Your Name"
+            required
+            data-ve-edit="testimonial-form-name"
+          />
         )}
-        {submit && <button type="submit">{submit}</button>}
+
+        {email && (
+          <input
+            type="email"
+            name="client_email"
+            placeholder="Your Email (optional)"
+            data-ve-edit="testimonial-form-email"
+          />
+        )}
+
+        {eventType && (
+          <input
+            type="text"
+            name="event_type"
+            placeholder="Event Type (Wedding, Birthday, Corporate, etc.)"
+            required
+            data-ve-edit="testimonial-form-event-type"
+          />
+        )}
+
+        {date && (
+          <input
+            type="date"
+            name="event_date"
+            placeholder="Event Date"
+            data-ve-edit="testimonial-form-date"
+          />
+        )}
+
+        {message && (
+          <textarea
+            name="testimonial"
+            placeholder="Write your testimonial here..."
+            required
+            data-ve-edit="testimonial-form-message"
+          />
+        )}
+
+        {permission && (
+          <label
+            style={{
+              display: "block",
+              color: "var(--gray)",
+              fontSize: "14px",
+              lineHeight: "1.4"
+            }}
+            data-ve-edit="testimonial-form-permission"
+            dangerouslySetInnerHTML={{ __html: permission }}
+          />
+        )}
+
+        <div className="form-actions">
+          {submit && (
+            <button
+              type="submit"
+              className="btn"
+              data-ve-edit="testimonial-form-submit"
+            >
+              {submit}
+            </button>
+          )}
+        </div>
+
+        {footer && (
+          <p
+            style={{
+              marginTop: "12px",
+              color: "var(--gray)",
+              fontSize: "13px",
+              textAlign: "center"
+            }}
+            data-ve-edit="testimonial-form-footer"
+            dangerouslySetInnerHTML={{ __html: footer }}
+          />
+        )}
       </form>
-      {footer && <p dangerouslySetInnerHTML={{ __html: footer }} />}
     </section>
   );
 }

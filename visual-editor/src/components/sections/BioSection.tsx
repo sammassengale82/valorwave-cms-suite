@@ -9,16 +9,49 @@ export default function BioSection({
   text3
 }) {
   return (
-    <section className="bio-section">
-      {heading && <h2>{heading}</h2>}
-      <div className="bio-content">
-        {image && <img src={image} alt={name} className="bio-image" />}
-        <div className="bio-text">
-          {name && <h3>{name}</h3>}
-          {text1 && <p dangerouslySetInnerHTML={{ __html: text1 }} />}
-          {text2 && <p dangerouslySetInnerHTML={{ __html: text2 }} />}
-          {text3 && <p dangerouslySetInnerHTML={{ __html: text3 }} />}
+    <section id="bio" data-theme-scope="all">
+      {heading && (
+        <h2 data-ve-edit="bio-heading">{heading}</h2>
+      )}
+
+      <div className="bio-wrap">
+        <div className="bio-head">
+          {image && (
+            <img
+              className="bio-image"
+              src={image}
+              alt={name}
+              data-ve-edit="bio-image"
+            />
+          )}
+
+          {name && (
+            <div className="bio-name" data-ve-edit="bio-name">
+              {name}
+            </div>
+          )}
         </div>
+
+        {text1 && (
+          <p
+            data-ve-edit="bio-text-1"
+            dangerouslySetInnerHTML={{ __html: text1 }}
+          />
+        )}
+
+        {text2 && (
+          <p
+            data-ve-edit="bio-text-2"
+            dangerouslySetInnerHTML={{ __html: text2 }}
+          />
+        )}
+
+        {text3 && (
+          <p
+            data-ve-edit="bio-text-3"
+            dangerouslySetInnerHTML={{ __html: text3 }}
+          />
+        )}
       </div>
     </section>
   );

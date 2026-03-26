@@ -10,27 +10,59 @@ export default function TestimonialsSection({
   t3author
 }) {
   return (
-    <section className="testimonials-section">
-      {heading && <h2>{heading}</h2>}
-      <div className="testimonials-grid">
-        {t1text && (
-          <div className="testimonial">
-            <p dangerouslySetInnerHTML={{ __html: t1text }} />
-            {t1author && <span>{t1author}</span>}
+    <section data-theme-scope="all">
+      {heading && (
+        <h2 data-ve-edit="testimonial-heading">{heading}</h2>
+      )}
+
+      <div className="testimonial-scroll">
+        <div className="card" data-ve-edit="testimonial-1">
+          <div className="card-body">
+            {t1text && (
+              <p
+                data-ve-edit="testimonial-1-text"
+                dangerouslySetInnerHTML={{ __html: t1text }}
+              />
+            )}
+            {t1author && (
+              <strong data-ve-edit="testimonial-1-author">
+                {t1author}
+              </strong>
+            )}
           </div>
-        )}
-        {t2text && (
-          <div className="testimonial">
-            <p dangerouslySetInnerHTML={{ __html: t2text }} />
-            {t2author && <span>{t2author}</span>}
+        </div>
+
+        <div className="card" data-ve-edit="testimonial-2">
+          <div className="card-body">
+            {t2text && (
+              <p
+                data-ve-edit="testimonial-2-text"
+                dangerouslySetInnerHTML={{ __html: t2text }}
+              />
+            )}
+            {t2author && (
+              <strong data-ve-edit="testimonial-2-author">
+                {t2author}
+              </strong>
+            )}
           </div>
-        )}
-        {t3text && (
-          <div className="testimonial">
-            <p dangerouslySetInnerHTML={{ __html: t3text }} />
-            {t3author && <span>{t3author}</span>}
+        </div>
+
+        <div className="card" data-ve-edit="testimonial-3">
+          <div className="card-body">
+            {t3text && (
+              <p
+                data-ve-edit="testimonial-3-text"
+                dangerouslySetInnerHTML={{ __html: t3text }}
+              />
+            )}
+            {t3author && (
+              <strong data-ve-edit="testimonial-3-author">
+                {t3author}
+              </strong>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </section>
   );

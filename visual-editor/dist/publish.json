@@ -1,0 +1,178 @@
+{
+  "theme": "original",
+
+  "seo": {
+    "title": "",
+    "description": "",
+    "keywords": "",
+    "ogTitle": "",
+    "ogDescription": "",
+    "ogImage": ""
+  },
+
+  "analytics": {
+    "googleAnalyticsId": "",
+    "googleTagManagerId": "",
+    "googleSiteVerification": ""
+  },
+
+  "header": {
+    "logo": "",
+    "brandText": "",
+    "socialLinks": "",
+    "nav": {
+      "services": "",
+      "availability": "",
+      "heroDiscount": "",
+      "requestQuote": "",
+      "requestQuoteHref": "",
+      "clientPortal": "",
+      "clientPortalHref": ""
+    }
+  },
+
+  "footer": {
+    "logo": "",
+    "line1": "",
+    "line2": "",
+    "line3": "",
+    "line4": "",
+    "socialLinks": ""
+  },
+
+  "sections": [
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "h1": "",
+        "logo": "",
+        "kicker": "",
+        "tagline": "",
+        "subline": "",
+        "cta": "",
+        "ctaHref": ""
+      }
+    },
+
+    {
+      "id": "services",
+      "component": "ServicesSection",
+      "props": {
+        "heading": "",
+        "cards": [
+          { "image": "", "title": "", "text": "" },
+          { "image": "", "title": "", "text": "" },
+          { "image": "", "title": "", "text": "" },
+          { "image": "", "title": "", "text": "" }
+        ]
+      }
+    },
+
+    {
+      "id": "service-area",
+      "component": "ServiceAreaSection",
+      "props": {
+        "heading": "",
+        "text": ""
+      }
+    },
+
+    {
+      "id": "bio",
+      "component": "BioSection",
+      "props": {
+        "heading": "",
+        "image": "",
+        "name": "",
+        "text1": "",
+        "text2": "",
+        "text3": ""
+      }
+    },
+
+    {
+      "id": "wedding-dj",
+      "component": "WeddingDJSection",
+      "props": {
+        "heading": "",
+        "intro": "",
+        "cards": [
+          { "title": "", "text": "" },
+          { "title": "", "text": "" },
+          { "title": "", "text": "" }
+        ]
+      }
+    },
+
+    {
+      "id": "faq",
+      "component": "FAQSection",
+      "props": {
+        "heading": "",
+        "items": ["", "", ""]
+      }
+    },
+
+    {
+      "id": "brand-meaning",
+      "component": "BrandMeaningSection",
+      "props": {
+        "heading": "",
+        "points": ["", "", ""]
+      }
+    },
+
+    {
+      "id": "hero-discount",
+      "component": "HeroDiscountSection",
+      "props": {
+        "heading": "",
+        "subheading": "",
+        "text1": "",
+        "text2": ""
+      }
+    },
+
+    {
+      "id": "calendar",
+      "component": "CalendarSection",
+      "props": {
+        "heading": "",
+        "intro": "",
+        "note": "",
+        "button": "",
+        "buttonHref": ""
+      }
+    },
+
+    {
+      "id": "testimonial-form",
+      "component": "TestimonialFormSection",
+      "props": {
+        "heading": "",
+        "nameLabel": "",
+        "emailLabel": "",
+        "eventTypeLabel": "",
+        "dateLabel": "",
+        "messageLabel": "",
+        "permissionLabel": "",
+        "submitLabel": "",
+        "footerText": ""
+      }
+    },
+
+    {
+      "id": "testimonials",
+      "component": "TestimonialsSection",
+      "props": {
+        "heading": "",
+        "items": [
+          { "text": "", "author": "" },
+          { "text": "", "author": "" },
+          { "text": "", "author": "" }
+        ]
+      }
+    }
+  ]
+}

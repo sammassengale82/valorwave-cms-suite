@@ -1,21 +1,21 @@
+// src/visual/compile/compileNode.ts
+
 import { toComponentName } from "./toComponentName";
-import { compileProps } from "./compileProps";
 
-export function compileNode(node: any): any {
-  const templateId = node.templateId || "";
+export interface CompiledNode {
+  id: string;
+  type: string;
+  component: string;
+  props: Record<string, any>;
+  children: never[]; // always empty for this architecture
+}
 
-  const component =
-    node.type === "section"
-      ? toComponentName(templateId)
-      : null;
-
+export function compileNode(node: any): CompiledNode {
   return {
     id: node.id,
-    type: node.type, // "section" | "block"
-    component,
-    props: compileProps(node),
-    styles: node.styles || {},
-    animations: node.animations || {},
-    children: (node.children || []).map(compileNode)
+    type: node.type,
+    component: toComponentName(node.id) || node.type,
+    props: node.props || {},
+    children: []
   };
 }

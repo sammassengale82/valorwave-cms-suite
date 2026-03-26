@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ValorWave Preview</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Your site styles -->
+    <link rel="stylesheet" href="/src/index.css" />
+    <link rel="stylesheet" href="/src/styles/site.css" />
+
+    <!-- CRITICAL: Full-height inside iframe -->
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: auto;
+      }
+
+      #root {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <!-- This is the ONLY script Vite will bundle -->
+    <script type="module" src="/src/visual/iframe-main.tsx"></script>
+  </body>
+</html>

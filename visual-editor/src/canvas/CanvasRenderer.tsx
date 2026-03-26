@@ -1,8 +1,8 @@
 import React from "react";
 import { useCanvasState } from "./CanvasState";
 import { useEditorState } from "../state/EditorState";
-import { SectionBlock } from "../components/SectionBlock";
-import { BlockWrapper } from "../components/BlockWrapper";
+import { SectionBlock } from "../editor/SectionBlock";
+import { BlockWrapper } from "./BlockWrapper";
 import type { VisualNode, AnimationConfig } from "./VisualTree";
 
 function buildAnimationAttributes(

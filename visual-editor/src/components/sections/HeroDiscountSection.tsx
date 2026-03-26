@@ -7,11 +7,43 @@ export default function HeroDiscountSection({
   text2
 }) {
   return (
-    <section className="hero-discount-section">
-      {heading && <h2>{heading}</h2>}
-      {subheading && <h3>{subheading}</h3>}
-      {text1 && <p dangerouslySetInnerHTML={{ __html: text1 }} />}
-      {text2 && <p dangerouslySetInnerHTML={{ __html: text2 }} />}
+    <section id="hero-discount" data-theme-scope="all">
+      {heading && (
+        <h2 data-ve-edit="hero-discount-heading">{heading}</h2>
+      )}
+
+      <div className="bio-wrap">
+        {subheading && (
+          <div
+            className="bio-name"
+            style={{ textAlign: "center", marginBottom: "10px" }}
+            data-ve-edit="hero-discount-subheading"
+          >
+            {subheading}
+          </div>
+        )}
+
+        {text1 && (
+          <p
+            style={{ textAlign: "center" }}
+            data-ve-edit="hero-discount-text-1"
+            dangerouslySetInnerHTML={{ __html: text1 }}
+          />
+        )}
+
+        {text2 && (
+          <p
+            style={{
+              textAlign: "center",
+              color: "var(--gray)",
+              fontSize: "14px",
+              marginTop: "10px"
+            }}
+            data-ve-edit="hero-discount-text-2"
+            dangerouslySetInnerHTML={{ __html: text2 }}
+          />
+        )}
+      </div>
     </section>
   );
 }

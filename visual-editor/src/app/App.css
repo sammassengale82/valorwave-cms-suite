@@ -7,15 +7,39 @@
 .app-main {
   display: flex;
   flex: 1;
+  height: 100%;
+  overflow: hidden;
+}
+.left-panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.right-panel {
+  flex: 1;
+  height: 100%;
+  display: flex;
   overflow: hidden;
 }
 
 .preview-container {
+  height: 100%;
   flex: 1;
   overflow: auto;
 }
 
 .inspector-panel {
   width: 320px;
+  flex-shrink: 0;
+  background: #ffffff;
   border-left: 1px solid #d0d4d9;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
