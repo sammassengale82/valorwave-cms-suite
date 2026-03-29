@@ -1,20 +1,11 @@
+// src/visual/sections/TestimonialFormSection.tsx
 import React from "react";
 
-export default function TestimonialFormSection({
-  heading,
-  name,
-  email,
-  eventType,
-  date,
-  message,
-  permission,
-  submit,
-  footer
-}) {
+export function TestimonialFormSection(props: any) {
   return (
     <section id="submit-testimonial" data-theme-scope="all">
-      {heading && (
-        <h2 data-ve-edit="testimonial-form-heading">{heading}</h2>
+      {props["testimonial-form-heading"] && (
+        <h2>{props["testimonial-form-heading"].text}</h2>
       )}
 
       <form
@@ -34,79 +25,94 @@ export default function TestimonialFormSection({
           value="https://valorwaveentertainment.com/testimonial-thank-you.html"
         />
 
-        {name && (
-          <input
-            type="text"
-            name="client_name"
-            placeholder="Your Name"
-            required
-            data-ve-edit="testimonial-form-name"
-          />
-        )}
+        {/* Name */}
+        <input
+          type="text"
+          name="client_name"
+          placeholder={props["testimonial-form-name"]?.text || "Your Name"}
+          required
+        />
 
-        {email && (
-          <input
-            type="email"
-            name="client_email"
-            placeholder="Your Email (optional)"
-            data-ve-edit="testimonial-form-email"
-          />
-        )}
+        {/* Email */}
+        <input
+          type="email"
+          name="client_email"
+          placeholder={props["testimonial-form-email"]?.text || "Your Email (optional)"}
+        />
 
-        {eventType && (
-          <input
-            type="text"
-            name="event_type"
-            placeholder="Event Type (Wedding, Birthday, Corporate, etc.)"
-            required
-            data-ve-edit="testimonial-form-event-type"
-          />
-        )}
+        {/* Event Type */}
+        <input
+          type="text"
+          name="event_type"
+          placeholder={
+            props["testimonial-form-event-type"]?.text ||
+            "Event Type (Wedding, Birthday, Corporate, etc.)"
+          }
+          required
+        />
 
-        {date && (
-          <input
-            type="date"
-            name="event_date"
-            placeholder="Event Date"
-            data-ve-edit="testimonial-form-date"
-          />
-        )}
+        {/* Event Date */}
+        <input
+          type="date"
+          name="event_date"
+          placeholder={props["testimonial-form-date"]?.text || "Event Date"}
+        />
 
-        {message && (
-          <textarea
-            name="testimonial"
-            placeholder="Write your testimonial here..."
-            required
-            data-ve-edit="testimonial-form-message"
-          />
-        )}
+        {/* Rating */}
+        <select
+          name="rating"
+          required
+          defaultValue=""
+          style={{
+            padding: "14px",
+            borderRadius: "10px",
+            border: "1px solid #0b1220",
+            background: "rgba(248,250,252,0.92)",
+            fontSize: "16px",
+            color: "#0b1220"
+         }}
+        >
+         <option value="" disabled>
+           Rating
+         </option>
+         <option value="5">5 - Excellent</option>
+         <option value="4">4 - Great</option>
+         <option value="3">3 - Good</option>
+         <option value="2">2 - Fair</option>
+         <option value="1">1 - Poor</option>
+       </select>
 
-        {permission && (
-          <label
-            style={{
-              display: "block",
-              color: "var(--gray)",
-              fontSize: "14px",
-              lineHeight: "1.4"
-            }}
-            data-ve-edit="testimonial-form-permission"
-            dangerouslySetInnerHTML={{ __html: permission }}
-          />
-        )}
+        {/* Testimonial */}
+        <textarea
+          name="testimonial"
+          placeholder={
+            props["testimonial-form-message"]?.text ||
+            "Write your testimonial here..."
+          }
+          required
+        />
+
+        {/* Permission */}
+        <label
+          style={{
+            display: "block",
+            color: "var(--gray)",
+            fontSize: "14px",
+            lineHeight: 1.4
+          }}
+        >
+          <input type="checkbox" name="permission" value="Yes" required />{" "}
+          {props["testimonial-form-permission"]?.text ||
+            "I give Valor Wave Entertainment permission to use my testimonial on the website."}
+        </label>
 
         <div className="form-actions">
-          {submit && (
-            <button
-              type="submit"
-              className="btn"
-              data-ve-edit="testimonial-form-submit"
-            >
-              {submit}
-            </button>
-          )}
+          <button type="submit" className="btn">
+            {props["testimonial-form-submit"]?.text || "Send Testimonial"}
+          </button>
         </div>
 
-        {footer && (
+        {props["testimonial-form-footer"] && (
           <p
             style={{
               marginTop: "12px",
@@ -114,9 +120,9 @@ export default function TestimonialFormSection({
               fontSize: "13px",
               textAlign: "center"
             }}
-            data-ve-edit="testimonial-form-footer"
-            dangerouslySetInnerHTML={{ __html: footer }}
-          />
+          >
+            {props["testimonial-form-footer"].text}
+          </p>
         )}
       </form>
     </section>

@@ -1,17 +1,19 @@
+// src/visual/sections/ServiceAreaSection.tsx
 import React from "react";
 
-export default function ServiceAreaSection({ heading, text }) {
+export function ServiceAreaSection(props: any) {
   return (
     <section data-theme-scope="all">
-      {heading && (
-        <h2 data-ve-edit="service-area-heading">{heading}</h2>
+      {props["service-area-heading"] && (
+        <h2>{props["service-area-heading"].text}</h2>
       )}
 
-      {text && (
+      {props["service-area-text"] && (
         <p
           className="service-area"
-          data-ve-edit="service-area-text"
-          dangerouslySetInnerHTML={{ __html: text }}
+          dangerouslySetInnerHTML={{
+            __html: props["service-area-text"].html
+          }}
         />
       )}
     </section>

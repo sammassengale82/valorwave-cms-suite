@@ -3,6 +3,9 @@ import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 
 export default defineConfig({
+  // ⭐ REQUIRED so Vite serves BOTH index.html AND preview.html in dev mode
+  appType: "mpa",
+
   plugins: [
     react({
       // ⭐ Only apply React Fast Refresh to the EDITOR app
@@ -23,8 +26,13 @@ export default defineConfig({
   server: {
     fs: {
       allow: [
+        // Allow Vite to serve your public folder
         resolve(__dirname, "public"),
+
+        // Allow Vite to serve the project root
         resolve(__dirname),
+
+        // Allow Vite to serve the iframe runtime
         resolve(__dirname, "src/visual")
       ]
     },

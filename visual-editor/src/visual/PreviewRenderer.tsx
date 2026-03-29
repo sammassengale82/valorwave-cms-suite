@@ -40,7 +40,7 @@ function PreviewRenderer({ canvasTree }: any) {
     <iframe
       ref={iframeRef}
       src="/preview.html"
-      sandbox="allow-scripts allow-same-origin"
+      sandbox="allow-scripts allow-same-origin allow-modals allow-forms"
       style={{
         width: "100%",
         height: "100%",

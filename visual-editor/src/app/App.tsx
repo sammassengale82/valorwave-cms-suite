@@ -4,31 +4,33 @@ import React, { useEffect } from "react";
 // Theme + UI
 import { ThemeProvider } from "../themes/ThemeManager";
 import ThemeSwitcher from "../themes/ThemeSwitcher";
+
 import PreviewContainer from "../editor/PreviewContainer";
 import InspectorPanel from "../inspector/InspectorPanel";
+import Toolbar from "../editor/Toolbar";
+import ModalHost from "../editor/modals/ModalHost";
 
 // Canvas state
 import { useCanvasState } from "../canvas/CanvasState";
 
 // ⭐ Import ALL section components here (NOT in the iframe)
-import HeaderSection from "../components/sections/HeaderSection";
-import HeroSection from "../components/sections/HeroSection";
-import ServicesSection from "../components/sections/ServicesSection";
-import ServiceAreaSection from "../components/sections/ServiceAreaSection";
-import BioSection from "../components/sections/BioSection";
-import WeddingDJSection from "../components/sections/WeddingDJSection";
-import FAQSection from "../components/sections/FAQSection";
-import BrandMeaningSection from "../components/sections/BrandMeaningSection";
-import HeroDiscountSection from "../components/sections/HeroDiscountSection";
-import CalendarSection from "../components/sections/CalendarSection";
-import TestimonialFormSection from "../components/sections/TestimonialFormSection";
-import TestimonialsSection from "../components/sections/TestimonialsSection";
-import FooterSection from "../components/sections/FooterSection";
+import { HeaderSection } from "../components/sections/HeaderSection";
+import { HeroSection } from "../components/sections/HeroSection";
+import { ServicesSection } from "../components/sections/ServicesSection";
+import { ServiceAreaSection } from "../components/sections/ServiceAreaSection";
+import { BioSection } from "../components/sections/BioSection";
+import { WeddingDJSection } from "../components/sections/WeddingDJSection";
+import { FAQSection } from "../components/sections/FaqSection";
+import { BrandMeaningSection } from "../components/sections/BrandMeaningSection";
+import { HeroDiscountSection } from "../components/sections/HeroDiscountSection";
+import { CalendarSection } from "../components/sections/CalendarSection";
+import { TestimonialFormSection } from "../components/sections/TestimonialFormSection";
+import { TestimonialScrollSection } from "../components/sections/TestimonialScrollSection";
+import { FooterSection } from "../components/sections/FooterSection";
 import SEOSection from "../components/sections/SEOSection";
 import GoogleSection from "../components/sections/GoogleSection";
 
 // ⭐ Inject components into global scope for the iframe
-// The iframe will read these via window.__SECTION_COMPONENTS__
 (window.top as any).__SECTION_COMPONENTS__ = {
   HeaderSection,
   HeroSection,
@@ -41,7 +43,7 @@ import GoogleSection from "../components/sections/GoogleSection";
   HeroDiscountSection,
   CalendarSection,
   TestimonialFormSection,
-  TestimonialsSection,
+  TestimonialScrollSection,
   FooterSection,
   SEOSection,
   GoogleSection,
@@ -49,7 +51,6 @@ import GoogleSection from "../components/sections/GoogleSection";
 
 export default function App() {
   useEffect(() => {
-    // ⭐ Load template.data.json → CanvasState.tree
     useCanvasState.getState().init();
   }, []);
 
@@ -57,13 +58,19 @@ export default function App() {
     <ThemeProvider>
       <ThemeSwitcher />
 
+      {/* ⭐ Toolbar */}
+      <Toolbar />
+
+      {/* ⭐ Modal Host */}
+      <ModalHost />
+
       <div className="app-container">
         <div className="app-main">
 
-          {/* Inspector MUST be first so it sits on the LEFT */}
+          {/* Inspector LEFT */}
           <InspectorPanel />
 
-          {/* Preview MUST be second so it expands on the RIGHT */}
+          {/* Preview RIGHT */}
           <div className="right-panel">
             <PreviewContainer mode="preview" />
           </div>

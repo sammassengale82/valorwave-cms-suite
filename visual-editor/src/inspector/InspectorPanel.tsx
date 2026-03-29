@@ -1,10 +1,16 @@
+// src/inspector/InspectorPanel.tsx
 import React from "react";
 import { useCanvasState } from "../canvas/CanvasState";
-import StyleInspector from "./style/StyleInspector";
-import ContentInspector from "./ContentInspector";
+
 import ComponentInspector from "./ComponentInspector";
 import LayoutInspector from "./LayoutInspector";
 import ResponsiveInspector from "./ResponsiveInspector";
+import StyleInspector from "./style/StyleInspector";
+import ContentInspector from "./ContentInspector";
+
+import ThemeEditorPanel from "../editor/panels/ThemeEditorPanel";
+import SiteSettingsPanel from "../editor/panels/SiteSettingsPanel";
+import SectionManager from "../editor/SectionManager";
 
 export default function InspectorPanel() {
   const selectedIds = useCanvasState((s) => s.selectedIds);
@@ -29,38 +35,53 @@ export default function InspectorPanel() {
         </div>
       </div>
 
-      {count === 0 ? (
-        <div className="inspector-empty-state">
-          <p>Select a block to edit.</p>
+      {/* Always show Section Manager + Site Settings + Theme */}
+      <div className="inspector-tabs">
+        <div className="inspector-tab-group">
+          <div className="inspector-tab-label">Sections</div>
+          <SectionManager />
         </div>
-      ) : (
-        <div className="inspector-tabs">
-          <div className="inspector-tab-group">
-            <div className="inspector-tab-label">Component</div>
-            <ComponentInspector />
-          </div>
 
-          <div className="inspector-tab-group">
-            <div className="inspector-tab-label">Layout</div>
-            <LayoutInspector />
-          </div>
-
-          <div className="inspector-tab-group">
-            <div className="inspector-tab-label">Responsive</div>
-            <ResponsiveInspector />
-          </div>
-
-          <div className="inspector-tab-group">
-            <div className="inspector-tab-label">Styles</div>
-            <StyleInspector />
-          </div>
-
-          <div className="inspector-tab-group">
-            <div className="inspector-tab-label">Content</div>
-            <ContentInspector />
-          </div>
+        <div className="inspector-tab-group">
+          <div className="inspector-tab-label">Site Settings</div>
+          <SiteSettingsPanel />
         </div>
-      )}
+
+        <div className="inspector-tab-group">
+          <div className="inspector-tab-label">Theme</div>
+          <ThemeEditorPanel />
+        </div>
+
+        {/* Only show block-level inspectors when something is selected */}
+        {count > 0 && (
+          <>
+            <div className="inspector-tab-group">
+              <div className="inspector-tab-label">Component</div>
+              <ComponentInspector />
+            </div>
+
+            <div className="inspector-tab-group">
+              <div className="inspector-tab-label">Layout</div>
+              <LayoutInspector />
+            </div>
+
+            <div className="inspector-tab-group">
+              <div className="inspector-tab-label">Responsive</div>
+              <ResponsiveInspector />
+            </div>
+
+            <div className="inspector-tab-group">
+              <div className="inspector-tab-label">Styles</div>
+              <StyleInspector />
+            </div>
+
+            <div className="inspector-tab-group">
+              <div className="inspector-tab-label">Content</div>
+              <ContentInspector />
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }

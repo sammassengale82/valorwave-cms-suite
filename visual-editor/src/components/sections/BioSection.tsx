@@ -1,57 +1,37 @@
+// src/visual/sections/BioSection.tsx
 import React from "react";
 
-export default function BioSection({
-  heading,
-  image,
-  name,
-  text1,
-  text2,
-  text3
-}) {
+export function BioSection(props: any) {
   return (
     <section id="bio" data-theme-scope="all">
-      {heading && (
-        <h2 data-ve-edit="bio-heading">{heading}</h2>
-      )}
+      {props["bio-heading"] && <h2>{props["bio-heading"].text}</h2>}
 
       <div className="bio-wrap">
         <div className="bio-head">
-          {image && (
+          {props["bio-image"] && (
             <img
               className="bio-image"
-              src={image}
-              alt={name}
-              data-ve-edit="bio-image"
+              src={props["bio-image"].src}
+              alt={props["bio-image"].alt}
             />
           )}
 
-          {name && (
-            <div className="bio-name" data-ve-edit="bio-name">
-              {name}
-            </div>
+          {props["bio-name"] && (
+            <div className="bio-name">{props["bio-name"].text}</div>
           )}
         </div>
 
-        {text1 && (
-          <p
-            data-ve-edit="bio-text-1"
-            dangerouslySetInnerHTML={{ __html: text1 }}
-          />
-        )}
-
-        {text2 && (
-          <p
-            data-ve-edit="bio-text-2"
-            dangerouslySetInnerHTML={{ __html: text2 }}
-          />
-        )}
-
-        {text3 && (
-          <p
-            data-ve-edit="bio-text-3"
-            dangerouslySetInnerHTML={{ __html: text3 }}
-          />
-        )}
+        {[1, 2, 3].map((i) => {
+          const key = `bio-text-${i}`;
+          return (
+            props[key] && (
+              <p
+                key={key}
+                dangerouslySetInnerHTML={{ __html: props[key].html }}
+              />
+            )
+          );
+        })}
       </div>
     </section>
   );

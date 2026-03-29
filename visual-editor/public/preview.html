@@ -4,22 +4,11 @@
     <meta charset="UTF-8" />
     <title>Preview</title>
   </head>
+
   <body>
     <div id="root"></div>
 
-    <!-- React Fast Refresh preamble -->
-    <script type="module">
-      import RefreshRuntime from "/@react-refresh";
-      RefreshRuntime.injectIntoGlobalHook(window);
-      window.$RefreshReg$ = () => {};
-      window.$RefreshSig$ = () => (type) => type;
-      window.__vite_plugin_react_preamble_installed__ = true;
-    </script>
-
-    <!-- Vite client (HMR + module loader) -->
-    <script type="module" src="/@vite/client"></script>
-
-    <!-- Your iframe entry -->
+    <!-- ONLY THIS SCRIPT SHOULD RUN IN THE IFRAME -->
     <script type="module" src="/src/visual/iframe-entry.ts"></script>
   </body>
 </html>

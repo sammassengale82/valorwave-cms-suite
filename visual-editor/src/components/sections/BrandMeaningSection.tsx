@@ -1,33 +1,25 @@
+// src/visual/sections/BrandMeaningSection.tsx
 import React from "react";
 
-export default function BrandMeaningSection({ heading, p1, p2, p3 }) {
+export function BrandMeaningSection(props: any) {
   return (
     <section id="brand-meaning" data-theme-scope="all">
-      {heading && (
-        <h2 data-ve-edit="brand-meaning-heading">{heading}</h2>
+      {props["brand-meaning-heading"] && (
+        <h2>{props["brand-meaning-heading"].text}</h2>
       )}
 
       <div className="bio-wrap">
-        {p1 && (
-          <p
-            data-ve-edit="brand-meaning-1"
-            dangerouslySetInnerHTML={{ __html: p1 }}
-          />
-        )}
-
-        {p2 && (
-          <p
-            data-ve-edit="brand-meaning-2"
-            dangerouslySetInnerHTML={{ __html: p2 }}
-          />
-        )}
-
-        {p3 && (
-          <p
-            data-ve-edit="brand-meaning-3"
-            dangerouslySetInnerHTML={{ __html: p3 }}
-          />
-        )}
+        {[1, 2, 3].map((i) => {
+          const key = `brand-meaning-${i}`;
+          return (
+            props[key] && (
+              <p
+                key={key}
+                dangerouslySetInnerHTML={{ __html: props[key].html }}
+              />
+            )
+          );
+        })}
       </div>
     </section>
   );

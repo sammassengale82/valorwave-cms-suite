@@ -1,4 +1,4 @@
-   :root{
+:root{
       --navy:#0F172A;
       --dark:#020617;
       --gold:#D4AF37;
@@ -283,4 +283,3 @@
       min-width:280px;
       scroll-snap-align:start;
     }
-  

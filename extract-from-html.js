@@ -1,234 +1,264 @@
+// extract-from-html.js
+//
+// Run with: node extract-from-html.js
+//
+// PURPOSE:
+// 1. Read the LIVE website HTML (valorwaveentertainment/index.html)
+// 2. Extract SEO, full CSS, sections, images, and editable fields
+// 3. Write CMS internal data → template.data.json
+// 4. Write website runtime data → publish.json
+// 5. Write FULL site CSS → visual-editor/src/styles/site.css
+
 const fs = require("fs");
 const path = require("path");
-const cheerio = require("cheerio");
+const { JSDOM } = require("jsdom");
 
-const SOURCE_HTML = path.join(__dirname, "..", "valorwaveentertainment", "index.html");
-const OUTPUT_JSON = path.join(
+// ------------------------------------------------------------
+// PATHS
+// ------------------------------------------------------------
+
+const WEBSITE_INDEX = path.resolve(
   __dirname,
-  "visualeditor",
-  "src",
-  "templates",
-  "template",
-  "template.data.json"
+  "../valorwaveentertainment/index.html"
 );
 
-function loadHtml() {
-  let html = fs.readFileSync(SOURCE_HTML, "utf8");
+const TEMPLATE_DATA_JSON = path.resolve(
+  __dirname,
+  "visual-editor/src/templates/template/template.data.json"
+);
 
-  // Remove BOM if present
-  if (html.charCodeAt(0) === 0xFEFF) {
-    html = html.slice(1);
+const PUBLISH_JSON = path.resolve(
+  __dirname,
+  "../valorwaveentertainment/publish.json"
+);
+
+const SITE_CSS = path.resolve(
+  __dirname,
+  "visual-editor/src/styles/site.css"
+);
+
+// ------------------------------------------------------------
+// HELPERS
+// ------------------------------------------------------------
+
+function normalizeImageSrc(src) {
+  if (!src) return src;
+  const clean = src.split("?")[0].split("#")[0];
+
+  if (clean.startsWith("/image/") || clean.startsWith("/images/")) {
+    return `/image/${path.basename(clean)}`;
   }
-
-  return cheerio.load(html, { decodeEntities: false });
+  if (clean.startsWith("image/") || clean.startsWith("images/")) {
+    return `/image/${path.basename(clean)}`;
+  }
+  if (!clean.includes("/")) {
+    return `/image/${clean}`;
+  }
+  return clean;
 }
 
-function ve($, key) {
-  return $(`[data-ve-edit="${key}"]`).first().text().trim();
+function textOrNull(el) {
+  if (!el) return null;
+  const t = el.textContent.trim();
+  return t || null;
 }
 
-function veAttr($, key, attr) {
-  return $(`[data-ve-edit="${key}"]`).first().attr(attr) || "";
+function attrOrNull(el, name) {
+  if (!el) return null;
+  const v = el.getAttribute(name);
+  return v || null;
 }
 
-function buildTemplateData() {
-  const $ = loadHtml();
+// Extract all data-ve-edit fields inside a container
+function extractEditableFields(container) {
+  const map = {};
+  if (!container) return map;
 
-  const data = {
-    sections: [
-      {
-        id: "header",
-        type: "HeaderSection",
-        props: {
-          logo: veAttr($, "header-logo", "src"),
-          brandText: ve($, "header-brand-text"),
-          services: ve($, "nav-services"),
-          availability: ve($, "nav-availability"),
-          heroDiscount: ve($, "nav-hero-discount"),
-          requestQuote: ve($, "nav-request-quote"),
-          requestQuoteHref: veAttr($, "nav-request-quote", "href"),
-          clientPortal: ve($, "nav-client-portal"),
-          clientPortalHref: veAttr($, "nav-client-portal", "href"),
-          socialLinks: ""
-        }
-      },
+  const nodes = container.querySelectorAll("[data-ve-edit]");
+  nodes.forEach((node) => {
+    const key = node.getAttribute("data-ve-edit");
+    if (!key) return;
 
-      {
-        id: "hero",
-        type: "HeroSection",
-        props: {
-          heading: ve($, "hero-h1"),
-          logo: veAttr($, "hero-logo", "src"),
-          kicker: ve($, "hero-kicker"),
-          tagline: ve($, "hero-tagline"),
-          subline: ve($, "hero-subline"),
-          ctaLabel: ve($, "hero-cta"),
-          ctaHref: veAttr($, "hero-cta", "href")
-        }
-      },
+    if (node.tagName.toLowerCase() === "img") {
+      map[key] = {
+        type: "image",
+        src: normalizeImageSrc(node.getAttribute("src") || ""),
+        alt: node.getAttribute("alt") || ""
+      };
+    } else if (node.tagName.toLowerCase() === "a") {
+      map[key] = {
+        type: "link",
+        href: node.getAttribute("href") || "",
+        text: textOrNull(node)
+      };
+    } else {
+      map[key] = {
+        type: "text",
+        html: node.innerHTML.trim(),
+        text: textOrNull(node)
+      };
+    }
+  });
 
-      {
-        id: "services",
-        type: "ServicesSection",
-        props: {
-          heading: ve($, "services-heading"),
-          cards: Array.from({ length: 5 }).map((_, i) => ({
-            image: veAttr($, `service-card-${i+1}-image`, "src"),
-            title: ve($, `service-card-${i+1}-title`),
-            text: ve($, `service-card-${i+1}-text`)
-          }))
-        }
-      },
+  return map;
+}
 
-      {
-        id: "service-area",
-        type: "ServiceAreaSection",
-        props: {
-          heading: ve($, "service-area-heading"),
-          text: ve($, "service-area-text")
-        }
-      },
+// ------------------------------------------------------------
+// SECTION MAPPING
+// ------------------------------------------------------------
 
-      {
-        id: "bio",
-        type: "BioSection",
-        props: {
-          heading: ve($, "bio-heading"),
-          image: veAttr($, "bio-image", "src"),
-          name: ve($, "bio-name"),
-          text1: ve($, "bio-text-1"),
-          text2: ve($, "bio-text-2"),
-          text3: ve($, "bio-text-3")
-        }
-      },
+function extractSections(doc) {
+  const sections = [];
 
-      {
-        id: "chattanooga-wedding-dj",
-        type: "WeddingDJSection",
-        props: {
-          heading: ve($, "wedding-dj-heading"),
-          intro: ve($, "wedding-dj-intro"),
-          cards: Array.from({ length: 3 }).map((_, i) => ({
-            title: ve($, `wedding-dj-card-${i+1}-title`),
-            text: ve($, `wedding-dj-card-${i+1}-text`)
-          }))
-        }
-      },
-
-      {
-        id: "faq",
-        type: "FAQSection",
-        props: {
-          faq1: ve($, "faq-1"),
-          faq2: ve($, "faq-2"),
-          faq3: ve($, "faq-3")
-        }
-      },
-
-      {
-        id: "brand-meaning",
-        type: "BrandMeaningSection",
-        props: {
-          heading: ve($, "brand-meaning-heading"),
-          p1: ve($, "brand-meaning-1"),
-          p2: ve($, "brand-meaning-2"),
-          p3: ve($, "brand-meaning-3")
-        }
-      },
-
-      {
-        id: "hero-discount",
-        type: "HeroDiscountSection",
-        props: {
-          heading: ve($, "hero-discount-heading"),
-          subheading: ve($, "hero-discount-subheading"),
-          text1: ve($, "hero-discount-text-1"),
-          text2: ve($, "hero-discount-text-2")
-        }
-      },
-
-      {
-        id: "calendar",
-        type: "CalendarSection",
-        props: {
-          heading: ve($, "calendar-heading"),
-          intro: ve($, "calendar-intro"),
-          note: ve($, "calendar-note"),
-          button: ve($, "calendar-button"),
-          buttonHref: veAttr($, "calendar-button", "href")
-        }
-      },
-
-      {
-        id: "submit-testimonial",
-        type: "TestimonialFormSection",
-        props: {
-          heading: ve($, "testimonial-form-heading"),
-          name: true,
-          email: true,
-          eventType: true,
-          date: true,
-          message: true,
-          permission: ve($, "testimonial-form-permission"),
-          submit: ve($, "testimonial-form-submit"),
-          footer: ve($, "testimonial-form-footer")
-        }
-      },
-
-      {
-        id: "testimonials",
-        type: "TestimonialsSection",
-        props: {
-          heading: ve($, "testimonial-heading"),
-          t1text: ve($, "testimonial-1-text"),
-          t1author: ve($, "testimonial-1-author"),
-          t2text: ve($, "testimonial-2-text"),
-          t2author: ve($, "testimonial-2-author"),
-          t3text: ve($, "testimonial-3-text"),
-          t3author: ve($, "testimonial-3-author")
-        }
-      },
-
-      {
-        id: "footer",
-        type: "FooterSection",
-        props: {
-          logo: veAttr($, "footer-logo", "src"),
-          line1: ve($, "footer-line-1"),
-          line2: ve($, "footer-line-2"),
-          line3: ve($, "footer-line-3"),
-          line4: ve($, "footer-line-4"),
-          socialLinks: ""
-        }
-      },
-
-      {
-        id: "seo",
-        type: "SEOSection",
-        props: {
-          title: $("title").text().trim(),
-          description: $('meta[name="description"]').attr("content") || "",
-          ogImage: $('meta[property="og:image"]').attr("content") || "",
-          url: $('meta[property="og:url"]').attr("content") || ""
-        }
-      },
-
-      {
-        id: "google",
-        type: "GoogleSection",
-        props: {}
-      }
-    ]
+  const push = (id, type, el) => {
+    if (!el) return;
+    sections.push({
+      id,
+      type,
+      props: extractEditableFields(el)
+    });
   };
 
-  return data;
+  push("header", "HeaderSection", doc.querySelector("header.site-header"));
+  push("hero", "HeroSection", doc.querySelector("header.hero"));
+  push("services", "ServicesSection", doc.querySelector("section#services"));
+
+  const serviceAreaEl = Array.from(doc.querySelectorAll("section")).find(
+    (s) => s.querySelector("[data-ve-edit='service-area-heading']")
+  );
+  push("service-area", "ServiceAreaSection", serviceAreaEl);
+
+  push("bio", "BioSection", doc.querySelector("section#bio"));
+  push("wedding-dj", "WeddingDJSection", doc.querySelector("section#chattanooga-wedding-dj"));
+  push("faq", "FAQSection", doc.querySelector("section#faq"));
+  push("brand-meaning", "BrandMeaningSection", doc.querySelector("section#brand-meaning"));
+  push("hero-discount", "HeroDiscountSection", doc.querySelector("section#hero-discount"));
+  push("calendar", "CalendarSection", doc.querySelector("section#calendar"));
+  push("submit-testimonial", "TestimonialFormSection", doc.querySelector("section#submit-testimonial"));
+
+  const testimonialScrollEl = Array.from(doc.querySelectorAll("section")).find(
+    (s) => s.querySelector(".testimonial-scroll")
+  );
+  push("testimonial-scroll", "TestimonialScrollSection", testimonialScrollEl);
+
+  push("footer", "FooterSection", doc.querySelector("footer"));
+
+  return sections;
 }
 
-function main() {
-  const data = buildTemplateData();
-  fs.mkdirSync(path.dirname(OUTPUT_JSON), { recursive: true });
-  fs.writeFileSync(OUTPUT_JSON, JSON.stringify(data, null, 2), "utf8");
-  console.log("Template data written to:", OUTPUT_JSON);
-}
+// ------------------------------------------------------------
+// MAIN
+// ------------------------------------------------------------
 
-main();
+(async function run() {
+  console.log("Extractor: starting");
+
+  if (!fs.existsSync(WEBSITE_INDEX)) {
+    console.error("Extractor: website index.html not found:", WEBSITE_INDEX);
+    process.exit(1);
+  }
+
+  const html = fs.readFileSync(WEBSITE_INDEX, "utf8");
+  const dom = new JSDOM(html);
+  const doc = dom.window.document;
+
+  // ------------------------------------------------------------
+  // SEO
+  // ------------------------------------------------------------
+  const title = textOrNull(doc.querySelector("title")) || "";
+  const metaDescription =
+    attrOrNull(doc.querySelector("meta[name='description']"), "content") || "";
+  const metaKeywords =
+    attrOrNull(doc.querySelector("meta[name='keywords']"), "content") || "";
+
+  const ogTitle =
+    attrOrNull(doc.querySelector("meta[property='og:title']"), "content") || "";
+  const ogDescription =
+    attrOrNull(
+      doc.querySelector("meta[property='og:description']"),
+      "content"
+    ) || "";
+  const ogImageRaw =
+    attrOrNull(doc.querySelector("meta[property='og:image']"), "content") || "";
+  const ogImage = normalizeImageSrc(ogImageRaw);
+
+  const siteTheme =
+    doc.documentElement.getAttribute("data-theme") ||
+    doc.body.getAttribute("data-theme-scope") ||
+    "default";
+
+  // ------------------------------------------------------------
+  // FULL CSS EXTRACTION
+  // ------------------------------------------------------------
+  const styleTag = doc.querySelector("style");
+  let fullCSS = "";
+
+  if (styleTag) {
+    fullCSS = styleTag.textContent.trim();
+  }
+
+  fs.writeFileSync(SITE_CSS, fullCSS, "utf8");
+  console.log("Extractor: wrote FULL site.css →", SITE_CSS);
+
+  // ------------------------------------------------------------
+  // SECTIONS
+  // ------------------------------------------------------------
+  const sections = extractSections(doc);
+
+  console.log("Extractor: sections extracted:", sections.map(s => s.id));
+
+  // ------------------------------------------------------------
+  // CMS INTERNAL TEMPLATE DATA
+  // ------------------------------------------------------------
+  const templateData = {
+    site: {
+      theme: siteTheme,
+      meta_title: title,
+      meta_description: metaDescription,
+      meta_keywords: metaKeywords,
+      og_title: ogTitle,
+      og_description: ogDescription,
+      og_image: ogImage
+    },
+    sections
+  };
+
+  // ------------------------------------------------------------
+  // WEBSITE RUNTIME PUBLISH JSON
+  // ------------------------------------------------------------
+  const publishJson = {
+    theme: siteTheme,
+    seo: {
+      title,
+      description: metaDescription,
+      keywords: metaKeywords,
+      ogTitle,
+      ogDescription,
+      ogImage
+    },
+    analytics: {
+      googleAnalyticsId: "G-PPBLPGS51B"
+    },
+    sections: sections.map((s) => ({
+      id: s.id,
+      type: s.type,
+      props: s.props
+    }))
+  };
+
+  fs.writeFileSync(
+    TEMPLATE_DATA_JSON,
+    JSON.stringify(templateData, null, 2),
+    "utf8"
+  );
+  console.log("Extractor: wrote template.data.json →", TEMPLATE_DATA_JSON);
+
+  fs.writeFileSync(
+    PUBLISH_JSON,
+    JSON.stringify(publishJson, null, 2),
+    "utf8"
+  );
+  console.log("Extractor: wrote publish.json →", PUBLISH_JSON);
+
+  console.log("Extractor: complete");
+})();

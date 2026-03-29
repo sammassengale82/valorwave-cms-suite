@@ -1,53 +1,37 @@
+// src/visual/sections/HeroSection.tsx
 import React from "react";
 
-export default function HeroSection({
-  heading,
-  logo,
-  kicker,
-  tagline,
-  subline,
-  ctaLabel,
-  ctaHref
-}) {
+export function HeroSection(props: any) {
   return (
     <header className="hero" data-theme-scope="all">
       <div className="hero-inner">
-        {heading && (
-          <h1 className="hero-h1" data-ve-edit="hero-h1">
-            {heading}
-          </h1>
+        {props["hero-h1"] && (
+          <h1 className="hero-h1">{props["hero-h1"].text}</h1>
         )}
 
-        {logo && (
+        {props["hero-logo"] && (
           <img
             className="hero-logo"
-            src={logo}
-            alt="Valor Wave Entertainment Logo"
-            data-ve-edit="hero-logo"
+            src={props["hero-logo"].src}
+            alt={props["hero-logo"].alt}
           />
         )}
 
-        {kicker && (
-          <div className="kicker" data-ve-edit="hero-kicker">
-            {kicker}
-          </div>
+        {props["hero-kicker"] && (
+          <div className="kicker">{props["hero-kicker"].text}</div>
         )}
 
-        {tagline && (
-          <div className="tagline" data-ve-edit="hero-tagline">
-            {tagline}
-          </div>
+        {props["hero-tagline"] && (
+          <div className="tagline">{props["hero-tagline"].text}</div>
         )}
 
-        {subline && (
-          <div className="subline" data-ve-edit="hero-subline">
-            {subline}
-          </div>
+        {props["hero-subline"] && (
+          <div className="subline">{props["hero-subline"].text}</div>
         )}
 
-        {ctaLabel && (
-          <a className="btn" href={ctaHref} data-ve-edit="hero-cta">
-            {ctaLabel}
+        {props["hero-cta"] && (
+          <a className="btn" href={props["hero-cta"].href}>
+            {props["hero-cta"].text}
           </a>
         )}
       </div>

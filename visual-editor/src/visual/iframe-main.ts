@@ -17,5 +17,10 @@ window.parent.postMessage({ type: "iframe-ready" }, "*");
 // ⭐ Called by the parent AFTER the iframe is ready
 window.renderVisualTree = (visualTree: any) => {
   console.log("visualTree received by iframe:", visualTree);
+
+  // Render the visual tree into #root
   renderIntoIframe(visualTree);
+
+  // ⭐ No loader injection — preview is React-only
+  console.log("Preview DOM rendered.");
 };

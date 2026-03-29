@@ -188,7 +188,7 @@
 
     {
       "id": "testimonials",
-      "type": "TestimonialsSection",
+      "type": "TestimonialScrollSection",
       "props": {
         "heading": "What Our Clients Say",
         "t1text": "\"Valor Wave Entertainment made our wedding absolutely perfect. Professional, faith-centered, and fun!\"",
@@ -239,11 +239,5 @@
       "type": "GoogleSection",
       "props": {}
     },
-
-    {
-      "id": "cms-loader",
-      "type": "CMSLoaderSection",
-      "props": {}
-    }
   ]
 }

@@ -1,37 +1,33 @@
+// src/visual/sections/HeroDiscountSection.tsx
 import React from "react";
 
-export default function HeroDiscountSection({
-  heading,
-  subheading,
-  text1,
-  text2
-}) {
+export function HeroDiscountSection(props: any) {
   return (
     <section id="hero-discount" data-theme-scope="all">
-      {heading && (
-        <h2 data-ve-edit="hero-discount-heading">{heading}</h2>
+      {props["hero-discount-heading"] && (
+        <h2>{props["hero-discount-heading"].text}</h2>
       )}
 
       <div className="bio-wrap">
-        {subheading && (
+        {props["hero-discount-subheading"] && (
           <div
             className="bio-name"
             style={{ textAlign: "center", marginBottom: "10px" }}
-            data-ve-edit="hero-discount-subheading"
           >
-            {subheading}
+            {props["hero-discount-subheading"].text}
           </div>
         )}
 
-        {text1 && (
+        {props["hero-discount-text-1"] && (
           <p
             style={{ textAlign: "center" }}
-            data-ve-edit="hero-discount-text-1"
-            dangerouslySetInnerHTML={{ __html: text1 }}
+            dangerouslySetInnerHTML={{
+              __html: props["hero-discount-text-1"].html
+            }}
           />
         )}
 
-        {text2 && (
+        {props["hero-discount-text-2"] && (
           <p
             style={{
               textAlign: "center",
@@ -39,8 +35,9 @@ export default function HeroDiscountSection({
               fontSize: "14px",
               marginTop: "10px"
             }}
-            data-ve-edit="hero-discount-text-2"
-            dangerouslySetInnerHTML={{ __html: text2 }}
+            dangerouslySetInnerHTML={{
+              __html: props["hero-discount-text-2"].html
+            }}
           />
         )}
       </div>

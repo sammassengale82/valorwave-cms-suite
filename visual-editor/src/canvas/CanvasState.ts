@@ -11,41 +11,85 @@ export type Node = {
 
 type CanvasState = {
   tree: Node[];
+  templateData: any;
+
+  // INIT
   init: () => Promise<void>;
   setTree: (tree: Node[]) => void;
 
+  // SELECTION
   selectedIds: string[];
   setSelectedIds: (ids: string[]) => void;
   toggleSelect: (id: string) => void;
   selectSingle: (id: string) => void;
   clearSelection: () => void;
 
+  // BLOCK + SECTION OPERATIONS
   insertSectionAt: (index: number, node: Node) => void;
   addSection: (node: Node) => void;
   insertBlockAt: (parentId: string, index: number, node: Node) => void;
-
   addBlockToSection: (sectionId: string, block: Node) => void;
   moveBlockUp: (id: string) => void;
   moveBlockDown: (id: string) => void;
-
   deleteSelected: () => void;
+
+  // NEW — SECTION MANAGER
+  removeSection: (id: string) => void;
+  moveSection: (id: string, direction: "up" | "down") => void;
+  duplicateSection: (id: string) => void;
+
+  // NEW — THEME
+  updateTheme: (updates: Record<string, string>) => void;
+
+  // NEW — SITE SETTINGS
+  updateSiteSettings: (updates: Record<string, any>) => void;
+
+  // NEW — DIRTY STATE
+  isDirty: boolean;
+  lastSavedTree: Node[];
+  markDirty: () => void;
+  markClean: () => void;
+
+  // NEW — PREVIEW MODE
+  previewMode: "draft" | "published";
+  setPreviewMode: (mode: "draft" | "published") => void;
+
+  // NEW — MODALS
+  modal: null | { name: string; data?: any };
+  openModal: (name: string, data?: any) => void;
+  closeModal: () => void;
 };
 
 export const useCanvasState = create<CanvasState>((set, get) => ({
   tree: [],
+  templateData: null,
 
-  // ⭐ Load template.data.json → set tree
+  // INIT — load template.data.json → tree + theme
   init: async () => {
     const sections = await loadTemplate();
-    console.log("CanvasState.init → loaded sections:", sections);
-    set({ tree: sections });
+    const templateData = await fetch(
+      "/src/templates/template/template.data.json"
+    ).then((r) => r.json());
+
+    // Apply theme tokens to :root
+    if (templateData?.site?.theme) {
+      Object.entries(templateData.site.theme).forEach(([key, value]) => {
+        document.documentElement.style.setProperty(`--${key}`, String(value));
+      });
+    }
+
+    set({
+      tree: sections,
+      templateData,
+      lastSavedTree: sections,
+    });
   },
 
-  setTree: (tree) => set({ tree }),
+  setTree: (tree) => set({ tree, isDirty: true }),
 
+  // SELECTION
   selectedIds: [],
   setSelectedIds: (ids) => set({ selectedIds: ids }),
-
   toggleSelect: (id) => {
     const current = get().selectedIds;
     if (current.includes(id)) {
@@ -54,22 +98,22 @@ export const useCanvasState = create<CanvasState>((set, get) => ({
       set({ selectedIds: [...current, id] });
     }
   },
-
   selectSingle: (id) => set({ selectedIds: [id] }),
-
   clearSelection: () => set({ selectedIds: [] }),
 
+  // SECTION INSERTION
   insertSectionAt: (index, node) => {
     const tree = [...get().tree];
     tree.splice(index, 0, node);
-    set({ tree });
+    set({ tree, isDirty: true });
   },
 
   addSection: (node) => {
     const tree = [...get().tree, node];
-    set({ tree });
+    set({ tree, isDirty: true });
   },
 
+  // BLOCK INSERTION
   insertBlockAt: (parentId, index, node) => {
     const tree = structuredClone(get().tree) as Node[];
 
@@ -87,7 +131,7 @@ export const useCanvasState = create<CanvasState>((set, get) => ({
     }
 
     insertInto(tree);
-    set({ tree });
+    set({ tree, isDirty: true });
   },
 
   addBlockToSection: (sectionId, block) => {
@@ -106,7 +150,7 @@ export const useCanvasState = create<CanvasState>((set, get) => ({
     }
 
     add(tree);
-    set({ tree });
+    set({ tree, isDirty: true });
   },
 
   moveBlockUp: (id) => {
@@ -129,7 +173,7 @@ export const useCanvasState = create<CanvasState>((set, get) => ({
     }
 
     move(tree);
-    set({ tree });
+    set({ tree, isDirty: true });
   },
 
   moveBlockDown: (id) => {
@@ -139,7 +183,7 @@ export const useCanvasState = create<CanvasState>((set, get) => ({
       for (const parent of nodes) {
         if (!parent.children) continue;
         const idx = parent.children.findIndex((c) => c.id === id);
-        if (idx !== -1 && idx < parent.children.length - 1) {
+        if (idx !== - -1 && idx < parent.children.length - 1) {
           const arr = [...parent.children];
           const [item] = arr.splice(idx, 1);
           arr.splice(idx + 1, 0, item);
@@ -152,7 +196,7 @@ export const useCanvasState = create<CanvasState>((set, get) => ({
     }
 
     move(tree);
-    set({ tree });
+    set({ tree, isDirty: true });
   },
 
   deleteSelected: () => {
@@ -173,6 +217,87 @@ export const useCanvasState = create<CanvasState>((set, get) => ({
     set({
       tree: remove(tree),
       selectedIds: [],
+      isDirty: true,
     });
   },
+
+  // NEW — SECTION MANAGER
+  removeSection: (id) => {
+    set({
+      tree: get().tree.filter((n) => n.id !== id),
+      isDirty: true,
+    });
+  },
+
+  moveSection: (id, direction) => {
+    const tree = [...get().tree];
+    const index = tree.findIndex((n) => n.id === id);
+    if (index === -1) return;
+
+    const swapWith = direction === "up" ? index - 1 : index + 1;
+    if (swapWith < 0 || swapWith >= tree.length) return;
+
+    [tree[index], tree[swapWith]] = [tree[swapWith], tree[index]];
+
+    set({ tree, isDirty: true });
+  },
+
+  duplicateSection: (id) => {
+    const tree = [...get().tree];
+    const index = tree.findIndex((n) => n.id === id);
+    if (index === -1) return;
+
+    const clone = {
+      ...tree[index],
+      id: crypto.randomUUID(),
+    };
+
+    tree.splice(index + 1, 0, clone);
+
+    set({ tree, isDirty: true });
+  },
+
+  // NEW — THEME
+  updateTheme: (updates) => {
+    set((state) => {
+      if (!state.templateData?.site?.theme) return state;
+
+      Object.entries(updates).forEach(([key, value]) => {
+        state.templateData.site.theme[key] = value;
+        document.documentElement.style.setProperty(`--${key}`, value);
+      });
+
+      state.isDirty = true;
+      return state;
+    });
+  },
+
+  // NEW — SITE SETTINGS
+  updateSiteSettings: (updates) => {
+    set((state) => {
+      if (!state.templateData?.site) return state;
+
+      Object.entries(updates).forEach(([key, value]) => {
+        state.templateData.site[key] = value;
+      });
+
+      state.isDirty = true;
+      return state;
+    });
+  },
+
+  // NEW — DIRTY STATE
+  isDirty: false,
+  lastSavedTree: [],
+  markDirty: () => set({ isDirty: true }),
+  markClean: () => set({ isDirty: false, lastSavedTree: get().tree }),
+
+  // NEW — PREVIEW MODE
+  previewMode: "draft",
+  setPreviewMode: (mode) => set({ previewMode: mode }),
+
+  // NEW — MODALS
+  modal: null,
+  openModal: (name, data) => set({ modal: { name, data } }),
+  closeModal: () => set({ modal: null }),
 }));

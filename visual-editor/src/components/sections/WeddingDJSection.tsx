@@ -1,47 +1,36 @@
+// src/visual/sections/WeddingDJSection.tsx
 import React from "react";
 
-export default function WeddingDJSection({
-  heading,
-  intro,
-  cards = []
-}) {
+export function WeddingDJSection(props: any) {
   return (
     <section id="chattanooga-wedding-dj" data-theme-scope="all">
-      {heading && (
-        <h2 data-ve-edit="wedding-dj-heading">{heading}</h2>
+      {props["wedding-dj-heading"] && (
+        <h2>{props["wedding-dj-heading"].text}</h2>
       )}
 
-      {intro && (
+      {props["wedding-dj-intro"] && (
         <p
           className="service-area"
-          data-ve-edit="wedding-dj-intro"
-          dangerouslySetInnerHTML={{ __html: intro }}
+          dangerouslySetInnerHTML={{
+            __html: props["wedding-dj-intro"].html
+          }}
         />
       )}
 
       <div className="grid" style={{ marginTop: "26px" }}>
-        {cards.map((card, index) => (
-          <div
-            key={index}
-            className="card"
-            data-ve-edit={`wedding-dj-card-${index + 1}`}
-          >
-            <div className="card-body">
-              {card.title && (
-                <h3 data-ve-edit={`wedding-dj-card-${index + 1}-title`}>
-                  {card.title}
-                </h3>
-              )}
+        {[1, 2, 3].map((i) => {
+          const title = props[`wedding-dj-card-${i}-title`];
+          const text = props[`wedding-dj-card-${i}-text`];
 
-              {card.text && (
-                <p
-                  data-ve-edit={`wedding-dj-card-${index + 1}-text`}
-                  dangerouslySetInnerHTML={{ __html: card.text }}
-                />
-              )}
+          return (
+            <div className="card" key={i}>
+              <div className="card-body">
+                {title && <h3>{title.text}</h3>}
+                {text && <p>{text.text}</p>}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
