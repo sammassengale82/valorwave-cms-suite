@@ -1,13 +1,21 @@
 #!/usr/bin/env node
 
 /**
- * Valorwave Visual Editor – Scoped File Usage + Dependency Audit
+ * Valorwave Visual Editor – Full Forensic Audit
  * --------------------------------------------------------------
- * This script scans ONLY the visual-editor folder and reports:
- *  - Which files are used (imported)
- *  - Which files are unused
- *  - Which imports are broken
- *  - Which files talk to each other (dependency graph)
+ * This script performs a deep audit of the visual-editor folder:
+ *
+ *  - Dependency graph
+ *  - Unused files
+ *  - Unused exports
+ *  - Broken imports
+ *  - Missing React components
+ *  - Missing templates
+ *  - Missing inferred required files
+ *  - Circular dependencies
+ *  - JSON report output
+ *
+ * Output file: visual-editor-audit.json
  */
 
 const fs = require("fs");
@@ -15,11 +23,13 @@ const path = require("path");
 
 const ROOT = process.cwd();
 const TARGET = path.join(ROOT, "visual-editor");
-const VALID_EXT = [".js", ".jsx", ".ts", ".tsx", ".mjs", ".cjs"];
+const VALID_EXT = [".js", ".jsx", ".ts", ".tsx", ".mjs", ".cjs", ".json"];
 
-// -------------------------------
+const REPORT_FILE = "visual-editor-audit.json";
+
+// ------------------------------------------------------------
 // Utility Helpers
-// -------------------------------
+// ------------------------------------------------------------
 function walk(dir, fileList = []) {
   if (!fs.existsSync(dir)) return fileList;
 
@@ -51,6 +61,41 @@ function extractImports(content) {
   return imports;
 }
 
+function extractExports(content) {
+  const exportRegex =
+    /export\s+(?:function|class|const|let|var|async function)\s+([A-Za-z0-9_]+)/g;
+  const namedExportRegex = /export\s*{\s*([^}]+)\s*}/g;
+
+  const exports = [];
+  let match;
+
+  while ((match = exportRegex.exec(content))) {
+    exports.push(match[1]);
+  }
+
+  while ((match = namedExportRegex.exec(content))) {
+    const names = match[1]
+      .split(",")
+      .map((n) => n.trim().split(" as ")[0]);
+    exports.push(...names);
+  }
+
+  return exports;
+}
+
+function extractJSXComponents(content) {
+  const jsxRegex = /<([A-Z][A-Za-z0-9_]*)\b/g;
+
+  const components = [];
+  let match;
+
+  while ((match = jsxRegex.exec(content))) {
+    components.push(match[1]);
+  }
+
+  return components;
+}
+
 function resolveImport(baseFile, importPath) {
   if (!importPath.startsWith(".")) return null; // ignore node_modules
 
@@ -74,42 +119,135 @@ function resolveImport(baseFile, importPath) {
   return null;
 }
 
-// -------------------------------
-// Main Audit
-// -------------------------------
+// ------------------------------------------------------------
+// Main Scan
+// ------------------------------------------------------------
 console.log("🔍 Scanning visual-editor folder:", TARGET);
 
-const allFiles = walk(TARGET).filter(f => VALID_EXT.includes(path.extname(f)));
-const graph = {};
+const allFiles = walk(TARGET).filter((f) =>
+  VALID_EXT.includes(path.extname(f))
+);
+
+const dependencyGraph = {};
 const usedFiles = new Set();
 const brokenImports = [];
+const exportMap = {};
+const exportUsage = {};
+const jsxComponentUsage = {};
+const missingComponents = [];
+const missingTemplates = [];
+const missingRequiredFiles = [];
 
+// ------------------------------------------------------------
+// First pass: parse imports, exports, JSX
+// ------------------------------------------------------------
 for (const file of allFiles) {
   const content = fs.readFileSync(file, "utf8");
+
   const imports = extractImports(content);
+  const exports = extractExports(content);
+  const jsxComponents = extractJSXComponents(content);
 
-  graph[file] = [];
+  dependencyGraph[file] = [];
+  exportMap[file] = exports;
+  jsxComponentUsage[file] = jsxComponents;
 
+  // Track export usage
+  exports.forEach((e) => {
+    exportUsage[e] = exportUsage[e] || { definedIn: file, usedBy: [] };
+  });
+
+  // Resolve imports
   for (const imp of imports) {
     const resolved = resolveImport(file, imp);
 
     if (resolved) {
-      graph[file].push(resolved);
+      dependencyGraph[file].push(resolved);
       usedFiles.add(resolved);
+
+      // Track export usage
+      const importedContent = fs.existsSync(resolved)
+        ? fs.readFileSync(resolved, "utf8")
+        : "";
+
+      const importedExports = extractExports(importedContent);
+      importedExports.forEach((e) => {
+        exportUsage[e] = exportUsage[e] || { definedIn: resolved, usedBy: [] };
+        exportUsage[e].usedBy.push(file);
+      });
     } else if (imp.startsWith(".")) {
       brokenImports.push({ file, import: imp });
     }
   }
 }
 
-// -------------------------------
-// Unused Files
-// -------------------------------
-const unusedFiles = allFiles.filter(f => !usedFiles.has(f));
+// ------------------------------------------------------------
+// Detect unused files
+// ------------------------------------------------------------
+const unusedFiles = allFiles.filter((f) => !usedFiles.has(f));
 
-// -------------------------------
-// Circular Dependency Detection
-// -------------------------------
+// ------------------------------------------------------------
+// Detect unused exports
+// ------------------------------------------------------------
+const unusedExports = Object.entries(exportUsage)
+  .filter(([_, info]) => info.usedBy.length === 0)
+  .map(([name, info]) => ({ name, file: info.definedIn }));
+
+// ------------------------------------------------------------
+// Detect missing React components
+// ------------------------------------------------------------
+for (const [file, components] of Object.entries(jsxComponentUsage)) {
+  for (const comp of components) {
+    const searchPaths = [
+      `${comp}.tsx`,
+      `${comp}.jsx`,
+      `${comp}.ts`,
+      `${comp}.js`,
+      `${comp}/index.tsx`,
+      `${comp}/index.jsx`,
+      `${comp}/index.js`,
+      `${comp}/index.ts`,
+    ];
+
+    const baseDir = path.dirname(file);
+    const found = searchPaths.some((p) =>
+      fs.existsSync(path.join(baseDir, p))
+    );
+
+    if (!found) {
+      missingComponents.push({ file, component: comp });
+    }
+  }
+}
+
+// ------------------------------------------------------------
+// Detect missing templates
+// ------------------------------------------------------------
+for (const file of allFiles) {
+  const content = fs.readFileSync(file, "utf8");
+
+  const templateRegex = /['"]\.\/templates\/(.*?)['"]/g;
+  let match;
+
+  while ((match = templateRegex.exec(content))) {
+    const templatePath = path.join(
+      path.dirname(file),
+      "templates",
+      match[1]
+    );
+
+    if (!fs.existsSync(templatePath)) {
+      missingTemplates.push({
+        file,
+        template: match[1],
+      });
+    }
+  }
+}
+
+// ------------------------------------------------------------
+// Detect circular dependencies
+// ------------------------------------------------------------
 function detectCycles(graph) {
   const visited = new Set();
   const stack = new Set();
@@ -136,40 +274,58 @@ function detectCycles(graph) {
   return cycles;
 }
 
-const cycles = detectCycles(graph);
+const circularDependencies = detectCycles(dependencyGraph);
 
-// -------------------------------
-// Output
-// -------------------------------
+// ------------------------------------------------------------
+// Infer missing required files
+// ------------------------------------------------------------
+function inferRequiredFiles() {
+  const required = [];
+
+  // If main.tsx or App.tsx referenced anywhere
+  const common = ["main.tsx", "App.tsx", "index.html"];
+
+  for (const f of common) {
+    const full = path.join(TARGET, "src", f);
+    if (!fs.existsSync(full)) {
+      required.push(full);
+    }
+  }
+
+  return required;
+}
+
+missingRequiredFiles.push(...inferRequiredFiles());
+
+// ------------------------------------------------------------
+// Write JSON report
+// ------------------------------------------------------------
+const report = {
+  scannedFiles: allFiles,
+  dependencyGraph,
+  unusedFiles,
+  unusedExports,
+  brokenImports,
+  missingComponents,
+  missingTemplates,
+  missingRequiredFiles,
+  circularDependencies,
+};
+
+fs.writeFileSync(REPORT_FILE, JSON.stringify(report, null, 2), "utf8");
+
+// ------------------------------------------------------------
+// Console Output
+// ------------------------------------------------------------
 console.log("\n📁 TOTAL FILES:", allFiles.length);
 console.log("📎 USED FILES:", usedFiles.size);
 console.log("🗑️ UNUSED FILES:", unusedFiles.length);
 console.log("❌ BROKEN IMPORTS:", brokenImports.length);
-console.log("🔁 CIRCULAR DEPENDENCIES:", cycles.length);
+console.log("⚠️ UNUSED EXPORTS:", unusedExports.length);
+console.log("🚫 MISSING COMPONENTS:", missingComponents.length);
+console.log("📄 MISSING TEMPLATES:", missingTemplates.length);
+console.log("📌 MISSING REQUIRED FILES:", missingRequiredFiles.length);
+console.log("🔁 CIRCULAR DEPENDENCIES:", circularDependencies.length);
 
-console.log("\n===============================");
-console.log("UNUSED FILES");
-console.log("===============================");
-unusedFiles.forEach(f => console.log(" -", f));
-
-console.log("\n===============================");
-console.log("BROKEN IMPORTS");
-console.log("===============================");
-brokenImports.forEach(b =>
-  console.log(` - ${b.file} → ${b.import}`)
-);
-
-console.log("\n===============================");
-console.log("CIRCULAR DEPENDENCIES");
-console.log("===============================");
-cycles.forEach(c => console.log(" -", c.join(" → ")));
-
-console.log("\n===============================");
-console.log("DEPENDENCY GRAPH (who talks to who)");
-console.log("===============================");
-Object.entries(graph).forEach(([file, deps]) => {
-  console.log(`\n${file}`);
-  deps.forEach(d => console.log("   →", d));
-});
-
-console.log("\n✅ Visual Editor Audit complete.\n");
+console.log(`\n📄 JSON report written to: ${REPORT_FILE}\n`);
+console.log("✅ Visual Editor Audit complete.\n");
