@@ -24,7 +24,7 @@ const WEBSITE_INDEX = path.resolve(
 
 const TEMPLATE_DATA_JSON = path.resolve(
   __dirname,
-  "visual-editor/src/templates/template/template.data.json"
+  "visual-editor/src/template/template.data.json"
 );
 
 const PUBLISH_JSON = path.resolve(

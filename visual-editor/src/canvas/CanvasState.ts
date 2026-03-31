@@ -68,7 +68,7 @@ export const useCanvasState = create<CanvasState>((set, get) => ({
   init: async () => {
     const sections = await loadTemplate();
     const templateData = await fetch(
-      "/src/templates/template/template.data.json"
+      "/src/template/template.data.json"
     ).then((r) => r.json());
 
     // Apply theme tokens to :root

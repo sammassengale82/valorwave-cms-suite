@@ -1,0 +1,574 @@
+VALORWAVE VISUAL EDITOR – FULL FIX PLAN REPORT
+Generated: 3/31/2026, 10:15:57 AM
+Source: visual-editor-audit.json
+
+============================================================
+MUST FIX (Critical Issues)
+============================================================
+
+• Broken import in /visual-editor/src/api/api.ts → "../../../mobile/MobileBridge"
+• Broken import in /visual-editor/src/cms-panel/CMSPanel.tsx → "../serialization/serializeToCMS"
+• Broken import in /visual-editor/src/cms-panel/fields/bio.ts → "../FieldEditor"
+• Broken import in /visual-editor/src/cms-panel/fields/brand-meaning.ts → "../FieldEditor"
+• Broken import in /visual-editor/src/cms-panel/fields/calendar.ts → "../FieldEditor"
+• Broken import in /visual-editor/src/cms-panel/fields/faq.ts → "../FieldEditor"
+• Broken import in /visual-editor/src/cms-panel/fields/footer.ts → "../FieldEditor"
+• Broken import in /visual-editor/src/cms-panel/fields/google.ts → "../FieldEditor"
+• Broken import in /visual-editor/src/cms-panel/fields/header.ts → "../FieldEditor"
+• Broken import in /visual-editor/src/cms-panel/fields/hero-discount.ts → "../FieldEditor"
+• Broken import in /visual-editor/src/cms-panel/fields/hero.ts → "../FieldEditor"
+• Broken import in /visual-editor/src/cms-panel/fields/navigation.ts → "../FieldEditor"
+• Broken import in /visual-editor/src/cms-panel/fields/seo.ts → "../FieldEditor"
+• Broken import in /visual-editor/src/cms-panel/fields/service-area.ts → "../FieldEditor"
+• Broken import in /visual-editor/src/cms-panel/fields/services.ts → "../FieldEditor"
+• Broken import in /visual-editor/src/cms-panel/fields/testimonials.ts → "../FieldEditor"
+• Broken import in /visual-editor/src/cms-panel/fields/wedding-dj.ts → "../FieldEditor"
+• Broken import in /visual-editor/src/editor/FieldEditor.tsx → "../cms-panel/fields"
+• Broken import in /visual-editor/src/editor/SectionFields.tsx → "../cms-panel/fields/testimonial-form"
+• Broken import in /visual-editor/src/templates/TemplatePicker.tsx → "../../../templates"
+• Broken import in /visual-editor/src/templates/useTemplateDrag.ts → "../../../templates"
+• Broken import in /visual-editor/src/templates/useTemplateVersioning.ts → "../../../template"
+• Broken import in /visual-editor/src/visual/compile/toComponentName.ts → "../../components/sections"
+• Missing React component "Asset" referenced in /visual-editor/src/api/assets.ts
+• Missing React component "Asset" referenced in /visual-editor/src/api/assets.ts
+• Missing React component "Asset" referenced in /visual-editor/src/api/assets.ts
+• Missing React component "TemplateData" referenced in /visual-editor/src/api/templates.ts
+• Missing React component "TemplateData" referenced in /visual-editor/src/api/templates.ts
+• Missing React component "BlockVariant" referenced in /visual-editor/src/api/variants.ts
+• Missing React component "BlockVariant" referenced in /visual-editor/src/api/variants.ts
+• Missing React component "BlockVariant" referenced in /visual-editor/src/api/variants.ts
+• Missing React component "ThemeProvider" referenced in /visual-editor/src/app/App.tsx
+• Missing React component "ThemeSwitcher" referenced in /visual-editor/src/app/App.tsx
+• Missing React component "Toolbar" referenced in /visual-editor/src/app/App.tsx
+• Missing React component "ModalHost" referenced in /visual-editor/src/app/App.tsx
+• Missing React component "InspectorPanel" referenced in /visual-editor/src/app/App.tsx
+• Missing React component "PreviewContainer" referenced in /visual-editor/src/app/App.tsx
+• Missing React component "Asset" referenced in /visual-editor/src/asset-manager/AssetManager.tsx
+• Missing React component "HTMLInputElement" referenced in /visual-editor/src/asset-manager/AssetManager.tsx
+• Missing React component "Asset" referenced in /visual-editor/src/asset-manager/AssetPicker.tsx
+• Missing React component "HTMLDivElement" referenced in /visual-editor/src/canvas/Canvas.tsx
+• Missing React component "BlockRenderer" referenced in /visual-editor/src/canvas/Canvas.tsx
+• Missing React component "SectionBlock" referenced in /visual-editor/src/canvas/CanvasRenderer.tsx
+• Missing React component "BlockRenderer" referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx
+• Missing React component "BlockRenderer" referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx
+• Missing React component "BlockRenderer" referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx
+• Missing React component "BlockRenderer" referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx
+• Missing React component "BlockRenderer" referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx
+• Missing React component "BlockRenderer" referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx
+• Missing React component "BlockRenderer" referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx
+• Missing React component "BlockRenderer" referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx
+• Missing React component "BlockRenderer" referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx
+• Missing React component "BlockRenderer" referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx
+• Missing React component "BlockRenderer" referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx
+• Missing React component "BlockRenderer" referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx
+• Missing React component "BlockRenderer" referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx
+• Missing React component "BlockRenderer" referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx
+• Missing React component "BlockRenderer" referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx
+• Missing React component "BlockRenderer" referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx
+• Missing React component "HTMLElement" referenced in /visual-editor/src/canvas/SelectionMarquee.tsx
+• Missing React component "Rect" referenced in /visual-editor/src/canvas/SelectionMarquee.tsx
+• Missing React component "SectionFields" referenced in /visual-editor/src/cms-panel/CMSPanel.tsx
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/bio.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/bio.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/bio.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/bio.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/bio.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/bio.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/brand-meaning.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/brand-meaning.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/brand-meaning.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/brand-meaning.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/faq.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/faq.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/faq.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/faq.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/footer.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/footer.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/footer.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/footer.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/footer.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/google.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/google.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/google.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/header.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/header.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/header.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/hero-discount.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/hero-discount.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/hero-discount.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/hero-discount.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/hero.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/hero.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/hero.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/hero.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/hero.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/hero.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/hero.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/navigation.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/navigation.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/navigation.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/navigation.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/navigation.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/navigation.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/navigation.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/seo.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/seo.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/seo.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/seo.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/seo.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/seo.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/service-area.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/service-area.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/services.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/services.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/services.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/services.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/testimonials.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/testimonials.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/testimonials.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/testimonials.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/testimonials.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/testimonials.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/testimonials.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/wedding-dj.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/wedding-dj.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/wedding-dj.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/wedding-dj.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/wedding-dj.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/wedding-dj.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/wedding-dj.ts
+• Missing React component "FieldEditor" referenced in /visual-editor/src/cms-panel/fields/wedding-dj.ts
+• Missing React component "Helmet" referenced in /visual-editor/src/components/sections/GoogleSection.tsx
+• Missing React component "Helmet" referenced in /visual-editor/src/components/sections/SeoSection.tsx
+• Missing React component "ContentInspector" referenced in /visual-editor/src/editor/Inspector.tsx
+• Missing React component "StyleInspector" referenced in /visual-editor/src/editor/Inspector.tsx
+• Missing React component "AnimationPanel" referenced in /visual-editor/src/editor/Inspector.tsx
+• Missing React component "Field" referenced in /visual-editor/src/editor/panels/SiteSettingsPanel.tsx
+• Missing React component "Field" referenced in /visual-editor/src/editor/panels/SiteSettingsPanel.tsx
+• Missing React component "Field" referenced in /visual-editor/src/editor/panels/SiteSettingsPanel.tsx
+• Missing React component "Field" referenced in /visual-editor/src/editor/panels/SiteSettingsPanel.tsx
+• Missing React component "Field" referenced in /visual-editor/src/editor/panels/SiteSettingsPanel.tsx
+• Missing React component "Field" referenced in /visual-editor/src/editor/panels/SiteSettingsPanel.tsx
+• Missing React component "Field" referenced in /visual-editor/src/editor/panels/SiteSettingsPanel.tsx
+• Missing React component "PreviewRenderer" referenced in /visual-editor/src/editor/PreviewContainer.tsx
+• Missing React component "HeroFields" referenced in /visual-editor/src/editor/SectionFields.tsx
+• Missing React component "NavigationFields" referenced in /visual-editor/src/editor/SectionFields.tsx
+• Missing React component "HeaderFields" referenced in /visual-editor/src/editor/SectionFields.tsx
+• Missing React component "ServicesFields" referenced in /visual-editor/src/editor/SectionFields.tsx
+• Missing React component "ServiceAreaFields" referenced in /visual-editor/src/editor/SectionFields.tsx
+• Missing React component "BioFields" referenced in /visual-editor/src/editor/SectionFields.tsx
+• Missing React component "WeddingDJFields" referenced in /visual-editor/src/editor/SectionFields.tsx
+• Missing React component "FAQFields" referenced in /visual-editor/src/editor/SectionFields.tsx
+• Missing React component "BrandMeaningFields" referenced in /visual-editor/src/editor/SectionFields.tsx
+• Missing React component "HeroDiscountFields" referenced in /visual-editor/src/editor/SectionFields.tsx
+• Missing React component "CalendarFields" referenced in /visual-editor/src/editor/SectionFields.tsx
+• Missing React component "TestimonialFormFields" referenced in /visual-editor/src/editor/SectionFields.tsx
+• Missing React component "TestimonialsFields" referenced in /visual-editor/src/editor/SectionFields.tsx
+• Missing React component "FooterFields" referenced in /visual-editor/src/editor/SectionFields.tsx
+• Missing React component "SEOFields" referenced in /visual-editor/src/editor/SectionFields.tsx
+• Missing React component "GoogleFields" referenced in /visual-editor/src/editor/SectionFields.tsx
+• Missing React component "HTMLDivElement" referenced in /visual-editor/src/history/HistoryScrubber.tsx
+• Missing React component "App" referenced in /visual-editor/src/index.tsx
+• Missing React component "Node" referenced in /visual-editor/src/inspector/ComponentInspector.tsx
+• Missing React component "Node" referenced in /visual-editor/src/inspector/ComponentInspector.tsx
+• Missing React component "Node" referenced in /visual-editor/src/inspector/ComponentInspector.tsx
+• Missing React component "Node" referenced in /visual-editor/src/inspector/ComponentInspector.tsx
+• Missing React component "SectionManager" referenced in /visual-editor/src/inspector/InspectorPanel.tsx
+• Missing React component "SiteSettingsPanel" referenced in /visual-editor/src/inspector/InspectorPanel.tsx
+• Missing React component "ThemeEditorPanel" referenced in /visual-editor/src/inspector/InspectorPanel.tsx
+• Missing React component "StyleInspector" referenced in /visual-editor/src/inspector/InspectorPanel.tsx
+• Missing React component "AssetPicker" referenced in /visual-editor/src/inspector/style/BackgroundPanel.tsx
+• Missing React component "Node" referenced in /visual-editor/src/inspector/style/StyleInspector.tsx
+• Missing React component "Node" referenced in /visual-editor/src/inspector/style/StyleInspector.tsx
+• Missing React component "HistoryScrubber" referenced in /visual-editor/src/layout/EditorLayout.tsx
+• Missing React component "TemplateData" referenced in /visual-editor/src/template-library/TemplateLibrary.tsx
+• Missing React component "TemplateEntry" referenced in /visual-editor/src/templates/useTemplateDrag.ts
+• Missing React component "ThemeState" referenced in /visual-editor/src/theme/theme-manager.ts
+• Missing React component "ThemeContextType" referenced in /visual-editor/src/themes/ThemeManager.tsx
+• Missing React component "ThemeName" referenced in /visual-editor/src/themes/ThemeManager.tsx
+• Missing React component "ThemeContext" referenced in /visual-editor/src/themes/ThemeManager.tsx
+• Missing React component "SectionRenderer" referenced in /visual-editor/src/visual/iframe-entry.js
+• Missing React component "SectionRenderer" referenced in /visual-editor/src/visual/iframe-entry.tsx
+• Missing React component "PageRenderer" referenced in /visual-editor/src/visual/iframe-renderer.tsx
+• Missing React component "HTMLIFrameElement" referenced in /visual-editor/src/visual/PreviewRenderer.tsx
+• Missing React component "Component" referenced in /visual-editor/src/visual/render/renderSectionComponent.tsx
+• Missing React component "Component" referenced in /visual-editor/src/visual/render/SectionRenderer.tsx
+• Missing React component "HTMLDivElement" referenced in /visual-editor/src/wysiwyg/InlineTextEditor.tsx
+• Required file missing: /visual-editor/src/main.tsx
+• Required file missing: /visual-editor/src/App.tsx
+
+
+============================================================
+SHOULD FIX (Recommended Cleanup)
+============================================================
+
+• Unused file: /visual-editor/package.json
+• Unused file: /visual-editor/tsconfig.json
+• Unused file: /visual-editor/vite.config.ts
+• Unused file: /visual-editor/src/animations/AnimationEngine.ts
+• Unused file: /visual-editor/src/api/templates.ts
+• Unused file: /visual-editor/src/api/variants.ts
+• Unused file: /visual-editor/src/asset-manager/AssetManager.tsx
+• Unused file: /visual-editor/src/block-library/BlockLibrary.tsx
+• Unused file: /visual-editor/src/canvas/buildDraftJson.ts
+• Unused file: /visual-editor/src/canvas/buildPublishJson.ts
+• Unused file: /visual-editor/src/canvas/Canvas.tsx
+• Unused file: /visual-editor/src/canvas/CanvasRenderer.tsx
+• Unused file: /visual-editor/src/canvas/DragDrop.ts
+• Unused file: /visual-editor/src/canvas/old.BlockRenderer.tsx
+• Unused file: /visual-editor/src/canvas/Resize.ts
+• Unused file: /visual-editor/src/canvas/SectionWrapper.tsx
+• Unused file: /visual-editor/src/canvas/Selection.ts
+• Unused file: /visual-editor/src/canvas/templateMapper.ts
+• Unused file: /visual-editor/src/cms-panel/CMSPanel.tsx
+• Unused file: /visual-editor/src/components/sections/CMSLoaderSection.tsx
+• Unused file: /visual-editor/src/components/sections/sections.json
+• Unused file: /visual-editor/src/components/sections/SeoSection.tsx
+• Unused file: /visual-editor/src/components/sections/WeddingDjSection.tsx
+• Unused file: /visual-editor/src/devices/DeviceSwitcher.tsx
+• Unused file: /visual-editor/src/dragdrop/DragLayer.tsx
+• Unused file: /visual-editor/src/dragdrop/useDragBlock.ts
+• Unused file: /visual-editor/src/dragdrop/useDropZone.ts
+• Unused file: /visual-editor/src/editor/Inspector.tsx
+• Unused file: /visual-editor/src/editor/PreviewMode.tsx
+• Unused file: /visual-editor/src/history/HistoryPanel.tsx
+• Unused file: /visual-editor/src/index.tsx
+• Unused file: /visual-editor/src/inspector/ColorPanel.tsx
+• Unused file: /visual-editor/src/inspector/LayoutPanel.tsx
+• Unused file: /visual-editor/src/inspector/SectionSettings.tsx
+• Unused file: /visual-editor/src/inspector/SpacingPanel.tsx
+• Unused file: /visual-editor/src/inspector/style/BackgroundPanel.tsx
+• Unused file: /visual-editor/src/inspector/style/BorderPanel.tsx
+• Unused file: /visual-editor/src/inspector/style/LayoutPanel.tsx
+• Unused file: /visual-editor/src/inspector/style/ResponsiveTabs.tsx
+• Unused file: /visual-editor/src/inspector/style/ShadowPanel.tsx
+• Unused file: /visual-editor/src/inspector/style/TypographyPanel.tsx
+• Unused file: /visual-editor/src/inspector/TypographyPanel.tsx
+• Unused file: /visual-editor/src/layout/EditorLayout.tsx
+• Unused file: /visual-editor/src/media/MediaLibrary.tsx
+• Unused file: /visual-editor/src/section-library/SectionLibrary.tsx
+• Unused file: /visual-editor/src/serialization/deserializationFromCMS.ts
+• Unused file: /visual-editor/src/serialization/serializationToCMS.ts
+• Unused file: /visual-editor/src/template-library/TemplateLibrary.tsx
+• Unused file: /visual-editor/src/templates/index.ts
+• Unused file: /visual-editor/src/templates/TemplatePicker.tsx
+• Unused file: /visual-editor/src/templates/useTemplateDrag.ts
+• Unused file: /visual-editor/src/templates/useTemplateVersioning.ts
+• Unused file: /visual-editor/src/theme/ThemeEditor.tsx
+• Unused file: /visual-editor/src/theme/ThemeProvider.tsx
+• Unused file: /visual-editor/src/theme/wave-divider.tsx
+• Unused file: /visual-editor/src/types/HistoryTypes.ts
+• Unused file: /visual-editor/src/visual/compile/compileNode.ts
+• Unused file: /visual-editor/src/visual/iframe-entry.js
+• Unused file: /visual-editor/src/visual/iframe-entry.ts
+• Unused file: /visual-editor/src/visual/iframe-entry.tsx
+• Unused file: /visual-editor/src/visual/iframe-main.ts
+• Unused file: /visual-editor/src/visual/render/renderSectionComponent.tsx
+• Unused file: /visual-editor/src/wysiwyg/WysiwygWrapper.tsx
+• Unused file: /visual-editor/public/js-old/cms-loader.js
+• Unused file: /visual-editor/public/publish.json
+• Unused export "AnimationEngine" in /visual-editor/src/animations/AnimationEngine.ts
+• Unused export "listTemplates" in /visual-editor/src/api/templates.ts
+• Unused export "saveTemplate" in /visual-editor/src/api/templates.ts
+• Unused export "deleteTemplate" in /visual-editor/src/api/templates.ts
+• Unused export "renameTemplate" in /visual-editor/src/api/templates.ts
+• Unused export "loadTemplateNode" in /visual-editor/src/api/templates.ts
+• Unused export "listVariants" in /visual-editor/src/api/variants.ts
+• Unused export "saveVariant" in /visual-editor/src/api/variants.ts
+• Unused export "deleteVariant" in /visual-editor/src/api/variants.ts
+• Unused export "renameVariant" in /visual-editor/src/api/variants.ts
+• Unused export "loadVariant" in /visual-editor/src/api/variants.ts
+• Unused export "buildDraftJson" in /visual-editor/src/canvas/buildDraftJson.ts
+• Unused export "buildPublishJson" in /visual-editor/src/canvas/buildPublishJson.ts
+• Unused export "startDrag" in /visual-editor/src/canvas/DragDrop.ts
+• Unused export "endDrag" in /visual-editor/src/canvas/DragDrop.ts
+• Unused export "moveNodeToRootIndex" in /visual-editor/src/canvas/DragDrop.ts
+• Unused export "startResize" in /visual-editor/src/canvas/Resize.ts
+• Unused export "endResize" in /visual-editor/src/canvas/Resize.ts
+• Unused export "applyResize" in /visual-editor/src/canvas/Resize.ts
+• Unused export "selectNode" in /visual-editor/src/canvas/Selection.ts
+• Unused export "getSelectedNode" in /visual-editor/src/canvas/Selection.ts
+• Unused export "templatesToTree" in /visual-editor/src/canvas/templateMapper.ts
+• Unused export "useDragBlock" in /visual-editor/src/dragdrop/useDragBlock.ts
+• Unused export "useDropZone" in /visual-editor/src/dragdrop/useDropZone.ts
+• Unused export "deserializeFromCMS" in /visual-editor/src/serialization/deserializationFromCMS.ts
+• Unused export "serializeToCMS" in /visual-editor/src/serialization/serializationToCMS.ts
+• Unused export "templates" in /visual-editor/src/templates/index.ts
+• Unused export "useTemplateDrag" in /visual-editor/src/templates/useTemplateDrag.ts
+• Unused export "getTemplateVersionFromTemplate" in /visual-editor/src/templates/useTemplateVersioning.ts
+• Unused export "getInstanceTemplateVersion" in /visual-editor/src/templates/useTemplateVersioning.ts
+• Unused export "hasTemplateUpdateForNode" in /visual-editor/src/templates/useTemplateVersioning.ts
+• Unused export "compileNode" in /visual-editor/src/visual/compile/compileNode.ts
+• Unused export "renderSectionComponent" in /visual-editor/src/visual/render/renderSectionComponent.tsx
+• Unused CSS class: ".anim-active"
+• Unused CSS class: ".left-panel"
+• Unused CSS class: ".active"
+• Unused CSS class: ".is-selected"
+• Unused CSS class: ".canvas-container"
+• Unused CSS class: ".canvas-content"
+• Unused CSS class: ".selected"
+• Unused CSS class: ".selection-outline"
+• Unused CSS class: ".block-wrapper"
+• Unused CSS class: ".absolute"
+• Unused CSS class: ".section-wrapper"
+• Unused CSS class: ".canvas-zoom"
+• Unused CSS class: ".preview-toolbar"
+• Unused CSS class: ".preview-frame"
+• Unused CSS class: ".component-inspector"
+• Unused CSS class: ".component-row"
+• Unused CSS class: ".header-cta"
+• Unused CSS class: ".mobile-quicknav"
+• Unused CSS class: ".cat"
+• Unused CSS class: ".replace-btn"
+• Unused CSS class: ".canvas-dropzone"
+• Unused CSS class: ".update-btn"
+• Unused CSS class: ".theme-patriotic"
+• Unused CSS class: ".theme-dark-operator"
+• Unused CSS class: ".theme-multicam"
+• Unused CSS class: ".wave-top"
+• Unused CSS class: ".wave-bottom"
+• Unused CSS class: ".top-bar"
+
+
+============================================================
+NICE TO FIX (Quality Improvements)
+============================================================
+
+• Unused React prop "name" in component SectionItem (/visual-editor/src/section-library/SectionItem.tsx)
+• Unused React prop "children" in component ThemeProvider (/visual-editor/src/theme/ThemeProvider.tsx)
+
+
+============================================================
+RECONSTRUCTION PLAN – Missing Required Files
+============================================================
+
+• Create file: /visual-editor/src/main.tsx
+• Create file: /visual-editor/src/App.tsx
+
+
+============================================================
+RECONSTRUCTION PLAN – Missing Components
+============================================================
+
+• Create component "Asset" (referenced in /visual-editor/src/api/assets.ts)
+• Create component "Asset" (referenced in /visual-editor/src/api/assets.ts)
+• Create component "Asset" (referenced in /visual-editor/src/api/assets.ts)
+• Create component "TemplateData" (referenced in /visual-editor/src/api/templates.ts)
+• Create component "TemplateData" (referenced in /visual-editor/src/api/templates.ts)
+• Create component "BlockVariant" (referenced in /visual-editor/src/api/variants.ts)
+• Create component "BlockVariant" (referenced in /visual-editor/src/api/variants.ts)
+• Create component "BlockVariant" (referenced in /visual-editor/src/api/variants.ts)
+• Create component "ThemeProvider" (referenced in /visual-editor/src/app/App.tsx)
+• Create component "ThemeSwitcher" (referenced in /visual-editor/src/app/App.tsx)
+• Create component "Toolbar" (referenced in /visual-editor/src/app/App.tsx)
+• Create component "ModalHost" (referenced in /visual-editor/src/app/App.tsx)
+• Create component "InspectorPanel" (referenced in /visual-editor/src/app/App.tsx)
+• Create component "PreviewContainer" (referenced in /visual-editor/src/app/App.tsx)
+• Create component "Asset" (referenced in /visual-editor/src/asset-manager/AssetManager.tsx)
+• Create component "HTMLInputElement" (referenced in /visual-editor/src/asset-manager/AssetManager.tsx)
+• Create component "Asset" (referenced in /visual-editor/src/asset-manager/AssetPicker.tsx)
+• Create component "HTMLDivElement" (referenced in /visual-editor/src/canvas/Canvas.tsx)
+• Create component "BlockRenderer" (referenced in /visual-editor/src/canvas/Canvas.tsx)
+• Create component "SectionBlock" (referenced in /visual-editor/src/canvas/CanvasRenderer.tsx)
+• Create component "BlockRenderer" (referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx)
+• Create component "BlockRenderer" (referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx)
+• Create component "BlockRenderer" (referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx)
+• Create component "BlockRenderer" (referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx)
+• Create component "BlockRenderer" (referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx)
+• Create component "BlockRenderer" (referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx)
+• Create component "BlockRenderer" (referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx)
+• Create component "BlockRenderer" (referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx)
+• Create component "BlockRenderer" (referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx)
+• Create component "BlockRenderer" (referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx)
+• Create component "BlockRenderer" (referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx)
+• Create component "BlockRenderer" (referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx)
+• Create component "BlockRenderer" (referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx)
+• Create component "BlockRenderer" (referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx)
+• Create component "BlockRenderer" (referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx)
+• Create component "BlockRenderer" (referenced in /visual-editor/src/canvas/old.BlockRenderer.tsx)
+• Create component "HTMLElement" (referenced in /visual-editor/src/canvas/SelectionMarquee.tsx)
+• Create component "Rect" (referenced in /visual-editor/src/canvas/SelectionMarquee.tsx)
+• Create component "SectionFields" (referenced in /visual-editor/src/cms-panel/CMSPanel.tsx)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/bio.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/bio.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/bio.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/bio.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/bio.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/bio.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/brand-meaning.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/brand-meaning.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/brand-meaning.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/brand-meaning.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/faq.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/faq.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/faq.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/faq.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/footer.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/footer.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/footer.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/footer.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/footer.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/google.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/google.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/google.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/header.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/header.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/header.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/hero-discount.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/hero-discount.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/hero-discount.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/hero-discount.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/hero.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/hero.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/hero.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/hero.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/hero.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/hero.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/hero.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/navigation.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/navigation.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/navigation.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/navigation.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/navigation.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/navigation.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/navigation.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/seo.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/seo.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/seo.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/seo.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/seo.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/seo.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/service-area.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/service-area.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/services.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/services.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/services.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/services.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/testimonials.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/testimonials.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/testimonials.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/testimonials.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/testimonials.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/testimonials.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/testimonials.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/wedding-dj.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/wedding-dj.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/wedding-dj.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/wedding-dj.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/wedding-dj.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/wedding-dj.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/wedding-dj.ts)
+• Create component "FieldEditor" (referenced in /visual-editor/src/cms-panel/fields/wedding-dj.ts)
+• Create component "Helmet" (referenced in /visual-editor/src/components/sections/GoogleSection.tsx)
+• Create component "Helmet" (referenced in /visual-editor/src/components/sections/SeoSection.tsx)
+• Create component "ContentInspector" (referenced in /visual-editor/src/editor/Inspector.tsx)
+• Create component "StyleInspector" (referenced in /visual-editor/src/editor/Inspector.tsx)
+• Create component "AnimationPanel" (referenced in /visual-editor/src/editor/Inspector.tsx)
+• Create component "Field" (referenced in /visual-editor/src/editor/panels/SiteSettingsPanel.tsx)
+• Create component "Field" (referenced in /visual-editor/src/editor/panels/SiteSettingsPanel.tsx)
+• Create component "Field" (referenced in /visual-editor/src/editor/panels/SiteSettingsPanel.tsx)
+• Create component "Field" (referenced in /visual-editor/src/editor/panels/SiteSettingsPanel.tsx)
+• Create component "Field" (referenced in /visual-editor/src/editor/panels/SiteSettingsPanel.tsx)
+• Create component "Field" (referenced in /visual-editor/src/editor/panels/SiteSettingsPanel.tsx)
+• Create component "Field" (referenced in /visual-editor/src/editor/panels/SiteSettingsPanel.tsx)
+• Create component "PreviewRenderer" (referenced in /visual-editor/src/editor/PreviewContainer.tsx)
+• Create component "HeroFields" (referenced in /visual-editor/src/editor/SectionFields.tsx)
+• Create component "NavigationFields" (referenced in /visual-editor/src/editor/SectionFields.tsx)
+• Create component "HeaderFields" (referenced in /visual-editor/src/editor/SectionFields.tsx)
+• Create component "ServicesFields" (referenced in /visual-editor/src/editor/SectionFields.tsx)
+• Create component "ServiceAreaFields" (referenced in /visual-editor/src/editor/SectionFields.tsx)
+• Create component "BioFields" (referenced in /visual-editor/src/editor/SectionFields.tsx)
+• Create component "WeddingDJFields" (referenced in /visual-editor/src/editor/SectionFields.tsx)
+• Create component "FAQFields" (referenced in /visual-editor/src/editor/SectionFields.tsx)
+• Create component "BrandMeaningFields" (referenced in /visual-editor/src/editor/SectionFields.tsx)
+• Create component "HeroDiscountFields" (referenced in /visual-editor/src/editor/SectionFields.tsx)
+• Create component "CalendarFields" (referenced in /visual-editor/src/editor/SectionFields.tsx)
+• Create component "TestimonialFormFields" (referenced in /visual-editor/src/editor/SectionFields.tsx)
+• Create component "TestimonialsFields" (referenced in /visual-editor/src/editor/SectionFields.tsx)
+• Create component "FooterFields" (referenced in /visual-editor/src/editor/SectionFields.tsx)
+• Create component "SEOFields" (referenced in /visual-editor/src/editor/SectionFields.tsx)
+• Create component "GoogleFields" (referenced in /visual-editor/src/editor/SectionFields.tsx)
+• Create component "HTMLDivElement" (referenced in /visual-editor/src/history/HistoryScrubber.tsx)
+• Create component "App" (referenced in /visual-editor/src/index.tsx)
+• Create component "Node" (referenced in /visual-editor/src/inspector/ComponentInspector.tsx)
+• Create component "Node" (referenced in /visual-editor/src/inspector/ComponentInspector.tsx)
+• Create component "Node" (referenced in /visual-editor/src/inspector/ComponentInspector.tsx)
+• Create component "Node" (referenced in /visual-editor/src/inspector/ComponentInspector.tsx)
+• Create component "SectionManager" (referenced in /visual-editor/src/inspector/InspectorPanel.tsx)
+• Create component "SiteSettingsPanel" (referenced in /visual-editor/src/inspector/InspectorPanel.tsx)
+• Create component "ThemeEditorPanel" (referenced in /visual-editor/src/inspector/InspectorPanel.tsx)
+• Create component "StyleInspector" (referenced in /visual-editor/src/inspector/InspectorPanel.tsx)
+• Create component "AssetPicker" (referenced in /visual-editor/src/inspector/style/BackgroundPanel.tsx)
+• Create component "Node" (referenced in /visual-editor/src/inspector/style/StyleInspector.tsx)
+• Create component "Node" (referenced in /visual-editor/src/inspector/style/StyleInspector.tsx)
+• Create component "HistoryScrubber" (referenced in /visual-editor/src/layout/EditorLayout.tsx)
+• Create component "TemplateData" (referenced in /visual-editor/src/template-library/TemplateLibrary.tsx)
+• Create component "TemplateEntry" (referenced in /visual-editor/src/templates/useTemplateDrag.ts)
+• Create component "ThemeState" (referenced in /visual-editor/src/theme/theme-manager.ts)
+• Create component "ThemeContextType" (referenced in /visual-editor/src/themes/ThemeManager.tsx)
+• Create component "ThemeName" (referenced in /visual-editor/src/themes/ThemeManager.tsx)
+• Create component "ThemeContext" (referenced in /visual-editor/src/themes/ThemeManager.tsx)
+• Create component "SectionRenderer" (referenced in /visual-editor/src/visual/iframe-entry.js)
+• Create component "SectionRenderer" (referenced in /visual-editor/src/visual/iframe-entry.tsx)
+• Create component "PageRenderer" (referenced in /visual-editor/src/visual/iframe-renderer.tsx)
+• Create component "HTMLIFrameElement" (referenced in /visual-editor/src/visual/PreviewRenderer.tsx)
+• Create component "Component" (referenced in /visual-editor/src/visual/render/renderSectionComponent.tsx)
+• Create component "Component" (referenced in /visual-editor/src/visual/render/SectionRenderer.tsx)
+• Create component "HTMLDivElement" (referenced in /visual-editor/src/wysiwyg/InlineTextEditor.tsx)
+
+
+============================================================
+RECONSTRUCTION PLAN – Missing Templates
+============================================================
+
+✔ None
+
+
+============================================================
+CSS CLEANUP PLAN
+============================================================
+
+• Remove or verify unused class ".anim-active"
+• Remove or verify unused class ".left-panel"
+• Remove or verify unused class ".active"
+• Remove or verify unused class ".is-selected"
+• Remove or verify unused class ".canvas-container"
+• Remove or verify unused class ".canvas-content"
+• Remove or verify unused class ".selected"
+• Remove or verify unused class ".selection-outline"
+• Remove or verify unused class ".block-wrapper"
+• Remove or verify unused class ".absolute"
+• Remove or verify unused class ".section-wrapper"
+• Remove or verify unused class ".canvas-zoom"
+• Remove or verify unused class ".preview-toolbar"
+• Remove or verify unused class ".preview-frame"
+• Remove or verify unused class ".component-inspector"
+• Remove or verify unused class ".component-row"
+• Remove or verify unused class ".header-cta"
+• Remove or verify unused class ".mobile-quicknav"
+• Remove or verify unused class ".cat"
+• Remove or verify unused class ".replace-btn"
+• Remove or verify unused class ".canvas-dropzone"
+• Remove or verify unused class ".update-btn"
+• Remove or verify unused class ".theme-patriotic"
+• Remove or verify unused class ".theme-dark-operator"
+• Remove or verify unused class ".theme-multicam"
+• Remove or verify unused class ".wave-top"
+• Remove or verify unused class ".wave-bottom"
+• Remove or verify unused class ".top-bar"
+
+
+============================================================
+REACT PROPS CLEANUP PLAN
+============================================================
+
+• Remove unused prop "name" from SectionItem (/visual-editor/src/section-library/SectionItem.tsx)
+• Remove unused prop "children" from ThemeProvider (/visual-editor/src/theme/ThemeProvider.tsx)
+
+
+============================================================
+DEPENDENCY CLEANUP PLAN
+============================================================
+
+✔ None
+

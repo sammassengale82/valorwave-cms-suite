@@ -66,8 +66,9 @@ window.renderVisualTree = (visualTree: any) => {
   // Render into #root
   renderIntoIframe(visualTree);
 
-  // ⭐ Re-attach editable handlers after DOM update
-  attachEditableHandlers();
-
-  console.log("Preview DOM rendered + handlers attached.");
+  // ⭐ Wait for React to finish rendering before scanning DOM
+  requestAnimationFrame(() => {
+    attachEditableHandlers();
+    console.log("Preview DOM rendered + handlers attached.");
+  });
 };

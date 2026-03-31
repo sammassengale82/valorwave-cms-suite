@@ -1,5 +1,5 @@
 // src/visual/compile/compileToVisualTree.ts
-import templateData from "../../templates/template/template.data.json";
+import templateData from "../../template/template.data.json";
 
 export interface VisualSectionNode {
   id: string;

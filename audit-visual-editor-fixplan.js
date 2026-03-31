@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 /**
- * Valorwave Visual Editor – Fix Plan Generator
- * --------------------------------------------------------------
+ * Valorwave Visual Editor – Fix Plan Generator (DOC/TXT OUTPUT EDITION)
+ * -----------------------------------------------------------------------
  * This script reads visual-editor-audit.json and produces:
  *
  *  - Must-Fix issues
@@ -14,13 +14,17 @@
  *  - Props cleanup plan
  *  - Dependency cleanup plan
  *
- * This script does NOT modify any files.
+ * AND ALSO:
+ *  - Writes a full DOC-style report to: visual-editor-fix-report.txt
+ *
+ * This script does NOT modify any project files.
  */
 
 const fs = require("fs");
 const path = require("path");
 
 const REPORT_FILE = "visual-editor-audit.json";
+const OUTPUT_FILE = "visual-editor-fix-report.txt";
 
 if (!fs.existsSync(REPORT_FILE)) {
   console.error("❌ ERROR: visual-editor-audit.json not found. Run the audit script first.");
@@ -43,9 +47,7 @@ const mustFix = [];
 const shouldFix = [];
 const niceToFix = [];
 
-// ----------------------
 // MUST FIX
-// ----------------------
 report.brokenImports.forEach((b) =>
   mustFix.push(`Broken import in ${short(b.file)} → "${b.import}"`)
 );
@@ -66,9 +68,7 @@ report.circularDependencies.forEach((cycle) =>
   mustFix.push(`Circular dependency: ${cycle.map(short).join(" → ")}`)
 );
 
-// ----------------------
 // SHOULD FIX
-// ----------------------
 report.unusedFiles.forEach((f) =>
   shouldFix.push(`Unused file: ${short(f)}`)
 );
@@ -81,9 +81,7 @@ report.css.unusedClasses.forEach((c) =>
   shouldFix.push(`Unused CSS class: ".${c}"`)
 );
 
-// ----------------------
 // NICE TO FIX
-// ----------------------
 report.reactProps.unusedProps.forEach((p) =>
   niceToFix.push(
     `Unused React prop "${p.prop}" in component ${p.component} (${short(p.file)})`
@@ -91,100 +89,85 @@ report.reactProps.unusedProps.forEach((p) =>
 );
 
 // ------------------------------------------------------------
-// Output Fix Plan
+// Build DOC/TXT Report
 // ------------------------------------------------------------
+let doc = "";
+
+function section(title) {
+  doc += `\n============================================================\n`;
+  doc += `${title}\n`;
+  doc += `============================================================\n\n`;
+}
+
+function list(items) {
+  if (items.length === 0) {
+    doc += `✔ None\n\n`;
+  } else {
+    items.forEach((i) => (doc += `• ${i}\n`));
+    doc += `\n`;
+  }
+}
+
+doc += `VALORWAVE VISUAL EDITOR – FULL FIX PLAN REPORT\n`;
+doc += `Generated: ${new Date().toLocaleString()}\n`;
+doc += `Source: visual-editor-audit.json\n`;
+
+section("MUST FIX (Critical Issues)");
+list(mustFix);
+
+section("SHOULD FIX (Recommended Cleanup)");
+list(shouldFix);
+
+section("NICE TO FIX (Quality Improvements)");
+list(niceToFix);
+
+section("RECONSTRUCTION PLAN – Missing Required Files");
+list(report.missingRequiredFiles.map((f) => `Create file: ${short(f)}`));
+
+section("RECONSTRUCTION PLAN – Missing Components");
+list(
+  report.missingComponents.map(
+    (c) => `Create component "${c.component}" (referenced in ${short(c.file)})`
+  )
+);
+
+section("RECONSTRUCTION PLAN – Missing Templates");
+list(
+  report.missingTemplates.map(
+    (t) => `Create template "${t.template}" (referenced in ${short(t.file)})`
+  )
+);
+
+section("CSS CLEANUP PLAN");
+list(report.css.unusedClasses.map((c) => `Remove or verify unused class ".${c}"`));
+
+section("REACT PROPS CLEANUP PLAN");
+list(
+  report.reactProps.unusedProps.map(
+    (p) => `Remove unused prop "${p.prop}" from ${p.component} (${short(p.file)})`
+  )
+);
+
+section("DEPENDENCY CLEANUP PLAN");
+list(
+  report.circularDependencies.map(
+    (cycle) => `Break cycle: ${cycle.map(short).join(" → ")}`
+  )
+);
+
+// ------------------------------------------------------------
+// Write report file
+// ------------------------------------------------------------
+fs.writeFileSync(OUTPUT_FILE, doc, "utf8");
+
 console.log("\n====================================================");
 console.log("🔥 VALORWAVE VISUAL EDITOR – FIX PLAN");
 console.log("====================================================\n");
 
-console.log("📌 MUST FIX (Critical issues)\n");
-if (mustFix.length === 0) console.log("  ✔ No critical issues detected.\n");
-else mustFix.forEach((i) => console.log("  - " + i));
-
-console.log("\n📌 SHOULD FIX (Recommended cleanup)\n");
-if (shouldFix.length === 0) console.log("  ✔ No recommended cleanup items.\n");
-else shouldFix.forEach((i) => console.log("  - " + i));
-
-console.log("\n📌 NICE TO FIX (Quality improvements)\n");
-if (niceToFix.length === 0) console.log("  ✔ No minor issues.\n");
-else niceToFix.forEach((i) => console.log("  - " + i));
-
-console.log("\n====================================================");
-console.log("🛠️  RECONSTRUCTION PLAN");
-console.log("====================================================\n");
-
-// Missing files
-if (report.missingRequiredFiles.length > 0) {
-  console.log("📄 Missing Required Files:");
-  report.missingRequiredFiles.forEach((f) =>
-    console.log("  - Create file:", short(f))
-  );
-  console.log("");
-}
-
-// Missing components
-if (report.missingComponents.length > 0) {
-  console.log("🧩 Missing Components:");
-  report.missingComponents.forEach((c) =>
-    console.log(
-      `  - Create component "${c.component}" (referenced in ${short(c.file)})`
-    )
-  );
-  console.log("");
-}
-
-// Missing templates
-if (report.missingTemplates.length > 0) {
-  console.log("📄 Missing Templates:");
-  report.missingTemplates.forEach((t) =>
-    console.log(
-      `  - Create template "${t.template}" (referenced in ${short(t.file)})`
-    )
-  );
-  console.log("");
-}
+console.log(doc);
 
 console.log("====================================================");
-console.log("🎨 CSS CLEANUP PLAN");
+console.log(`📄 FIX REPORT WRITTEN TO: ${OUTPUT_FILE}`);
 console.log("====================================================\n");
 
-if (report.css.unusedClasses.length === 0) {
-  console.log("✔ All CSS classes are used.\n");
-} else {
-  report.css.unusedClasses.forEach((c) =>
-    console.log(`  - Remove or verify unused class ".${c}"`)
-  );
-  console.log("");
-}
-
-console.log("====================================================");
-console.log("🧩 REACT PROPS CLEANUP PLAN");
-console.log("====================================================\n");
-
-if (report.reactProps.unusedProps.length === 0) {
-  console.log("✔ No unused props detected.\n");
-} else {
-  report.reactProps.unusedProps.forEach((p) =>
-    console.log(
-      `  - Remove unused prop "${p.prop}" from ${p.component} (${short(p.file)})`
-    )
-  );
-  console.log("");
-}
-
-console.log("====================================================");
-console.log("🔗 DEPENDENCY CLEANUP PLAN");
-console.log("====================================================\n");
-
-if (report.circularDependencies.length === 0) {
-  console.log("✔ No circular dependencies.\n");
-} else {
-  report.circularDependencies.forEach((cycle) =>
-    console.log("  - Break cycle:", cycle.map(short).join(" → "))
-  );
-  console.log("");
-}
-
-console.log("====================================================");
-console.log("✅ FIX PLAN COMPLETE");
-console.log("====================================================\n");
+console.log("✅ FIX PLAN REPORT COMPLETE\n");

@@ -1,0 +1,2099 @@
+{
+  "scannedFiles": [
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\package.json",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\theme-config.json",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\tsconfig.json",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\vite.config.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\animations\\AnimationEngine.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\api.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\assets.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\templates.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\variants.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\app\\App.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\asset-manager\\AssetManager.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\asset-manager\\AssetPicker.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\block-library\\block-presets.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\block-library\\BlockItem.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\block-library\\BlockLibrary.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\BlockWrapper.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\buildDraftJson.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\buildPublishJson.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\Canvas.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasRenderer.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\cmsConverters.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\cmsTypes.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\DragDrop.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\loadTemplate.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\publishSite.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\Resize.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\saveDraft.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\saveTemplates.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\SectionWrapper.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\Selection.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\SelectionMarquee.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\templateMapper.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\templateTypes.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\CMSPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\bio.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\brand-meaning.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\calendar.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\faq.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\footer.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\google.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\header.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero-discount.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\navigation.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\seo.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\service-area.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\services.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\testimonials.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\wedding-dj.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\BioSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\BrandMeaningSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\CalendarSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\CMSLoaderSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\FaqSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\FooterSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\GoogleSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\HeaderSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\HeroDiscountSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\HeroSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\sections.json",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\SeoSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\ServiceAreaSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\ServicesSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\TestimonialFormSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\TestimonialScrollSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\WeddingDjSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\devices\\DeviceSwitcher.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\dragdrop\\DragLayer.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\dragdrop\\useDragBlock.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\dragdrop\\useDropZone.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\BlockRenderer.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\FieldEditor.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\Inspector.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\modals\\ModalHost.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\modals\\PublishConfirmModal.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\panels\\SiteSettingsPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\panels\\ThemeEditorPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\PreviewContainer.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\PreviewMode.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\PreviewModeToggle.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionBlock.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionManager.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\Toolbar.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\history\\HistoryPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\history\\HistoryScrubber.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\index.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\ColorPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\ComponentInspector.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\ContentInspector.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\InspectorPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\LayoutInspector.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\LayoutPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\ResponsiveInspector.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\SectionSettings.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\SpacingPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\AnimationPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\BackgroundPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\BorderPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\LayoutPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\ResponsiveTabs.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\ShadowPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\StyleInspector.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\TypographyPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\StyleInput.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\TypographyPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\layout\\EditorLayout.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\media\\MediaGrid.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\media\\MediaLibrary.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\media\\MediaUploader.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\section-library\\section-presets.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\section-library\\SectionItem.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\section-library\\SectionLibrary.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\serialization\\deserializationFromCMS.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\serialization\\serializationToCMS.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\state\\EditorState.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\template-library\\TemplateLibrary.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\index.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\template\\template.data.json",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\TemplateCard.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\TemplatePicker.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\useTemplateDrag.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\useTemplateVersioning.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\theme-manager.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\theme-tokens.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\ThemeEditor.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\ThemeProvider.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\wave-divider.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\themes\\ThemeManager.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\themes\\ThemeSwitcher.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\types\\AssetTypes.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\types\\HistoryTypes.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\types\\TemplateTypes.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\types\\VariantTypes.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\compile\\compileNode.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\compile\\compileToVisualTree.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\compile\\toComponentName.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\iframe-entry.js",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\iframe-entry.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\iframe-entry.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\iframe-main.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\iframe-renderer.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\PreviewRenderer.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\render\\PageRenderer.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\render\\renderSectionComponent.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\render\\SectionRenderer.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\wysiwyg\\InlineImageEditor.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\wysiwyg\\InlineTextEditor.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\wysiwyg\\WysiwygToolbar.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\wysiwyg\\WysiwygWrapper.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\public\\js-old\\cms-loader.js",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\public\\publish.json"
+  ],
+  "dependencyGraph": {
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\package.json": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\theme-config.json": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\tsconfig.json": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\vite.config.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\animations\\AnimationEngine.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\api.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\assets.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\api.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\types\\AssetTypes.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\templates.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\api.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\types\\TemplateTypes.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\variants.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\api.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\types\\VariantTypes.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\app\\App.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\themes\\ThemeManager.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\themes\\ThemeSwitcher.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\PreviewContainer.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\InspectorPanel.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\Toolbar.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\modals\\ModalHost.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\HeaderSection.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\HeroSection.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\ServicesSection.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\ServiceAreaSection.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\BioSection.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\WeddingDJSection.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\FaqSection.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\BrandMeaningSection.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\HeroDiscountSection.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\CalendarSection.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\TestimonialFormSection.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\TestimonialScrollSection.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\FooterSection.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\SEOSection.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\GoogleSection.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\asset-manager\\AssetManager.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\types\\AssetTypes.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\asset-manager\\AssetPicker.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\assets.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\types\\AssetTypes.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\block-library\\block-presets.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\block-library\\BlockItem.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\block-library\\BlockLibrary.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\block-library\\block-presets.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\block-library\\BlockItem.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\BlockWrapper.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\buildDraftJson.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\buildPublishJson.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\Canvas.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\SelectionMarquee.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\BlockWrapper.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\BlockRenderer.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasRenderer.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\state\\EditorState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionBlock.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\BlockWrapper.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\loadTemplate.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\cmsConverters.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\cmsTypes.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\cmsTypes.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\DragDrop.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\loadTemplate.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\state\\EditorState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\publishSite.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\cmsTypes.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\Resize.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\saveDraft.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\cmsTypes.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\saveTemplates.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\cmsConverters.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\cmsTypes.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\SectionWrapper.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\Selection.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\SelectionMarquee.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\templateMapper.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\templateTypes.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\templateTypes.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\CMSPanel.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\api.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\bio.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\brand-meaning.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\calendar.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\faq.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\footer.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\google.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\header.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero-discount.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\navigation.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\seo.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\service-area.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\services.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\testimonials.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\wedding-dj.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\BioSection.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\BrandMeaningSection.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\CalendarSection.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\CMSLoaderSection.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\FaqSection.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\FooterSection.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\GoogleSection.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\HeaderSection.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\HeroDiscountSection.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\HeroSection.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\sections.json": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\SeoSection.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\ServiceAreaSection.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\ServicesSection.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\TestimonialFormSection.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\TestimonialScrollSection.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\WeddingDjSection.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\devices\\DeviceSwitcher.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\state\\EditorState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\dragdrop\\DragLayer.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\dragdrop\\useDragBlock.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\dragdrop\\useDropZone.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\BlockRenderer.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\FieldEditor.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\Inspector.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\ContentInspector.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\StyleInspector.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\AnimationPanel.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\modals\\ModalHost.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\modals\\PublishConfirmModal.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\saveTemplates.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\publishSite.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\modals\\PublishConfirmModal.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\panels\\SiteSettingsPanel.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\panels\\ThemeEditorPanel.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\PreviewContainer.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\PreviewRenderer.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\PreviewMode.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\PreviewContainer.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\PreviewModeToggle.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionBlock.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\FieldEditor.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\navigation.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\header.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\services.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\service-area.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\bio.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\wedding-dj.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\faq.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\brand-meaning.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero-discount.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\calendar.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\testimonials.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\footer.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\seo.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\google.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionManager.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\Toolbar.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\saveTemplates.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\saveDraft.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\PreviewModeToggle.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\history\\HistoryPanel.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\history\\HistoryScrubber.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\index.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\app\\App.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\ColorPanel.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\StyleInput.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\ComponentInspector.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\ContentInspector.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\InspectorPanel.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\ComponentInspector.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\LayoutInspector.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\ResponsiveInspector.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\StyleInspector.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\ContentInspector.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\panels\\ThemeEditorPanel.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\panels\\SiteSettingsPanel.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionManager.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\LayoutInspector.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\LayoutPanel.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\StyleInput.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\ResponsiveInspector.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\SectionSettings.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\StyleInput.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\SpacingPanel.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\StyleInput.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\AnimationPanel.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\state\\EditorState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\BackgroundPanel.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\state\\EditorState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\asset-manager\\AssetPicker.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\BorderPanel.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\state\\EditorState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\LayoutPanel.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\state\\EditorState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\ResponsiveTabs.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\state\\EditorState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\ShadowPanel.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\state\\EditorState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\StyleInspector.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\TypographyPanel.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\state\\EditorState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\StyleInput.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\TypographyPanel.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\StyleInput.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\layout\\EditorLayout.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\history\\HistoryScrubber.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\media\\MediaGrid.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\media\\MediaLibrary.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\media\\MediaGrid.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\media\\MediaUploader.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\media\\MediaUploader.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\section-library\\section-presets.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\section-library\\SectionItem.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\section-library\\SectionLibrary.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\section-library\\section-presets.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\section-library\\SectionItem.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\serialization\\deserializationFromCMS.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\theme-manager.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\serialization\\serializationToCMS.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\VisualTree.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\theme-manager.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\state\\EditorState.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\template-library\\TemplateLibrary.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\types\\TemplateTypes.ts",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\index.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\template\\template.data.json"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\template\\template.data.json": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\TemplateCard.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\TemplatePicker.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\TemplateCard.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\useTemplateDrag.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\useTemplateVersioning.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\theme-manager.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\theme-tokens.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\theme-tokens.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\ThemeEditor.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\theme-manager.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\ThemeProvider.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\theme-manager.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\wave-divider.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\themes\\ThemeManager.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\theme-config.json"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\themes\\ThemeSwitcher.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\themes\\ThemeManager.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\theme-config.json"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\types\\AssetTypes.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\types\\HistoryTypes.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\types\\TemplateTypes.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\types\\VariantTypes.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\compile\\compileNode.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\compile\\toComponentName.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\compile\\compileToVisualTree.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\template\\template.data.json"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\compile\\toComponentName.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\iframe-entry.js": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\render\\SectionRenderer.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\iframe-entry.ts": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\iframe-entry.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\render\\SectionRenderer.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\iframe-main.ts": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\iframe-renderer.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\iframe-renderer.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\render\\PageRenderer.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\PreviewRenderer.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\compile\\compileToVisualTree.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\render\\PageRenderer.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\render\\SectionRenderer.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\render\\renderSectionComponent.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\render\\SectionRenderer.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\wysiwyg\\InlineImageEditor.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\wysiwyg\\InlineTextEditor.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasState.ts"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\wysiwyg\\WysiwygToolbar.tsx": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\wysiwyg\\WysiwygWrapper.tsx": [
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\wysiwyg\\InlineTextEditor.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\wysiwyg\\InlineImageEditor.tsx",
+      "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\wysiwyg\\WysiwygToolbar.tsx"
+    ],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\public\\js-old\\cms-loader.js": [],
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\public\\publish.json": []
+  },
+  "unusedFiles": [
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\package.json",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\tsconfig.json",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\vite.config.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\animations\\AnimationEngine.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\templates.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\variants.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\asset-manager\\AssetManager.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\block-library\\BlockLibrary.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\buildDraftJson.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\buildPublishJson.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\Canvas.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasRenderer.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\DragDrop.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\Resize.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\SectionWrapper.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\Selection.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\templateMapper.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\CMSPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\CMSLoaderSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\sections.json",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\SeoSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\WeddingDjSection.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\devices\\DeviceSwitcher.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\dragdrop\\DragLayer.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\dragdrop\\useDragBlock.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\dragdrop\\useDropZone.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\Inspector.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\PreviewMode.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\history\\HistoryPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\index.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\ColorPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\LayoutPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\SectionSettings.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\SpacingPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\BackgroundPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\BorderPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\LayoutPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\ResponsiveTabs.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\ShadowPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\TypographyPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\TypographyPanel.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\layout\\EditorLayout.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\media\\MediaLibrary.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\section-library\\SectionLibrary.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\serialization\\deserializationFromCMS.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\serialization\\serializationToCMS.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\template-library\\TemplateLibrary.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\index.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\TemplatePicker.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\useTemplateDrag.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\useTemplateVersioning.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\ThemeEditor.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\ThemeProvider.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\wave-divider.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\types\\HistoryTypes.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\compile\\compileNode.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\iframe-entry.js",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\iframe-entry.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\iframe-entry.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\iframe-main.ts",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\render\\renderSectionComponent.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\wysiwyg\\WysiwygWrapper.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\public\\js-old\\cms-loader.js",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\public\\publish.json"
+  ],
+  "unusedExports": [
+    {
+      "name": "AnimationEngine",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\animations\\AnimationEngine.ts"
+    },
+    {
+      "name": "listTemplates",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\templates.ts"
+    },
+    {
+      "name": "saveTemplate",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\templates.ts"
+    },
+    {
+      "name": "deleteTemplate",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\templates.ts"
+    },
+    {
+      "name": "renameTemplate",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\templates.ts"
+    },
+    {
+      "name": "loadTemplateNode",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\templates.ts"
+    },
+    {
+      "name": "listVariants",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\variants.ts"
+    },
+    {
+      "name": "saveVariant",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\variants.ts"
+    },
+    {
+      "name": "deleteVariant",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\variants.ts"
+    },
+    {
+      "name": "renameVariant",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\variants.ts"
+    },
+    {
+      "name": "loadVariant",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\variants.ts"
+    },
+    {
+      "name": "buildDraftJson",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\buildDraftJson.ts"
+    },
+    {
+      "name": "buildPublishJson",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\buildPublishJson.ts"
+    },
+    {
+      "name": "startDrag",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\DragDrop.ts"
+    },
+    {
+      "name": "endDrag",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\DragDrop.ts"
+    },
+    {
+      "name": "moveNodeToRootIndex",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\DragDrop.ts"
+    },
+    {
+      "name": "startResize",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\Resize.ts"
+    },
+    {
+      "name": "endResize",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\Resize.ts"
+    },
+    {
+      "name": "applyResize",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\Resize.ts"
+    },
+    {
+      "name": "selectNode",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\Selection.ts"
+    },
+    {
+      "name": "getSelectedNode",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\Selection.ts"
+    },
+    {
+      "name": "templatesToTree",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\templateMapper.ts"
+    },
+    {
+      "name": "useDragBlock",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\dragdrop\\useDragBlock.ts"
+    },
+    {
+      "name": "useDropZone",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\dragdrop\\useDropZone.ts"
+    },
+    {
+      "name": "deserializeFromCMS",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\serialization\\deserializationFromCMS.ts"
+    },
+    {
+      "name": "serializeToCMS",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\serialization\\serializationToCMS.ts"
+    },
+    {
+      "name": "templates",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\index.ts"
+    },
+    {
+      "name": "useTemplateDrag",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\useTemplateDrag.ts"
+    },
+    {
+      "name": "getTemplateVersionFromTemplate",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\useTemplateVersioning.ts"
+    },
+    {
+      "name": "getInstanceTemplateVersion",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\useTemplateVersioning.ts"
+    },
+    {
+      "name": "hasTemplateUpdateForNode",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\useTemplateVersioning.ts"
+    },
+    {
+      "name": "compileNode",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\compile\\compileNode.ts"
+    },
+    {
+      "name": "renderSectionComponent",
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\render\\renderSectionComponent.tsx"
+    }
+  ],
+  "brokenImports": [
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\api.ts",
+      "import": "../../../mobile/MobileBridge"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\CMSPanel.tsx",
+      "import": "../serialization/serializeToCMS"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\bio.ts",
+      "import": "../FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\brand-meaning.ts",
+      "import": "../FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\calendar.ts",
+      "import": "../FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\faq.ts",
+      "import": "../FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\footer.ts",
+      "import": "../FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\google.ts",
+      "import": "../FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\header.ts",
+      "import": "../FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero-discount.ts",
+      "import": "../FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero.ts",
+      "import": "../FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\navigation.ts",
+      "import": "../FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\seo.ts",
+      "import": "../FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\service-area.ts",
+      "import": "../FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\services.ts",
+      "import": "../FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\testimonials.ts",
+      "import": "../FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\wedding-dj.ts",
+      "import": "../FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\FieldEditor.tsx",
+      "import": "../cms-panel/fields"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+      "import": "../cms-panel/fields/testimonial-form"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\TemplatePicker.tsx",
+      "import": "../../../templates"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\useTemplateDrag.ts",
+      "import": "../../../templates"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\useTemplateVersioning.ts",
+      "import": "../../../template"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\compile\\toComponentName.ts",
+      "import": "../../components/sections"
+    }
+  ],
+  "missingComponents": [
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\assets.ts",
+      "component": "Asset"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\assets.ts",
+      "component": "Asset"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\assets.ts",
+      "component": "Asset"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\templates.ts",
+      "component": "TemplateData"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\templates.ts",
+      "component": "TemplateData"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\variants.ts",
+      "component": "BlockVariant"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\variants.ts",
+      "component": "BlockVariant"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\api\\variants.ts",
+      "component": "BlockVariant"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\app\\App.tsx",
+      "component": "ThemeProvider"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\app\\App.tsx",
+      "component": "ThemeSwitcher"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\app\\App.tsx",
+      "component": "Toolbar"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\app\\App.tsx",
+      "component": "ModalHost"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\app\\App.tsx",
+      "component": "InspectorPanel"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\app\\App.tsx",
+      "component": "PreviewContainer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\asset-manager\\AssetManager.tsx",
+      "component": "Asset"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\asset-manager\\AssetManager.tsx",
+      "component": "HTMLInputElement"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\asset-manager\\AssetPicker.tsx",
+      "component": "Asset"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\Canvas.tsx",
+      "component": "HTMLDivElement"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\Canvas.tsx",
+      "component": "BlockRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\CanvasRenderer.tsx",
+      "component": "SectionBlock"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx",
+      "component": "BlockRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx",
+      "component": "BlockRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx",
+      "component": "BlockRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx",
+      "component": "BlockRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx",
+      "component": "BlockRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx",
+      "component": "BlockRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx",
+      "component": "BlockRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx",
+      "component": "BlockRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx",
+      "component": "BlockRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx",
+      "component": "BlockRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx",
+      "component": "BlockRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx",
+      "component": "BlockRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx",
+      "component": "BlockRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx",
+      "component": "BlockRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx",
+      "component": "BlockRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\old.BlockRenderer.tsx",
+      "component": "BlockRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\SelectionMarquee.tsx",
+      "component": "HTMLElement"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\canvas\\SelectionMarquee.tsx",
+      "component": "Rect"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\CMSPanel.tsx",
+      "component": "SectionFields"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\bio.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\bio.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\bio.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\bio.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\bio.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\bio.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\brand-meaning.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\brand-meaning.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\brand-meaning.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\brand-meaning.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\faq.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\faq.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\faq.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\faq.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\footer.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\footer.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\footer.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\footer.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\footer.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\google.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\google.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\google.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\header.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\header.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\header.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero-discount.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero-discount.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero-discount.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero-discount.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\navigation.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\navigation.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\navigation.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\navigation.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\navigation.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\navigation.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\navigation.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\seo.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\seo.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\seo.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\seo.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\seo.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\seo.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\service-area.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\service-area.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\services.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\services.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\services.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\services.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\testimonials.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\testimonials.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\testimonials.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\testimonials.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\testimonials.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\testimonials.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\testimonials.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\wedding-dj.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\wedding-dj.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\wedding-dj.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\wedding-dj.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\wedding-dj.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\wedding-dj.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\wedding-dj.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\wedding-dj.ts",
+      "component": "FieldEditor"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\GoogleSection.tsx",
+      "component": "Helmet"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\components\\sections\\SeoSection.tsx",
+      "component": "Helmet"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\Inspector.tsx",
+      "component": "ContentInspector"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\Inspector.tsx",
+      "component": "StyleInspector"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\Inspector.tsx",
+      "component": "AnimationPanel"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\panels\\SiteSettingsPanel.tsx",
+      "component": "Field"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\panels\\SiteSettingsPanel.tsx",
+      "component": "Field"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\panels\\SiteSettingsPanel.tsx",
+      "component": "Field"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\panels\\SiteSettingsPanel.tsx",
+      "component": "Field"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\panels\\SiteSettingsPanel.tsx",
+      "component": "Field"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\panels\\SiteSettingsPanel.tsx",
+      "component": "Field"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\panels\\SiteSettingsPanel.tsx",
+      "component": "Field"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\PreviewContainer.tsx",
+      "component": "PreviewRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+      "component": "HeroFields"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+      "component": "NavigationFields"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+      "component": "HeaderFields"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+      "component": "ServicesFields"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+      "component": "ServiceAreaFields"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+      "component": "BioFields"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+      "component": "WeddingDJFields"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+      "component": "FAQFields"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+      "component": "BrandMeaningFields"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+      "component": "HeroDiscountFields"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+      "component": "CalendarFields"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+      "component": "TestimonialFormFields"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+      "component": "TestimonialsFields"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+      "component": "FooterFields"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+      "component": "SEOFields"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\editor\\SectionFields.tsx",
+      "component": "GoogleFields"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\history\\HistoryScrubber.tsx",
+      "component": "HTMLDivElement"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\index.tsx",
+      "component": "App"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\ComponentInspector.tsx",
+      "component": "Node"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\ComponentInspector.tsx",
+      "component": "Node"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\ComponentInspector.tsx",
+      "component": "Node"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\ComponentInspector.tsx",
+      "component": "Node"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\InspectorPanel.tsx",
+      "component": "SectionManager"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\InspectorPanel.tsx",
+      "component": "SiteSettingsPanel"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\InspectorPanel.tsx",
+      "component": "ThemeEditorPanel"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\InspectorPanel.tsx",
+      "component": "StyleInspector"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\BackgroundPanel.tsx",
+      "component": "AssetPicker"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\StyleInspector.tsx",
+      "component": "Node"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\StyleInspector.tsx",
+      "component": "Node"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\layout\\EditorLayout.tsx",
+      "component": "HistoryScrubber"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\template-library\\TemplateLibrary.tsx",
+      "component": "TemplateData"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\templates\\useTemplateDrag.ts",
+      "component": "TemplateEntry"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\theme-manager.ts",
+      "component": "ThemeState"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\themes\\ThemeManager.tsx",
+      "component": "ThemeContextType"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\themes\\ThemeManager.tsx",
+      "component": "ThemeName"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\themes\\ThemeManager.tsx",
+      "component": "ThemeContext"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\iframe-entry.js",
+      "component": "SectionRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\iframe-entry.tsx",
+      "component": "SectionRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\iframe-renderer.tsx",
+      "component": "PageRenderer"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\PreviewRenderer.tsx",
+      "component": "HTMLIFrameElement"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\render\\renderSectionComponent.tsx",
+      "component": "Component"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\visual\\render\\SectionRenderer.tsx",
+      "component": "Component"
+    },
+    {
+      "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\wysiwyg\\InlineTextEditor.tsx",
+      "component": "HTMLDivElement"
+    }
+  ],
+  "missingTemplates": [],
+  "missingRequiredFiles": [
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\main.tsx",
+    "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\App.tsx"
+  ],
+  "circularDependencies": [],
+  "css": {
+    "allClasses": [
+      "anim-active",
+      "app-container",
+      "app-main",
+      "left-panel",
+      "right-panel",
+      "preview-container",
+      "inspector-panel",
+      "app-toolbar",
+      "toolbar-btn",
+      "publish",
+      "active",
+      "modal-backdrop",
+      "modal",
+      "modal-actions",
+      "danger",
+      "theme-editor-panel",
+      "site-settings-panel",
+      "section-manager",
+      "theme-field",
+      "site-field",
+      "section-manager-header",
+      "section-add-btn",
+      "section-list",
+      "section-item",
+      "is-selected",
+      "canvas-container",
+      "canvas-content",
+      "selection-marquee",
+      "selected",
+      "selection-outline",
+      "block-wrapper",
+      "absolute",
+      "section-wrapper",
+      "canvas-zoom",
+      "drag-layer",
+      "drag-ghost",
+      "preview-toolbar",
+      "preview-frame",
+      "component-inspector",
+      "layout-inspector",
+      "responsive-inspector",
+      "component-row",
+      "layout-row",
+      "responsive-row",
+      "media-library",
+      "media-header",
+      "media-upload-btn",
+      "media-grid",
+      "media-item",
+      "media-name",
+      "hero",
+      "hero-inner",
+      "hero-logo",
+      "kicker",
+      "tagline",
+      "subline",
+      "btn",
+      "grid",
+      "card",
+      "card-body",
+      "service-area",
+      "bio-wrap",
+      "bio-head",
+      "bio-image",
+      "bio-name",
+      "form-actions",
+      "testimonial-form",
+      "social-links",
+      "site-header",
+      "header-inner",
+      "brand-mini",
+      "brand-text",
+      "header-nav",
+      "header-cta",
+      "nav-link",
+      "mobile-quicknav",
+      "testimonial-scroll",
+      "template-picker-wrap",
+      "template-controls",
+      "template-search",
+      "template-categories",
+      "cat",
+      "template-picker",
+      "template-card",
+      "template-preview",
+      "template-name",
+      "replace-btn",
+      "canvas-dropzone",
+      "update-btn",
+      "theme-switcher",
+      "theme-patriotic",
+      "theme-dark-operator",
+      "theme-multicam",
+      "wave-top",
+      "wave-bottom",
+      "top-bar",
+      "inspector-tab-group",
+      "wysiwyg-wrapper",
+      "wysiwyg-toolbar",
+      "inline-text-editor"
+    ],
+    "usedClasses": [
+      "app-container",
+      "app-main",
+      "right-panel",
+      "asset-manager-overlay",
+      "asset-manager",
+      "asset-manager-header",
+      "close-btn",
+      "asset-manager-actions",
+      "upload-btn",
+      "asset-grid",
+      "asset-item",
+      "asset-meta",
+      "asset-name",
+      "asset-size",
+      "asset-actions",
+      "asset-empty",
+      "asset-picker-overlay",
+      "asset-picker",
+      "asset-picker-header",
+      "asset-picker-grid",
+      "asset-picker-item",
+      "asset-picker-meta",
+      "asset-picker-empty",
+      "block-item",
+      "block-library",
+      "block-list",
+      "block-row",
+      "canvas-block",
+      "ve-section-controls",
+      "canvas-root",
+      "ve-canvas-toolbar",
+      "canvas-inner",
+      "canvas-section",
+      "selection-marquee-layer",
+      "selection-marquee",
+      "cms-panel-root",
+      "cms-save-btn",
+      "cms-section",
+      "cms-subsection",
+      "bio-wrap",
+      "bio-head",
+      "bio-image",
+      "bio-name",
+      "service-area",
+      "btn",
+      "social-links",
+      "footer-social",
+      "site-header",
+      "header-inner",
+      "brand-mini",
+      "brand-text",
+      "header-nav",
+      "nav-link",
+      "hero",
+      "hero-inner",
+      "hero-h1",
+      "hero-logo",
+      "kicker",
+      "tagline",
+      "subline",
+      "grid",
+      "card",
+      "card-body",
+      "testimonial-form",
+      "form-actions",
+      "testimonial-scroll",
+      "device-switcher",
+      "drag-layer",
+      "drag-ghost",
+      "cms-field-editor",
+      "inspector-root",
+      "inspector-empty",
+      "modal-backdrop",
+      "modal",
+      "modal-actions",
+      "danger",
+      "site-settings-panel",
+      "site-field",
+      "theme-editor-panel",
+      "theme-field",
+      "preview-container",
+      "preview-mode-toggle",
+      "cms-section-block",
+      "section-manager",
+      "section-manager-header",
+      "section-add-btn",
+      "section-list",
+      "section-item-main",
+      "section-label",
+      "section-item-actions",
+      "app-toolbar",
+      "toolbar-left",
+      "toolbar-btn",
+      "draft",
+      "publish",
+      "toolbar-right",
+      "history-panel",
+      "history-header",
+      "history-list",
+      "history-label",
+      "history-timestamp",
+      "history-scrubber",
+      "history-scrubber-bar",
+      "history-indicator",
+      "inspector-panel",
+      "content-inspector",
+      "empty",
+      "inspector-field",
+      "content-row",
+      "inspector-header",
+      "inspector-title",
+      "inspector-tabs",
+      "inspector-tab-group",
+      "inspector-tab-label",
+      "layout-inspector",
+      "layout-row",
+      "responsive-inspector",
+      "responsive-group",
+      "responsive-row",
+      "panel",
+      "animation-panel",
+      "animation-item",
+      "remove-anim",
+      "add-anim",
+      "background-panel",
+      "bg-image-row",
+      "choose-image-btn",
+      "bg-preview",
+      "border-panel",
+      "layout-panel",
+      "responsive-tabs",
+      "shadow-panel",
+      "style-inspector",
+      "typography-panel",
+      "style-input",
+      "editor-layout",
+      "editor-main",
+      "editor-scrubber",
+      "media-grid",
+      "media-item",
+      "media-name",
+      "media-library",
+      "media-header",
+      "media-upload-btn",
+      "section-item",
+      "section-library",
+      "template-library-overlay",
+      "template-library",
+      "template-header",
+      "template-categories",
+      "template-grid",
+      "template-item",
+      "template-preview",
+      "template-placeholder",
+      "template-info",
+      "template-name",
+      "template-category",
+      "template-actions",
+      "template-empty",
+      "template-card",
+      "template-picker-wrap",
+      "template-controls",
+      "template-search",
+      "template-picker",
+      "theme-editor",
+      "wave-divider",
+      "theme-switcher",
+      "inline-image-editor",
+      "inline-text-editor",
+      "wysiwyg-toolbar",
+      "wysiwyg-wrapper"
+    ],
+    "unusedClasses": [
+      "anim-active",
+      "left-panel",
+      "active",
+      "is-selected",
+      "canvas-container",
+      "canvas-content",
+      "selected",
+      "selection-outline",
+      "block-wrapper",
+      "absolute",
+      "section-wrapper",
+      "canvas-zoom",
+      "preview-toolbar",
+      "preview-frame",
+      "component-inspector",
+      "component-row",
+      "header-cta",
+      "mobile-quicknav",
+      "cat",
+      "replace-btn",
+      "canvas-dropzone",
+      "update-btn",
+      "theme-patriotic",
+      "theme-dark-operator",
+      "theme-multicam",
+      "wave-top",
+      "wave-bottom",
+      "top-bar"
+    ]
+  },
+  "reactProps": {
+    "componentsWithProps": [
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\bio.ts",
+        "component": "BioFields",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\brand-meaning.ts",
+        "component": "BrandMeaningFields",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\faq.ts",
+        "component": "FAQFields",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\footer.ts",
+        "component": "FooterFields",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\google.ts",
+        "component": "GoogleFields",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\header.ts",
+        "component": "HeaderFields",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero-discount.ts",
+        "component": "HeroDiscountFields",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\hero.ts",
+        "component": "HeroFields",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\navigation.ts",
+        "component": "NavigationFields",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\seo.ts",
+        "component": "SEOFields",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\service-area.ts",
+        "component": "ServiceAreaFields",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\services.ts",
+        "component": "ServicesFields",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\testimonials.ts",
+        "component": "TestimonialsFields",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\cms-panel\\fields\\wedding-dj.ts",
+        "component": "WeddingDJFields",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\ColorPanel.tsx",
+        "component": "ColorPanel",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\LayoutPanel.tsx",
+        "component": "LayoutPanel",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\SectionSettings.tsx",
+        "component": "SectionSettings",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\SpacingPanel.tsx",
+        "component": "SpacingPanel",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\BorderPanel.tsx",
+        "component": "BorderPanel",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\LayoutPanel.tsx",
+        "component": "LayoutPanel",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\ShadowPanel.tsx",
+        "component": "ShadowPanel",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\style\\TypographyPanel.tsx",
+        "component": "TypographyPanel",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\inspector\\TypographyPanel.tsx",
+        "component": "TypographyPanel",
+        "props": [
+          "node"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\section-library\\SectionItem.tsx",
+        "component": "SectionItem",
+        "props": [
+          "name",
+          "onAdd"
+        ]
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\ThemeProvider.tsx",
+        "component": "ThemeProvider",
+        "props": [
+          "children"
+        ]
+      }
+    ],
+    "unusedProps": [
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\section-library\\SectionItem.tsx",
+        "component": "SectionItem",
+        "prop": "name"
+      },
+      {
+        "file": "C:\\Users\\samma\\Documents\\GitHub\\valorwave-cms-suite\\visual-editor\\src\\theme\\ThemeProvider.tsx",
+        "component": "ThemeProvider",
+        "prop": "children"
+      }
+    ]
+  }
+}

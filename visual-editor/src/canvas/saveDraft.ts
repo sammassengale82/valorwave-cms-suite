@@ -6,7 +6,7 @@ import type { CmsTemplateData } from "./cmsTypes";
 export function saveDraft(templateData: CmsTemplateData) {
   const templateFile = path.resolve(
     __dirname,
-    "../templates/template/template.data.json"
+    "../template/template.data.json"
   );
 
   fs.writeFileSync(templateFile, JSON.stringify(templateData, null, 2), "utf8");

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Valorwave Visual Editor – Full Forensic Audit (Extended)
+ * Valorwave Visual Editor – Full Forensic Audit (Patched & Scoped)
  * --------------------------------------------------------------
  * This script performs a deep audit of the visual-editor folder:
  *
@@ -14,7 +14,7 @@
  *  - Missing inferred required files
  *  - Circular dependencies
  *  - Unused CSS classes
- *  - Unused React props (approximate static analysis)
+ *  - Unused React props
  *
  * Output file: visual-editor-audit.json
  */
@@ -24,6 +24,9 @@ const path = require("path");
 
 const ROOT = process.cwd();
 const TARGET = path.join(ROOT, "visual-editor");
+const SRC_DIR = path.join(TARGET, "src");
+const PUBLIC_DIR = path.join(TARGET, "public");
+
 const VALID_EXT = [".js", ".jsx", ".ts", ".tsx", ".mjs", ".cjs", ".json"];
 const REPORT_FILE = "visual-editor-audit.json";
 
@@ -48,6 +51,47 @@ function walk(dir, fileList = []) {
   return fileList;
 }
 
+function safeWalk(dir) {
+  return fs.existsSync(dir) ? walk(dir) : [];
+}
+
+// ------------------------------------------------------------
+// Build scoped file list
+// ------------------------------------------------------------
+
+// 1. Root-level files (exclude repo-tree.txt)
+const rootFiles = fs
+  .readdirSync(TARGET)
+  .filter((name) => {
+    const full = path.join(TARGET, name);
+    return (
+      fs.statSync(full).isFile() &&
+      name !== "repo-tree.txt" &&
+      name !== "package-lock.json" &&
+      name !== "yarn.lock"
+    );
+  })
+  .map((name) => path.join(TARGET, name));
+
+// 2. Files inside src/ and public/
+const scopedFiles = [
+  ...safeWalk(SRC_DIR),
+  ...safeWalk(PUBLIC_DIR),
+];
+
+// 3. Combine and filter by extension
+const allFiles = [...rootFiles, ...scopedFiles].filter((f) =>
+  VALID_EXT.includes(path.extname(f))
+);
+
+// 4. CSS files
+const cssFiles = [...rootFiles, ...scopedFiles].filter(
+  (f) => path.extname(f) === ".css"
+);
+
+// ------------------------------------------------------------
+// Extractors
+// ------------------------------------------------------------
 function extractImports(content) {
   const importRegex = /import\s+.*?from\s+['"](.*?)['"]/g;
   const requireRegex = /require\(['"](.*?)['"]\)/g;
@@ -69,9 +113,7 @@ function extractExports(content) {
   const exports = [];
   let match;
 
-  while ((match = exportRegex.exec(content))) {
-    exports.push(match[1]);
-  }
+  while ((match = exportRegex.exec(content))) exports.push(match[1]);
 
   while ((match = namedExportRegex.exec(content))) {
     const names = match[1]
@@ -96,24 +138,37 @@ function extractJSXComponents(content) {
   return components;
 }
 
+// ------------------------------------------------------------
+// PATCHED resolveImport (no EISDIR)
+// ------------------------------------------------------------
 function resolveImport(baseFile, importPath) {
-  if (!importPath.startsWith(".")) return null; // ignore node_modules
+  if (!importPath.startsWith(".")) return null;
 
   const baseDir = path.dirname(baseFile);
   const full = path.resolve(baseDir, importPath);
 
-  // Try exact file
-  if (fs.existsSync(full)) return full;
-
-  // Try with extensions
-  for (const ext of VALID_EXT) {
-    if (fs.existsSync(full + ext)) return full + ext;
+  // Exact file
+  if (fs.existsSync(full) && fs.statSync(full).isFile()) {
+    return full;
   }
 
-  // Try index.js inside folder
+  // Try extensions
   for (const ext of VALID_EXT) {
-    const indexPath = path.join(full, "index" + ext);
-    if (fs.existsSync(indexPath)) return indexPath;
+    const candidate = full + ext;
+    if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) {
+      return candidate;
+    }
+  }
+
+  // Directory → try index files
+  if (fs.existsSync(full) && fs.statSync(full).isDirectory()) {
+    for (const ext of VALID_EXT) {
+      const indexPath = path.join(full, "index" + ext);
+      if (fs.existsSync(indexPath) && fs.statSync(indexPath).isFile()) {
+        return indexPath;
+      }
+    }
+    return null;
   }
 
   return null;
@@ -137,35 +192,26 @@ function extractCssClasses(content) {
 function extractClassNameUsages(content) {
   const usages = new Set();
 
-  // className="foo bar"
   const classNameStringRegex = /className\s*=\s*["']([^"']+)["']/g;
   let match;
   while ((match = classNameStringRegex.exec(content))) {
-    match[1]
-      .split(/\s+/)
-      .filter(Boolean)
-      .forEach((c) => usages.add(c));
+    match[1].split(/\s+/).forEach((c) => usages.add(c));
   }
 
-  // className={'foo bar'}
   const classNameJsxRegex = /className\s*=\s*{\s*['"]([^'"]+)['"]\s*}/g;
   while ((match = classNameJsxRegex.exec(content))) {
-    match[1]
-      .split(/\s+/)
-      .filter(Boolean)
-      .forEach((c) => usages.add(c));
+    match[1].split(/\s+/).forEach((c) => usages.add(c));
   }
 
   return Array.from(usages);
 }
 
 // ------------------------------------------------------------
-// React props helpers (approximate)
+// React props helpers
 // ------------------------------------------------------------
 function extractComponentProps(content, filePath) {
   const results = [];
 
-  // function Comp({ foo, bar }) { ... }
   const funcRegex =
     /function\s+([A-Z][A-Za-z0-9_]*)\s*\(\s*{([^}]*)}\s*\)\s*{([\s\S]*?)}\s*/g;
 
@@ -183,7 +229,6 @@ function extractComponentProps(content, filePath) {
     }
   }
 
-  // const Comp = ({ foo, bar }) => { ... }
   const arrowRegex =
     /const\s+([A-Z][A-Za-z0-9_]*)\s*=\s*\(\s*{([^}]*)}\s*\)\s*=>\s*{([\s\S]*?)}\s*/g;
 
@@ -211,8 +256,7 @@ function detectUnusedProps(componentsWithProps) {
 
     props.forEach((prop) => {
       const propRegex = new RegExp(`\\b${prop}\\b`, "g");
-      const used = propRegex.test(body);
-      if (!used) {
+      if (!propRegex.test(body)) {
         unused.push({ file, component, prop });
       }
     });
@@ -225,11 +269,6 @@ function detectUnusedProps(componentsWithProps) {
 // Main Scan
 // ------------------------------------------------------------
 console.log("🔍 Scanning visual-editor folder:", TARGET);
-
-const allFiles = walk(TARGET).filter((f) =>
-  VALID_EXT.includes(path.extname(f))
-);
-const cssFiles = walk(TARGET).filter((f) => path.extname(f) === ".css");
 
 const dependencyGraph = {};
 const usedFiles = new Set();
@@ -245,7 +284,7 @@ const usedCssClasses = new Set();
 const componentsWithProps = [];
 
 // ------------------------------------------------------------
-// First pass: parse imports, exports, JSX, props, CSS
+// First pass
 // ------------------------------------------------------------
 for (const cssFile of cssFiles) {
   const cssContent = fs.readFileSync(cssFile, "utf8");
@@ -267,12 +306,10 @@ for (const file of allFiles) {
   propsInfo.forEach((p) => componentsWithProps.push(p));
   classUsages.forEach((c) => usedCssClasses.add(c));
 
-  // Track export usage
   exports.forEach((e) => {
     exportUsage[e] = exportUsage[e] || { definedIn: file, usedBy: [] };
   });
 
-  // Resolve imports
   for (const imp of imports) {
     const resolved = resolveImport(file, imp);
 
@@ -280,10 +317,10 @@ for (const file of allFiles) {
       dependencyGraph[file].push(resolved);
       usedFiles.add(resolved);
 
-      // Track export usage
-      const importedContent = fs.existsSync(resolved)
-        ? fs.readFileSync(resolved, "utf8")
-        : "";
+      let importedContent = "";
+      if (fs.existsSync(resolved) && fs.statSync(resolved).isFile()) {
+        importedContent = fs.readFileSync(resolved, "utf8");
+      }
 
       const importedExports = extractExports(importedContent);
       importedExports.forEach((e) => {
@@ -403,7 +440,7 @@ function inferRequiredFiles() {
     const full =
       f === "index.html"
         ? path.join(TARGET, f)
-        : path.join(TARGET, "src", f);
+        : path.join(SRC_DIR, f);
     if (!fs.existsSync(full)) {
       required.push(full);
     }
