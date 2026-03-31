@@ -1,10 +1,16 @@
-// src/visual/sections/FAQSection.tsx
+// src/components/sections/FAQSection.tsx
 import React from "react";
 
 export function FAQSection(props: any) {
   return (
     <section id="faq" data-theme-scope="all">
-      {props["faq-heading"] && <h2>{props["faq-heading"].text}</h2>}
+
+      {props["faq-heading"] && (
+        <h2
+          data-ve-edit="faq-heading"
+          dangerouslySetInnerHTML={{ __html: props["faq-heading"].html }}
+        />
+      )}
 
       <div className="bio-wrap">
         {[1, 2, 3].map((i) => {
@@ -13,6 +19,7 @@ export function FAQSection(props: any) {
             props[key] && (
               <p
                 key={key}
+                data-ve-edit={key}
                 dangerouslySetInnerHTML={{ __html: props[key].html }}
               />
             )

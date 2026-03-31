@@ -1,24 +1,28 @@
-// src/visual/sections/CalendarSection.tsx
+// src/components/sections/CalendarSection.tsx
 import React from "react";
 
 export function CalendarSection(props: any) {
   return (
     <section id="calendar" data-theme-scope="all">
+
       {props["calendar-heading"] && (
-        <h2>{props["calendar-heading"].text}</h2>
+        <h2
+          data-ve-edit="calendar-heading"
+          dangerouslySetInnerHTML={{ __html: props["calendar-heading"].html }}
+        />
       )}
 
       {props["calendar-intro"] && (
         <p
           className="service-area"
           style={{ textAlign: "center" }}
-          dangerouslySetInnerHTML={{
-            __html: props["calendar-intro"].html
-          }}
+          data-ve-edit="calendar-intro"
+          dangerouslySetInnerHTML={{ __html: props["calendar-intro"].html }}
         />
       )}
 
       <div className="bio-wrap" style={{ marginTop: "18px" }}>
+
         {props["calendar-note"] && (
           <p
             style={{
@@ -27,13 +31,12 @@ export function CalendarSection(props: any) {
               color: "var(--gray)",
               fontSize: "14px"
             }}
-            dangerouslySetInnerHTML={{
-              __html: props["calendar-note"].html
-            }}
+            data-ve-edit="calendar-note"
+            dangerouslySetInnerHTML={{ __html: props["calendar-note"].html }}
           />
         )}
 
-        {/* The iframe is static — not editable */}
+        {/* Static iframe */}
         <div
           style={{
             borderRadius: "14px",
@@ -59,6 +62,7 @@ export function CalendarSection(props: any) {
           <div style={{ textAlign: "center", marginTop: "16px" }}>
             <a
               className="btn"
+              data-ve-edit="calendar-button"
               href={props["calendar-button"].href}
               target="_blank"
               rel="noopener"

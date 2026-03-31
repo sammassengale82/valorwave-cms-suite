@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { compileToVisualTree } from "./compile/compileToVisualTree";
 
-function PreviewRenderer({ canvasTree }: any) {
+function PreviewRenderer() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [iframeReady, setIframeReady] = useState(false);
 
@@ -25,16 +25,16 @@ function PreviewRenderer({ canvasTree }: any) {
     const iframe = iframeRef.current;
     if (!iframe) return;
 
-    const visualTree = compileToVisualTree(canvasTree);
+    // ⭐ Always compile from template.data.json
+    const visualTree = compileToVisualTree();
 
-    console.log("canvasTree received by PreviewRenderer:", canvasTree);
     console.log("visualTree compiled:", visualTree);
 
     const win = iframe.contentWindow;
     if (win && typeof win.renderVisualTree === "function") {
       win.renderVisualTree(visualTree);
     }
-  }, [iframeReady, canvasTree]);
+  }, [iframeReady]); // ❗ canvasTree removed
 
   return (
     <iframe

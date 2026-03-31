@@ -102,7 +102,7 @@
         },
         "service-card-1": {
           "type": "text",
-          "html": "<img src=\"images/service-wedding.jpg\" alt=\"Wedding DJ Services\" data-ve-edit=\"service-card-1-image\">\n        <div class=\"card-body\">\n          <h3 data-ve-edit=\"service-card-1-title\">Wedding DJ Services</h3>\n          <p data-ve-edit=\"service-card-1-text\">\n            Professional, faith-respectful wedding DJ services with clean music, structured timelines, and stress-free coordination.\n          </p>\n        </div>",
+          "html": "<img src=\"image/service-wedding.jpg\" alt=\"Wedding DJ Services\" data-ve-edit=\"service-card-1-image\">\n        <div class=\"card-body\">\n          <h3 data-ve-edit=\"service-card-1-title\">Wedding DJ Services</h3>\n          <p data-ve-edit=\"service-card-1-text\">\n            Professional, faith-respectful wedding DJ services with clean music, structured timelines, and stress-free coordination.\n          </p>\n        </div>",
           "text": "Wedding DJ Services\n          \n            Professional, faith-respectful wedding DJ services with clean music, structured timelines, and stress-free coordination."
         },
         "service-card-1-image": {
@@ -122,7 +122,7 @@
         },
         "service-card-2": {
           "type": "text",
-          "html": "<img src=\"images/service-dj-mc.jpg\" alt=\"DJ and MC Services\" data-ve-edit=\"service-card-2-image\">\n        <div class=\"card-body\">\n          <h3 data-ve-edit=\"service-card-2-title\">DJ &amp; MC Services</h3>\n          <p data-ve-edit=\"service-card-2-text\">\n            Confident MC presence, clear communication, and modern music tailored to your values and your guests.\n          </p>\n        </div>",
+          "html": "<img src=\"image/service-dj-mc.jpg\" alt=\"DJ and MC Services\" data-ve-edit=\"service-card-2-image\">\n        <div class=\"card-body\">\n          <h3 data-ve-edit=\"service-card-2-title\">DJ &amp; MC Services</h3>\n          <p data-ve-edit=\"service-card-2-text\">\n            Confident MC presence, clear communication, and modern music tailored to your values and your guests.\n          </p>\n        </div>",
           "text": "DJ & MC Services\n          \n            Confident MC presence, clear communication, and modern music tailored to your values and your guests."
         },
         "service-card-2-image": {
@@ -142,7 +142,7 @@
         },
         "service-card-3": {
           "type": "text",
-          "html": "<img src=\"images/service-sound-lighting.jpg\" alt=\"Sound and Lighting\" data-ve-edit=\"service-card-3-image\">\n        <div class=\"card-body\">\n          <h3 data-ve-edit=\"service-card-3-title\">Sound &amp; Lighting</h3>\n          <p data-ve-edit=\"service-card-3-text\">\n            High-quality audio and tasteful lighting designed to enhance your event without overwhelming it.\n          </p>\n        </div>",
+          "html": "<img src=\"image/service-sound-lighting.jpg\" alt=\"Sound and Lighting\" data-ve-edit=\"service-card-3-image\">\n        <div class=\"card-body\">\n          <h3 data-ve-edit=\"service-card-3-title\">Sound &amp; Lighting</h3>\n          <p data-ve-edit=\"service-card-3-text\">\n            High-quality audio and tasteful lighting designed to enhance your event without overwhelming it.\n          </p>\n        </div>",
           "text": "Sound & Lighting\n          \n            High-quality audio and tasteful lighting designed to enhance your event without overwhelming it."
         },
         "service-card-3-image": {
@@ -162,7 +162,7 @@
         },
         "service-card-4": {
           "type": "text",
-          "html": "<img src=\"images/service-corporate.jpg\" alt=\"Corporate and Community Events\" data-ve-edit=\"service-card-4-image\">\n        <div class=\"card-body\">\n          <h3 data-ve-edit=\"service-card-4-title\">Corporate &amp; Community Events</h3>\n          <p data-ve-edit=\"service-card-4-text\">\n            Reliable, positive entertainment for corporate gatherings, churches, and community celebrations.\n          </p>\n        </div>",
+          "html": "<img src=\"image/service-corporate.jpg\" alt=\"Corporate and Community Events\" data-ve-edit=\"service-card-4-image\">\n        <div class=\"card-body\">\n          <h3 data-ve-edit=\"service-card-4-title\">Corporate &amp; Community Events</h3>\n          <p data-ve-edit=\"service-card-4-text\">\n            Reliable, positive entertainment for corporate gatherings, churches, and community celebrations.\n          </p>\n        </div>",
           "text": "Corporate & Community Events\n          \n            Reliable, positive entertainment for corporate gatherings, churches, and community celebrations."
         },
         "service-card-4-image": {
@@ -182,7 +182,7 @@
         },
         "service-card-5": {
           "type": "text",
-          "html": "<img src=\"images/karaoke.jpg\" alt=\"Karaoke DJ Services\" data-ve-edit=\"service-card-5-image\">\n        <div class=\"card-body\">\n          <h3 data-ve-edit=\"service-card-5-title\">Karaoke DJ Services</h3>\n          <p data-ve-edit=\"service-card-5-text\">\n            Turn any event into an unforgettable experience with our high‑quality karaoke setup, clean current music library, and professional hosting.\n          </p>\n        </div>",
+          "html": "<img src=\"image/karaoke.jpg\" alt=\"Karaoke DJ Services\" data-ve-edit=\"service-card-5-image\">\n        <div class=\"card-body\">\n          <h3 data-ve-edit=\"service-card-5-title\">Karaoke DJ Services</h3>\n          <p data-ve-edit=\"service-card-5-text\">\n            Turn any event into an unforgettable experience with our high‑quality karaoke setup, clean current music library, and professional hosting.\n          </p>\n        </div>",
           "text": "Karaoke DJ Services\n          \n            Turn any event into an unforgettable experience with our high‑quality karaoke setup, clean current music library, and professional hosting."
         },
         "service-card-5-image": {

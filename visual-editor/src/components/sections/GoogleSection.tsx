@@ -1,19 +1,20 @@
+// src/components/sections/GoogleSection.tsx
 import React from "react";
 import { Helmet } from "react-helmet";
 
 export default function GoogleSection() {
   return (
     <>
-      {/* Visible preview */}
       <section data-theme-scope="all">
         <h2>Google Integrations</h2>
         <div className="bio-wrap">
           <p>Google Analytics (GA4) is active.</p>
-          <p>Tag: <strong>G-PPBLPGS51B</strong></p>
+          <p>
+            Tag: <strong>G-PPBLPGS51B</strong>
+          </p>
         </div>
       </section>
 
-      {/* Real GA4 injection */}
       <Helmet>
         <script
           async

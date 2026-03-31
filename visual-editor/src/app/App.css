@@ -31,7 +31,7 @@
 .inspector-panel {
   width: 320px;
   flex-shrink: 0;
-  background: #ffffff;
+  background: #22127a;
   border-left: 1px solid #d0d4d9;
   max-height: 100vh;
   display: flex;

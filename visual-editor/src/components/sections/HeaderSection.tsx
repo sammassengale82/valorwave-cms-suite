@@ -1,4 +1,4 @@
-// src/visual/sections/HeaderSection.tsx
+// src/components/sections/HeaderSection.tsx
 import React from "react";
 
 export function HeaderSection(props: any) {
@@ -8,33 +8,50 @@ export function HeaderSection(props: any) {
         <a className="brand-mini" href="#top" aria-label="Go to top">
           {props["header-logo"] && (
             <img
+              data-ve-edit="header-logo"
               src={props["header-logo"].src}
               alt={props["header-logo"].alt}
             />
           )}
 
           {props["header-brand-text"] && (
-            <span className="brand-text">
-              {props["header-brand-text"].text}
-            </span>
+            <span
+              className="brand-text"
+              data-ve-edit="header-brand-text"
+              dangerouslySetInnerHTML={{
+                __html: props["header-brand-text"].html,
+              }}
+            />
           )}
         </a>
 
         <nav className="header-nav" aria-label="Primary">
           {props["nav-services"] && (
-            <a className="nav-link" href="#services">
+            <a
+              className="nav-link"
+              data-ve-edit="nav-services"
+              href={props["nav-services"].href}
+            >
               {props["nav-services"].text}
             </a>
           )}
 
           {props["nav-availability"] && (
-            <a className="nav-link" href="#calendar">
+            <a
+              className="nav-link"
+              data-ve-edit="nav-availability"
+              href={props["nav-availability"].href}
+            >
               {props["nav-availability"].text}
             </a>
           )}
 
           {props["nav-hero-discount"] && (
-            <a className="nav-link" href="#hero-discount">
+            <a
+              className="nav-link"
+              data-ve-edit="nav-hero-discount"
+              href={props["nav-hero-discount"].href}
+            >
               {props["nav-hero-discount"].text}
             </a>
           )}
@@ -42,6 +59,7 @@ export function HeaderSection(props: any) {
           {props["nav-request-quote"] && (
             <a
               className="nav-link"
+              data-ve-edit="nav-request-quote"
               href={props["nav-request-quote"].href}
             >
               {props["nav-request-quote"].text}
@@ -51,6 +69,7 @@ export function HeaderSection(props: any) {
           {props["nav-client-portal"] && (
             <a
               className="nav-link"
+              data-ve-edit="nav-client-portal"
               href={props["nav-client-portal"].href}
               target="_blank"
               rel="noopener"
@@ -59,41 +78,15 @@ export function HeaderSection(props: any) {
             </a>
           )}
 
-          {/* Social links */}
           <div className="social-links">
-            {/* These SVGs are static; only the hrefs are editable */}
-            <a
-              href="https://www.facebook.com/valorwaveentertainment"
-              target="_blank"
-              rel="noopener"
-              aria-label="Facebook"
-            >
-              <svg viewBox="0 0 24 24">
-                <path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2.4V12h2.4V9.8c0-2.4 1.4-3.7 3.6-3.7 1 0 2 .2 2 .2v2.2h-1.1c-1.1 0-1.4.7-1.4 1.4V12h2.5l-.4 2.9h-2.1v7A10 10 0 0 0 22 12z"/>
-              </svg>
-            </a>
-
-            <a
-              href="https://www.instagram.com/valorwaveentertainment/"
-              target="_blank"
-              rel="noopener"
-              aria-label="Instagram"
-            >
-              <svg viewBox="0 0 24 24">
-                <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z"/>
-              </svg>
-            </a>
-
-            <a
-              href="https://x.com/ValorwaveEnt"
-              target="_blank"
-              rel="noopener"
-              aria-label="X"
-            >
-              <svg viewBox="0 0 24 24">
-                <path d="M18.9 2H22l-7.3 8.3L23 22h-6.7l-5.2-6.7L4.9 22H2l7.8-9L1 2h6.8l4.7 6L18.9 2z"/>
-              </svg>
-            </a>
+            {props["header-social-links"] && (
+              <div
+                data-ve-edit="header-social-links"
+                dangerouslySetInnerHTML={{
+                  __html: props["header-social-links"].html,
+                }}
+              />
+            )}
           </div>
         </nav>
       </div>
