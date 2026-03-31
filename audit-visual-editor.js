@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Valorwave Visual Editor – Full Forensic Audit
+ * Valorwave Visual Editor – Full Forensic Audit (Extended)
  * --------------------------------------------------------------
  * This script performs a deep audit of the visual-editor folder:
  *
@@ -13,7 +13,8 @@
  *  - Missing templates
  *  - Missing inferred required files
  *  - Circular dependencies
- *  - JSON report output
+ *  - Unused CSS classes
+ *  - Unused React props (approximate static analysis)
  *
  * Output file: visual-editor-audit.json
  */
@@ -24,7 +25,6 @@ const path = require("path");
 const ROOT = process.cwd();
 const TARGET = path.join(ROOT, "visual-editor");
 const VALID_EXT = [".js", ".jsx", ".ts", ".tsx", ".mjs", ".cjs", ".json"];
-
 const REPORT_FILE = "visual-editor-audit.json";
 
 // ------------------------------------------------------------
@@ -120,6 +120,108 @@ function resolveImport(baseFile, importPath) {
 }
 
 // ------------------------------------------------------------
+// CSS helpers
+// ------------------------------------------------------------
+function extractCssClasses(content) {
+  const classRegex = /\.([A-Za-z0-9_-]+)\s*[{,]/g;
+  const classes = new Set();
+  let match;
+
+  while ((match = classRegex.exec(content))) {
+    classes.add(match[1]);
+  }
+
+  return Array.from(classes);
+}
+
+function extractClassNameUsages(content) {
+  const usages = new Set();
+
+  // className="foo bar"
+  const classNameStringRegex = /className\s*=\s*["']([^"']+)["']/g;
+  let match;
+  while ((match = classNameStringRegex.exec(content))) {
+    match[1]
+      .split(/\s+/)
+      .filter(Boolean)
+      .forEach((c) => usages.add(c));
+  }
+
+  // className={'foo bar'}
+  const classNameJsxRegex = /className\s*=\s*{\s*['"]([^'"]+)['"]\s*}/g;
+  while ((match = classNameJsxRegex.exec(content))) {
+    match[1]
+      .split(/\s+/)
+      .filter(Boolean)
+      .forEach((c) => usages.add(c));
+  }
+
+  return Array.from(usages);
+}
+
+// ------------------------------------------------------------
+// React props helpers (approximate)
+// ------------------------------------------------------------
+function extractComponentProps(content, filePath) {
+  const results = [];
+
+  // function Comp({ foo, bar }) { ... }
+  const funcRegex =
+    /function\s+([A-Z][A-Za-z0-9_]*)\s*\(\s*{([^}]*)}\s*\)\s*{([\s\S]*?)}\s*/g;
+
+  let match;
+  while ((match = funcRegex.exec(content))) {
+    const compName = match[1];
+    const propsList = match[2]
+      .split(",")
+      .map((p) => p.trim().split(":")[0].split("=")[0].trim())
+      .filter(Boolean);
+    const body = match[3];
+
+    if (propsList.length > 0) {
+      results.push({ file: filePath, component: compName, props: propsList, body });
+    }
+  }
+
+  // const Comp = ({ foo, bar }) => { ... }
+  const arrowRegex =
+    /const\s+([A-Z][A-Za-z0-9_]*)\s*=\s*\(\s*{([^}]*)}\s*\)\s*=>\s*{([\s\S]*?)}\s*/g;
+
+  while ((match = arrowRegex.exec(content))) {
+    const compName = match[1];
+    const propsList = match[2]
+      .split(",")
+      .map((p) => p.trim().split(":")[0].split("=")[0].trim())
+      .filter(Boolean);
+    const body = match[3];
+
+    if (propsList.length > 0) {
+      results.push({ file: filePath, component: compName, props: propsList, body });
+    }
+  }
+
+  return results;
+}
+
+function detectUnusedProps(componentsWithProps) {
+  const unused = [];
+
+  for (const comp of componentsWithProps) {
+    const { file, component, props, body } = comp;
+
+    props.forEach((prop) => {
+      const propRegex = new RegExp(`\\b${prop}\\b`, "g");
+      const used = propRegex.test(body);
+      if (!used) {
+        unused.push({ file, component, prop });
+      }
+    });
+  }
+
+  return unused;
+}
+
+// ------------------------------------------------------------
 // Main Scan
 // ------------------------------------------------------------
 console.log("🔍 Scanning visual-editor folder:", TARGET);
@@ -127,6 +229,7 @@ console.log("🔍 Scanning visual-editor folder:", TARGET);
 const allFiles = walk(TARGET).filter((f) =>
   VALID_EXT.includes(path.extname(f))
 );
+const cssFiles = walk(TARGET).filter((f) => path.extname(f) === ".css");
 
 const dependencyGraph = {};
 const usedFiles = new Set();
@@ -137,20 +240,32 @@ const jsxComponentUsage = {};
 const missingComponents = [];
 const missingTemplates = [];
 const missingRequiredFiles = [];
+const allCssClasses = new Set();
+const usedCssClasses = new Set();
+const componentsWithProps = [];
 
 // ------------------------------------------------------------
-// First pass: parse imports, exports, JSX
+// First pass: parse imports, exports, JSX, props, CSS
 // ------------------------------------------------------------
+for (const cssFile of cssFiles) {
+  const cssContent = fs.readFileSync(cssFile, "utf8");
+  extractCssClasses(cssContent).forEach((c) => allCssClasses.add(c));
+}
+
 for (const file of allFiles) {
   const content = fs.readFileSync(file, "utf8");
 
   const imports = extractImports(content);
   const exports = extractExports(content);
   const jsxComponents = extractJSXComponents(content);
+  const classUsages = extractClassNameUsages(content);
+  const propsInfo = extractComponentProps(content, file);
 
   dependencyGraph[file] = [];
   exportMap[file] = exports;
   jsxComponentUsage[file] = jsxComponents;
+  propsInfo.forEach((p) => componentsWithProps.push(p));
+  classUsages.forEach((c) => usedCssClasses.add(c));
 
   // Track export usage
   exports.forEach((e) => {
@@ -282,11 +397,13 @@ const circularDependencies = detectCycles(dependencyGraph);
 function inferRequiredFiles() {
   const required = [];
 
-  // If main.tsx or App.tsx referenced anywhere
   const common = ["main.tsx", "App.tsx", "index.html"];
 
   for (const f of common) {
-    const full = path.join(TARGET, "src", f);
+    const full =
+      f === "index.html"
+        ? path.join(TARGET, f)
+        : path.join(TARGET, "src", f);
     if (!fs.existsSync(full)) {
       required.push(full);
     }
@@ -296,6 +413,18 @@ function inferRequiredFiles() {
 }
 
 missingRequiredFiles.push(...inferRequiredFiles());
+
+// ------------------------------------------------------------
+// Detect unused CSS classes
+// ------------------------------------------------------------
+const unusedCssClasses = Array.from(allCssClasses).filter(
+  (c) => !usedCssClasses.has(c)
+);
+
+// ------------------------------------------------------------
+// Detect unused React props
+// ------------------------------------------------------------
+const unusedReactProps = detectUnusedProps(componentsWithProps);
 
 // ------------------------------------------------------------
 // Write JSON report
@@ -310,6 +439,17 @@ const report = {
   missingTemplates,
   missingRequiredFiles,
   circularDependencies,
+  css: {
+    allClasses: Array.from(allCssClasses),
+    usedClasses: Array.from(usedCssClasses),
+    unusedClasses: unusedCssClasses,
+  },
+  reactProps: {
+    componentsWithProps: componentsWithProps.map(
+      ({ file, component, props }) => ({ file, component, props })
+    ),
+    unusedProps: unusedReactProps,
+  },
 };
 
 fs.writeFileSync(REPORT_FILE, JSON.stringify(report, null, 2), "utf8");
@@ -325,6 +465,10 @@ console.log("⚠️ UNUSED EXPORTS:", unusedExports.length);
 console.log("🚫 MISSING COMPONENTS:", missingComponents.length);
 console.log("📄 MISSING TEMPLATES:", missingTemplates.length);
 console.log("📌 MISSING REQUIRED FILES:", missingRequiredFiles.length);
+console.log("🎨 CSS CLASSES (total):", allCssClasses.size);
+console.log("🎨 UNUSED CSS CLASSES:", unusedCssClasses.length);
+console.log("🧩 COMPONENTS WITH PROPS:", componentsWithProps.length);
+console.log("🧩 UNUSED REACT PROPS:", unusedReactProps.length);
 console.log("🔁 CIRCULAR DEPENDENCIES:", circularDependencies.length);
 
 console.log(`\n📄 JSON report written to: ${REPORT_FILE}\n`);
